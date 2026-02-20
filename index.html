@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Protocolo de Amor | ¿Quieres ser mi novia?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --wine: #7b1738;
+      --rose: #f8c7d8;
+      --white: #ffffff;
+      --med-blue: #d8edff;
+      --deep: #280f21;
+      --card: rgba(255, 255, 255, 0.12);
+      --line: rgba(255, 255, 255, 0.2);
+      --text: #fff7fb;
+      --glow: 0 0 35px rgba(255, 145, 176, 0.55);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: radial-gradient(circle at 15% 15%, #b02859 0%, transparent 28%),
+                  radial-gradient(circle at 85% 12%, #7caed8 0%, transparent 26%),
+                  radial-gradient(circle at 50% 85%, #f08eb7 0%, transparent 26%),
+                  linear-gradient(135deg, var(--deep), #4b1c3d 45%, #2a3455 100%);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      justify-content: center;
+      padding: 2rem 1rem 3rem;
+      position: relative;
+    }
+
+    #bgCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .container {
+      width: min(1040px, 100%);
+      display: grid;
+      gap: 1.4rem;
+      position: relative;
+    }
+
+    .glass {
+      background: var(--card);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+      border-radius: 22px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.24);
+    }
+
+    .hero {
+      padding: 1.4rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .title {
+      font-size: clamp(1.5rem, 4vw, 2.7rem);
+      font-weight: 800;
+      line-height: 1.18;
+      letter-spacing: .3px;
+      text-wrap: balance;
+    }
+
+    .subtitle {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: #ffe8f3;
+      max-width: 70ch;
+      opacity: 0.9;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+
+    .console {
+      padding: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      min-height: 190px;
+      position: relative;
+    }
+
+    .console h2,
+    .medical h2,
+    .proposal h2 {
+      margin-bottom: .8rem;
+      font-size: 1.05rem;
+      letter-spacing: .4px;
+      color: #ffd8e8;
+      text-transform: uppercase;
+    }
+
+    #terminal {
+      font-size: .9rem;
+      line-height: 1.65;
+      white-space: pre-wrap;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      animation: blink .7s steps(1) infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    .code-snippet {
+      margin-top: .8rem;
+      border-top: 1px dashed rgba(255,255,255,.3);
+      padding-top: .8rem;
+      color: #d4f1ff;
+      min-height: 70px;
+    }
+
+    .medical {
+      padding: 1rem;
+      display: grid;
+      gap: .9rem;
+    }
+
+    .monitor {
+      height: 110px;
+      border-radius: 14px;
+      border: 1px solid rgba(198, 242, 255, .38);
+      background: linear-gradient(180deg, rgba(10,33,45,.45), rgba(8,16,31,.35));
+      padding: .5rem;
+    }
+
+    #ecg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .diagnosis {
+      display: grid;
+      gap: .45rem;
+      font-size: .96rem;
+    }
+
+    .badge {
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 999px;
+      padding: .15rem .6rem;
+      font-size: .78rem;
+      margin-left: .4rem;
+    }
+
+    .prescription {
+      background: rgba(255, 255, 255, .1);
+      border: 1px dashed rgba(255,255,255,.38);
+      border-radius: 12px;
+      padding: .9rem;
+      color: #fff7fb;
+      font-size: .94rem;
+    }
+
+    .proposal {
+      padding: 1.2rem;
+      position: relative;
+      overflow: hidden;
+      min-height: 240px;
+    }
+
+    .cta {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: .85rem;
+      flex-wrap: wrap;
+      min-height: 65px;
+      position: relative;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: .9rem 1.3rem;
+      font-size: .95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+      font-family: inherit;
+    }
+
+    #yesBtn {
+      background: linear-gradient(135deg, #ff729f, #d83a6a);
+      color: white;
+      box-shadow: var(--glow);
+      min-width: 220px;
+    }
+
+    #yesBtn:hover { transform: translateY(-2px) scale(1.02); }
+
+    #noBtn {
+      background: linear-gradient(135deg, #ddedf8, #9bc3de);
+      color: #22435d;
+      position: relative;
+    }
+
+    .music-toggle {
+      margin-top: .8rem;
+      background: rgba(255,255,255,.14);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.28);
+      font-weight: 600;
+    }
+
+    .final-message {
+      margin-top: 1rem;
+      text-align: center;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      line-height: 1.5;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: .7s ease;
+      color: #fffafc;
+    }
+
+    .final-message.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .spark {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(255,255,255,.95), rgba(255,255,255,.05));
+      animation: fly 1.5s ease-out forwards;
+    }
+
+    @keyframes fly {
+      to {
+        transform: translate(var(--x), var(--y)) scale(0);
+        opacity: 0;
+      }
+    }
+
+    @media (min-width: 860px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .hero { padding: 1.7rem; }
+      .proposal { min-height: 280px; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+
+  <main class="container">
+    <section class="hero glass">
+      <h1 class="title">Protocolo <span style="color:#ffc2da">Code + Care</span>: la única versión estable de mi corazón eres tú.</h1>
+      <p class="subtitle">
+        Hoy no vengo a compilar un programa cualquiera: vengo a ejecutar el diagnóstico más sincero.
+        Entre líneas de código y latidos, descubrí que quiero que seamos el mejor proyecto de nuestras vidas.
+      </p>
+    </section>
+
+    <section class="grid">
+      <article class="console glass">
+        <h2>Consola sentimental</h2>
+        <div id="terminal" aria-live="polite"></div><span class="cursor">▋</span>
+        <div class="code-snippet" id="codeSnippet"></div>
+      </article>
+
+      <article class="medical glass">
+        <h2>Módulo clínico del amor</h2>
+        <div class="monitor">
+          <canvas id="ecg" width="600" height="120" aria-label="Monitor cardíaco animado"></canvas>
+        </div>
+
+        <div class="diagnosis">
+          <p><strong>Diagnóstico:</strong> Enamorado <span class="badge">confirmado</span></p>
+          <p><strong>Síntomas:</strong> Pensar en ti 24/7, sonreír sin motivo, taquicardia cada vez que te veo.</p>
+          <p><strong>Tratamiento:</strong> Ser tu novio y cuidarte toda la vida.</p>
+        </div>
+
+        <div class="prescription">
+          <strong>Receta médica personalizada</strong><br />
+          Paciente: Mi corazón 🫀<br />
+          Dosis: 1 abrazo tuyo cada 8 horas, 2 besos al día y una vida compartida.
+          Administración: vía miradas, risas y complicidad.<br />
+          Vigencia: infinita.
+        </div>
+      </article>
+    </section>
+
+    <section class="proposal glass" id="proposalCard">
+      <h2>Solicitud oficial</h2>
+      <p>
+        Con base en evidencia clínica y pruebas de estrés en producción,
+        concluyo que eres la persona con la que quiero construir cada versión de mi futuro.
+      </p>
+
+      <div class="cta" id="ctaArea">
+        <button id="yesBtn">¿Aceptas ser mi novia?</button>
+        <button id="noBtn">No (intentar 😅)</button>
+      </div>
+
+      <button id="musicBtn" class="music-toggle">🔈 Activar música romántica</button>
+      <audio id="bgMusic" loop preload="auto">
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8f3f7c4d4d.mp3?filename=romantic-piano-11449.mp3" type="audio/mpeg" />
+      </audio>
+
+      <p id="finalMessage" class="final-message">
+        Desde que llegaste, mi sistema dejó de buscar excepciones y encontró su mejor respuesta.
+        Tú sanas como doctora, yo construyo como programador… juntos podemos crear el algoritmo más hermoso:
+        <strong>un amor que late, evoluciona y nunca se cae.</strong> ❤️
+      </p>
+    </section>
+  </main>
+
+  <script>
+    // ------------------------------
+    // 1) Fondo animado con corazones/partículas
+    // ------------------------------
+    const bgCanvas = document.getElementById('bgCanvas');
+    const bgCtx = bgCanvas.getContext('2d');
+    const particles = [];
+
+    function resizeBG() {
+      bgCanvas.width = window.innerWidth;
+      bgCanvas.height = window.innerHeight;
+    }
+
+    class HeartParticle {
+      constructor() {
+        this.reset(true);
+      }
+
+      reset(initial = false) {
+        this.x = Math.random() * bgCanvas.width;
+        this.y = initial ? Math.random() * bgCanvas.height : bgCanvas.height + 40;
+        this.size = 8 + Math.random() * 14;
+        this.speedY = 0.4 + Math.random() * 1;
+        this.speedX = (Math.random() - 0.5) * 0.8;
+        this.alpha = 0.2 + Math.random() * 0.6;
+        this.color = Math.random() > 0.45 ? '255, 160, 190' : '186, 224, 255';
+      }
+
+      drawHeart(x, y, s) {
+        bgCtx.save();
+        bgCtx.translate(x, y);
+        bgCtx.scale(s / 16, s / 16);
+        bgCtx.beginPath();
+        bgCtx.moveTo(0, 0);
+        bgCtx.bezierCurveTo(-8, -8, -16, 3, 0, 14);
+        bgCtx.bezierCurveTo(16, 3, 8, -8, 0, 0);
+        bgCtx.closePath();
+        bgCtx.fillStyle = `rgba(${this.color}, ${this.alpha})`;
+        bgCtx.fill();
+        bgCtx.restore();
+      }
+
+      update() {
+        this.y -= this.speedY;
+        this.x += this.speedX;
+        if (this.y < -20) this.reset();
+        this.drawHeart(this.x, this.y, this.size);
+      }
+    }
+
+    function initParticles() {
+      for (let i = 0; i < 52; i++) particles.push(new HeartParticle());
+    }
+
+    function animateBG() {
+      bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+      particles.forEach(p => p.update());
+      requestAnimationFrame(animateBG);
+    }
+
+    // ------------------------------
+    // 2) Consola de arranque romántica
+    // ------------------------------
+    const terminal = document.getElementById('terminal');
+    const codeSnippet = document.getElementById('codeSnippet');
+    const bootLines = [
+      '>> Iniciando sistema…',
+      '>> Analizando compatibilidad…',
+      '>> Conectando corazones…',
+      '>> Resultado: coincidencia perfecta detectada 💘'
+    ];
+
+    const romanticCode = [
+      'if (tuSonrisa === true) { miCorazon++; }',
+      'while (estemosJuntos) { felicidad++; }',
+      'const futuro = construir("tú", "yo");',
+      'return amor.infinito();'
+    ];
+
+    function typeLines(lines, target, speed = 36, lineDelay = 520) {
+      return new Promise(resolve => {
+        let line = 0;
+
+        const writeLine = () => {
+          if (line >= lines.length) return resolve();
+          const text = lines[line];
+          let i = 0;
+
+          const typing = setInterval(() => {
+            target.textContent += text[i++] || '';
+            if (i > text.length) {
+              clearInterval(typing);
+              target.textContent += '\n';
+              line++;
+              setTimeout(writeLine, lineDelay);
+            }
+          }, speed);
+        };
+
+        writeLine();
+      });
+    }
+
+    // ------------------------------
+    // 3) Monitor cardíaco (ECG)
+    // ------------------------------
+    const ecg = document.getElementById('ecg');
+    const ecgCtx = ecg.getContext('2d');
+    let ecgOffset = 0;
+
+    function drawECG() {
+      ecgCtx.clearRect(0, 0, ecg.width, ecg.height);
+      ecgCtx.lineWidth = 2;
+      ecgCtx.strokeStyle = '#82ffd0';
+      ecgCtx.shadowColor = '#77ffd8';
+      ecgCtx.shadowBlur = 9;
+      ecgCtx.beginPath();
+
+      for (let x = 0; x < ecg.width; x++) {
+        const t = (x + ecgOffset) % 120;
+        let y = ecg.height / 2;
+
+        if (t > 18 && t < 24) y -= (t - 18) * 2.8;
+        else if (t >= 24 && t < 28) y += (t - 24) * 13;
+        else if (t >= 28 && t < 34) y -= (34 - t) * 8;
+        else if (t >= 34 && t < 46) y += Math.sin((t - 34) / 2) * 2;
+
+        if (x === 0) ecgCtx.moveTo(x, y);
+        else ecgCtx.lineTo(x, y);
+      }
+
+      ecgCtx.stroke();
+      ecgOffset += 3;
+      requestAnimationFrame(drawECG);
+    }
+
+    // ------------------------------
+    // 4) Botones de propuesta
+    // ------------------------------
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const finalMessage = document.getElementById('finalMessage');
+    const proposalCard = document.getElementById('proposalCard');
+
+    function moveNoButton() {
+      const parent = noBtn.parentElement.getBoundingClientRect();
+      const maxX = parent.width - noBtn.offsetWidth - 4;
+      const maxY = Math.max(0, parent.height - noBtn.offsetHeight + 35);
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+      noBtn.style.position = 'absolute';
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    }
+
+    function burstHearts(originX, originY) {
+      for (let i = 0; i < 38; i++) {
+        const spark = document.createElement('span');
+        spark.className = 'spark';
+        spark.style.left = `${originX}px`;
+        spark.style.top = `${originY}px`;
+        spark.style.setProperty('--x', `${(Math.random() - 0.5) * 380}px`);
+        spark.style.setProperty('--y', `${(Math.random() - 0.5) * 280}px`);
+        spark.style.background = Math.random() > 0.4
+          ? 'radial-gradient(circle, rgba(255,182,210,1), rgba(255,182,210,0.1))'
+          : 'radial-gradient(circle, rgba(198,238,255,1), rgba(198,238,255,0.1))';
+        proposalCard.appendChild(spark);
+        setTimeout(() => spark.remove(), 1500);
+      }
+    }
+
+    noBtn.addEventListener('mouseenter', moveNoButton);
+    noBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      moveNoButton();
+    });
+
+    yesBtn.addEventListener('click', () => {
+      const rect = yesBtn.getBoundingClientRect();
+      burstHearts(rect.left + rect.width / 2, rect.top - 80);
+      finalMessage.classList.add('show');
+      yesBtn.textContent = '¡Sabía que sí! 💖';
+      yesBtn.disabled = true;
+      yesBtn.style.opacity = '.92';
+    });
+
+    // ------------------------------
+    // 5) Música opcional
+    // ------------------------------
+    const musicBtn = document.getElementById('musicBtn');
+    const bgMusic = document.getElementById('bgMusic');
+    let playing = false;
+
+    musicBtn.addEventListener('click', async () => {
+      try {
+        if (!playing) {
+          await bgMusic.play();
+          musicBtn.textContent = '⏸ Pausar música';
+        } else {
+          bgMusic.pause();
+          musicBtn.textContent = '🔈 Activar música romántica';
+        }
+        playing = !playing;
+      } catch {
+        musicBtn.textContent = 'No se pudo reproducir (toca de nuevo)';
+      }
+    });
+
+    // Inicialización principal
+    window.addEventListener('resize', resizeBG);
+    resizeBG();
+    initParticles();
+    animateBG();
+    drawECG();
+
+    (async function bootSequence() {
+      await typeLines(bootLines, terminal, 28, 430);
+      await typeLines(romanticCode, codeSnippet, 22, 350);
+    })();
+  </script>
+</body>
+</html>
