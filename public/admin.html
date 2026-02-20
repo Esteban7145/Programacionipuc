@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AZ Moda Admin</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <main class="admin-layout">
+    <section class="card">
+      <h2>Acceso administrador</h2>
+      <form id="loginForm">
+        <input type="email" name="email" placeholder="admin@azmoda.com" required />
+        <input type="password" name="password" placeholder="Contraseña" required />
+        <button class="btn btn-dark">Ingresar</button>
+      </form>
+    </section>
+
+    <section class="card hidden" id="dashboardSection">
+      <h2>Dashboard</h2>
+      <p>Ventas totales: $<span id="totalSales">0</span></p>
+      <p>Pedidos: <span id="ordersCount">0</span></p>
+      <h3>Stock bajo</h3>
+      <ul id="lowStockList"></ul>
+    </section>
+
+    <section class="card hidden" id="productSection">
+      <h2>Gestionar productos</h2>
+      <form id="productForm">
+        <input name="name" placeholder="Nombre" required />
+        <textarea name="description" placeholder="Descripción" required></textarea>
+        <input type="number" name="price" placeholder="Precio" min="0" required />
+        <input name="category" placeholder="Categoría" required />
+        <input name="sizes" placeholder="Tallas (XS,S,M)" />
+        <input name="colors" placeholder="Colores (Negro,Beige)" />
+        <input type="number" name="inventory" placeholder="Inventario" min="0" required />
+        <input name="images" placeholder="URLs de imágenes separadas por coma" required />
+        <label><input type="checkbox" name="featured" /> Destacado</label>
+        <button class="btn btn-dark" type="submit">Guardar producto</button>
+      </form>
+      <p id="adminMessage"></p>
+    </section>
+  </main>
+  <script src="/js/admin.js"></script>
+</body>
+</html>
