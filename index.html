@@ -259,6 +259,51 @@
       to { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(1.6) rotate(20deg); }
     }
 
+
+    .response-panel {
+      margin-top: .9rem;
+      display: grid;
+      gap: .55rem;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+    }
+
+    .response-panel input {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.3);
+      background: rgba(0,0,0,.22);
+      color: var(--blanco);
+      border-radius: 999px;
+      padding: .7rem .95rem;
+      outline: none;
+      transition: border-color .25s ease, box-shadow .25s ease;
+    }
+
+    .response-panel input:focus {
+      border-color: rgba(247, 191, 210, .85);
+      box-shadow: 0 0 0 4px rgba(247,191,210,.16);
+    }
+
+    .send-btn {
+      background: linear-gradient(140deg, #5da9d9, #2f5d83);
+      box-shadow: 0 8px 18px rgba(54, 114, 161, .35);
+    }
+
+    .mail-status {
+      grid-column: 1 / -1;
+      min-height: 1.4em;
+      color: #dff6ff;
+      font-size: .95rem;
+      opacity: .9;
+    }
+
+    .tiny-help {
+      font-size: .88rem;
+      color: #ffdbe8;
+      opacity: .9;
+      margin-top: .35rem;
+    }
+
     @media (max-width: 780px) {
       .ecg-wrap { grid-template-columns: 1fr; }
       .actions { justify-content: center; }
@@ -307,6 +352,12 @@
         No necesito inteligencia artificial para saber que contigo quiero escribir el mejor código de mi vida.
         <br />¿Quieres ser mi novia?
       </div>
+      <div class="response-panel">
+        <input id="whoInput" type="text" placeholder="Tu nombre (opcional para el correo)" />
+        <button id="sendBtn" class="send-btn">📩 Enviar respuesta al correo</button>
+        <div class="mail-status" id="mailStatus">Aún no se envía ninguna respuesta.</div>
+      </div>
+      <div class="tiny-help" id="noHint"></div>
     </section>
   </main>
 
@@ -477,9 +528,16 @@
     const yesBtn = document.getElementById("yesBtn");
     const noBtn = document.getElementById("noBtn");
     const finalMsg = document.getElementById("finalMsg");
+    const whoInput = document.getElementById("whoInput");
+    const sendBtn = document.getElementById("sendBtn");
+    const mailStatus = document.getElementById("mailStatus");
+    const noHint = document.getElementById("noHint");
     let noScale = 1;
+    let noEscapes = 0;
+    let selectedResponse = "Pendiente";
 
     function moveNoButton() {
+      noEscapes += 1;
       const box = document.getElementById("actions").getBoundingClientRect();
       const maxX = Math.max(0, box.width - noBtn.offsetWidth - 16);
       const maxY = Math.max(0, box.height - noBtn.offsetHeight - 8);
@@ -491,13 +549,33 @@
       noBtn.style.top = `${y}px`;
       noBtn.style.transform = `scale(${noScale})`;
       noBtn.style.opacity = String(Math.max(0.65, noScale));
+
+      if (noEscapes >= 7) {
+        noBtn.style.position = "static";
+        noBtn.style.transform = "scale(0.95)";
+        noBtn.textContent = "💔 No (si estás segura, click)";
+        noHint.textContent = "Ok, te doy la opción real: si de verdad es no, ahora sí puedes pulsarlo.";
+        noBtn.onmouseenter = null;
+      }
     }
 
-    ["mouseenter", "click", "touchstart"].forEach(evt => {
+    ["mouseenter", "touchstart"].forEach(evt => {
       noBtn.addEventListener(evt, (e) => {
+        if (noEscapes < 7) {
+          e.preventDefault();
+          moveNoButton();
+        }
+      });
+    });
+
+    noBtn.addEventListener("click", (e) => {
+      if (noEscapes < 7) {
         e.preventDefault();
         moveNoButton();
-      });
+        return;
+      }
+      selectedResponse = "No";
+      mailStatus.textContent = "Respuesta marcada: NO. Puedes enviarla por correo.";
     });
 
     function heartExplosion() {
@@ -515,12 +593,46 @@
       }
     }
 
+    async function sendResponseEmail() {
+      if (selectedResponse === "Pendiente") {
+        mailStatus.textContent = "Primero selecciona una respuesta (Sí o No).";
+        return;
+      }
+
+      const nombre = whoInput.value.trim() || "Anónimo";
+      mailStatus.textContent = "Enviando respuesta al correo...";
+
+      try {
+        const res = await fetch("https://formsubmit.co/ajax/earango@miceas.edu.co", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify({
+            _subject: "Nueva respuesta a tu propuesta 💌",
+            nombre,
+            respuesta: selectedResponse,
+            detalle: selectedResponse === "Si" ? "Aceptó ser tu novia ❤️" : "Respondió que no por ahora 💔",
+            _template: "table",
+            _captcha: "false"
+          })
+        });
+
+        if (!res.ok) throw new Error("No se pudo enviar");
+        mailStatus.textContent = "✅ Respuesta enviada a earango@miceas.edu.co";
+      } catch (err) {
+        mailStatus.textContent = "⚠️ No se pudo enviar automáticamente. Usa el botón otra vez o revisa conexión.";
+      }
+    }
+
+    sendBtn.addEventListener("click", sendResponseEmail);
+
     yesBtn.addEventListener("click", () => {
+      selectedResponse = "Si";
       document.body.classList.add("accepted");
       finalMsg.classList.add("show");
       yesBtn.disabled = true;
       noBtn.style.display = "none";
       heartExplosion();
+      mailStatus.textContent = "Respuesta marcada: SÍ. Ahora pulsa “Enviar respuesta al correo”.";
     });
 
     // --- Parallax ligero con mouse ---
