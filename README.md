@@ -77,3 +77,14 @@ server.js
 - Integración de subida de imágenes en nube (Cloudinary) reemplazando URLs directas.
 - JWT ya implementado para ampliar autenticación por roles.
 - Arquitectura modular por capas para crecer en microservicios si es necesario.
+
+
+## Despliegue en Netlify (evita 404 de rutas)
+1. Este repositorio incluye `netlify.toml` con fallback SPA para que rutas como `/admin` no den 404.
+2. Netlify publica la carpeta `public/`.
+3. El backend de Node/Express debe desplegarse aparte (Render/Railway/Fly.io).
+4. Define en frontend una variable global opcional antes de cargar los scripts:
+   ```html
+   <script>window.AZ_API_BASE = "https://tu-api.com";</script>
+   ```
+   Si no se define, por defecto usa rutas relativas (`/api/...`).

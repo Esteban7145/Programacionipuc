@@ -3,6 +3,7 @@ const dashboardSection = document.getElementById('dashboardSection');
 const productSection = document.getElementById('productSection');
 const productForm = document.getElementById('productForm');
 const adminMessage = document.getElementById('adminMessage');
+const API_BASE = window.AZ_API_BASE || '';
 
 let token = localStorage.getItem('az_admin_token') || '';
 
@@ -13,8 +14,8 @@ const authHeaders = () => ({
 
 const loadDashboard = async () => {
   const [dashboardRes, ordersRes] = await Promise.all([
-    fetch('/api/admin/dashboard', { headers: authHeaders() }),
-    fetch('/api/orders', { headers: authHeaders() })
+    fetch(`${API_BASE}/api/admin/dashboard`, { headers: authHeaders() }),
+    fetch(`${API_BASE}/api/orders`, { headers: authHeaders() })
   ]);
 
   if (!dashboardRes.ok || !ordersRes.ok) return;
@@ -39,22 +40,26 @@ loginForm.addEventListener('submit', async (event) => {
   event.preventDefault();
   const formData = Object.fromEntries(new FormData(loginForm).entries());
 
-  const response = await fetch('/api/auth/admin/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData)
-  });
+  try {
+    const response = await fetch(`${API_BASE}/api/auth/admin/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    });
 
-  const data = await response.json();
-  if (!response.ok) {
-    adminMessage.textContent = data.message || 'No se pudo iniciar sesión';
-    return;
+    const data = await response.json();
+    if (!response.ok) {
+      adminMessage.textContent = data.message || 'No se pudo iniciar sesión';
+      return;
+    }
+
+    token = data.token;
+    localStorage.setItem('az_admin_token', token);
+    adminMessage.textContent = 'Autenticación exitosa';
+    unlockAdmin();
+  } catch (error) {
+    adminMessage.textContent = 'No se pudo conectar con la API de autenticación.';
   }
-
-  token = data.token;
-  localStorage.setItem('az_admin_token', token);
-  adminMessage.textContent = 'Autenticación exitosa';
-  unlockAdmin();
 });
 
 productForm.addEventListener('submit', async (event) => {
@@ -73,21 +78,25 @@ productForm.addEventListener('submit', async (event) => {
     status: 'active'
   };
 
-  const response = await fetch('/api/products', {
-    method: 'POST',
-    headers: authHeaders(),
-    body: JSON.stringify(payload)
-  });
+  try {
+    const response = await fetch(`${API_BASE}/api/products`, {
+      method: 'POST',
+      headers: authHeaders(),
+      body: JSON.stringify(payload)
+    });
 
-  const data = await response.json();
-  if (!response.ok) {
-    adminMessage.textContent = data.message || 'Error al guardar producto';
-    return;
+    const data = await response.json();
+    if (!response.ok) {
+      adminMessage.textContent = data.message || 'Error al guardar producto';
+      return;
+    }
+
+    adminMessage.textContent = `Producto creado: ${data.name}`;
+    productForm.reset();
+    loadDashboard();
+  } catch (error) {
+    adminMessage.textContent = 'No se pudo conectar con la API para guardar el producto.';
   }
-
-  adminMessage.textContent = `Producto creado: ${data.name}`;
-  productForm.reset();
-  loadDashboard();
 });
 
 if (token) {

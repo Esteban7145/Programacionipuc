@@ -6,6 +6,7 @@ const subtotalEl = document.getElementById('subtotal');
 const totalEl = document.getElementById('total');
 
 let cart = JSON.parse(localStorage.getItem('az_cart') || '[]');
+const API_BASE = window.AZ_API_BASE || '';
 
 const formatMoney = (value) => Number(value).toFixed(2);
 
@@ -59,6 +60,11 @@ const addToCart = (product) => {
 };
 
 const renderProducts = (products) => {
+  if (!Array.isArray(products) || products.length === 0) {
+    productsGrid.innerHTML = '<p>No hay productos disponibles por el momento.</p>';
+    return;
+  }
+
   productsGrid.innerHTML = products
     .map(
       (product) => `
@@ -97,9 +103,21 @@ const loadProducts = async () => {
     params.set(key.charAt(0).toLowerCase() + key.slice(1), value);
   });
 
-  const response = await fetch(`/api/products?${params.toString()}`);
-  const products = await response.json();
-  renderProducts(products);
+  try {
+    const response = await fetch(`${API_BASE}/api/products?${params.toString()}`);
+    if (!response.ok) {
+      throw new Error('No se pudo cargar el catálogo');
+    }
+    const products = await response.json();
+    renderProducts(products);
+  } catch (error) {
+    productsGrid.innerHTML = `
+      <p>
+        No se pudo conectar con el catálogo. Si estás en Netlify, configura la API en
+        <code>window.AZ_API_BASE</code> o despliega el backend por separado.
+      </p>
+    `;
+  }
 };
 
 document.getElementById('applyFiltersBtn').addEventListener('click', loadProducts);
@@ -113,25 +131,30 @@ document.getElementById('checkoutForm').addEventListener('submit', async (event)
   const formData = new FormData(event.target);
   const customer = Object.fromEntries(formData.entries());
 
-  const response = await fetch('/api/orders', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ customer, items: cart })
-  });
-
-  const result = await response.json();
   const resultEl = document.getElementById('checkoutResult');
 
-  if (!response.ok) {
-    resultEl.textContent = result.message || 'No se pudo procesar el pedido';
-    return;
-  }
+  try {
+    const response = await fetch(`${API_BASE}/api/orders`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ customer, items: cart })
+    });
 
-  resultEl.textContent = `Pedido confirmado. Número: ${result.orderNumber}. Pago: ${result.paymentStatus}`;
-  cart = [];
-  saveCart();
-  event.target.reset();
-  loadProducts();
+    const result = await response.json();
+
+    if (!response.ok) {
+      resultEl.textContent = result.message || 'No se pudo procesar el pedido';
+      return;
+    }
+
+    resultEl.textContent = `Pedido confirmado. Número: ${result.orderNumber}. Pago: ${result.paymentStatus}`;
+    cart = [];
+    saveCart();
+    event.target.reset();
+    loadProducts();
+  } catch (error) {
+    resultEl.textContent = 'No se pudo conectar con el backend para finalizar la compra.';
+  }
 });
 
 renderCart();
