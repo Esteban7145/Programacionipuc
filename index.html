@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¿Quieres ser mi novia?</title>
+  <style>
+    :root {
+      --vino: #7d1d3f;
+      --rosa: #f7bfd2;
+      --blanco: #fff9fc;
+      --azul-med: #a6d4ef;
+      --azul-osc: #194e72;
+      --bg: radial-gradient(circle at 20% 20%, #8b2348 0%, #42132a 50%, #150912 100%);
+      --warm-bg: radial-gradient(circle at 30% 20%, #c13b69 0%, #6f1a3a 45%, #21111f 100%);
+      --glass: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 255, 255, 0.22);
+      --shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Inter", system-ui, sans-serif;
+      color: var(--blanco);
+      background: var(--bg);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 1.2s ease;
+    }
+
+    body.accepted { background: var(--warm-bg); }
+
+    .glow-bg {
+      position: fixed;
+      inset: -20%;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(247, 191, 210, 0.14), transparent 35%),
+        radial-gradient(circle at 80% 25%, rgba(166, 212, 239, 0.12), transparent 30%),
+        radial-gradient(circle at 50% 80%, rgba(255, 125, 164, 0.14), transparent 35%);
+      animation: pulseBg 7s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    #particles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.85;
+    }
+
+    @keyframes pulseBg {
+      0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.8; }
+      50% { transform: scale(1.06) rotate(4deg); opacity: 1; }
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: clamp(1.2rem, 2.5vw, 2rem);
+      display: grid;
+      gap: 1.4rem;
+    }
+
+    .card {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      padding: clamp(1rem, 2vw, 1.5rem);
+      transform: translateY(0);
+      transition: transform .45s ease, box-shadow .45s ease, border-color .35s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.35);
+      box-shadow: 0 25px 40px rgba(0, 0, 0, 0.42), 0 0 35px rgba(247, 191, 210, 0.15);
+    }
+
+    h1, h2 { margin: 0 0 .8rem; font-weight: 650; letter-spacing: 0.03em; }
+    p { margin: 0.4rem 0; line-height: 1.55; }
+
+    .boot {
+      min-height: 170px;
+      display: grid;
+      gap: .4rem;
+      align-content: center;
+      font-family: Consolas, monospace;
+      color: var(--azul-med);
+    }
+
+    .boot-line {
+      opacity: 0;
+      transform: translateY(5px);
+      transition: opacity .3s ease, transform .3s ease;
+      text-shadow: 0 0 12px rgba(166, 212, 239, 0.65);
+    }
+
+    .boot-line.visible { opacity: 1; transform: translateY(0); }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 1em;
+      margin-left: 2px;
+      vertical-align: -2px;
+      background: var(--azul-med);
+      animation: blink .8s steps(1) infinite;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .code-terminal {
+      font-family: Consolas, "Fira Code", monospace;
+      background: rgba(4, 16, 24, 0.5);
+      border: 1px solid rgba(166, 212, 239, .3);
+      border-radius: 16px;
+      padding: 1rem;
+      color: #d8f2ff;
+      min-height: 140px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .code-terminal::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -200%;
+      width: 130%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(166,212,239,.14), transparent);
+      animation: scan 5s linear infinite;
+    }
+
+    @keyframes scan { to { left: 220%; } }
+
+    .code-line {
+      opacity: 0;
+      transform: translateY(4px);
+      margin: 0.25rem 0;
+      transition: .35s ease;
+      text-shadow: 0 0 10px rgba(174, 240, 255, 0.5);
+    }
+
+    .code-line.show { opacity: 1; transform: translateY(0); }
+
+    .ecg-wrap {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .ecg-screen {
+      background: linear-gradient(180deg, rgba(0, 32, 48, .55), rgba(0, 15, 24, .75));
+      border: 1px solid rgba(166, 212, 239, .35);
+      border-radius: 14px;
+      overflow: hidden;
+      padding: 0.5rem;
+      min-height: 160px;
+      position: relative;
+    }
+
+    #ecgCanvas { width: 100%; height: 150px; display: block; }
+
+    .diagnosis p strong { color: var(--rosa); }
+
+    .rx {
+      margin-top: .6rem;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,.25);
+      border-left: 5px solid var(--azul-med);
+      border-radius: 10px;
+      padding: .8rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: rxIn .9s ease forwards;
+      animation-delay: 4.4s;
+    }
+
+    @keyframes rxIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      align-items: center;
+      min-height: 110px;
+      position: relative;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: .86rem 1.35rem;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform .22s ease, box-shadow .25s ease, opacity .25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #yesBtn {
+      background: linear-gradient(140deg, #ff5f8f, #b92654);
+      box-shadow: 0 10px 22px rgba(255, 95, 143, .34);
+      animation: btnPulse 2.3s ease-in-out infinite;
+    }
+
+    #noBtn {
+      background: linear-gradient(140deg, #4f6f9b, #2f4562);
+      box-shadow: 0 8px 16px rgba(41, 57, 77, .32);
+    }
+
+    button:hover { transform: translateY(-2px) scale(1.02); }
+
+    @keyframes btnPulse {
+      50% { box-shadow: 0 0 0 9px rgba(255,95,143,.11), 0 12px 26px rgba(255,95,143,.4); }
+    }
+
+    .final-message {
+      margin-top: .8rem;
+      opacity: 0;
+      max-height: 0;
+      transform: translateY(8px);
+      overflow: hidden;
+      transition: .7s ease;
+      color: #ffeef5;
+      font-size: clamp(1rem, 2.1vw, 1.2rem);
+    }
+
+    .final-message.show {
+      opacity: 1;
+      max-height: 220px;
+      transform: translateY(0);
+    }
+
+    .heart-burst {
+      position: fixed;
+      pointer-events: none;
+      font-size: 1rem;
+      z-index: 4;
+      animation: burst 1.8s ease forwards;
+      text-shadow: 0 0 14px rgba(255, 93, 146, .9);
+    }
+
+    @keyframes burst {
+      from { opacity: 1; transform: translate(0,0) scale(.7); }
+      to { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(1.6) rotate(20deg); }
+    }
+
+    @media (max-width: 780px) {
+      .ecg-wrap { grid-template-columns: 1fr; }
+      .actions { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles" aria-hidden="true"></canvas>
+  <div class="glow-bg"></div>
+
+  <main id="scene">
+    <section class="card boot" id="boot"></section>
+
+    <section class="card">
+      <h2>💻 Código del Amor</h2>
+      <div class="code-terminal" id="terminal"></div>
+    </section>
+
+    <section class="card" id="medicalCard">
+      <h2>🩺 Monitoreo Médico-Emocional</h2>
+      <div class="ecg-wrap">
+        <div class="ecg-screen" id="ecgArea">
+          <canvas id="ecgCanvas" width="600" height="150"></canvas>
+        </div>
+        <div class="diagnosis">
+          <p><strong>Diagnóstico:</strong> Enamorado crónico.</p>
+          <p><strong>Síntomas:</strong> Pensar en ti 24/7.</p>
+          <p><strong>Pronóstico:</strong> Felicidad permanente.</p>
+          <p><strong>Tratamiento recomendado:</strong> Ser tu novio.</p>
+        </div>
+      </div>
+      <div class="rx">
+        <strong>Receta médica:</strong>
+        1 dosis diaria de abrazos + 1 sesión nocturna de risas + compartir vida a largo plazo.
+      </div>
+    </section>
+
+    <section class="card">
+      <h1>¿Quieres ser mi novia?</h1>
+      <p>He debuggeado mis emociones y el resultado es claro: eres mi feature favorita.</p>
+      <div class="actions" id="actions">
+        <button id="yesBtn">💖 Sí, acepto</button>
+        <button id="noBtn">💔 No</button>
+      </div>
+      <div class="final-message" id="finalMsg">
+        No necesito inteligencia artificial para saber que contigo quiero escribir el mejor código de mi vida.
+        <br />¿Quieres ser mi novia?
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // --- Efecto de inicio typewriter ---
+    const bootMessages = [
+      "Iniciando sistema emocional…",
+      "Escaneando compatibilidad…",
+      "Detectando sonrisa perfecta…",
+      "Conexión establecida."
+    ];
+
+    const bootEl = document.getElementById("boot");
+    const terminal = document.getElementById("terminal");
+    const scene = document.getElementById("scene");
+
+    async function typeLine(target, text, speed = 35) {
+      const line = document.createElement("div");
+      line.className = "boot-line visible";
+      const span = document.createElement("span");
+      const cursor = document.createElement("span");
+      cursor.className = "cursor";
+      line.append(span, cursor);
+      target.appendChild(line);
+
+      for (let i = 0; i < text.length; i++) {
+        span.textContent += text[i];
+        await new Promise(r => setTimeout(r, speed));
+      }
+      cursor.remove();
+    }
+
+    async function runBoot() {
+      for (const msg of bootMessages) {
+        await typeLine(bootEl, msg, 32);
+        await new Promise(r => setTimeout(r, 240));
+      }
+    }
+
+    const codeLines = [
+      "if (tuSonrisa === true) {",
+      "  miCorazon++;",
+      "}",
+      "",
+      "while (estemosJuntos) {",
+      "  felicidad++;",
+      "}"
+    ];
+
+    async function runCodeTyping() {
+      for (let i = 0; i < codeLines.length; i++) {
+        const p = document.createElement("p");
+        p.className = "code-line";
+        terminal.appendChild(p);
+        const txt = codeLines[i];
+
+        for (let j = 0; j < txt.length; j++) {
+          p.textContent += txt[j];
+          await new Promise(r => setTimeout(r, 18));
+        }
+
+        p.classList.add("show");
+        await new Promise(r => setTimeout(r, 110));
+      }
+    }
+
+    // --- Corazones flotantes en canvas ---
+    const pCanvas = document.getElementById("particles");
+    const pCtx = pCanvas.getContext("2d");
+    let hearts = [];
+
+    function resizeCanvas() {
+      pCanvas.width = innerWidth;
+      pCanvas.height = innerHeight;
+    }
+
+    function createHearts(total = Math.max(20, Math.floor(innerWidth / 40))) {
+      hearts = Array.from({ length: total }, () => ({
+        x: Math.random() * innerWidth,
+        y: Math.random() * innerHeight,
+        size: 6 + Math.random() * 10,
+        speedY: 0.2 + Math.random() * 0.6,
+        speedX: -0.4 + Math.random() * 0.8,
+        alpha: 0.18 + Math.random() * 0.42,
+        phase: Math.random() * Math.PI * 2
+      }));
+    }
+
+    function drawHeart(x, y, s, a) {
+      pCtx.save();
+      pCtx.translate(x, y);
+      pCtx.scale(s / 14, s / 14);
+      pCtx.fillStyle = `rgba(255, 182, 206, ${a})`;
+      pCtx.beginPath();
+      pCtx.moveTo(0, 4);
+      pCtx.bezierCurveTo(0, -3, -12, -3, -12, 4);
+      pCtx.bezierCurveTo(-12, 10, -5, 13, 0, 17);
+      pCtx.bezierCurveTo(5, 13, 12, 10, 12, 4);
+      pCtx.bezierCurveTo(12, -3, 0, -3, 0, 4);
+      pCtx.fill();
+      pCtx.restore();
+    }
+
+    let t = 0;
+    function animateHearts() {
+      t += 0.01;
+      pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
+      hearts.forEach(h => {
+        h.y -= h.speedY;
+        h.x += h.speedX + Math.sin(t + h.phase) * 0.3;
+        if (h.y < -20) { h.y = innerHeight + 20; h.x = Math.random() * innerWidth; }
+        if (h.x < -20) h.x = innerWidth + 15;
+        if (h.x > innerWidth + 20) h.x = -15;
+        drawHeart(h.x, h.y, h.size, h.alpha + Math.sin(t + h.phase) * 0.09);
+      });
+      requestAnimationFrame(animateHearts);
+    }
+
+    // --- Monitor ECG animado ---
+    const ecgCanvas = document.getElementById("ecgCanvas");
+    const ecgCtx = ecgCanvas.getContext("2d");
+    let ecgPhase = 0;
+    let ecgSpeed = 0.05;
+
+    function ecgWave(x) {
+      const p = (x + ecgPhase) % 120;
+      if (p < 20) return 0;
+      if (p < 28) return -8;
+      if (p < 32) return 26;
+      if (p < 36) return -18;
+      if (p < 52) return 2;
+      return 0;
+    }
+
+    function drawECG() {
+      ecgCtx.clearRect(0, 0, ecgCanvas.width, ecgCanvas.height);
+
+      ecgCtx.strokeStyle = "rgba(166, 212, 239, .2)";
+      ecgCtx.lineWidth = 1;
+      for (let x = 0; x < ecgCanvas.width; x += 24) {
+        ecgCtx.beginPath();
+        ecgCtx.moveTo(x, 0);
+        ecgCtx.lineTo(x, ecgCanvas.height);
+        ecgCtx.stroke();
+      }
+
+      ecgCtx.strokeStyle = "#79f3d2";
+      ecgCtx.lineWidth = 2.2;
+      ecgCtx.shadowBlur = 12;
+      ecgCtx.shadowColor = "rgba(121, 243, 210, 0.75)";
+      ecgCtx.beginPath();
+      for (let x = 0; x < ecgCanvas.width; x++) {
+        const y = ecgCanvas.height / 2 + ecgWave(x);
+        x === 0 ? ecgCtx.moveTo(x, y) : ecgCtx.lineTo(x, y);
+      }
+      ecgCtx.stroke();
+      ecgCtx.shadowBlur = 0;
+
+      ecgPhase += 1 + ecgSpeed * 40;
+      requestAnimationFrame(drawECG);
+    }
+
+    const ecgArea = document.getElementById("ecgArea");
+    ecgArea.addEventListener("mouseenter", () => ecgSpeed = 0.09);
+    ecgArea.addEventListener("mouseleave", () => ecgSpeed = 0.05);
+
+    // --- Interacción botones ---
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const finalMsg = document.getElementById("finalMsg");
+    let noScale = 1;
+
+    function moveNoButton() {
+      const box = document.getElementById("actions").getBoundingClientRect();
+      const maxX = Math.max(0, box.width - noBtn.offsetWidth - 16);
+      const maxY = Math.max(0, box.height - noBtn.offsetHeight - 8);
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+      noScale = Math.max(0.55, noScale - 0.06);
+      noBtn.style.position = "absolute";
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+      noBtn.style.transform = `scale(${noScale})`;
+      noBtn.style.opacity = String(Math.max(0.65, noScale));
+    }
+
+    ["mouseenter", "click", "touchstart"].forEach(evt => {
+      noBtn.addEventListener(evt, (e) => {
+        e.preventDefault();
+        moveNoButton();
+      });
+    });
+
+    function heartExplosion() {
+      const count = 26;
+      for (let i = 0; i < count; i++) {
+        const h = document.createElement("div");
+        h.className = "heart-burst";
+        h.textContent = ["💖", "💘", "💗", "💞"][Math.floor(Math.random() * 4)];
+        h.style.left = `${innerWidth / 2 + (Math.random() * 90 - 45)}px`;
+        h.style.top = `${innerHeight / 2 + (Math.random() * 90 - 45)}px`;
+        h.style.setProperty("--tx", `${(Math.random() * 2 - 1) * 260}px`);
+        h.style.setProperty("--ty", `${-120 - Math.random() * 220}px`);
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 1800);
+      }
+    }
+
+    yesBtn.addEventListener("click", () => {
+      document.body.classList.add("accepted");
+      finalMsg.classList.add("show");
+      yesBtn.disabled = true;
+      noBtn.style.display = "none";
+      heartExplosion();
+    });
+
+    // --- Parallax ligero con mouse ---
+    window.addEventListener("mousemove", (e) => {
+      const x = (e.clientX / innerWidth - 0.5) * 6;
+      const y = (e.clientY / innerHeight - 0.5) * 5;
+      scene.style.transform = `translate(${x * -0.35}px, ${y * -0.35}px)`;
+    });
+
+    window.addEventListener("resize", () => {
+      resizeCanvas();
+      createHearts();
+    });
+
+    async function init() {
+      resizeCanvas();
+      createHearts();
+      animateHearts();
+      drawECG();
+      await runBoot();
+      runCodeTyping();
+    }
+
+    init();
+  </script>
+</body>
+</html>
