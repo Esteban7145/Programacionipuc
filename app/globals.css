@@ -1,0 +1,23 @@
+:root {
+  --bg: #06070a;
+  --bg-soft: rgba(20, 28, 42, 0.62);
+  --text: #f7f8fb;
+  --accent: #3e7bff;
+  --gold: #b9964e;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #10203a 0%, #06070a 45%);
+  color: var(--text);
+  font-family: Inter, Segoe UI, sans-serif;
+}
+a { color: #9bc0ff; text-decoration: none; }
+.glass {
+  background: var(--bg-soft);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  border-radius: 18px;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+.grid { display: grid; gap: 16px; }
