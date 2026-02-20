@@ -17,14 +17,25 @@ Ecommerce premium con **Next.js App Router**, **MongoDB**, **Tailwind CSS**, **F
 
 ## Variables de entorno
 
-Copia `.env.example` a `.env.local`.
+Copia `.env.example` a `.env.local` y completa los datos reales.
 
-## Ejecutar
+## Ejecutar en local
 
 ```bash
 npm install
 npm run dev
 ```
+
+## Deploy en Netlify (evita error 404)
+
+Este repositorio ya incluye `netlify.toml` con el runtime oficial de Next.js. Para que funcione correctamente en Netlify:
+
+1. Build command: `npm run build`
+2. Publish directory: **dejar vacío** (Netlify lo resuelve con el plugin de Next)
+3. Configurar variables de entorno del `.env.example` en Site settings → Environment variables.
+4. Redeploy del sitio.
+
+Si faltan variables (`MONGODB_URI`, `JWT_SECRET`, Cloudinary, etc.), las páginas/API pueden fallar en runtime.
 
 ## Seguridad
 
