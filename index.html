@@ -140,12 +140,21 @@
           <button class="btn btn-ghost" id="nextBtn">Siguiente</button>
           <button class="btn btn-ghost" id="muteBtn">Silenciar música</button>
           <button class="btn btn-ghost" id="replayBtn">Repetir animación</button>
-          <button class="btn btn-ghost" id="songBtn" type="button">Escuchar "Yo Te Extrañaré" (Tercer Cielo)</button>
+          <button class="btn btn-ghost" id="songBtn" type="button">Reproducir "Amor Real" (Tercer Cielo)</button>
         </nav>
       </section>
     </main>
 
-    <audio id="bgMusic" loop preload="none"></audio>
+    <div class="music-dock" aria-live="polite">
+      <p class="music-label">🎵 Sonando: Tercer Cielo - Amor Real</p>
+      <iframe
+        id="ytMusicPlayer"
+        title="Reproductor de música romántica"
+        src="https://www.youtube.com/embed?autoplay=0&controls=1&enablejsapi=1&rel=0&modestbranding=1&listType=search&list=Tercer%20Cielo%20Amor%20Real"
+        allow="autoplay; encrypted-media"
+        referrerpolicy="strict-origin-when-cross-origin"
+      ></iframe>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="script.js"></script>

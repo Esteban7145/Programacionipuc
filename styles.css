@@ -302,7 +302,43 @@ h2 {
   border-color: rgba(255, 186, 239, 0.7);
 }
 
+
+.music-dock {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  width: min(360px, calc(100vw - 2rem));
+  padding: 0.65rem;
+  border: 1px solid rgba(214, 162, 255, 0.45);
+  border-radius: 14px;
+  background: rgba(14, 9, 24, 0.85);
+  backdrop-filter: blur(6px);
+  z-index: 40;
+}
+
+.music-label {
+  margin: 0 0 0.45rem;
+  font-size: 0.82rem;
+  color: #f2d6ff;
+}
+
+#ytMusicPlayer {
+  width: 100%;
+  height: 92px;
+  border: 0;
+  border-radius: 10px;
+}
+
 @media (max-width: 700px) {
   .screen { padding: 1rem; }
   .btn { flex: 1 1 45%; }
+  .music-dock {
+    right: 0.5rem;
+    left: 0.5rem;
+    width: auto;
+    bottom: 0.5rem;
+  }
+  #ytMusicPlayer {
+    height: 82px;
+  }
 }

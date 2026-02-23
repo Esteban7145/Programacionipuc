@@ -14,6 +14,7 @@ const signatureText = document.getElementById('signatureText');
 const yesBtn = document.getElementById('yesBtn');
 const thinkBtn = document.getElementById('thinkBtn');
 const finalResponse = document.getElementById('finalResponse');
+const ytMusicPlayer = document.getElementById('ytMusicPlayer');
 
 const biblePages = [...document.querySelectorAll('.bible-page')];
 const prevVerseBtn = document.getElementById('prevVerseBtn');
@@ -23,15 +24,15 @@ let currentStep = 0;
 let currentVerse = 0;
 let isMuted = false;
 let audioContext;
-let masterGain;
+let pageSoundGain;
 let musicStarted = false;
 
 function ensureAudioContext() {
   if (!audioContext) {
     audioContext = new window.AudioContext();
-    masterGain = audioContext.createGain();
-    masterGain.gain.value = 0.06;
-    masterGain.connect(audioContext.destination);
+    pageSoundGain = audioContext.createGain();
+    pageSoundGain.gain.value = 0.12;
+    pageSoundGain.connect(audioContext.destination);
   }
 
   if (audioContext.state === 'suspended') {
@@ -39,46 +40,31 @@ function ensureAudioContext() {
   }
 }
 
-function playAmbientMusic() {
+function sendYouTubeCommand(command) {
+  if (!ytMusicPlayer || !ytMusicPlayer.contentWindow) {
+    return;
+  }
+
+  ytMusicPlayer.contentWindow.postMessage(
+    JSON.stringify({ event: 'command', func: command, args: [] }),
+    '*'
+  );
+}
+
+function startSongPlayback() {
   if (musicStarted) {
     return;
   }
 
-  ensureAudioContext();
   musicStarted = true;
-
-  const chords = [
-    [261.63, 329.63, 392.0],
-    [220.0, 277.18, 329.63],
-    [246.94, 311.13, 369.99],
-    [196.0, 246.94, 329.63],
-  ];
-
-  let chordIndex = 0;
-  setInterval(() => {
-    if (isMuted || !audioContext) {
-      return;
+  setTimeout(() => {
+    sendYouTubeCommand('playVideo');
+    if (isMuted) {
+      sendYouTubeCommand('mute');
+    } else {
+      sendYouTubeCommand('unMute');
     }
-
-    const now = audioContext.currentTime;
-    const chord = chords[chordIndex % chords.length];
-
-    chord.forEach((freq, idx) => {
-      const osc = audioContext.createOscillator();
-      const gain = audioContext.createGain();
-      osc.type = idx === 0 ? 'sine' : 'triangle';
-      osc.frequency.value = freq;
-      gain.gain.setValueAtTime(0, now);
-      gain.gain.linearRampToValueAtTime(0.07 / (idx + 1), now + 0.6);
-      gain.gain.linearRampToValueAtTime(0.0, now + 4.2);
-      osc.connect(gain);
-      gain.connect(masterGain);
-      osc.start(now);
-      osc.stop(now + 4.3);
-    });
-
-    chordIndex += 1;
-  }, 3600);
+  }, 420);
 }
 
 function playPageFlipSound() {
@@ -109,7 +95,7 @@ function playPageFlipSound() {
 
   noise.connect(filter);
   filter.connect(gain);
-  gain.connect(masterGain);
+  gain.connect(pageSoundGain);
   noise.start(now);
   noise.stop(now + 0.23);
 }
@@ -188,7 +174,7 @@ startBtn.addEventListener('click', () => {
   introScreen.setAttribute('aria-hidden', 'true');
   storyScreen.classList.add('active');
   storyScreen.setAttribute('aria-hidden', 'false');
-  playAmbientMusic();
+  startSongPlayback();
   showSection(0);
 });
 
@@ -208,14 +194,19 @@ nextBtn.addEventListener('click', () => {
 
 muteBtn.addEventListener('click', () => {
   isMuted = !isMuted;
-  if (masterGain) {
-    masterGain.gain.value = isMuted ? 0 : 0.06;
+
+  if (isMuted) {
+    sendYouTubeCommand('mute');
+  } else {
+    sendYouTubeCommand('unMute');
   }
+
   muteBtn.textContent = isMuted ? 'Activar música' : 'Silenciar música';
 });
 
 songBtn.addEventListener('click', () => {
-  window.open('https://www.youtube.com/watch?v=JQx7r8L9QJ8', '_blank', 'noopener');
+  sendYouTubeCommand('playVideo');
+  ytMusicPlayer?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 });
 
 replayBtn.addEventListener('click', replayCurrentAnimation);
