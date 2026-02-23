@@ -14,7 +14,7 @@ const signatureText = document.getElementById('signatureText');
 const yesBtn = document.getElementById('yesBtn');
 const thinkBtn = document.getElementById('thinkBtn');
 const finalResponse = document.getElementById('finalResponse');
-const ytMusicPlayer = document.getElementById('ytMusicPlayer');
+const spotifyPlayer = document.getElementById('spotifyPlayer');
 
 const biblePages = [...document.querySelectorAll('.bible-page')];
 const prevVerseBtn = document.getElementById('prevVerseBtn');
@@ -25,7 +25,6 @@ let currentVerse = 0;
 let isMuted = false;
 let audioContext;
 let pageSoundGain;
-let musicStarted = false;
 
 function ensureAudioContext() {
   if (!audioContext) {
@@ -40,31 +39,17 @@ function ensureAudioContext() {
   }
 }
 
-function sendYouTubeCommand(command) {
-  if (!ytMusicPlayer || !ytMusicPlayer.contentWindow) {
+function focusSpotifyPlayer() {
+  if (!spotifyPlayer) {
     return;
   }
 
-  ytMusicPlayer.contentWindow.postMessage(
-    JSON.stringify({ event: 'command', func: command, args: [] }),
-    '*'
+  spotifyPlayer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  gsap.fromTo(
+    '.music-dock',
+    { boxShadow: '0 0 0 1px rgba(214, 162, 255, 0.2)' },
+    { boxShadow: '0 0 0 1px rgba(255, 173, 236, 0.7), 0 0 28px rgba(177, 109, 255, 0.5)', duration: 0.8 }
   );
-}
-
-function startSongPlayback() {
-  if (musicStarted) {
-    return;
-  }
-
-  musicStarted = true;
-  setTimeout(() => {
-    sendYouTubeCommand('playVideo');
-    if (isMuted) {
-      sendYouTubeCommand('mute');
-    } else {
-      sendYouTubeCommand('unMute');
-    }
-  }, 420);
 }
 
 function playPageFlipSound() {
@@ -174,8 +159,8 @@ startBtn.addEventListener('click', () => {
   introScreen.setAttribute('aria-hidden', 'true');
   storyScreen.classList.add('active');
   storyScreen.setAttribute('aria-hidden', 'false');
-  startSongPlayback();
   showSection(0);
+  setTimeout(focusSpotifyPlayer, 500);
 });
 
 prevBtn.addEventListener('click', () => {
@@ -194,19 +179,12 @@ nextBtn.addEventListener('click', () => {
 
 muteBtn.addEventListener('click', () => {
   isMuted = !isMuted;
-
-  if (isMuted) {
-    sendYouTubeCommand('mute');
-  } else {
-    sendYouTubeCommand('unMute');
-  }
-
-  muteBtn.textContent = isMuted ? 'Activar música' : 'Silenciar música';
+  muteBtn.textContent = isMuted ? 'Activar efectos' : 'Silenciar efectos';
 });
 
 songBtn.addEventListener('click', () => {
-  sendYouTubeCommand('playVideo');
-  ytMusicPlayer?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  focusSpotifyPlayer();
+  window.open('https://open.spotify.com/track/5rLoEgccrpmPXPKvxb0zIY', '_blank', 'noopener');
 });
 
 replayBtn.addEventListener('click', replayCurrentAnimation);
