@@ -9,8 +9,7 @@ const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 const muteBtn = document.getElementById('muteBtn');
 const replayBtn = document.getElementById('replayBtn');
-const bgMusic = document.getElementById('bgMusic');
-const pageSound = document.getElementById('pageSound');
+const songBtn = document.getElementById('songBtn');
 const signatureText = document.getElementById('signatureText');
 const yesBtn = document.getElementById('yesBtn');
 const thinkBtn = document.getElementById('thinkBtn');
@@ -23,8 +22,97 @@ const nextVerseBtn = document.getElementById('nextVerseBtn');
 let currentStep = 0;
 let currentVerse = 0;
 let isMuted = false;
+let audioContext;
+let masterGain;
+let musicStarted = false;
 
-bgMusic.volume = 0.23;
+function ensureAudioContext() {
+  if (!audioContext) {
+    audioContext = new window.AudioContext();
+    masterGain = audioContext.createGain();
+    masterGain.gain.value = 0.06;
+    masterGain.connect(audioContext.destination);
+  }
+
+  if (audioContext.state === 'suspended') {
+    audioContext.resume();
+  }
+}
+
+function playAmbientMusic() {
+  if (musicStarted) {
+    return;
+  }
+
+  ensureAudioContext();
+  musicStarted = true;
+
+  const chords = [
+    [261.63, 329.63, 392.0],
+    [220.0, 277.18, 329.63],
+    [246.94, 311.13, 369.99],
+    [196.0, 246.94, 329.63],
+  ];
+
+  let chordIndex = 0;
+  setInterval(() => {
+    if (isMuted || !audioContext) {
+      return;
+    }
+
+    const now = audioContext.currentTime;
+    const chord = chords[chordIndex % chords.length];
+
+    chord.forEach((freq, idx) => {
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      osc.type = idx === 0 ? 'sine' : 'triangle';
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(0.07 / (idx + 1), now + 0.6);
+      gain.gain.linearRampToValueAtTime(0.0, now + 4.2);
+      osc.connect(gain);
+      gain.connect(masterGain);
+      osc.start(now);
+      osc.stop(now + 4.3);
+    });
+
+    chordIndex += 1;
+  }, 3600);
+}
+
+function playPageFlipSound() {
+  if (isMuted) {
+    return;
+  }
+
+  ensureAudioContext();
+  const now = audioContext.currentTime;
+  const noiseBuffer = audioContext.createBuffer(1, audioContext.sampleRate * 0.22, audioContext.sampleRate);
+  const data = noiseBuffer.getChannelData(0);
+
+  for (let i = 0; i < data.length; i += 1) {
+    data[i] = (Math.random() * 2 - 1) * (1 - i / data.length);
+  }
+
+  const noise = audioContext.createBufferSource();
+  noise.buffer = noiseBuffer;
+
+  const filter = audioContext.createBiquadFilter();
+  filter.type = 'highpass';
+  filter.frequency.value = 420;
+
+  const gain = audioContext.createGain();
+  gain.gain.setValueAtTime(0.0001, now);
+  gain.gain.exponentialRampToValueAtTime(0.15, now + 0.04);
+  gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.22);
+
+  noise.connect(filter);
+  filter.connect(gain);
+  gain.connect(masterGain);
+  noise.start(now);
+  noise.stop(now + 0.23);
+}
 
 function initIntroAnimation() {
   gsap.from('h1', { opacity: 0, y: 12, duration: 1.2, ease: 'power2.out' });
@@ -58,7 +146,7 @@ function animateSection(index) {
 
   if (activeCard.dataset.step === '4') {
     signatureText.style.width = '0ch';
-    gsap.to(signatureText, { width: '19ch', duration: 2.1, ease: 'steps(19)' });
+    gsap.to(signatureText, { width: '24ch', duration: 2.3, ease: 'steps(24)' });
   }
 
   if (activeCard.dataset.step === '5') {
@@ -85,9 +173,7 @@ function showVerse(index, withFlip = true) {
   prevVerseBtn.disabled = index === 0;
   nextVerseBtn.disabled = index === biblePages.length - 1;
 
-  pageSound.currentTime = 0;
-  pageSound.volume = 0.15;
-  pageSound.play().catch(() => {});
+  playPageFlipSound();
 }
 
 function replayCurrentAnimation() {
@@ -102,7 +188,7 @@ startBtn.addEventListener('click', () => {
   introScreen.setAttribute('aria-hidden', 'true');
   storyScreen.classList.add('active');
   storyScreen.setAttribute('aria-hidden', 'false');
-  bgMusic.play().catch(() => {});
+  playAmbientMusic();
   showSection(0);
 });
 
@@ -122,8 +208,14 @@ nextBtn.addEventListener('click', () => {
 
 muteBtn.addEventListener('click', () => {
   isMuted = !isMuted;
-  bgMusic.muted = isMuted;
+  if (masterGain) {
+    masterGain.gain.value = isMuted ? 0 : 0.06;
+  }
   muteBtn.textContent = isMuted ? 'Activar música' : 'Silenciar música';
+});
+
+songBtn.addEventListener('click', () => {
+  window.open('https://www.youtube.com/watch?v=JQx7r8L9QJ8', '_blank', 'noopener');
 });
 
 replayBtn.addEventListener('click', replayCurrentAnimation);
@@ -144,7 +236,7 @@ nextVerseBtn.addEventListener('click', () => {
 
 yesBtn.addEventListener('click', () => {
   finalResponse.textContent =
-    'Gracias por decir sí. Quiero honrar esta historia con fe, respeto y pasos firmes.';
+    'Gracias por abrir tu corazón. Quiero cuidarte bonito, hablarte con verdad y demostrarte cada día lo especial que eres para mí.';
   gsap.fromTo(finalResponse, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.9 });
   gsap.to('.section-card[data-step="6"]', {
     boxShadow: '0 0 0 1px rgba(255, 157, 227, 0.45), 0 0 36px rgba(170, 107, 255, 0.35)',
@@ -153,7 +245,7 @@ yesBtn.addEventListener('click', () => {
 });
 
 thinkBtn.addEventListener('click', () => {
-  finalResponse.textContent = 'Lo valioso se piensa con calma. Yo seguiré orando con respeto.';
+  finalResponse.textContent = 'Tómate el tiempo que necesites. Yo voy a seguir aquí, con respeto, paciencia y mucho cariño por ti.';
   gsap.fromTo(finalResponse, { opacity: 0 }, { opacity: 1, duration: 0.7 });
 });
 
