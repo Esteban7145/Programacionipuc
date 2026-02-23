@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Francisca | Carta con Propósito</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="texture-overlay" aria-hidden="true"></div>
+
+    <main class="experience" id="experience">
+      <section class="screen intro active" data-screen="intro">
+        <div class="particles" id="particles" aria-hidden="true"></div>
+        <div class="intro-content">
+          <p class="eyebrow">Una carta con intención</p>
+          <h1 class="intro-name">Francisca…</h1>
+          <p class="intro-line delayed" id="introLineOne">
+            Hay historias que comienzan por decisión…
+          </p>
+          <p class="intro-line delayed" id="introLineTwo">
+            y otras que comienzan por dirección divina.
+          </p>
+          <button class="btn btn-primary" id="startBtn">Presiona aquí, Doctora.</button>
+        </div>
+      </section>
+
+      <section class="screen story" data-screen="story" aria-hidden="true">
+        <div class="section-card active" data-step="0">
+          <h2>🩺 Metáfora médica</h2>
+          <p class="lead">No llegaste como emergencia… llegaste como propósito.</p>
+          <p>
+            He aprendido que hay dolores que no aparecen en una resonancia, pero sí en el
+            silencio. Mi corazón no necesitaba cirugía, necesitaba dirección… y Dios usó a
+            Francisca para mostrarme que la sanidad también se parece a la paz.
+          </p>
+          <div class="ecg-wrap" aria-label="Animación de electrocardiograma elegante">
+            <svg viewBox="0 0 500 120" class="ecg-svg" role="img" aria-label="ECG convirtiéndose en corazón">
+              <path id="ecgPath" d="M0 60 H80 L110 60 L130 20 L160 100 L190 60 H250 L280 60 L300 40 L320 80 L340 60 H500" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="section-card" data-step="1">
+          <h2>🕊 Propósito y fe</h2>
+          <p class="lead">No fue casualidad clínica, fue providencia divina.</p>
+          <p>
+            Tú sanas cuerpos con dedicación; Dios sana almas con amor perfecto. En medio de ese
+            equilibrio, descubrí algo inesperado: tu presencia comenzó a ordenar mi mundo,
+            recordándome que lo verdadero se construye con oración, coherencia y tiempo.
+          </p>
+          <div class="heartbeat" aria-hidden="true"></div>
+        </div>
+
+        <div class="section-card" data-step="2">
+          <h2>🤍 Admiración</h2>
+          <p class="lead">Eres el diagnóstico más claro que ha tenido mi vida.</p>
+          <p>
+            Admiro tu entrega, tu vocación y tu forma de llevar esperanza con manos firmes y alma
+            sensible. Me inspira tu excelencia y tu fe serena: esa mezcla rara de inteligencia,
+            ternura y carácter que revela a una mujer con propósito.
+          </p>
+        </div>
+
+        <div class="section-card" data-step="3">
+          <h2>📜 Declaración sincera de Esteban</h2>
+          <p>
+            No te hablo desde la emoción pasajera, sino desde la convicción. Quiero construir algo
+            serio, con madurez, con verdad y con Cristo al centro. No deseo impresionar tu
+            instante; deseo honrar tu proceso y cuidar tu corazón.
+          </p>
+        </div>
+
+        <div class="section-card" data-step="4">
+          <h2>🧾 Receta médica</h2>
+          <article class="prescription">
+            <p><strong>Paciente:</strong> Corazón de Esteban</p>
+            <p><strong>Diagnóstico:</strong> Se enamoró de Francisca</p>
+            <p><strong>Tratamiento:</strong> Seguir construyendo algo guiado por Dios</p>
+            <p><strong>Dosis:</strong> Conversaciones sinceras, oraciones compartidas y paciencia eterna</p>
+            <p class="signature" id="signatureText">Dr. Providencia Divina</p>
+          </article>
+        </div>
+
+        <div class="section-card scripture" data-step="5">
+          <h2>✝️ Palabra que guía</h2>
+          <div class="verse" data-verse="Jeremías 29:11">
+            “Porque yo sé los planes que tengo para ustedes —afirma el Señor—, planes de bienestar
+            y no de calamidad, a fin de darles un futuro y una esperanza.”
+          </div>
+          <div class="verse" data-verse="1 Corintios 13:4-7">
+            “El amor es paciente, es bondadoso. El amor no es envidioso ni jactancioso ni orgulloso.
+            No se comporta con rudeza, no es egoísta, no se enoja fácilmente, no guarda rencor. El
+            amor no se deleita en la maldad sino que se regocija con la verdad. Todo lo disculpa,
+            todo lo cree, todo lo espera, todo lo soporta.”
+          </div>
+          <div class="verse" data-verse="Proverbios 4:23">
+            “Por sobre todas las cosas cuida tu corazón, porque de él mana la vida.”
+          </div>
+          <div class="verse" data-verse="Eclesiastés 4:9-10">
+            “Más valen dos que uno, porque obtienen más fruto de su esfuerzo. Si caen, el uno levanta
+            al otro.”
+          </div>
+        </div>
+
+        <div class="section-card" data-step="6">
+          <h2>💍 Pregunta final</h2>
+          <div class="final-question">
+            <p class="big">Francisca…</p>
+            <p>No quiero ser una etapa.<br />Quiero ser dirección.</p>
+            <p class="pause">¿Te gustaría escribir esta historia conmigo?</p>
+            <div class="decision-buttons">
+              <button class="btn btn-primary" id="yesBtn">Sí, sigamos hablando 🤍</button>
+              <button class="btn btn-ghost" id="thinkBtn">Necesito pensarlo</button>
+            </div>
+            <p id="finalResponse" class="final-response" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <nav class="controls" aria-label="Controles de navegación">
+          <button class="btn btn-ghost" id="prevBtn">Anterior</button>
+          <button class="btn btn-ghost" id="nextBtn">Siguiente</button>
+          <button class="btn btn-ghost" id="muteBtn">Silenciar música</button>
+          <button class="btn btn-ghost" id="replayBtn">Repetir animación</button>
+        </nav>
+      </section>
+    </main>
+
+    <audio id="bgMusic" loop preload="none">
+      <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3b8f37ff88.mp3?filename=soft-piano-ambient-110624.mp3" type="audio/mpeg" />
+    </audio>
+
+    <audio id="pageSound" preload="none">
+      <source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_89b9f050d7.mp3?filename=turning-book-page-104823.mp3" type="audio/mpeg" />
+    </audio>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
