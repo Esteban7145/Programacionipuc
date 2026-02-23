@@ -1,0 +1,405 @@
+:root {
+  --black: #0a0712;
+  --black-soft: #130d21;
+  --lila: #b06bff;
+  --lila-bright: #cf9bff;
+  --violet: #7d4ad6;
+  --pink: #ff79d1;
+  --text: #f6f0ff;
+  --muted: #d9caef;
+  --card: rgba(19, 13, 33, 0.78);
+  --line: rgba(203, 153, 255, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  font-family: "Inter", system-ui, sans-serif;
+  background: radial-gradient(circle at 16% 18%, #22123d 0%, var(--black) 52%, #08050d 100%);
+  overflow-x: hidden;
+}
+
+.bg-noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.2;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.16) 0.7px, transparent 0.7px);
+  background-size: 3px 3px;
+}
+
+.neon-orb {
+  position: fixed;
+  width: 36vw;
+  height: 36vw;
+  border-radius: 50%;
+  filter: blur(56px);
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.orb-a {
+  background: #a159ff;
+  top: -10vw;
+  right: -8vw;
+}
+
+.orb-b {
+  background: #ff6dd4;
+  bottom: -12vw;
+  left: -8vw;
+}
+
+.screen {
+  min-height: 100vh;
+  display: none;
+  padding: 2rem;
+}
+
+.screen.active {
+  display: flex;
+}
+
+.intro {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+.particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: radial-gradient(circle, var(--lila-bright), transparent 72%);
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(25vh) scale(1); opacity: 0.3; }
+  to { transform: translateY(-120vh) scale(1.9); opacity: 0.9; }
+}
+
+.intro-content {
+  max-width: 800px;
+  z-index: 1;
+}
+
+h1,
+h2,
+h3,
+.eyebrow,
+.big {
+  font-family: "Cinzel", serif;
+}
+
+h1 {
+  font-size: clamp(3rem, 8vw, 5.6rem);
+  margin: 0.6rem 0;
+  text-shadow: 0 0 25px rgba(188, 124, 255, 0.4);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--lila-bright);
+}
+
+.intro-line {
+  opacity: 0;
+  font-size: clamp(1.1rem, 2.8vw, 1.45rem);
+  color: var(--muted);
+}
+
+.story {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.section-card {
+  width: min(920px, 100%);
+  display: none;
+  background: linear-gradient(145deg, rgba(28, 18, 45, 0.92), rgba(13, 9, 24, 0.9));
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: clamp(1.25rem, 3vw, 2.2rem);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(210, 164, 255, 0.08);
+}
+
+.section-card.active {
+  display: block;
+}
+
+h2 {
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  margin-top: 0;
+}
+
+.lead {
+  color: #e6d7ff;
+  font-size: 1.14rem;
+}
+
+.scan-zone {
+  position: relative;
+  margin-top: 1rem;
+  border: 1px solid rgba(173, 110, 255, 0.35);
+  border-radius: 14px;
+  min-height: 180px;
+  overflow: hidden;
+  background: radial-gradient(circle at center, rgba(84, 40, 153, 0.25), rgba(11, 7, 19, 0.85));
+}
+
+.scan-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.scan-line {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(201, 141, 255, 0.35) 48%, transparent 100%);
+  animation: scan 3.4s linear infinite;
+}
+
+.scan-text {
+  position: absolute;
+  bottom: 12px;
+  left: 16px;
+  font-size: 0.9rem;
+  letter-spacing: 0.14em;
+  color: #e9d3ff;
+}
+
+@keyframes scan {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(100%); }
+}
+
+.prescription {
+  background: linear-gradient(180deg, rgba(29, 20, 43, 0.85), rgba(13, 8, 22, 0.95));
+  border-left: 3px solid var(--pink);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+}
+
+.signature {
+  margin-top: 1rem;
+  padding-top: 0.7rem;
+  border-top: 1px dashed rgba(219, 170, 255, 0.44);
+  font-family: "Cinzel", serif;
+  color: #ffbcf2;
+  width: fit-content;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.scripture .bible-book {
+  perspective: 1400px;
+  min-height: 245px;
+  position: relative;
+  border: 1px solid rgba(201, 142, 255, 0.3);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(24, 16, 40, 0.96), rgba(14, 10, 22, 0.98));
+  overflow: hidden;
+}
+
+.bible-page {
+  position: absolute;
+  inset: 0;
+  padding: 1.2rem;
+  transform-origin: left center;
+  transform: rotateY(-95deg);
+  opacity: 0;
+  backface-visibility: hidden;
+  background: linear-gradient(160deg, rgba(39, 26, 61, 0.96), rgba(19, 12, 31, 0.98));
+  border-left: 2px solid rgba(218, 173, 255, 0.35);
+}
+
+.bible-page.active {
+  opacity: 1;
+  transform: rotateY(0deg);
+}
+
+.bible-page h3 {
+  color: #f2d6ff;
+  margin-top: 0;
+}
+
+.bible-page p {
+  color: #e9def8;
+  line-height: 1.65;
+}
+
+.bible-controls,
+.controls,
+.decision-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  justify-content: center;
+  position: relative;
+  min-height: 58px;
+}
+
+.bible-controls {
+  margin-top: 0.9rem;
+}
+
+.controls {
+  width: min(920px, 100%);
+  margin-bottom: 1rem;
+}
+
+.final-question {
+  text-align: center;
+}
+
+.big {
+  font-size: 2.8rem;
+  margin-bottom: 0.2rem;
+}
+
+.pause {
+  margin-top: 1rem;
+}
+
+.final-response {
+  min-height: 2rem;
+  color: #ffd0f2;
+}
+
+.btn {
+  padding: 0.7rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid rgba(214, 162, 255, 0.45);
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8efff;
+  cursor: pointer;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: linear-gradient(110deg, var(--violet), var(--pink));
+  border-color: rgba(255, 186, 239, 0.7);
+}
+
+
+.music-dock {
+  position: fixed;
+  right: 0.9rem;
+  bottom: 0.8rem;
+  width: min(260px, calc(100vw - 1.2rem));
+  border: 1px solid rgba(214, 162, 255, 0.45);
+  border-radius: 999px;
+  background: rgba(14, 9, 24, 0.78);
+  backdrop-filter: blur(6px);
+  z-index: 40;
+  overflow: hidden;
+}
+
+.music-mini {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  padding: 0.5rem 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.music-mini small {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.music-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+  border-top: 1px solid transparent;
+}
+
+.music-panel.open {
+  max-height: 180px;
+  border-top-color: rgba(214, 162, 255, 0.25);
+}
+
+#spotifyPlayer {
+  width: 100%;
+  height: 152px;
+  border: 0;
+}
+
+.celebration-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 35;
+  opacity: 0;
+}
+
+.celebration-layer.active {
+  opacity: 1;
+}
+
+.confetti {
+  position: absolute;
+  top: -24px;
+  width: 8px;
+  height: 14px;
+  border-radius: 3px;
+  animation: confettiDrop linear forwards;
+}
+
+@keyframes confettiDrop {
+  to {
+    transform: translateY(110vh) rotate(540deg);
+    opacity: 0.2;
+  }
+}
+
+#thinkBtn {
+  position: relative;
+  transition: transform 0.22s ease;
+}
+
+@media (max-width: 700px) {
+  .screen { padding: 1rem; }
+  .btn { flex: 1 1 45%; }
+  .music-dock {
+    right: 0.5rem;
+    left: 0.5rem;
+    width: auto;
+    bottom: 0.5rem;
+  }
+  .music-panel.open {
+    max-height: 168px;
+  }
+  #spotifyPlayer {
+    height: 140px;
+  }
+}

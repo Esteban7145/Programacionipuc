@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Francisca | Lo que Dios puso en mi corazón</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Inter:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-noise" aria-hidden="true"></div>
+    <div class="neon-orb orb-a" aria-hidden="true"></div>
+    <div class="neon-orb orb-b" aria-hidden="true"></div>
+
+    <main class="experience">
+      <section class="screen intro active" data-screen="intro">
+        <div class="particles" id="particles" aria-hidden="true"></div>
+        <div class="intro-content">
+          <p class="eyebrow">Carta con intención real</p>
+          <h1>Francisca…</h1>
+          <p class="intro-line" id="introLineOne">Hay historias que comienzan por decisión…</p>
+          <p class="intro-line" id="introLineTwo">y otras porque Dios las escribe con precisión.</p>
+          <button class="btn btn-primary" id="startBtn">Presiona aquí, Doctora.</button>
+        </div>
+      </section>
+
+      <section class="screen story" data-screen="story" aria-hidden="true">
+        <div class="section-card active" data-step="0">
+          <h2>🩺 Cuando mi corazón fue examinado</h2>
+          <p class="lead">No llegaste como emergencia… llegaste como propósito.</p>
+          <p>
+            Si mi vida entrara a una resonancia, creo que antes aparecería mucho ruido y poca claridad.
+            Pero desde que te conocí, algo cambió en silencio: no fue impulso, fue dirección. Mi corazón
+            no necesitaba cirugía, necesitaba sentido. Y Dios, con la delicadeza con la que solo Él obra,
+            usó tu presencia para traer calma donde antes había dudas.
+          </p>
+          <div class="scan-zone" aria-label="Efecto de resonancia médica">
+            <div class="scan-grid"></div>
+            <div class="scan-line"></div>
+            <p class="scan-text">RESONANCIA: AMOR CON PROPÓSITO DETECTADO</p>
+          </div>
+        </div>
+
+        <div class="section-card" data-step="1">
+          <h2>🕊 Lo que Dios me hizo entender</h2>
+          <p class="lead">No fue casualidad clínica, fue un regalo de Dios.</p>
+          <p>
+            Tú sanas cuerpos con excelencia, disciplina y compasión. Y mientras te observo, recuerdo que
+            Dios también restaura almas con paciencia y verdad. En ese punto donde tu vocación y tu fe se
+            encuentran, descubrí algo que me marcó: contigo quiero construir, no improvisar; quiero honrar,
+            no apresurar. Porque lo que vale la pena no se fuerza, se cuida.
+          </p>
+        </div>
+
+        <div class="section-card" data-step="2">
+          <h2>🤍 Lo que más admiro de ti</h2>
+          <p class="lead">Eres la respuesta más clara que ha visto mi vida en mucho tiempo.</p>
+          <p>
+            Admiro tu inteligencia, tu sensibilidad y tu carácter. Admiro cómo puedes ser firme sin dejar de
+            ser tierna, y cómo llevas esperanza en una profesión donde muchos se cansan de sentir. Hay algo
+            en ti que inspira paz y profundidad, algo que no grita pero transforma. Y eso, Francisca, para mí
+            es hermoso de verdad.
+          </p>
+        </div>
+
+        <div class="section-card" data-step="3">
+          <h2>📜 Lo que quiero que sepas de mí</h2>
+          <p>
+            Soy Esteban, y quiero hablarte desde la verdad. No estoy aquí para jugar con emociones ni para ser
+            una historia pasajera. Quiero caminar con madurez, con respeto y con Dios al centro. Quiero ser un
+            hombre que te sume paz, que te cuide con hechos, que ore contigo y que aprenda a amar cada etapa
+            de tu proceso.
+          </p>
+        </div>
+
+        <div class="section-card" data-step="4">
+          <h2>🧾 Receta del corazón</h2>
+          <article class="prescription">
+            <p><strong>Paciente:</strong> Corazón de Esteban</p>
+            <p><strong>Diagnóstico:</strong> Se enamoró de Francisca</p>
+            <p><strong>Tratamiento:</strong> Seguir construyendo algo guiado por Dios</p>
+            <p><strong>Dosis:</strong> Conversaciones sinceras, oraciones compartidas y paciencia eterna</p>
+            <p class="signature" id="signatureText">Dr. Dios tiene el control</p>
+          </article>
+        </div>
+
+        <div class="section-card scripture" data-step="5">
+          <h2>✝️ Palabras de Dios para nosotros</h2>
+          <div class="bible-book" id="bibleBook">
+            <article class="bible-page active" data-verse="Jeremías 29:11">
+              <h3>Jeremías 29:11</h3>
+              <p>
+                “Porque yo sé los planes que tengo para ustedes —afirma el Señor—, planes de bienestar y no
+                de calamidad, a fin de darles un futuro y una esperanza.”
+              </p>
+            </article>
+            <article class="bible-page" data-verse="1 Corintios 13:4-7">
+              <h3>1 Corintios 13:4-7</h3>
+              <p>
+                “El amor es paciente, es bondadoso... Todo lo disculpa, todo lo cree, todo lo espera,
+                todo lo soporta.”
+              </p>
+            </article>
+            <article class="bible-page" data-verse="Proverbios 4:23">
+              <h3>Proverbios 4:23</h3>
+              <p>“Por sobre todas las cosas cuida tu corazón, porque de él mana la vida.”</p>
+            </article>
+            <article class="bible-page" data-verse="Eclesiastés 4:9-10">
+              <h3>Eclesiastés 4:9-10</h3>
+              <p>“Más valen dos que uno... Si caen, el uno levanta al otro.”</p>
+            </article>
+          </div>
+          <div class="bible-controls">
+            <button class="btn btn-ghost" id="prevVerseBtn">Página anterior</button>
+            <button class="btn btn-ghost" id="nextVerseBtn">Pasar página</button>
+          </div>
+        </div>
+
+        <div class="section-card" data-step="6">
+          <h2>💞 Lo que siento por ti</h2>
+          <div class="final-question">
+            <p class="big">Francisca…</p>
+            <p>No quiero quedarme en palabras lindas.<br />Quiero demostrarte con hechos todo lo que siento por ti.</p>
+            <p class="pause">Si tú también lo sientes, me haría feliz seguir escribiendo esto juntos, con calma y con Dios.</p>
+            <div class="decision-buttons">
+              <button class="btn btn-primary" id="yesBtn">Sí, quiero seguir este camino contigo 🤍</button>
+              <button class="btn btn-ghost" id="thinkBtn">Dame un poquito más de tiempo</button>
+            </div>
+            <p id="finalResponse" class="final-response" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <nav class="controls" aria-label="Controles generales">
+          <button class="btn btn-ghost" id="prevBtn">Anterior</button>
+          <button class="btn btn-ghost" id="nextBtn">Siguiente</button>
+          <button class="btn btn-ghost" id="muteBtn">Silenciar efectos</button>
+          <button class="btn btn-ghost" id="replayBtn">Repetir animación</button>
+          <button class="btn btn-ghost" id="songBtn" type="button">Reproducir "Amor Real" (Tercer Cielo)</button>
+        </nav>
+      </section>
+    </main>
+
+    <div class="music-dock" aria-live="polite">
+      <button class="music-mini" id="toggleMusicBtn" type="button">
+        <span>🎵 Amor Real</span>
+        <small>Spotify integrado</small>
+      </button>
+      <div class="music-panel" id="musicPanel">
+        <iframe
+          id="spotifyPlayer"
+          title="Reproductor Spotify: Amor Real"
+          src="https://open.spotify.com/embed/track/5rLoEgccrpmPXPKvxb0zIY?utm_source=generator&theme=0&autoplay=1"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
+      </div>
+    </div>
+
+    <div id="celebrationLayer" class="celebration-layer" aria-hidden="true"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
