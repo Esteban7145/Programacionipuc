@@ -1,112 +1,100 @@
-// Experiencia romántica elegante para Francisca y Esteban.
+// Experiencia romántica elegante-futurista personalizada.
 const introScreen = document.querySelector('[data-screen="intro"]');
 const storyScreen = document.querySelector('[data-screen="story"]');
-const introLines = [document.getElementById('introLineOne'), document.getElementById('introLineTwo')];
+const introLineOne = document.getElementById('introLineOne');
+const introLineTwo = document.getElementById('introLineTwo');
 const sectionCards = [...document.querySelectorAll('.section-card')];
-const verses = [...document.querySelectorAll('.verse')];
 const startBtn = document.getElementById('startBtn');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 const muteBtn = document.getElementById('muteBtn');
 const replayBtn = document.getElementById('replayBtn');
-const yesBtn = document.getElementById('yesBtn');
-const thinkBtn = document.getElementById('thinkBtn');
-const finalResponse = document.getElementById('finalResponse');
 const bgMusic = document.getElementById('bgMusic');
 const pageSound = document.getElementById('pageSound');
 const signatureText = document.getElementById('signatureText');
+const yesBtn = document.getElementById('yesBtn');
+const thinkBtn = document.getElementById('thinkBtn');
+const finalResponse = document.getElementById('finalResponse');
+
+const biblePages = [...document.querySelectorAll('.bible-page')];
+const prevVerseBtn = document.getElementById('prevVerseBtn');
+const nextVerseBtn = document.getElementById('nextVerseBtn');
 
 let currentStep = 0;
+let currentVerse = 0;
 let isMuted = false;
 
-const ecgOriginal =
-  'M0 60 H80 L110 60 L130 20 L160 100 L190 60 H250 L280 60 L300 40 L320 80 L340 60 H500';
-const ecgHeart =
-  'M0 60 H95 L120 60 Q145 20 170 60 Q195 100 220 60 H250 Q270 25 300 60 Q330 95 350 60 H500';
-
-bgMusic.volume = 0.22;
+bgMusic.volume = 0.23;
 
 function initIntroAnimation() {
-  gsap.to(introLines[0], { opacity: 1, y: -4, delay: 0.7, duration: 1.4, ease: 'power2.out' });
-  gsap.to(introLines[1], { opacity: 1, y: -4, delay: 2, duration: 1.4, ease: 'power2.out' });
+  gsap.from('h1', { opacity: 0, y: 12, duration: 1.2, ease: 'power2.out' });
+  gsap.to(introLineOne, { opacity: 1, y: -4, delay: 0.8, duration: 1.2 });
+  gsap.to(introLineTwo, { opacity: 1, y: -4, delay: 1.8, duration: 1.2 });
 }
 
 function buildParticles() {
   const particlesContainer = document.getElementById('particles');
-  const amount = 28;
-
-  for (let i = 0; i < amount; i += 1) {
+  for (let i = 0; i < 34; i += 1) {
     const dot = document.createElement('span');
     dot.className = 'particle';
     dot.style.left = `${Math.random() * 100}%`;
     dot.style.top = `${Math.random() * 100}%`;
-    dot.style.animationDuration = `${11 + Math.random() * 16}s`;
-    dot.style.animationDelay = `${-Math.random() * 8}s`;
+    dot.style.animationDuration = `${9 + Math.random() * 14}s`;
+    dot.style.animationDelay = `${-Math.random() * 6}s`;
     particlesContainer.appendChild(dot);
   }
 }
 
 function showSection(index) {
-  sectionCards.forEach((card, i) => {
-    card.classList.toggle('active', i === index);
-  });
-
+  sectionCards.forEach((card, i) => card.classList.toggle('active', i === index));
   prevBtn.disabled = index === 0;
   nextBtn.disabled = index === sectionCards.length - 1;
-
   animateSection(index);
 }
 
 function animateSection(index) {
   const activeCard = sectionCards[index];
-
-  gsap.fromTo(
-    activeCard,
-    { opacity: 0, y: 25 },
-    { opacity: 1, y: 0, duration: 0.9, ease: 'power2.out' }
-  );
-
-  if (activeCard.classList.contains('scripture')) {
-    if (pageSound) {
-      pageSound.currentTime = 0;
-      pageSound.volume = 0.14;
-      pageSound.play().catch(() => {});
-    }
-    gsap.to(verses, {
-      opacity: 1,
-      y: 0,
-      duration: 1.2,
-      ease: 'power2.out',
-      stagger: 0.6,
-    });
-  }
-
-  if (activeCard.dataset.step === '0') {
-    const ecgPath = document.getElementById('ecgPath');
-    gsap.fromTo(ecgPath, { strokeDashoffset: 1200 }, { strokeDashoffset: 0, duration: 2.4, ease: 'power2.out' });
-    gsap.to(ecgPath, { attr: { d: ecgHeart }, duration: 1.8, delay: 1.8, ease: 'power1.inOut' });
-  }
+  gsap.fromTo(activeCard, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.8 });
 
   if (activeCard.dataset.step === '4') {
     signatureText.style.width = '0ch';
-    gsap.to(signatureText, { width: '19ch', duration: 2.2, ease: 'steps(19)' });
+    gsap.to(signatureText, { width: '19ch', duration: 2.1, ease: 'steps(19)' });
+  }
+
+  if (activeCard.dataset.step === '5') {
+    currentVerse = 0;
+    showVerse(0, false);
   }
 }
 
+function showVerse(index, withFlip = true) {
+  biblePages.forEach((page, i) => {
+    page.classList.remove('active');
+    if (i === index) {
+      page.classList.add('active');
+      if (withFlip) {
+        gsap.fromTo(
+          page,
+          { rotateY: -96, opacity: 0.18, x: 10 },
+          { rotateY: 0, opacity: 1, x: 0, duration: 0.9, ease: 'power2.out' }
+        );
+      }
+    }
+  });
+
+  prevVerseBtn.disabled = index === 0;
+  nextVerseBtn.disabled = index === biblePages.length - 1;
+
+  pageSound.currentTime = 0;
+  pageSound.volume = 0.15;
+  pageSound.play().catch(() => {});
+}
+
 function replayCurrentAnimation() {
-  const activeCard = sectionCards[currentStep];
-
-  if (activeCard.dataset.step === '0') {
-    const ecgPath = document.getElementById('ecgPath');
-    ecgPath.setAttribute('d', ecgOriginal);
-    gsap.set(ecgPath, { strokeDashoffset: 1200 });
-  }
-
-  if (activeCard.classList.contains('scripture')) {
-    gsap.set(verses, { opacity: 0, y: 12 });
-  }
-
   animateSection(currentStep);
+  if (currentStep === 5) {
+    showVerse(currentVerse, true);
+  }
 }
 
 startBtn.addEventListener('click', () => {
@@ -114,7 +102,6 @@ startBtn.addEventListener('click', () => {
   introScreen.setAttribute('aria-hidden', 'true');
   storyScreen.classList.add('active');
   storyScreen.setAttribute('aria-hidden', 'false');
-
   bgMusic.play().catch(() => {});
   showSection(0);
 });
@@ -141,26 +128,36 @@ muteBtn.addEventListener('click', () => {
 
 replayBtn.addEventListener('click', replayCurrentAnimation);
 
+prevVerseBtn.addEventListener('click', () => {
+  if (currentVerse > 0) {
+    currentVerse -= 1;
+    showVerse(currentVerse, true);
+  }
+});
+
+nextVerseBtn.addEventListener('click', () => {
+  if (currentVerse < biblePages.length - 1) {
+    currentVerse += 1;
+    showVerse(currentVerse, true);
+  }
+});
+
 yesBtn.addEventListener('click', () => {
   finalResponse.textContent =
-    'Gracias por abrir esta puerta. Prometo que lo nuestro sea guiado por Dios, cuidado con honra y construido con paciencia.';
-  gsap.fromTo(
-    finalResponse,
-    { opacity: 0, y: 10, color: '#9f7f42' },
-    { opacity: 1, y: 0, color: '#5b472e', duration: 1.3, ease: 'power2.out' }
-  );
-  gsap.to('.final-question', {
-    boxShadow: '0 0 0 2px rgba(185, 153, 98, 0.38), 0 16px 48px rgba(175, 143, 87, 0.25)',
-    duration: 1.2,
+    'Gracias por decir sí. Quiero honrar esta historia con fe, respeto y pasos firmes.';
+  gsap.fromTo(finalResponse, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.9 });
+  gsap.to('.section-card[data-step="6"]', {
+    boxShadow: '0 0 0 1px rgba(255, 157, 227, 0.45), 0 0 36px rgba(170, 107, 255, 0.35)',
+    duration: 1,
   });
 });
 
 thinkBtn.addEventListener('click', () => {
-  finalResponse.textContent =
-    'Está bien, Francisca. Lo valioso se discierne con calma. Yo seguiré orando y caminando con respeto.';
-  gsap.fromTo(finalResponse, { opacity: 0 }, { opacity: 1, duration: 0.8 });
+  finalResponse.textContent = 'Lo valioso se piensa con calma. Yo seguiré orando con respeto.';
+  gsap.fromTo(finalResponse, { opacity: 0 }, { opacity: 1, duration: 0.7 });
 });
 
 buildParticles();
 initIntroAnimation();
 showSection(0);
+showVerse(0, false);
