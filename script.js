@@ -15,6 +15,9 @@ const yesBtn = document.getElementById('yesBtn');
 const thinkBtn = document.getElementById('thinkBtn');
 const finalResponse = document.getElementById('finalResponse');
 const spotifyPlayer = document.getElementById('spotifyPlayer');
+const toggleMusicBtn = document.getElementById('toggleMusicBtn');
+const musicPanel = document.getElementById('musicPanel');
+const celebrationLayer = document.getElementById('celebrationLayer');
 
 const biblePages = [...document.querySelectorAll('.bible-page')];
 const prevVerseBtn = document.getElementById('prevVerseBtn');
@@ -39,17 +42,26 @@ function ensureAudioContext() {
   }
 }
 
-function focusSpotifyPlayer() {
+function attemptAutoPlay() {
+  // Spotify decide si permite autoplay según navegador/cuenta/políticas.
   if (!spotifyPlayer) {
     return;
   }
 
-  spotifyPlayer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  gsap.fromTo(
-    '.music-dock',
-    { boxShadow: '0 0 0 1px rgba(214, 162, 255, 0.2)' },
-    { boxShadow: '0 0 0 1px rgba(255, 173, 236, 0.7), 0 0 28px rgba(177, 109, 255, 0.5)', duration: 0.8 }
-  );
+  const src = spotifyPlayer.getAttribute('src') || '';
+  if (!src.includes('autoplay=1')) {
+    const separator = src.includes('?') ? '&' : '?';
+    spotifyPlayer.setAttribute('src', `${src}${separator}autoplay=1`);
+  }
+}
+
+function toggleMusicPanel() {
+  musicPanel.classList.toggle('open');
+}
+
+function focusSpotifyPlayer() {
+  musicPanel.classList.add('open');
+  spotifyPlayer?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 function playPageFlipSound() {
@@ -154,13 +166,57 @@ function replayCurrentAnimation() {
   }
 }
 
+function launchCelebration() {
+  if (!celebrationLayer) {
+    return;
+  }
+
+  celebrationLayer.innerHTML = '';
+  for (let i = 0; i < 90; i += 1) {
+    const piece = document.createElement('span');
+    piece.className = 'confetti';
+    piece.style.left = `${Math.random() * 100}%`;
+    piece.style.background = ['#ff79d1', '#b06bff', '#f1cbff', '#7d4ad6'][Math.floor(Math.random() * 4)];
+    piece.style.animationDelay = `${Math.random() * 0.45}s`;
+    piece.style.animationDuration = `${2.2 + Math.random() * 1.6}s`;
+    celebrationLayer.appendChild(piece);
+  }
+
+  celebrationLayer.classList.add('active');
+  setTimeout(() => celebrationLayer.classList.remove('active'), 3400);
+}
+
+function makeThinkButtonEscape() {
+  const wrapper = thinkBtn.parentElement;
+  if (!wrapper) {
+    return;
+  }
+
+  const move = () => {
+    const x = (Math.random() - 0.5) * 160;
+    const y = (Math.random() - 0.5) * 70;
+    thinkBtn.style.transform = `translate(${x}px, ${y}px)`;
+  };
+
+  thinkBtn.addEventListener('mouseenter', move);
+  thinkBtn.addEventListener('focus', move);
+  thinkBtn.addEventListener('touchstart', (event) => {
+    event.preventDefault();
+    move();
+  }, { passive: false });
+
+  wrapper.addEventListener('mouseleave', () => {
+    thinkBtn.style.transform = 'translate(0, 0)';
+  });
+}
+
 startBtn.addEventListener('click', () => {
   introScreen.classList.remove('active');
   introScreen.setAttribute('aria-hidden', 'true');
   storyScreen.classList.add('active');
   storyScreen.setAttribute('aria-hidden', 'false');
   showSection(0);
-  setTimeout(focusSpotifyPlayer, 500);
+  setTimeout(focusSpotifyPlayer, 450);
 });
 
 prevBtn.addEventListener('click', () => {
@@ -181,6 +237,8 @@ muteBtn.addEventListener('click', () => {
   isMuted = !isMuted;
   muteBtn.textContent = isMuted ? 'Activar efectos' : 'Silenciar efectos';
 });
+
+toggleMusicBtn?.addEventListener('click', toggleMusicPanel);
 
 songBtn.addEventListener('click', () => {
   focusSpotifyPlayer();
@@ -211,10 +269,12 @@ yesBtn.addEventListener('click', () => {
     boxShadow: '0 0 0 1px rgba(255, 157, 227, 0.45), 0 0 36px rgba(170, 107, 255, 0.35)',
     duration: 1,
   });
+  launchCelebration();
 });
 
-thinkBtn.addEventListener('click', () => {
-  finalResponse.textContent = 'Tómate el tiempo que necesites. Yo voy a seguir aquí, con respeto, paciencia y mucho cariño por ti.';
+thinkBtn.addEventListener('click', (event) => {
+  event.preventDefault();
+  finalResponse.textContent = 'No te dejo ir tan fácil 😌. Mejor sigamos escribiendo algo bonito juntos.';
   gsap.fromTo(finalResponse, { opacity: 0 }, { opacity: 1, duration: 0.7 });
 });
 
@@ -222,3 +282,5 @@ buildParticles();
 initIntroAnimation();
 showSection(0);
 showVerse(0, false);
+makeThinkButtonEscape();
+attemptAutoPlay();
