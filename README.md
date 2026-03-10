@@ -57,3 +57,14 @@ npm run dev
 - Estética: elegante, minimalista, futurista.
 - Paleta: negro profundo, azul eléctrico, blanco limpio, dorado suave.
 - Glassmorphism ligero y transiciones cinematográficas.
+
+
+## Despliegue en Netlify
+
+Este proyecto usa Next.js App Router. Para evitar errores 404 de Netlify por rutas dinámicas, incluye `netlify.toml` con el plugin oficial de Next.js.
+
+Pasos:
+
+1. Configura en Netlify el comando de build `npm run build`.
+2. Asegúrate de que Netlify detecte e instale `@netlify/plugin-nextjs`.
+3. No publiques una carpeta estática manual (`out/`) para este proyecto SSR.
