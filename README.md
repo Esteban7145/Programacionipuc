@@ -61,10 +61,10 @@ npm run dev
 
 ## Despliegue en Netlify
 
-Este proyecto usa Next.js App Router. Para evitar errores 404 de Netlify por rutas dinámicas, incluye `netlify.toml` con el plugin oficial de Next.js.
+Netlify ya detecta automáticamente Next.js y usa su **Next.js Runtime**.
 
-Pasos:
+Recomendaciones:
 
-1. Configura en Netlify el comando de build `npm run build`.
-2. Asegúrate de que Netlify detecte e instale `@netlify/plugin-nextjs`.
-3. No publiques una carpeta estática manual (`out/`) para este proyecto SSR.
+1. Usa como comando de build `npm run build`.
+2. **No** fijes `publish = ".next"` ni fuerces plugin manual en `netlify.toml`.
+3. No publiques una carpeta estática (`out/`) en este proyecto SSR/App Router.
