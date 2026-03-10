@@ -4,7 +4,7 @@ Plataforma SaaS de proyección profesional para la IPUC (Iglesia Pentecostal Uni
 
 ## Características implementadas (base profesional)
 
-- Arquitectura Next.js + React + API Routes (backend integrado).
+- Arquitectura Next.js + React + API Routes (backend integrado) en JavaScript.
 - MongoDB + Mongoose con modelos multi-tenant (`Tenant`, `User`, `Song`, `Verse`, `Presentation`).
 - Autenticación con JWT y roles (`ADMIN_GENERAL`, `LIDER_DECOM`, `OPERADOR`).
 - Panel de administración inicial para:

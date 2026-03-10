@@ -8,7 +8,7 @@ export default function LoginPage() {
   const [tenantCode, setTenantCode] = useState('ipuc-central');
   const [message, setMessage] = useState('');
 
-  const onSubmit = async (e: React.FormEvent) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const res = await fetch('/api/auth/login', {
       method: 'POST',

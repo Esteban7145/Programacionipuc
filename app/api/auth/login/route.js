@@ -12,10 +12,9 @@ const schema = z.object({
   password: z.string().min(6)
 });
 
-export async function POST(req: Request) {
+export async function POST(req) {
   await connectDB();
-  const body = await req.json();
-  const data = schema.parse(body);
+  const data = schema.parse(await req.json());
 
   const tenant = await Tenant.findOne({ code: data.tenantCode });
   if (!tenant) return NextResponse.json({ message: 'Iglesia no encontrada' }, { status: 404 });
@@ -25,11 +24,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: 'Credenciales inválidas' }, { status: 401 });
   }
 
-  const token = signToken({
-    userId: String(user._id),
-    tenantId: String(tenant._id),
-    role: user.role
-  });
+  const token = signToken({ userId: String(user._id), tenantId: String(tenant._id), role: user.role });
 
   return NextResponse.json({ message: 'Inicio de sesión exitoso', token });
 }

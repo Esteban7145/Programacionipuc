@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 
-const splitLyrics = (lyrics: string) =>
+const splitLyrics = (lyrics) =>
   lyrics
     .split('\n\n')
     .flatMap((block) => block.match(/.{1,100}(\s|$)/g) ?? [])

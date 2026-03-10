@@ -3,17 +3,13 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
-const slides = [
-  'Tu fidelidad nunca falla',
-  'Grande es tu nombre Jesús',
-  'Eres digno de adoración'
-];
+const slides = ['Tu fidelidad nunca falla', 'Grande es tu nombre Jesús', 'Eres digno de adoración'];
 
 export function PresentationStage() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
+    const handler = (e) => {
       if (e.key === 'ArrowRight') setIndex((prev) => Math.min(prev + 1, slides.length - 1));
       if (e.key === 'ArrowLeft') setIndex((prev) => Math.max(prev - 1, 0));
     };

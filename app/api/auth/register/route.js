@@ -13,21 +13,14 @@ const schema = z.object({
   password: z.string().min(6)
 });
 
-export async function POST(req: Request) {
+export async function POST(req) {
   await connectDB();
-  const body = await req.json();
-  const data = schema.parse(body);
+  const data = schema.parse(await req.json());
 
   const tenant = await Tenant.create({ name: data.churchName, code: data.tenantCode });
   const passwordHash = await bcrypt.hash(data.password, 10);
 
-  await User.create({
-    tenantId: tenant._id,
-    email: data.email,
-    name: data.name,
-    passwordHash,
-    role: 'ADMIN_GENERAL'
-  });
+  await User.create({ tenantId: tenant._id, email: data.email, name: data.name, passwordHash, role: 'ADMIN_GENERAL' });
 
   return NextResponse.json({ message: 'Iglesia registrada exitosamente.' }, { status: 201 });
 }

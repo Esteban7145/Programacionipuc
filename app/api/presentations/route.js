@@ -10,7 +10,7 @@ const schema = z.object({
   slides: z.array(z.string()).min(1)
 });
 
-export async function POST(req: Request) {
+export async function POST(req) {
   await connectDB();
   const data = schema.parse(await req.json());
   const created = await Presentation.create(data);

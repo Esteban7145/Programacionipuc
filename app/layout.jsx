@@ -1,12 +1,11 @@
 import './globals.css';
-import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'IPUC Proyección',
   description: 'Plataforma profesional de proyección para iglesias IPUC'
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body>{children}</body>
