@@ -9,6 +9,7 @@ import { endOfWeek, format, isWithinInterval, parseISO, startOfWeek } from 'date
 import { readDb, writeDb } from './db.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const rootDir = path.join(__dirname, '..');
 const app = express();
 const PORT = process.env.PORT || 3001;
 const uploadsDir = path.join(__dirname, 'uploads');
@@ -29,6 +30,7 @@ const upload = multer({ storage });
 
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
+app.use(express.static(rootDir));
 app.use('/uploads', express.static(uploadsDir));
 
 const normalizeSchedule = (input) => {
@@ -207,6 +209,10 @@ app.post('/api/admin/invitations/upload', upload.single('media'), (req, res) => 
   db.invitations = [...db.invitations.filter((item) => item.id_evento !== eventId), invitation];
   writeDb(db);
   res.json({ message: 'Invitación guardada.', invitation, event });
+});
+
+app.get('/', (_req, res) => {
+  res.sendFile(path.join(rootDir, 'index.html'));
 });
 
 app.listen(PORT, () => {

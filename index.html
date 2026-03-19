@@ -4,10 +4,1059 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IPUC Villa del Río | Cronograma semanal</title>
-    <meta name="description" content="Plataforma para gestionar y proyectar el cronograma semanal de IPUC Villa del Río." />
+    <meta
+      name="description"
+      content="Cronograma semanal moderno para IPUC Villa del Río con visualización pública y panel administrativo."
+    />
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <style>
+      :root {
+        --bg-1: #041126;
+        --bg-2: #0d2d66;
+        --panel: rgba(8, 20, 45, 0.72);
+        --panel-strong: rgba(7, 16, 39, 0.86);
+        --line: rgba(255, 255, 255, 0.12);
+        --text: #f8f6ea;
+        --muted: rgba(248, 246, 234, 0.74);
+        --accent: #d9c99a;
+        --accent-soft: rgba(217, 201, 154, 0.18);
+        --success: #86efac;
+        --warning: #fde68a;
+        --danger: #fca5a5;
+        font-family: "Segoe UI", Inter, system-ui, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top center, rgba(72, 111, 199, 0.45), transparent 34%),
+          radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.12), transparent 18%),
+          radial-gradient(circle at 80% 24%, rgba(255, 255, 255, 0.08), transparent 20%),
+          linear-gradient(145deg, rgba(0, 0, 0, 0.55), rgba(4, 17, 38, 0.85)),
+          linear-gradient(135deg, var(--bg-1), var(--bg-2));
+        overflow-x: hidden;
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        inset: auto;
+        width: 38vw;
+        height: 38vw;
+        background: rgba(255, 255, 255, 0.05);
+        filter: blur(2px);
+        border-radius: 40% 60% 55% 45% / 45% 35% 65% 55%;
+        transform: rotate(25deg);
+        pointer-events: none;
+      }
+
+      body::before {
+        left: -10vw;
+        bottom: -8vw;
+      }
+
+      body::after {
+        right: -8vw;
+        top: 16vh;
+      }
+
+      .page-shell {
+        position: relative;
+        z-index: 1;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 28px clamp(16px, 3vw, 34px) 42px;
+      }
+
+      .topbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 24px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .brand-mark {
+        width: 68px;
+        height: 68px;
+        border-radius: 50%;
+        border: 2px solid rgba(248, 246, 234, 0.7);
+        display: grid;
+        place-items: center;
+        font-size: 11px;
+        text-align: center;
+        font-weight: 700;
+        line-height: 1.1;
+        background: rgba(255, 255, 255, 0.04);
+        backdrop-filter: blur(10px);
+      }
+
+      .brand-copy h1 {
+        margin: 0;
+        font-size: clamp(2rem, 4vw, 4rem);
+        letter-spacing: 0.01em;
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 700;
+      }
+
+      .brand-copy p,
+      .meta-line,
+      .muted,
+      .helper-text {
+        color: var(--muted);
+      }
+
+      .meta-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      button,
+      input,
+      textarea,
+      select {
+        font: inherit;
+      }
+
+      .ghost-btn,
+      .solid-btn,
+      .soft-btn {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 12px 18px;
+        cursor: pointer;
+        transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      }
+
+      .solid-btn {
+        background: var(--accent);
+        color: #111827;
+        border-color: rgba(217, 201, 154, 0.4);
+        font-weight: 700;
+      }
+
+      .ghost-btn,
+      .soft-btn {
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--text);
+      }
+
+      .soft-btn {
+        border-radius: 16px;
+      }
+
+      .ghost-btn:hover,
+      .solid-btn:hover,
+      .soft-btn:hover,
+      .schedule-row:hover,
+      .card:hover,
+      .tile:hover {
+        transform: translateY(-2px);
+      }
+
+      .hero {
+        display: grid;
+        gap: 28px;
+        grid-template-columns: 1.35fr 0.9fr;
+        align-items: start;
+      }
+
+      .panel,
+      .card,
+      .admin-panel,
+      .modal-card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+        backdrop-filter: blur(20px);
+      }
+
+      .hero-main {
+        border-radius: 36px;
+        padding: clamp(24px, 4vw, 44px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-main::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 70% 12%, rgba(255,255,255,0.09), transparent 18%),
+          radial-gradient(circle at 28% 78%, rgba(217,201,154,0.12), transparent 20%);
+        pointer-events: none;
+      }
+
+      .hero-main > * { position: relative; z-index: 1; }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        font-size: 0.88rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .hero-main h2 {
+        margin: 18px 0 10px;
+        font-size: clamp(3rem, 5vw, 5.2rem);
+        line-height: 0.96;
+        font-family: Georgia, "Times New Roman", serif;
+      }
+
+      .hero-main .week-label {
+        margin: 0;
+        font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+        color: rgba(248, 246, 234, 0.88);
+      }
+
+      .hero-main .summary {
+        margin-top: 18px;
+        max-width: 620px;
+        line-height: 1.7;
+        color: var(--muted);
+      }
+
+      .hero-side {
+        display: grid;
+        gap: 18px;
+      }
+
+      .tile {
+        border-radius: 28px;
+        padding: 22px;
+      }
+
+      .tile strong {
+        display: block;
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+      }
+
+      .status-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .status-chip::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--success);
+        box-shadow: 0 0 0 8px rgba(134, 239, 172, 0.12);
+      }
+
+      .schedule-board {
+        margin-top: 32px;
+        display: grid;
+        gap: 18px;
+      }
+
+      .board-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .board-head h3,
+      .detail-pane h3,
+      .admin-head h3 {
+        margin: 0;
+        font-size: clamp(1.6rem, 2vw, 2.2rem);
+      }
+
+      .schedule-row {
+        width: 100%;
+        border: 1px solid rgba(255,255,255,0.1);
+        background: rgba(8, 20, 45, 0.62);
+        color: var(--text);
+        border-radius: 30px;
+        padding: 0;
+        overflow: hidden;
+        cursor: pointer;
+        transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      }
+
+      .schedule-row.active {
+        background: rgba(11, 29, 69, 0.9);
+        border-color: rgba(217, 201, 154, 0.32);
+      }
+
+      .schedule-row-inner {
+        display: grid;
+        grid-template-columns: minmax(200px, 320px) 22px minmax(240px, 1fr) auto;
+        align-items: center;
+        gap: 22px;
+        padding: clamp(18px, 2vw, 28px);
+      }
+
+      .schedule-row-inner .day {
+        font-size: clamp(2.2rem, 4.2vw, 4.2rem);
+        font-weight: 800;
+      }
+
+      .divider {
+        width: 4px;
+        height: 72px;
+        border-radius: 999px;
+        background: rgba(248, 246, 234, 0.86);
+      }
+
+      .service-title {
+        font-size: clamp(1.9rem, 4vw, 4rem);
+        font-weight: 700;
+        line-height: 1.04;
+      }
+
+      .schedule-meta {
+        display: grid;
+        gap: 8px;
+        justify-items: end;
+        text-align: right;
+      }
+
+      .time-pill {
+        display: inline-flex;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--text);
+        border: 1px solid rgba(217, 201, 154, 0.24);
+        font-weight: 700;
+      }
+
+      .content-grid {
+        margin-top: 28px;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 24px;
+      }
+
+      .card,
+      .detail-pane,
+      .admin-panel {
+        border-radius: 30px;
+        padding: 24px;
+      }
+
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .card h4,
+      .detail-pane h4 {
+        margin: 0 0 8px;
+        font-size: 1.2rem;
+      }
+
+      .detail-pane {
+        background: var(--panel-strong);
+        border: 1px solid rgba(255,255,255,0.12);
+      }
+
+      .media-preview {
+        margin-top: 20px;
+        border-radius: 24px;
+        min-height: 260px;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.08);
+        background:
+          radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 42%),
+          linear-gradient(135deg, rgba(7,16,39,0.95), rgba(13,45,102,0.85));
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 24px;
+      }
+
+      .media-preview img,
+      .media-preview video,
+      .modal-media img,
+      .modal-media video,
+      .modal-media iframe {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border: 0;
+      }
+
+      .helper-list {
+        display: grid;
+        gap: 10px;
+        margin-top: 16px;
+      }
+
+      .helper-list li {
+        list-style: none;
+        padding-left: 16px;
+        position: relative;
+        color: var(--muted);
+      }
+
+      .helper-list li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+      }
+
+      .admin-panel {
+        margin-top: 26px;
+        display: none;
+      }
+
+      .admin-panel.open {
+        display: block;
+      }
+
+      .admin-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        gap: 16px;
+        margin-bottom: 18px;
+      }
+
+      .admin-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .field,
+      .stack {
+        display: grid;
+        gap: 10px;
+      }
+
+      .field input,
+      .field textarea,
+      .field select {
+        width: 100%;
+        padding: 13px 14px;
+        border-radius: 16px;
+        border: 1px solid rgba(255,255,255,0.12);
+        background: rgba(255,255,255,0.06);
+        color: var(--text);
+      }
+
+      .field textarea {
+        min-height: 110px;
+        resize: vertical;
+      }
+
+      .notice {
+        padding: 14px 18px;
+        border-radius: 18px;
+        margin: 16px 0;
+        border: 1px solid rgba(255,255,255,0.1);
+        background: rgba(255,255,255,0.07);
+      }
+
+      .notice.warning { color: var(--warning); }
+      .notice.success { color: var(--success); }
+      .notice.error { color: var(--danger); }
+
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(2, 8, 23, 0.84);
+        display: none;
+        place-items: center;
+        padding: 20px;
+        z-index: 30;
+      }
+
+      .modal.open { display: grid; }
+
+      .modal-card {
+        width: min(1120px, 100%);
+        border-radius: 34px;
+        padding: 22px;
+      }
+
+      .modal-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 20px;
+      }
+
+      .modal-media {
+        min-height: 360px;
+        overflow: hidden;
+        border-radius: 26px;
+        background: rgba(255,255,255,0.05);
+        display: grid;
+        place-items: center;
+      }
+
+      .close-btn {
+        float: right;
+        background: transparent;
+        color: var(--text);
+        border: 1px solid var(--line);
+        border-radius: 50%;
+        width: 42px;
+        height: 42px;
+        cursor: pointer;
+      }
+
+      .footer-note {
+        margin-top: 34px;
+        text-align: center;
+        font-size: clamp(1.25rem, 2.3vw, 2rem);
+        color: rgba(248, 246, 234, 0.9);
+      }
+
+      @media (max-width: 1100px) {
+        .hero,
+        .content-grid,
+        .modal-grid,
+        .admin-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 900px) {
+        .schedule-row-inner {
+          grid-template-columns: 1fr;
+          text-align: left;
+        }
+
+        .divider {
+          width: 100%;
+          height: 4px;
+        }
+
+        .schedule-meta {
+          justify-items: start;
+          text-align: left;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .card-grid { grid-template-columns: 1fr; }
+        .brand { align-items: start; }
+        .brand-mark { width: 56px; height: 56px; font-size: 9px; }
+        .hero-main h2 { line-height: 1; }
+      }
+    </style>
   </head>
-  <body class="bg-slate-950">
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+  <body>
+    <div class="page-shell" id="captureArea">
+      <div class="topbar">
+        <div class="brand">
+          <div class="brand-mark">IPUC<br/>VILLA<br/>DEL RÍO</div>
+          <div class="brand-copy">
+            <div class="meta-line">Iglesia Pentecostal Unida de Colombia</div>
+            <h1>Cronograma Semanal</h1>
+            <p id="todayLabel">Cargando fecha actual...</p>
+          </div>
+        </div>
+        <div class="meta-actions">
+          <button class="ghost-btn" id="downloadBtn">Descargar cronograma</button>
+          <button class="solid-btn" id="adminToggleBtn">Panel DECOM</button>
+        </div>
+      </div>
+
+      <section class="hero">
+        <div class="panel hero-main">
+          <div class="eyebrow">Esta semana</div>
+          <h2 id="weekTitle">Villa del Río</h2>
+          <p class="week-label" id="weekRange">Cargando semana actual...</p>
+          <p class="summary">
+            Plataforma visual para proyectar, compartir y administrar la programación semanal de la iglesia con actualización automática,
+            multimedia y vista elegante inspirada en cronogramas de culto modernos.
+          </p>
+          <div class="notice warning" id="statusNotice" style="display:none"></div>
+        </div>
+
+        <div class="hero-side">
+          <div class="panel tile">
+            <div class="status-chip">Sincronización semanal automática</div>
+            <div style="height:12px"></div>
+            <strong id="currentMode">Modo visual activo</strong>
+            <div class="helper-text">El sistema detecta la semana actual y solo muestra los cultos correspondientes.</div>
+          </div>
+          <div class="panel tile">
+            <strong>Servicios principales</strong>
+            <div class="muted">Martes · Jueves · Sábado · Domingo</div>
+            <ul class="helper-list" style="padding:0; margin:0;">
+              <li>Cards interactivas por día</li>
+              <li>Vista ampliada de invitación</li>
+              <li>Descarga lista para WhatsApp y proyección</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="schedule-board">
+        <div class="board-head">
+          <div>
+            <h3>Programación visible de la semana</h3>
+            <div class="muted">Haz clic en cualquier día para ver detalles, invitación y multimedia.</div>
+          </div>
+          <div class="muted" id="weekTag">Semana actual</div>
+        </div>
+        <div id="scheduleRows"></div>
+      </section>
+
+      <section class="content-grid">
+        <div class="card">
+          <h3 style="margin-top:0">Resumen rápido</h3>
+          <div class="card-grid" id="infoCards"></div>
+        </div>
+
+        <aside class="detail-pane">
+          <div class="muted">Detalle del culto seleccionado</div>
+          <h3 id="detailTitle">Selecciona un día</h3>
+          <h4 id="detailSubtitle">Vista previa e invitación</h4>
+          <p class="muted" id="detailText">Aquí verás la descripción, hora, mensaje e invitación completa del servicio.</p>
+          <div class="media-preview" id="mediaPreview">
+            <div>
+              <div style="font-size:1.4rem;font-weight:700;">Invitación multimedia</div>
+              <div class="muted">Sube una imagen o video desde el panel DECOM para ver la vista previa aquí.</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+            <button class="solid-btn" id="openInvitationBtn">Ver invitación completa</button>
+            <button class="soft-btn" id="refreshBtn">Actualizar vista</button>
+          </div>
+        </aside>
+      </section>
+
+      <section class="admin-panel" id="adminPanel">
+        <div class="admin-head">
+          <div>
+            <h3>Panel administrativo DECOM</h3>
+            <div class="muted">Sube cronogramas JSON/Excel, edita eventos y carga invitaciones semanales.</div>
+          </div>
+          <div class="status-chip" id="adminStatus">Acceso restringido</div>
+        </div>
+
+        <div class="admin-grid">
+          <div class="card stack">
+            <h4>1. Ingreso administrativo</h4>
+            <div class="field"><input id="loginUser" placeholder="Usuario" value="IPUCVILLADELRIO" /></div>
+            <div class="field"><input id="loginPass" placeholder="Clave" type="password" value="99061408327" /></div>
+            <button class="solid-btn" id="loginBtn">Ingresar</button>
+          </div>
+
+          <div class="card stack">
+            <h4>2. Subir cronograma mensual/anual</h4>
+            <div class="field"><input id="scheduleFile" type="file" accept=".json,.xlsx,.xls" /></div>
+            <button class="solid-btn" id="uploadScheduleBtn">Subir archivo</button>
+            <div class="helper-text">Formato compatible: JSON o Excel agrupado por <strong>fecha_inicio_semana</strong>.</div>
+          </div>
+
+          <div class="card stack">
+            <h4>3. Editar evento</h4>
+            <div class="field"><select id="eventSelector"><option value="">Selecciona un evento</option></select></div>
+            <div class="field"><input id="editTitle" placeholder="Título" /></div>
+            <div class="field"><input id="editTime" placeholder="Hora" /></div>
+            <div class="field"><textarea id="editDescription" placeholder="Descripción"></textarea></div>
+            <div class="field"><textarea id="editMessage" placeholder="Mensaje de invitación"></textarea></div>
+            <button class="solid-btn" id="saveEventBtn">Guardar cambios</button>
+          </div>
+
+          <div class="card stack">
+            <h4>4. Subir invitación</h4>
+            <div class="field"><input id="invitationFile" type="file" accept="image/*,video/mp4" /></div>
+            <div class="field"><input id="videoUrl" placeholder="Enlace de YouTube opcional" /></div>
+            <div class="field"><textarea id="fullInvitation" placeholder="Texto completo de la invitación"></textarea></div>
+            <button class="solid-btn" id="uploadInvitationBtn">Guardar invitación</button>
+          </div>
+        </div>
+
+        <div id="adminNotice" class="notice" style="display:none"></div>
+      </section>
+
+      <div class="footer-note" id="footerHours">Martes, Jueves, Sábado 07:00 P.M · Domingos 09:00 A.M</div>
+    </div>
+
+    <div class="modal" id="invitationModal">
+      <div class="modal-card">
+        <button class="close-btn" id="closeModalBtn">×</button>
+        <div class="modal-grid">
+          <div class="modal-media" id="modalMedia"></div>
+          <div>
+            <div class="eyebrow">Invitación completa</div>
+            <h3 id="modalTitle" style="font-size:2.2rem; margin-bottom:10px;">Culto</h3>
+            <div class="muted" id="modalTime">Hora</div>
+            <p id="modalDescription" class="muted" style="line-height:1.7;"></p>
+            <div class="notice" id="modalInvitationText"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const apiBase = '';
+      const fallbackData = {
+        generatedAt: new Date().toISOString(),
+        currentWeek: {
+          id: 'semana-demo',
+          fecha_inicio_semana: '2026-03-09',
+          fecha_fin_semana: '2026-03-15',
+          etiqueta: 'Marzo 09 al 15 Marzo',
+          eventos: [
+            {
+              id: 'martes', dia: 'Martes', titulo: 'Culto de Caballeros', hora: '7:00 P.M',
+              descripcion: 'Servicio especial para fortalecer la fe, la oración y el liderazgo cristiano de los caballeros.',
+              mensaje: 'Te invitamos a una noche especial de adoración, palabra y comunión en IPUC Villa del Río.',
+              media: '',
+              invitacion: { descripcion_completa: 'Ven con tu familia y amigos. Dios tiene una palabra de bendición para tu vida.', imagen_url: '', video_url: '' }
+            },
+            {
+              id: 'jueves', dia: 'Jueves', titulo: 'Culto de Evangelismo', hora: '7:00 P.M',
+              descripcion: 'Una jornada para invitar nuevos corazones y compartir el mensaje de salvación.',
+              mensaje: 'Invita a una persona especial y acompáñanos a vivir un culto de evangelismo poderoso.',
+              media: '',
+              invitacion: { descripcion_completa: 'Será una noche de milagros, alabanza y palabra para visitantes y congregación.', imagen_url: '', video_url: '' }
+            },
+            {
+              id: 'sabado', dia: 'Sábado', titulo: 'Culto de Escuela Dominical', hora: '7:00 P.M',
+              descripcion: 'Encuentro formativo con enseñanza bíblica y participación de toda la iglesia.',
+              mensaje: 'Prepárate para aprender más de la Palabra y crecer espiritualmente.',
+              media: '',
+              invitacion: { descripcion_completa: 'Una noche ideal para profundizar en la enseñanza bíblica con toda la congregación.', imagen_url: '', video_url: '' }
+            },
+            {
+              id: 'domingo', dia: 'Domingo', titulo: 'Escuela Dominical', hora: '10:00 A.M',
+              descripcion: 'La reunión principal de enseñanza y adoración para la familia y los visitantes.',
+              mensaje: 'Te esperamos para celebrar juntos una mañana gloriosa en la presencia de Dios.',
+              media: '',
+              invitacion: { descripcion_completa: 'Ven con toda tu familia para disfrutar un tiempo especial de adoración, palabra y unidad.', imagen_url: '', video_url: '' }
+            }
+          ]
+        },
+        allWeeks: []
+      };
+
+      const state = {
+        payload: fallbackData,
+        selectedEventId: fallbackData.currentWeek.eventos[0].id,
+        loggedIn: false,
+        dashboard: null,
+        fallbackMode: true,
+      };
+
+      const byId = (id) => document.getElementById(id);
+      const todayLabel = byId('todayLabel');
+      const weekTitle = byId('weekTitle');
+      const weekRange = byId('weekRange');
+      const weekTag = byId('weekTag');
+      const scheduleRows = byId('scheduleRows');
+      const infoCards = byId('infoCards');
+      const detailTitle = byId('detailTitle');
+      const detailSubtitle = byId('detailSubtitle');
+      const detailText = byId('detailText');
+      const mediaPreview = byId('mediaPreview');
+      const statusNotice = byId('statusNotice');
+      const currentMode = byId('currentMode');
+      const footerHours = byId('footerHours');
+      const adminPanel = byId('adminPanel');
+      const adminNotice = byId('adminNotice');
+      const adminStatus = byId('adminStatus');
+      const invitationModal = byId('invitationModal');
+
+      function formatLongDate(date = new Date()) {
+        return new Intl.DateTimeFormat('es-CO', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(date);
+      }
+
+      function formatWeekRange(week) {
+        try {
+          const start = new Date(week.fecha_inicio_semana + 'T00:00:00');
+          const end = new Date(week.fecha_fin_semana + 'T00:00:00');
+          const fmt = new Intl.DateTimeFormat('es-CO', { month: 'long', day: 'numeric' });
+          return `${fmt.format(start)} al ${fmt.format(end)}`;
+        } catch {
+          return week.etiqueta || 'Semana actual';
+        }
+      }
+
+      function selectedEvent() {
+        return state.payload.currentWeek.eventos.find((event) => event.id === state.selectedEventId) || state.payload.currentWeek.eventos[0];
+      }
+
+      function renderScheduleRows() {
+        const events = state.payload.currentWeek.eventos;
+        scheduleRows.innerHTML = events.map((event) => `
+          <button class="schedule-row ${event.id === state.selectedEventId ? 'active' : ''}" data-event-id="${event.id}">
+            <div class="schedule-row-inner">
+              <div class="day">${event.dia}</div>
+              <div class="divider"></div>
+              <div class="service-title">${event.titulo}</div>
+              <div class="schedule-meta">
+                <span class="time-pill">${event.hora}</span>
+                <span class="muted">Ver invitación</span>
+              </div>
+            </div>
+          </button>
+        `).join('');
+
+        scheduleRows.querySelectorAll('[data-event-id]').forEach((button) => {
+          button.addEventListener('click', () => {
+            state.selectedEventId = button.dataset.eventId;
+            renderAll();
+          });
+        });
+      }
+
+      function mediaMarkup(event) {
+        const invitation = event.invitacion || {};
+        const media = invitation.imagen_url || invitation.video_url || event.media || '';
+        if (!media) {
+          return `<div><div style="font-size:1.45rem;font-weight:700; margin-bottom:6px;">${event.titulo}</div><div class="muted">Aquí aparecerá la imagen o video del culto cuando lo subas desde el panel DECOM.</div></div>`;
+        }
+        if ((invitation.video_url || '').includes('youtube.com') || (invitation.video_url || '').includes('youtu.be')) {
+          const src = invitation.video_url.replace('watch?v=', 'embed/').replace('youtu.be/', 'youtube.com/embed/');
+          return `<iframe src="${src}" title="${event.titulo}" allowfullscreen></iframe>`;
+        }
+        if ((invitation.video_url || '').endsWith('.mp4')) {
+          return `<video controls src="${invitation.video_url}"></video>`;
+        }
+        return `<img src="${invitation.imagen_url || event.media}" alt="${event.titulo}" />`;
+      }
+
+      function renderInfoCards() {
+        const event = selectedEvent();
+        const cards = [
+          ['Día seleccionado', event.dia],
+          ['Hora', event.hora],
+          ['Tipo', event.tipo || 'Culto'],
+          ['Estado', state.fallbackMode ? 'Vista de respaldo' : 'Sincronizado con backend'],
+        ];
+        infoCards.innerHTML = cards.map(([label, value]) => `
+          <div class="tile panel">
+            <div class="muted">${label}</div>
+            <strong>${value}</strong>
+          </div>
+        `).join('');
+      }
+
+      function renderDetailPane() {
+        const event = selectedEvent();
+        detailTitle.textContent = `${event.dia} · ${event.titulo}`;
+        detailSubtitle.textContent = event.hora;
+        detailText.textContent = event.descripcion;
+        mediaPreview.innerHTML = mediaMarkup(event);
+      }
+
+      function renderModal() {
+        const event = selectedEvent();
+        byId('modalTitle').textContent = `${event.dia} · ${event.titulo}`;
+        byId('modalTime').textContent = event.hora;
+        byId('modalDescription').textContent = event.descripcion;
+        byId('modalInvitationText').textContent = event.invitacion?.descripcion_completa || event.mensaje || 'Invitación disponible.';
+        byId('modalMedia').innerHTML = mediaMarkup(event);
+      }
+
+      function syncAdminSelectors() {
+        const selector = byId('eventSelector');
+        const events = state.payload.currentWeek.eventos;
+        selector.innerHTML = `<option value="">Selecciona un evento</option>` + events.map((event) => `<option value="${event.id}">${event.dia} · ${event.titulo}</option>`).join('');
+        selector.value = state.selectedEventId;
+        const event = selectedEvent();
+        byId('editTitle').value = event.titulo;
+        byId('editTime').value = event.hora;
+        byId('editDescription').value = event.descripcion;
+        byId('editMessage').value = event.mensaje || '';
+      }
+
+      function renderAll() {
+        const week = state.payload.currentWeek;
+        todayLabel.textContent = formatLongDate(new Date());
+        weekTitle.textContent = 'Villa del Río';
+        weekRange.textContent = formatWeekRange(week);
+        weekTag.textContent = week.etiqueta || 'Semana actual';
+        currentMode.textContent = state.fallbackMode ? 'Modo visual activo (respaldo local)' : 'Modo visual activo (conectado)';
+        statusNotice.style.display = state.fallbackMode ? 'block' : 'none';
+        statusNotice.textContent = state.fallbackMode
+          ? 'No se detectó respuesta del backend en este momento, por eso cargamos una vista visual de respaldo para que nunca veas una pantalla en blanco.'
+          : 'Cronograma sincronizado correctamente con la API y la base de datos.';
+        renderScheduleRows();
+        renderInfoCards();
+        renderDetailPane();
+        renderModal();
+        syncAdminSelectors();
+        footerHours.textContent = state.payload.currentWeek.eventos.map((event) => `${event.dia} ${event.hora}`).join(' · ');
+        adminStatus.childNodes[0].nodeValue = state.loggedIn ? 'Acceso autorizado' : 'Acceso restringido';
+      }
+
+      async function loadPublicData() {
+        try {
+          const response = await fetch(`${apiBase}/api/public/schedule/current`);
+          if (!response.ok) throw new Error('No se pudo consultar la API pública.');
+          state.payload = await response.json();
+          state.selectedEventId = state.payload.currentWeek.eventos[0]?.id || fallbackData.currentWeek.eventos[0].id;
+          state.fallbackMode = false;
+        } catch (error) {
+          console.warn(error);
+          state.payload = fallbackData;
+          state.selectedEventId = fallbackData.currentWeek.eventos[0].id;
+          state.fallbackMode = true;
+        }
+        renderAll();
+      }
+
+      async function loginAdmin() {
+        try {
+          const response = await fetch(`${apiBase}/api/auth/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: byId('loginUser').value, password: byId('loginPass').value }),
+          });
+          const result = await response.json();
+          if (!result.success) throw new Error('Credenciales incorrectas.');
+          state.loggedIn = true;
+          adminNotice.className = 'notice success';
+          adminNotice.style.display = 'block';
+          adminNotice.textContent = 'Acceso administrativo concedido.';
+          renderAll();
+        } catch (error) {
+          adminNotice.className = 'notice error';
+          adminNotice.style.display = 'block';
+          adminNotice.textContent = `${error.message} Si la API no está arriba, la vista pública seguirá funcionando con datos locales.`;
+        }
+      }
+
+      async function uploadSchedule() {
+        const file = byId('scheduleFile').files[0];
+        if (!file) {
+          adminNotice.className = 'notice warning';
+          adminNotice.style.display = 'block';
+          adminNotice.textContent = 'Selecciona un archivo JSON o Excel primero.';
+          return;
+        }
+        const formData = new FormData();
+        formData.append('file', file);
+        try {
+          const response = await fetch(`${apiBase}/api/admin/schedules/upload`, { method: 'POST', body: formData });
+          const result = await response.json();
+          if (!response.ok) throw new Error(result.message || 'No fue posible subir el archivo.');
+          adminNotice.className = 'notice success';
+          adminNotice.style.display = 'block';
+          adminNotice.textContent = 'Cronograma cargado correctamente.';
+          await loadPublicData();
+        } catch (error) {
+          adminNotice.className = 'notice error';
+          adminNotice.style.display = 'block';
+          adminNotice.textContent = error.message;
+        }
+      }
+
+      async function saveEvent() {
+        const event = selectedEvent();
+        const payload = {
+          titulo: byId('editTitle').value,
+          hora: byId('editTime').value,
+          descripcion: byId('editDescription').value,
+          mensaje: byId('editMessage').value,
+        };
+        try {
+          const response = await fetch(`${apiBase}/api/admin/schedules/${state.payload.currentWeek.id}/events/${event.id}`, {
+            method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload),
+          });
+          const result = await response.json();
+          if (!response.ok) throw new Error(result.message || 'No fue posible guardar el evento.');
+          adminNotice.className = 'notice success';
+          adminNotice.style.display = 'block';
+          adminNotice.textContent = 'Evento actualizado correctamente.';
+          await loadPublicData();
+        } catch (error) {
+          adminNotice.className = 'notice error';
+          adminNotice.style.display = 'block';
+          adminNotice.textContent = error.message;
+        }
+      }
+
+      async function uploadInvitation() {
+        const event = selectedEvent();
+        const formData = new FormData();
+        formData.append('scheduleId', state.payload.currentWeek.id);
+        formData.append('eventId', event.id);
+        formData.append('descripcion_completa', byId('fullInvitation').value);
+        formData.append('video_url', byId('videoUrl').value);
+        const file = byId('invitationFile').files[0];
+        if (file) formData.append('media', file);
+        try {
+          const response = await fetch(`${apiBase}/api/admin/invitations/upload`, { method: 'POST', body: formData });
+          const result = await response.json();
+          if (!response.ok) throw new Error(result.message || 'No fue posible guardar la invitación.');
+          adminNotice.className = 'notice success';
+          adminNotice.style.display = 'block';
+          adminNotice.textContent = 'Invitación guardada correctamente.';
+          await loadPublicData();
+        } catch (error) {
+          adminNotice.className = 'notice error';
+          adminNotice.style.display = 'block';
+          adminNotice.textContent = error.message;
+        }
+      }
+
+      byId('downloadBtn').addEventListener('click', async () => {
+        if (window.html2canvas) {
+          const canvas = await window.html2canvas(byId('captureArea'), { backgroundColor: '#041126', scale: 2 });
+          const link = document.createElement('a');
+          link.download = 'cronograma-ipuc-villa-del-rio.png';
+          link.href = canvas.toDataURL('image/png');
+          link.click();
+          return;
+        }
+        window.print();
+      });
+
+      byId('adminToggleBtn').addEventListener('click', () => adminPanel.classList.toggle('open'));
+      byId('openInvitationBtn').addEventListener('click', () => invitationModal.classList.add('open'));
+      byId('closeModalBtn').addEventListener('click', () => invitationModal.classList.remove('open'));
+      invitationModal.addEventListener('click', (event) => {
+        if (event.target === invitationModal) invitationModal.classList.remove('open');
+      });
+      byId('refreshBtn').addEventListener('click', loadPublicData);
+      byId('loginBtn').addEventListener('click', loginAdmin);
+      byId('uploadScheduleBtn').addEventListener('click', uploadSchedule);
+      byId('saveEventBtn').addEventListener('click', saveEvent);
+      byId('uploadInvitationBtn').addEventListener('click', uploadInvitation);
+      byId('eventSelector').addEventListener('change', (event) => {
+        if (!event.target.value) return;
+        state.selectedEventId = event.target.value;
+        renderAll();
+      });
+
+      renderAll();
+      loadPublicData();
+    </script>
   </body>
 </html>
