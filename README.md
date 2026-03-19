@@ -27,6 +27,7 @@ Backend: `http://localhost:3001`
 
 > Si el backend aún no está disponible, el frontend muestra un cronograma local de respaldo para evitar una pantalla en blanco mientras se conecta la API.
 > También puedes abrir la experiencia principal directamente desde `http://localhost:3001/`, porque el servidor Express ahora entrega una versión visual lista para usar sin depender del build de Vite.
+> El panel de edición quedó separado en `http://localhost:3001/admin`, oculto del cronograma público y accesible desde el menú de tres líneas.
 
 ## Credenciales admin simuladas
 

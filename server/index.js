@@ -215,6 +215,10 @@ app.get('/', (_req, res) => {
   res.sendFile(path.join(rootDir, 'index.html'));
 });
 
+app.get('/admin', (_req, res) => {
+  res.sendFile(path.join(rootDir, 'admin.html'));
+});
+
 app.listen(PORT, () => {
   console.log(`Servidor IPUC ejecutándose en http://localhost:${PORT}`);
 });
