@@ -9,6 +9,7 @@ import EventModal from './components/EventModal';
 import Header from './components/Header';
 import ScheduleCard from './components/ScheduleCard';
 import { api } from './lib/api';
+import { fallbackSchedulePayload } from './lib/fallbackData';
 
 export default function App() {
   const scheduleRef = useRef(null);
@@ -21,6 +22,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
   const [feedback, setFeedback] = useState('');
+  const [usingFallback, setUsingFallback] = useState(false);
 
   const loadPublicData = async () => {
     setLoading(true);
@@ -28,8 +30,14 @@ export default function App() {
       const current = await api.getCurrentSchedule();
       setData(current);
       setActiveEventId(current.currentWeek?.eventos?.[0]?.id || null);
+      setUsingFallback(false);
     } catch (error) {
-      setFeedback(error.message);
+      setData(fallbackSchedulePayload);
+      setActiveEventId(fallbackSchedulePayload.currentWeek?.eventos?.[0]?.id || null);
+      setUsingFallback(true);
+      setFeedback(
+        `${error.message} Mostrando un cronograma local de respaldo para que la página nunca quede en blanco.`,
+      );
     } finally {
       setLoading(false);
     }
@@ -49,10 +57,6 @@ export default function App() {
     () => currentWeek?.eventos?.find((event) => event.id === activeEventId) || null,
     [activeEventId, currentWeek],
   );
-
-  useEffect(() => {
-    setSelectedEvent(activeEvent);
-  }, [activeEvent]);
 
   const handleDownload = async () => {
     if (!scheduleRef.current) return;
@@ -78,6 +82,7 @@ export default function App() {
       }
       setIsAuthenticated(true);
       await loadDashboard();
+      setUsingFallback(false);
       setFeedback('Acceso administrativo concedido.');
     } catch (error) {
       setFeedback(error.message);
@@ -158,7 +163,7 @@ export default function App() {
 
       <AdminPanel
         isOpen={isAdminOpen}
-        isAuthenticated={isAuthenticated}
+        isAuthenticated={isAuthenticated && !usingFallback}
         onLogin={handleLogin}
         dashboard={dashboard}
         onScheduleUpload={handleScheduleUpload}
@@ -178,6 +183,11 @@ export default function App() {
             <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-300">
               El sistema detecta la semana vigente y presenta únicamente sus servicios, listo para compartir por WhatsApp o proyectar en la iglesia.
             </p>
+            {usingFallback ? (
+              <p className="mt-3 text-sm text-amber-300">
+                Estás viendo datos de respaldo mientras el backend o la base de datos no estén disponibles.
+              </p>
+            ) : null}
           </div>
           {currentWeek ? (
             <div className="glass rounded-[1.5rem] px-4 py-3 text-sm text-slate-200">

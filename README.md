@@ -25,6 +25,8 @@ npm run dev
 Frontend: `http://localhost:5173`
 Backend: `http://localhost:3001`
 
+> Si el backend aún no está disponible, el frontend muestra un cronograma local de respaldo para evitar una pantalla en blanco mientras se conecta la API.
+
 ## Credenciales admin simuladas
 
 - Usuario: `IPUCVILLADELRIO`
