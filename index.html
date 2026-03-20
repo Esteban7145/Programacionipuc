@@ -3,88 +3,103 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IPUC Villa del Río | Cronograma semanal</title>
+    <title>IPUC Villa del Río | Inicio</title>
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <style>
       :root {
-        --bg-1: #041126;
-        --bg-2: #0d2d66;
-        --panel: rgba(8, 20, 45, 0.74);
-        --line: rgba(255,255,255,0.12);
+        --bg-1: #020817;
+        --bg-2: #0b1f4a;
+        --bg-3: #123d88;
+        --panel: rgba(8, 19, 45, 0.76);
+        --panel-strong: rgba(5, 12, 33, 0.88);
+        --line: rgba(255, 255, 255, 0.12);
         --text: #f8f6ea;
-        --muted: rgba(248,246,234,0.72);
-        --gold: #d9c99a;
-        --gold-soft: rgba(217,201,154,0.16);
+        --muted: rgba(248, 246, 234, 0.72);
+        --gold: #e0c990;
+        --gold-soft: rgba(224, 201, 144, 0.18);
+        --blue-soft: rgba(90, 150, 255, 0.18);
         font-family: "Segoe UI", Inter, system-ui, sans-serif;
       }
       * { box-sizing: border-box; }
       body {
         margin: 0;
+        min-height: 100vh;
         color: var(--text);
         background:
-          radial-gradient(circle at top center, rgba(72,111,199,0.35), transparent 34%),
-          linear-gradient(145deg, rgba(0,0,0,0.55), rgba(4,17,38,0.85)),
-          linear-gradient(135deg, var(--bg-1), var(--bg-2));
-        min-height: 100vh;
+          radial-gradient(circle at top, rgba(94, 142, 255, 0.26), transparent 28%),
+          radial-gradient(circle at 15% 30%, rgba(255, 255, 255, 0.08), transparent 14%),
+          radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.06), transparent 14%),
+          linear-gradient(145deg, rgba(0,0,0,0.48), rgba(2,8,23,0.88)),
+          linear-gradient(135deg, var(--bg-1), var(--bg-2), var(--bg-3));
+        overflow-x: hidden;
       }
       body::before, body::after {
-        content:""; position: fixed; border-radius: 42% 58% 61% 39% / 41% 41% 59% 59%; background: rgba(255,255,255,0.05); pointer-events:none;
+        content: "";
+        position: fixed;
+        border-radius: 41% 59% 70% 30% / 36% 34% 66% 64%;
+        background: rgba(255,255,255,0.05);
+        pointer-events: none;
       }
-      body::before { width: 34vw; height: 34vw; left: -8vw; bottom: -6vw; }
-      body::after { width: 30vw; height: 30vw; right: -6vw; top: 12vh; }
-      .shell { max-width: 1480px; margin: 0 auto; padding: 28px 18px 40px; position: relative; z-index: 1; }
-      .topbar, .hero, .row-btn, .detail, .special-card, .menu-panel, .modal-card { background: var(--panel); border: 1px solid var(--line); backdrop-filter: blur(18px); box-shadow: 0 20px 60px rgba(0,0,0,0.28); }
-      .topbar { border-radius: 30px; padding: 18px 22px; display:flex; align-items:center; justify-content:space-between; gap:16px; position: relative; }
-      .brand { display:flex; gap:16px; align-items:center; }
-      .logo-wrap { width: 100px; height: 100px; border-radius: 24px; background: rgba(255,255,255,0.05); display:grid; place-items:center; overflow:hidden; }
-      .logo-wrap img { width:100%; height:100%; object-fit:contain; }
-      .brand h1 { margin:0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2rem,4vw,4rem); }
+      body::before { width: 34vw; height: 34vw; left: -10vw; bottom: -9vw; }
+      body::after { width: 28vw; height: 28vw; right: -8vw; top: 14vh; }
+      .app-shell { max-width: 1460px; margin: 0 auto; padding: 24px 18px 44px; position: relative; z-index: 1; }
+      .topbar, .hero-card, .day-card, .detail-card, .calendar-card, .verse-card, .menu-panel, .media-box, .calendar-actions { background: var(--panel); border: 1px solid var(--line); backdrop-filter: blur(18px); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+      .topbar { display:flex; justify-content:space-between; align-items:center; gap:18px; padding: 18px 22px; border-radius: 30px; position: relative; }
+      .brand { display:flex; align-items:center; gap:16px; }
+      .brand img { width: 94px; height: 94px; object-fit: contain; }
+      .brand h1 { margin:0; font-size: clamp(2rem,4vw,4rem); font-family: Georgia, "Times New Roman", serif; }
       .muted { color: var(--muted); }
-      .menu-btn, .tab-btn, .action-btn { border:1px solid var(--line); background: rgba(255,255,255,0.06); color: var(--text); cursor:pointer; }
-      .menu-btn { width:56px; height:56px; border-radius:18px; font-size:1.35rem; }
+      .menu-btn, .action-btn, .chip-btn { border:1px solid var(--line); background: rgba(255,255,255,0.06); color: var(--text); cursor:pointer; }
+      .menu-btn { width: 56px; height: 56px; border-radius: 18px; font-size: 1.2rem; }
       .action-btn { border-radius: 999px; padding: 12px 18px; }
-      .action-btn.primary { background: var(--gold); color:#111827; font-weight:700; }
-      .menu-panel { display:none; position:absolute; top: calc(100% + 10px); right: 0; width: 290px; border-radius: 24px; padding: 18px; }
+      .action-btn.primary, .chip-btn.active { background: var(--gold); color: #111827; font-weight: 700; }
+      .menu-panel { display:none; position:absolute; top: calc(100% + 10px); right: 0; width: 300px; border-radius: 24px; padding: 18px; }
       .menu-panel.open { display:block; }
-      .menu-panel a { display:block; text-decoration:none; color:var(--text); padding:12px 14px; border-radius:14px; background:rgba(255,255,255,0.04); margin-top:10px; }
-      .hero { border-radius: 34px; margin-top: 24px; padding: 28px; }
-      .hero-top { display:flex; justify-content:space-between; gap:18px; align-items:flex-start; flex-wrap:wrap; }
-      .hero-top h2 { margin: 12px 0 8px; font-size: clamp(3rem,5vw,5.2rem); line-height:0.96; font-family: Georgia, "Times New Roman", serif; }
-      .chip { display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border-radius:999px; background: rgba(255,255,255,0.08); border:1px solid var(--line); }
-      .tabs { margin-top: 22px; display:flex; gap:12px; overflow:auto; padding-bottom: 4px; }
-      .tab-btn { min-width:max-content; border-radius:999px; padding: 12px 18px; }
-      .tab-btn.active { background: var(--gold); color:#111827; font-weight:700; }
-      .layout { margin-top: 24px; display:grid; grid-template-columns: 1.3fr 0.8fr; gap: 22px; }
-      .rows { display:grid; gap:18px; }
-      .row-btn { width:100%; color:var(--text); text-align:left; border-radius:28px; padding:0; overflow:hidden; cursor:pointer; transition: transform .2s ease; }
-      .row-btn.active { border-color: rgba(217,201,154,0.4); background: rgba(11,29,69,0.92); }
-      .row-inner { display:grid; grid-template-columns: 280px 8px 1fr 170px; gap:24px; align-items:center; padding: 22px 26px; }
-      .day { font-size: clamp(2.2rem, 4vw, 4.2rem); font-weight: 800; }
-      .divider { width:4px; height:80px; border-radius:999px; background: rgba(248,246,234,0.88); }
-      .title { font-size: clamp(2rem, 3.5vw, 4rem); font-weight: 700; line-height: 1.02; }
-      .meta { text-align:right; display:grid; gap:10px; justify-items:end; }
-      .time-pill { display:inline-flex; padding: 10px 14px; border-radius:999px; background: var(--gold-soft); border:1px solid rgba(217,201,154,0.28); }
-      .detail { border-radius: 30px; padding: 24px; }
-      .media { margin-top: 18px; min-height: 260px; border-radius: 24px; overflow:hidden; background: linear-gradient(135deg, rgba(7,16,39,.94), rgba(13,45,102,.84)); display:grid; place-items:center; text-align:center; }
-      .media img, .media video, .media iframe, .modal-media img, .modal-media video, .modal-media iframe { width:100%; height:100%; object-fit:cover; border:0; }
-      .special-card { margin-top: 22px; border-radius: 30px; padding: 22px; }
-      .notice { margin-top:14px; padding:14px 16px; border-radius:16px; background: rgba(255,255,255,0.06); border:1px solid var(--line); display:none; }
-      .modal { position:fixed; inset:0; background: rgba(2,8,23,0.84); display:none; place-items:center; padding:18px; z-index:20; }
-      .modal.open { display:grid; }
-      .modal-card { width:min(1120px,100%); border-radius:32px; padding:20px; }
-      .modal-grid { display:grid; grid-template-columns: 1.05fr .95fr; gap:20px; }
-      .modal-media { min-height: 360px; border-radius: 24px; overflow:hidden; background: rgba(255,255,255,0.05); display:grid; place-items:center; }
-      .close-btn { float:right; width:44px; height:44px; border-radius:50%; background:transparent; color:var(--text); border:1px solid var(--line); cursor:pointer; }
-      .footer-note { margin-top: 32px; text-align:center; font-size: clamp(1.15rem,2.2vw,2rem); color: rgba(248,246,234,.9); }
-      @media (max-width: 1050px) { .layout, .modal-grid { grid-template-columns:1fr; } }
-      @media (max-width: 900px) { .row-inner { grid-template-columns:1fr; } .divider { width:100%; height:4px; } .meta { text-align:left; justify-items:start; } }
+      .menu-panel a { display:block; padding: 12px 14px; margin-top: 10px; border-radius: 14px; background: rgba(255,255,255,0.05); color: var(--text); text-decoration:none; }
+      .view-stack { position: relative; margin-top: 24px; min-height: 760px; }
+      .view { position: absolute; inset: 0; opacity: 0; pointer-events: none; transform-origin: left center; transition: opacity 0.45s ease, transform 0.7s cubic-bezier(.2,.9,.15,1.05); }
+      .view.active { opacity: 1; pointer-events: auto; transform: rotateY(0deg) translateX(0); }
+      .view.hidden-left { transform: rotateY(-78deg) translateX(-60px); }
+      .view.hidden-right { transform: rotateY(78deg) translateX(60px); }
+      .home-layout { display:grid; grid-template-columns: 1.2fr 0.8fr; gap: 22px; }
+      .hero-card, .verse-card, .detail-card, .calendar-card { border-radius: 34px; padding: 24px; }
+      .hero-card h2 { margin: 14px 0 8px; font-size: clamp(3rem, 5vw, 5.2rem); line-height: 0.96; font-family: Georgia, "Times New Roman", serif; }
+      .eyebrow { display:inline-flex; align-items:center; gap:8px; border-radius: 999px; padding: 8px 14px; background: rgba(255,255,255,0.08); border: 1px solid var(--line); }
+      .verse-card { display:grid; gap: 18px; }
+      .verse-box { min-height: 220px; display:grid; align-content:center; gap: 10px; padding: 20px; border-radius: 24px; background: rgba(255,255,255,0.05); }
+      .verse-box p { font-size: clamp(1.2rem, 2vw, 1.65rem); line-height: 1.6; margin-bottom: 0; }
+      .chip-list { margin-top: 22px; display:flex; flex-wrap:wrap; gap: 12px; }
+      .chip-btn { border-radius: 999px; padding: 12px 18px; min-width:max-content; }
+      .grid-days { margin-top: 22px; display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+      .day-card { border-radius: 28px; padding: 22px; cursor:pointer; transition: transform .2s ease, border-color .2s ease; }
+      .day-card:hover { transform: translateY(-4px); border-color: rgba(224, 201, 144, 0.3); }
+      .day-card h3 { margin-bottom: 8px; font-size: 1.55rem; }
+      .day-card .badge { display:inline-flex; padding: 8px 12px; border-radius: 999px; background: var(--gold-soft); border:1px solid rgba(224,201,144,0.28); margin-top: 10px; }
+      .detail-grid { display:grid; grid-template-columns: 1.05fr 0.95fr; gap: 22px; }
+      .header-actions { display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom: 16px; }
+      .media-box { min-height: 360px; border-radius: 28px; overflow:hidden; display:grid; place-items:center; text-align:center; background: linear-gradient(135deg, rgba(6,14,36,.94), rgba(18,61,136,.84)); }
+      .media-box img, .media-box video, .media-box iframe { width:100%; height:100%; object-fit:cover; border:0; }
+      .calendar-card { display:grid; gap: 16px; }
+      .calendar-head { display:flex; justify-content:space-between; align-items:center; gap:10px; }
+      .calendar-grid { display:grid; grid-template-columns: repeat(7, minmax(0,1fr)); gap: 8px; }
+      .calendar-label, .calendar-day { border-radius: 16px; text-align:center; }
+      .calendar-label { padding: 10px 0; font-size: 0.84rem; color: var(--muted); }
+      .calendar-day { padding: 14px 0; background: rgba(255,255,255,0.04); border:1px solid transparent; cursor:pointer; }
+      .calendar-day.in-month { border-color: rgba(255,255,255,0.06); }
+      .calendar-day.selected { background: var(--gold); color:#111827; font-weight:700; }
+      .calendar-day.event-date { box-shadow: 0 0 0 2px rgba(224,201,144,0.3) inset; }
+      .calendar-actions { border-radius: 24px; padding: 18px; display:grid; gap: 12px; }
+      .notice { display:none; padding: 14px 16px; border-radius: 16px; background: rgba(255,255,255,0.06); border:1px solid var(--line); margin-top: 14px; }
+      .back-btn { border:1px solid var(--line); border-radius: 999px; padding: 10px 16px; background: rgba(255,255,255,0.06); color: var(--text); cursor:pointer; }
+      @media (max-width: 1080px) { .home-layout, .detail-grid { grid-template-columns: 1fr; } .view-stack { min-height: 1400px; } }
+      @media (max-width: 720px) { .grid-days { grid-template-columns: 1fr; } .topbar { flex-direction: column; align-items: flex-start; } .brand { align-items:flex-start; } }
     </style>
   </head>
   <body>
-    <div class="shell" id="captureArea">
+    <div class="app-shell" id="captureArea">
       <header class="topbar">
         <div class="brand">
-          <div class="logo-wrap"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Logo_IPUC.png/512px-Logo_IPUC.png" alt="Logo IPUC" /></div>
+          <img src="/assets/logo-ipuc.svg" alt="Logo IPUC Villa del Río" />
           <div>
             <div class="muted">Iglesia Pentecostal Unida de Colombia</div>
             <h1>Villa del Río</h1>
@@ -96,177 +111,189 @@
           <button class="menu-btn" id="menuBtn">☰</button>
           <div class="menu-panel" id="menuPanel">
             <strong>Acceso privado</strong>
-            <p class="muted">El cronograma es público, pero la edición quedó en un espacio aparte para proteger el contenido.</p>
+            <p class="muted">La edición quedó en una página aparte para que el público solo vea el cronograma y las invitaciones.</p>
             <a href="/admin">Entrar al panel DECOM</a>
           </div>
         </div>
       </header>
-
-      <section class="hero">
-        <div class="hero-top">
-          <div>
-            <div class="chip">Esta semana</div>
-            <h2>Cronograma Semanal</h2>
-            <div class="muted" id="weekRange">Cargando semana actual...</div>
-            <p class="muted" style="max-width:760px; line-height:1.7;">Selecciona uno de los días de culto o el espacio de evento especial para entrar directamente a la invitación y ver la información completa del servicio de la semana.</p>
-            <div class="notice" id="statusNotice"></div>
+      <div class="view-stack">
+        <section class="view active" id="homeView">
+          <div class="home-layout">
+            <div class="hero-card">
+              <div class="eyebrow">Bienvenida</div>
+              <h2>Cronograma e invitaciones</h2>
+              <div class="muted" id="weekLabel">Cargando semana actual...</div>
+              <p class="muted" style="line-height:1.75; max-width: 720px;">Bienvenido a la programación oficial de IPUC Villa del Río. Aquí encontrarás los cultos de la semana, el evento especial, la invitación visual y un recordatorio para agregar cada actividad al calendario de tu celular.</p>
+              <div class="chip-list" id="dayChips"></div>
+              <div class="notice" id="statusNotice"></div>
+              <div class="grid-days" id="dayGrid"></div>
+            </div>
+            <aside class="verse-card">
+              <div>
+                <div class="eyebrow">Versículo del día</div>
+                <h3 style="font-size:2rem; margin:14px 0 8px;">Palabra para la bienvenida</h3>
+              </div>
+              <div class="verse-box">
+                <small class="muted" id="verseRef">Salmo 119:105</small>
+                <p id="verseText">Lámpara es a mis pies tu palabra, y lumbrera a mi camino.</p>
+              </div>
+              <div class="muted">Los versículos rotan automáticamente durante el día.</div>
+            </aside>
           </div>
-          <div>
-            <div class="chip">Invitaciones por culto</div>
-            <div style="height:10px"></div>
-            <div class="muted">Martes · Jueves · Sábado · Domingo · Evento especial</div>
-          </div>
-        </div>
-        <div class="tabs" id="tabs"></div>
-      </section>
-
-      <div class="layout">
-        <section>
-          <div class="rows" id="rows"></div>
-          <div class="special-card" id="specialCard"></div>
         </section>
-        <aside class="detail">
-          <div class="muted">Invitación seleccionada</div>
-          <h3 id="detailTitle" style="font-size:2.2rem; margin-bottom:8px;">Selecciona un culto</h3>
-          <div class="muted" id="detailHour">Hora del servicio</div>
-          <p id="detailDescription" class="muted" style="line-height:1.75;"></p>
-          <div class="media" id="media"></div>
-          <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
-            <button class="action-btn primary" id="openInvitationBtn">Ver invitación completa</button>
-            <button class="action-btn" id="refreshBtn">Actualizar</button>
+        <section class="view hidden-right" id="detailView">
+          <div class="detail-grid">
+            <div class="detail-card">
+              <div class="header-actions">
+                <button class="back-btn" id="backBtn">← Volver al inicio</button>
+                <div class="eyebrow" id="detailBadge">Culto</div>
+              </div>
+              <h2 id="detailTitle" style="font-size:3rem; margin-bottom:8px; font-family: Georgia, 'Times New Roman', serif;">Culto</h2>
+              <div class="muted" id="detailMeta">Hora y fecha</div>
+              <p class="muted" id="detailDescription" style="line-height:1.8;"></p>
+              <div class="media-box" id="mediaBox"></div>
+              <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+                <button class="action-btn primary" id="googleCalendarBtn">Agregar a Google Calendar</button>
+                <button class="action-btn" id="icsBtn">Recordatorio para iPhone / Android</button>
+              </div>
+            </div>
+            <div style="display:grid; gap:22px;">
+              <div class="calendar-card">
+                <div class="calendar-head">
+                  <div>
+                    <div class="eyebrow">Calendario</div>
+                    <h3 id="calendarTitle" style="font-size:1.8rem; margin:14px 0 8px;">Mes del evento</h3>
+                  </div>
+                  <div class="muted" id="selectedDateText">Selecciona una fecha</div>
+                </div>
+                <div class="calendar-grid" id="calendarGrid"></div>
+              </div>
+              <div class="calendar-actions">
+                <strong>Invitación completa</strong>
+                <div class="muted" id="invitationText">Aquí se mostrará la invitación completa del culto seleccionado.</div>
+                <button class="action-btn" id="shareBtn">Ver invitación visual</button>
+              </div>
+            </div>
           </div>
-        </aside>
-      </div>
-
-      <div class="footer-note" id="footerNote">Martes, Jueves, Sábado 07:00 P.M · Domingo 10:00 A.M</div>
-    </div>
-
-    <div class="modal" id="modal">
-      <div class="modal-card">
-        <button class="close-btn" id="closeModalBtn">×</button>
-        <div class="modal-grid">
-          <div class="modal-media" id="modalMedia"></div>
-          <div>
-            <div class="chip">Invitación completa</div>
-            <h3 id="modalTitle" style="font-size:2.2rem; margin:14px 0 8px;"></h3>
-            <div class="muted" id="modalHour"></div>
-            <p class="muted" id="modalDescription" style="line-height:1.8;"></p>
-            <div class="notice" id="modalText" style="display:block;"></div>
-          </div>
-        </div>
+        </section>
       </div>
     </div>
-
     <script>
+      const verses = [
+        { ref: 'Salmo 119:105', text: 'Lámpara es a mis pies tu palabra, y lumbrera a mi camino.' },
+        { ref: 'Josué 1:9', text: 'Mira que te mando que te esfuerces y seas valiente; no temas ni desmayes.' },
+        { ref: 'Salmo 122:1', text: 'Yo me alegré con los que me decían: A la casa de Jehová iremos.' },
+        { ref: 'Isaías 40:31', text: 'Los que esperan a Jehová tendrán nuevas fuerzas.' },
+      ];
       const fallbackData = {
         generatedAt: new Date().toISOString(),
         currentWeek: {
-          id: 'semana-demo',
-          fecha_inicio_semana: '2026-03-09',
-          fecha_fin_semana: '2026-03-15',
-          etiqueta: 'Marzo 09 al 15 Marzo',
+          id: 'semana-demo', fecha_inicio_semana: '2026-03-16', fecha_fin_semana: '2026-03-22', etiqueta: 'Semana del 16 al 22 de marzo',
           eventos: [
-            { id:'martes', dia:'Martes', titulo:'Culto de Caballeros', hora:'7:00 P.M', descripcion:'Servicio especial para fortalecer la fe, la oración y el liderazgo cristiano de los caballeros.', mensaje:'Te invitamos a una noche especial de adoración, palabra y comunión en IPUC Villa del Río.', tipo:'culto', media:'', invitacion:{ descripcion_completa:'Ven con tu familia y amigos. Dios tiene una palabra de bendición para tu vida.', imagen_url:'', video_url:'' } },
-            { id:'jueves', dia:'Jueves', titulo:'Culto de Evangelismo', hora:'7:00 P.M', descripcion:'Una jornada para invitar nuevos corazones y compartir el mensaje de salvación.', mensaje:'Invita a una persona especial y acompáñanos a vivir un culto de evangelismo poderoso.', tipo:'culto', media:'', invitacion:{ descripcion_completa:'Será una noche de milagros, alabanza y palabra para visitantes y congregación.', imagen_url:'', video_url:'' } },
+            { id:'martes', dia:'Martes', titulo:'Culto de Caballeros', hora:'7:00 P.M', descripcion:'Servicio especial para fortalecer la fe, la oración y el liderazgo cristiano.', mensaje:'Te invitamos a una noche especial de adoración, palabra y comunión en IPUC Villa del Río.', tipo:'culto', media:'', invitacion:{ descripcion_completa:'Ven con tu familia y amigos. Dios tiene una palabra de bendición para tu vida.', imagen_url:'', video_url:'' } },
+            { id:'jueves', dia:'Jueves', titulo:'Culto de Evangelismo', hora:'7:00 P.M', descripcion:'Jornada para invitar nuevos corazones y compartir el mensaje de salvación.', mensaje:'Invita a una persona especial y acompáñanos a vivir un culto de evangelismo poderoso.', tipo:'culto', media:'', invitacion:{ descripcion_completa:'Será una noche de milagros, alabanza y palabra para visitantes y congregación.', imagen_url:'', video_url:'' } },
             { id:'sabado', dia:'Sábado', titulo:'Culto Escuela Dominical', hora:'7:00 P.M', descripcion:'Encuentro formativo con enseñanza bíblica y participación de toda la iglesia.', mensaje:'Prepárate para aprender más de la Palabra y crecer espiritualmente.', tipo:'culto', media:'', invitacion:{ descripcion_completa:'Una noche ideal para profundizar en la enseñanza bíblica con toda la congregación.', imagen_url:'', video_url:'' } },
             { id:'domingo', dia:'Domingo', titulo:'Escuela Dominical', hora:'10:00 A.M', descripcion:'La reunión principal de enseñanza y adoración para la familia y los visitantes.', mensaje:'Te esperamos para celebrar juntos una mañana gloriosa en la presencia de Dios.', tipo:'culto', media:'', invitacion:{ descripcion_completa:'Ven con toda tu familia para disfrutar un tiempo especial de adoración, palabra y unidad.', imagen_url:'', video_url:'' } },
-            { id:'especial', dia:'Evento especial', titulo:'Vigilia / Oración / Campaña', hora:'Próximamente', descripcion:'Espacio flexible para semanas con vigilias, campañas, reuniones de oración o actividades especiales fuera de los días habituales.', mensaje:'Mantente atento a nuestras actividades especiales y acompáñanos en cada jornada extraordinaria.', tipo:'especial', media:'', invitacion:{ descripcion_completa:'Aquí se publicará la invitación del evento especial cuando sea programado por el equipo DECOM.', imagen_url:'', video_url:'' } }
+            { id:'especial', dia:'Evento especial', titulo:'Vigilia / Oración / Campaña', hora:'Próximamente', descripcion:'Espacio flexible para vigilias, campañas, reuniones de oración o actividades especiales.', mensaje:'Mantente atento a nuestras actividades especiales y acompáñanos en cada jornada extraordinaria.', tipo:'especial', media:'', invitacion:{ descripcion_completa:'Aquí se publicará la invitación del evento especial cuando sea programado por el equipo DECOM.', imagen_url:'', video_url:'' } }
           ]
-        },
-        allWeeks: []
+        }
       };
-      const state = { payload: fallbackData, selectedEventId: fallbackData.currentWeek.eventos[0].id, fallbackMode: true };
+      const state = { payload: structuredClone(fallbackData), selectedEventId: 'martes', fallbackMode: true, selectedDate: null, verseIndex: 0 };
       const byId = (id) => document.getElementById(id);
+      const dayOffset = { 'lunes':0, 'martes':1, 'miércoles':2, 'miercoles':2, 'jueves':3, 'viernes':4, 'sábado':5, 'sabado':5, 'domingo':6 };
       function selectedEvent() { return state.payload.currentWeek.eventos.find((event) => event.id === state.selectedEventId) || state.payload.currentWeek.eventos[0]; }
+      function parseDate(dateString) { return new Date(`${dateString}T00:00:00`); }
+      function formatLong(date) { return new Intl.DateTimeFormat('es-CO', { weekday:'long', day:'numeric', month:'long', year:'numeric' }).format(date); }
+      function eventDate(event) {
+        if (event.fecha) return parseDate(event.fecha);
+        const weekStart = parseDate(state.payload.currentWeek.fecha_inicio_semana);
+        const key = (event.dia || '').toLowerCase();
+        if (dayOffset[key] !== undefined) { const date = new Date(weekStart); date.setDate(weekStart.getDate() + dayOffset[key]); return date; }
+        return state.selectedDate || weekStart;
+      }
+      function setSelectedDate(date) { state.selectedDate = date; renderCalendar(); renderDetail(); }
       function mediaMarkup(event) {
         const invitation = event.invitacion || {};
         const media = invitation.imagen_url || invitation.video_url || event.media || '';
-        if (!media) return `<div><strong style="font-size:1.35rem;">${event.titulo}</strong><div class="muted" style="margin-top:8px;">La invitación visual se mostrará aquí cuando sea subida desde el panel DECOM.</div></div>`;
-        if ((invitation.video_url || '').includes('youtube.com') || (invitation.video_url || '').includes('youtu.be')) {
-          const src = invitation.video_url.replace('watch?v=', 'embed/').replace('youtu.be/', 'youtube.com/embed/');
-          return `<iframe src="${src}" title="${event.titulo}" allowfullscreen></iframe>`;
-        }
+        if (!media) return `<div><strong style="font-size:1.35rem;">${event.titulo}</strong><div class="muted" style="margin-top:8px;">Aquí aparecerá la imagen o video de la invitación cuando se suba para este culto.</div></div>`;
+        if ((invitation.video_url || '').includes('youtube.com') || (invitation.video_url || '').includes('youtu.be')) { const src = invitation.video_url.replace('watch?v=', 'embed/').replace('youtu.be/', 'youtube.com/embed/'); return `<iframe src="${src}" title="${event.titulo}" allowfullscreen></iframe>`; }
         if ((invitation.video_url || '').endsWith('.mp4')) return `<video controls src="${invitation.video_url}"></video>`;
         return `<img src="${invitation.imagen_url || event.media}" alt="${event.titulo}" />`;
       }
-      function renderTabs() {
-        byId('tabs').innerHTML = state.payload.currentWeek.eventos.map((event) => `<button class="tab-btn ${event.id === state.selectedEventId ? 'active' : ''}" data-id="${event.id}">${event.dia}</button>`).join('');
-        byId('tabs').querySelectorAll('[data-id]').forEach((button) => button.addEventListener('click', () => { state.selectedEventId = button.dataset.id; renderAll(); }));
+      function renderVerses() { byId('verseRef').textContent = verses[state.verseIndex].ref; byId('verseText').textContent = verses[state.verseIndex].text; }
+      function buildEventCards() {
+        const events = state.payload.currentWeek.eventos;
+        byId('dayChips').innerHTML = events.map((event) => `<button class="chip-btn ${event.id === state.selectedEventId ? 'active' : ''}" data-id="${event.id}">${event.dia}</button>`).join('');
+        byId('dayGrid').innerHTML = events.map((event) => { const date = eventDate(event); return `<article class="day-card" data-id="${event.id}"><div class="muted">${new Intl.DateTimeFormat('es-CO', { month:'long', day:'numeric' }).format(date)}</div><h3>${event.titulo}</h3><div class="muted">${event.descripcion}</div><div class="badge">${event.hora}</div></article>`; }).join('');
+        document.querySelectorAll('[data-id]').forEach((button) => button.addEventListener('click', () => openEvent(button.dataset.id)));
       }
-      function renderRows() {
-        const normalEvents = state.payload.currentWeek.eventos.filter((event) => event.id !== 'especial' && event.tipo !== 'especial');
-        byId('rows').innerHTML = normalEvents.map((event) => `
-          <button class="row-btn ${event.id === state.selectedEventId ? 'active' : ''}" data-id="${event.id}">
-            <div class="row-inner">
-              <div class="day">${event.dia}</div>
-              <div class="divider"></div>
-              <div class="title">${event.titulo}</div>
-              <div class="meta"><span class="time-pill">${event.hora}</span><span class="muted">Entrar a invitación</span></div>
-            </div>
-          </button>
-        `).join('');
-        byId('rows').querySelectorAll('[data-id]').forEach((button) => button.addEventListener('click', () => { state.selectedEventId = button.dataset.id; renderAll(); }));
-      }
-      function renderSpecial() {
-        const event = state.payload.currentWeek.eventos.find((item) => item.id === 'especial' || item.tipo === 'especial');
-        if (!event) return byId('specialCard').style.display = 'none';
-        byId('specialCard').style.display = 'block';
-        byId('specialCard').innerHTML = `<div style="display:flex; justify-content:space-between; gap:18px; align-items:center; flex-wrap:wrap;"><div><div class="chip">Evento especial</div><h3 style="font-size:2rem; margin:14px 0 8px;">${event.titulo}</h3><p class="muted" style="margin-bottom:0; max-width:760px;">${event.descripcion}</p></div><button class="action-btn primary" id="specialBtn">Abrir invitación</button></div>`;
-        byId('specialBtn').addEventListener('click', () => { state.selectedEventId = event.id; renderAll(); byId('modal').classList.add('open'); });
+      function renderCalendar() {
+        const event = selectedEvent();
+        const baseDate = state.selectedDate || eventDate(event);
+        const monthStart = new Date(baseDate.getFullYear(), baseDate.getMonth(), 1);
+        const monthEnd = new Date(baseDate.getFullYear(), baseDate.getMonth() + 1, 0);
+        const startDay = (monthStart.getDay() + 6) % 7;
+        const labels = ['L','M','M','J','V','S','D'];
+        const eventDay = eventDate(event);
+        byId('calendarTitle').textContent = new Intl.DateTimeFormat('es-CO', { month:'long', year:'numeric' }).format(baseDate);
+        byId('selectedDateText').textContent = `Fecha seleccionada: ${formatLong(baseDate)}`;
+        const cells = labels.map((label) => `<div class="calendar-label">${label}</div>`);
+        for (let i = 0; i < startDay; i += 1) cells.push('<div class="calendar-day"></div>');
+        for (let day = 1; day <= monthEnd.getDate(); day += 1) {
+          const current = new Date(baseDate.getFullYear(), baseDate.getMonth(), day);
+          const selected = current.toDateString() === baseDate.toDateString();
+          const eventMatch = current.toDateString() === eventDay.toDateString();
+          cells.push(`<button class="calendar-day in-month ${selected ? 'selected' : ''} ${eventMatch ? 'event-date' : ''}" data-calendar-day="${day}">${day}</button>`);
+        }
+        byId('calendarGrid').innerHTML = cells.join('');
+        byId('calendarGrid').querySelectorAll('[data-calendar-day]').forEach((button) => button.addEventListener('click', () => setSelectedDate(new Date(baseDate.getFullYear(), baseDate.getMonth(), Number(button.dataset.calendarDay)))));
       }
       function renderDetail() {
-        const event = selectedEvent();
-        byId('detailTitle').textContent = `${event.dia} · ${event.titulo}`;
-        byId('detailHour').textContent = event.hora;
-        byId('detailDescription').textContent = event.descripcion;
-        byId('media').innerHTML = mediaMarkup(event);
-        byId('modalTitle').textContent = `${event.dia} · ${event.titulo}`;
-        byId('modalHour').textContent = event.hora;
-        byId('modalDescription').textContent = event.descripcion;
-        byId('modalText').textContent = event.invitacion?.descripcion_completa || event.mensaje || 'Invitación disponible.';
-        byId('modalMedia').innerHTML = mediaMarkup(event);
+        const event = selectedEvent(); const chosenDate = state.selectedDate || eventDate(event);
+        byId('detailBadge').textContent = event.dia; byId('detailTitle').textContent = event.titulo; byId('detailMeta').textContent = `${event.hora} · ${formatLong(chosenDate)}`; byId('detailDescription').textContent = event.descripcion; byId('mediaBox').innerHTML = mediaMarkup(event); byId('invitationText').textContent = event.invitacion?.descripcion_completa || event.mensaje || 'Invitación disponible.';
       }
-      function renderAll() {
-        byId('todayLabel').textContent = new Intl.DateTimeFormat('es-CO', { weekday:'long', day:'numeric', month:'long', year:'numeric' }).format(new Date());
-        byId('weekRange').textContent = state.payload.currentWeek.etiqueta || 'Semana actual';
-        byId('statusNotice').style.display = state.fallbackMode ? 'block' : 'none';
-        byId('statusNotice').textContent = state.fallbackMode ? 'La vista pública carga con respaldo local para que siempre se vea el cronograma, incluso si la API aún no responde.' : '';
-        renderTabs(); renderRows(); renderSpecial(); renderDetail();
-        byId('footerNote').textContent = state.payload.currentWeek.eventos.map((event) => `${event.dia} ${event.hora}`).join(' · ');
+      function renderHome() {
+        byId('todayLabel').textContent = formatLong(new Date()); byId('weekLabel').textContent = state.payload.currentWeek.etiqueta || 'Semana actual';
+        const notice = byId('statusNotice');
+        if (state.fallbackMode) { notice.style.display = 'block'; notice.textContent = 'La vista está usando datos de respaldo mientras la API termina de responder, para que el cronograma siempre se vea.'; } else { notice.style.display = 'none'; }
+        buildEventCards(); renderDetail(); renderCalendar();
       }
-      async function loadCurrent() {
+      function setView(target) {
+        const home = byId('homeView'); const detail = byId('detailView');
+        if (target === 'detail') { home.className = 'view hidden-left'; detail.className = 'view active'; } else { detail.className = 'view hidden-right'; home.className = 'view active'; }
+      }
+      function openEvent(eventId) { state.selectedEventId = eventId; state.selectedDate = eventDate(selectedEvent()); renderHome(); setView('detail'); }
+      function buildCalendarUrls() {
+        const event = selectedEvent(); const date = state.selectedDate || eventDate(event);
+        const parts = (event.hora || '7:00 P.M').split(' '); const time = parts[0] || '7:00'; const meridiem = (parts[1] || 'P.M').toUpperCase();
+        let [hours, minutes] = time.replace('.', '').split(':').map((item) => Number(item)); if (!Number.isFinite(hours)) hours = 19; if (!Number.isFinite(minutes)) minutes = 0;
+        if (meridiem.includes('P') && hours < 12) hours += 12; if (meridiem.includes('A') && hours === 12) hours = 0;
+        const start = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hours, minutes); const end = new Date(start.getTime() + 90 * 60000);
+        const iso = (value) => value.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'; const title = `${selectedEvent().dia} - ${selectedEvent().titulo}`;
+        const details = encodeURIComponent(selectedEvent().invitacion?.descripcion_completa || selectedEvent().mensaje || selectedEvent().descripcion); const location = encodeURIComponent('IPUC Villa del Río');
+        return { start, end, google: `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${iso(start)}/${iso(end)}&details=${details}&location=${location}`, title };
+      }
+      function downloadIcs() {
+        const { start, end, title } = buildCalendarUrls(); const description = selectedEvent().invitacion?.descripcion_completa || selectedEvent().mensaje || selectedEvent().descripcion;
+        const formatIcs = (date) => date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+        const ics = `BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nSUMMARY:${title}\nDESCRIPTION:${description.replace(/\n/g, ' ')}\nLOCATION:IPUC Villa del Río\nDTSTART:${formatIcs(start)}\nDTEND:${formatIcs(end)}\nEND:VEVENT\nEND:VCALENDAR`;
+        const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' }); const url = URL.createObjectURL(blob); const link = document.createElement('a'); link.href = url; link.download = `${title.toLowerCase().replace(/[^a-z0-9]+/gi, '-')}.ics`; link.click(); URL.revokeObjectURL(url);
+      }
+      async function loadCurrentSchedule() {
         try {
-          const response = await fetch('/api/public/schedule/current');
-          if (!response.ok) throw new Error('No se pudo consultar la API pública.');
+          const response = await fetch('/api/public/schedule/current'); if (!response.ok) throw new Error('Sin respuesta pública.');
           state.payload = await response.json();
-          if (!state.payload.currentWeek.eventos.some((event) => event.id === 'especial' || event.tipo === 'especial')) {
-            state.payload.currentWeek.eventos.push(fallbackData.currentWeek.eventos.find((event) => event.id === 'especial'));
-          }
-          state.selectedEventId = state.payload.currentWeek.eventos[0]?.id || 'martes';
-          state.fallbackMode = false;
-        } catch (error) {
-          state.payload = structuredClone(fallbackData);
-          state.selectedEventId = state.payload.currentWeek.eventos[0].id;
-          state.fallbackMode = true;
-        }
-        renderAll();
+          if (!state.payload.currentWeek.eventos.some((event) => event.id === 'especial' || event.tipo === 'especial')) state.payload.currentWeek.eventos.push(structuredClone(fallbackData.currentWeek.eventos.find((event) => event.id === 'especial')));
+          state.selectedEventId = state.payload.currentWeek.eventos[0]?.id || 'martes'; state.selectedDate = eventDate(selectedEvent()); state.fallbackMode = false;
+        } catch { state.payload = structuredClone(fallbackData); state.selectedEventId = 'martes'; state.selectedDate = eventDate(selectedEvent()); state.fallbackMode = true; }
+        renderHome();
       }
       byId('menuBtn').addEventListener('click', () => byId('menuPanel').classList.toggle('open'));
-      document.addEventListener('click', (event) => {
-        const menu = byId('menuPanel'); const button = byId('menuBtn');
-        if (!menu.contains(event.target) && !button.contains(event.target)) menu.classList.remove('open');
-      });
-      byId('downloadBtn').addEventListener('click', async () => {
-        if (window.html2canvas) {
-          const canvas = await window.html2canvas(byId('captureArea'), { backgroundColor: '#041126', scale: 2 });
-          const link = document.createElement('a'); link.download = 'cronograma-ipuc-villa-del-rio.png'; link.href = canvas.toDataURL('image/png'); link.click();
-        } else window.print();
-      });
-      byId('openInvitationBtn').addEventListener('click', () => byId('modal').classList.add('open'));
-      byId('closeModalBtn').addEventListener('click', () => byId('modal').classList.remove('open'));
-      byId('modal').addEventListener('click', (event) => { if (event.target === byId('modal')) byId('modal').classList.remove('open'); });
-      byId('refreshBtn').addEventListener('click', loadCurrent);
-      renderAll(); loadCurrent();
+      document.addEventListener('click', (event) => { const menu = byId('menuPanel'); const button = byId('menuBtn'); if (!menu.contains(event.target) && !button.contains(event.target)) menu.classList.remove('open'); });
+      byId('downloadBtn').addEventListener('click', async () => { if (window.html2canvas) { const canvas = await window.html2canvas(byId('captureArea'), { backgroundColor: '#020817', scale: 2 }); const link = document.createElement('a'); link.download = 'cronograma-ipuc-villa-del-rio.png'; link.href = canvas.toDataURL('image/png'); link.click(); } });
+      byId('backBtn').addEventListener('click', () => setView('home')); byId('googleCalendarBtn').addEventListener('click', () => { window.open(buildCalendarUrls().google, '_blank'); }); byId('icsBtn').addEventListener('click', downloadIcs); byId('shareBtn').addEventListener('click', () => { const media = selectedEvent().invitacion?.imagen_url || selectedEvent().invitacion?.video_url || selectedEvent().media; if (media) window.open(media, '_blank'); });
+      setInterval(() => { state.verseIndex = (state.verseIndex + 1) % verses.length; renderVerses(); }, 5000);
+      renderVerses(); loadCurrentSchedule();
     </script>
   </body>
 </html>

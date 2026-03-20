@@ -5,272 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IPUC Villa del Río | Panel DECOM</title>
     <style>
-      :root {
-        --bg: #041126;
-        --bg-soft: #0d2d66;
-        --panel: rgba(8, 20, 45, 0.82);
-        --line: rgba(255,255,255,0.12);
-        --text: #f8f6ea;
-        --muted: rgba(248,246,234,0.72);
-        --gold: #d9c99a;
-        font-family: "Segoe UI", Inter, system-ui, sans-serif;
-      }
-      * { box-sizing: border-box; }
-      body {
-        margin: 0;
-        min-height: 100vh;
-        color: var(--text);
-        background:
-          radial-gradient(circle at top, rgba(76, 118, 210, 0.32), transparent 30%),
-          linear-gradient(135deg, var(--bg), var(--bg-soft));
-      }
-      .shell { max-width: 1280px; margin: 0 auto; padding: 28px 18px 44px; }
-      .topbar, .section, .login-box, .editor-box { background: var(--panel); border: 1px solid var(--line); backdrop-filter: blur(16px); box-shadow: 0 20px 60px rgba(0,0,0,0.28); }
-      .topbar { border-radius: 28px; padding: 20px; display: flex; justify-content: space-between; align-items: center; gap: 18px; }
-      .brand { display:flex; align-items:center; gap:16px; }
-      .logo-frame { width:88px; height:88px; border-radius:24px; background: rgba(255,255,255,0.05); display:grid; place-items:center; overflow:hidden; border:1px solid var(--line); }
-      .logo-frame img { width:100%; height:100%; object-fit:contain; }
-      h1,h2,h3,h4,p { margin-top:0; }
-      .muted { color: var(--muted); }
-      .btn { border:1px solid var(--line); color:var(--text); background:rgba(255,255,255,0.06); border-radius:16px; padding:12px 16px; cursor:pointer; }
-      .btn.primary { background: var(--gold); color:#111827; font-weight:700; }
-      .grid { display:grid; grid-template-columns: 320px 1fr; gap: 22px; margin-top: 24px; }
-      .login-box, .editor-box, .section { border-radius: 28px; padding: 22px; }
-      .stack { display:grid; gap: 14px; }
-      .field { display:grid; gap: 8px; }
-      .field input, .field textarea, .field select { width:100%; padding: 13px 14px; border-radius: 16px; border:1px solid var(--line); background: rgba(255,255,255,0.06); color: var(--text); }
-      .field textarea { min-height: 110px; resize: vertical; }
-      .notice { margin-top: 14px; padding: 14px 16px; border-radius: 16px; background: rgba(255,255,255,0.06); border:1px solid var(--line); display:none; }
-      .cards { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; }
-      .editor-box h3 { margin-bottom: 12px; }
-      .event-list { display:grid; gap: 10px; }
-      .event-pill { padding: 12px 14px; border-radius: 16px; background: rgba(255,255,255,0.05); border:1px solid var(--line); cursor:pointer; }
-      .event-pill.active { border-color: rgba(217,201,154,0.5); background: rgba(217,201,154,0.12); }
-      @media (max-width: 980px) { .grid { grid-template-columns:1fr; } .cards { grid-template-columns:1fr; } .topbar { flex-direction:column; align-items:flex-start; } }
+      :root { --bg-1:#041126; --bg-2:#0d2d66; --panel:rgba(8,20,45,.82); --line:rgba(255,255,255,.12); --text:#f8f6ea; --muted:rgba(248,246,234,.72); --gold:#e0c990; font-family:"Segoe UI", Inter, system-ui, sans-serif; }
+      * { box-sizing:border-box; }
+      body { margin:0; min-height:100vh; color:var(--text); background:radial-gradient(circle at top, rgba(76,118,210,.32), transparent 30%), linear-gradient(135deg, var(--bg-1), var(--bg-2)); }
+      .shell { max-width:1360px; margin:0 auto; padding:24px 18px 40px; }
+      .topbar,.panel,.editor,.list-box,.form-box { background:var(--panel); border:1px solid var(--line); backdrop-filter:blur(16px); box-shadow:0 20px 60px rgba(0,0,0,.28); }
+      .topbar { border-radius:30px; padding:20px; display:flex; justify-content:space-between; gap:18px; align-items:center; }
+      .brand { display:flex; gap:16px; align-items:center; } .brand img { width:90px; height:90px; object-fit:contain; }
+      .muted { color:var(--muted); } .btn { border:1px solid var(--line); border-radius:16px; padding:12px 16px; background:rgba(255,255,255,.06); color:var(--text); cursor:pointer; text-decoration:none; } .btn.primary { background:var(--gold); color:#111827; font-weight:700; }
+      .layout { margin-top:24px; display:grid; grid-template-columns:320px 1fr; gap:22px; } .panel,.editor,.list-box,.form-box { border-radius:28px; padding:22px; } .stack { display:grid; gap:14px; }
+      .field { display:grid; gap:8px; } .field input,.field textarea { width:100%; padding:13px 14px; border-radius:16px; border:1px solid var(--line); background:rgba(255,255,255,.06); color:var(--text); } .field textarea { min-height:110px; resize:vertical; }
+      .editor { opacity:.45; pointer-events:none; } .editor.active { opacity:1; pointer-events:auto; } .editor-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; } .event-list { display:grid; gap:10px; }
+      .event-item { padding:12px 14px; border-radius:16px; background:rgba(255,255,255,.05); border:1px solid var(--line); cursor:pointer; } .event-item.active { border-color:rgba(224,201,144,.5); background:rgba(224,201,144,.12); }
+      .notice { display:none; margin-top:14px; padding:14px 16px; border-radius:16px; background:rgba(255,255,255,.06); border:1px solid var(--line); }
+      @media (max-width:980px) { .layout,.editor-grid { grid-template-columns:1fr; } .topbar { flex-direction:column; align-items:flex-start; } }
     </style>
   </head>
   <body>
     <div class="shell">
       <header class="topbar">
-        <div class="brand">
-          <div class="logo-frame"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Logo_IPUC.png/512px-Logo_IPUC.png" alt="Logo IPUC" /></div>
-          <div>
-            <div class="muted">Área restringida · DECOM</div>
-            <h1>Panel administrativo</h1>
-            <p class="muted">Gestiona cronogramas, cultos, invitaciones y eventos especiales sin mostrar las herramientas al público.</p>
-          </div>
-        </div>
-        <div style="display:flex; gap:12px; flex-wrap:wrap;">
-          <a class="btn" href="/">Volver al cronograma</a>
-          <button class="btn primary" id="logoutBtn">Cerrar sesión</button>
-        </div>
+        <div class="brand"><img src="/assets/logo-ipuc.svg" alt="Logo IPUC Villa del Río" /><div><div class="muted">Área privada DECOM</div><h1 style="margin:0">Panel administrativo</h1><p class="muted" style="margin-bottom:0">Aquí se edita el cronograma, las invitaciones y el evento especial sin mostrar controles al público.</p></div></div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;"><a class="btn" href="/">Volver al inicio</a><button class="btn primary" id="logoutBtn">Cerrar sesión</button></div>
       </header>
-
-      <div class="grid">
-        <aside class="login-box stack">
-          <div>
-            <h3>Acceso privado</h3>
-            <p class="muted">Solo el personal autorizado con el usuario y clave definidos puede editar el contenido.</p>
-          </div>
+      <div class="layout">
+        <aside class="panel stack">
+          <div><h3>Acceso con credenciales</h3><p class="muted">Solo quienes tengan el usuario y la clave pueden modificar el contenido.</p></div>
           <div class="field"><label>Usuario</label><input id="loginUser" value="IPUCVILLADELRIO" /></div>
           <div class="field"><label>Clave</label><input id="loginPass" type="password" value="99061408327" /></div>
-          <button class="btn primary" id="loginBtn">Ingresar al panel</button>
+          <button class="btn primary" id="loginBtn">Ingresar</button>
           <div class="notice" id="authNotice"></div>
-          <div class="section">
-            <h4>Qué puedes hacer</h4>
-            <ul class="muted" style="padding-left:18px; line-height:1.8;">
-              <li>Subir cronogramas JSON o Excel.</li>
-              <li>Editar cultos semanales.</li>
-              <li>Agregar invitaciones por día.</li>
-              <li>Crear un evento especial adicional.</li>
-            </ul>
-          </div>
+          <div class="list-box"><h4>Opciones disponibles</h4><ul class="muted" style="padding-left:18px; line-height:1.8; margin-bottom:0;"><li>Subir cronograma JSON/Excel.</li><li>Editar martes, jueves, sábado, domingo y evento especial.</li><li>Asignar imagen, video o enlace de YouTube.</li><li>Definir fecha exacta para el recordatorio del calendario.</li></ul></div>
         </aside>
-
-        <main class="editor-box stack" id="editorArea" style="opacity:0.45; pointer-events:none;">
-          <div>
-            <h2>Edición de la semana actual</h2>
-            <p class="muted">Esta zona está separada del cronograma público para que solo el equipo autorizado edite la información.</p>
+        <main class="editor" id="editorArea">
+          <div style="display:flex; justify-content:space-between; gap:16px; align-items:center; flex-wrap:wrap; margin-bottom:18px;"><div><h2 style="margin-bottom:8px;">Semana actual para edición</h2><div class="muted" id="weekText">Cargando cronograma...</div></div><button class="btn" id="reloadBtn">Actualizar datos</button></div>
+          <div class="editor-grid">
+            <section class="form-box stack"><h3>Subir cronograma</h3><div class="field"><input id="scheduleFile" type="file" accept=".json,.xlsx,.xls" /></div><button class="btn primary" id="uploadScheduleBtn">Subir archivo</button></section>
+            <section class="list-box stack"><h3>Seleccionar culto o evento</h3><div class="event-list" id="eventList"></div></section>
+            <section class="form-box stack"><h3>Editar información</h3><div class="field"><input id="editDay" placeholder="Día o etiqueta" /></div><div class="field"><input id="editTitle" placeholder="Título" /></div><div class="field"><input id="editTime" placeholder="Hora" /></div><div class="field"><input id="editDate" type="date" /></div><div class="field"><textarea id="editDescription" placeholder="Descripción"></textarea></div><div class="field"><textarea id="editMessage" placeholder="Mensaje de invitación"></textarea></div><button class="btn primary" id="saveEventBtn">Guardar cambios</button></section>
+            <section class="form-box stack"><h3>Invitación multimedia</h3><div class="field"><input id="invitationFile" type="file" accept="image/*,video/mp4" /></div><div class="field"><input id="videoUrl" placeholder="Enlace de YouTube opcional" /></div><div class="field"><textarea id="fullInvitation" placeholder="Texto completo de la invitación"></textarea></div><button class="btn primary" id="uploadInvitationBtn">Guardar invitación</button></section>
           </div>
-
-          <div class="cards">
-            <section class="section stack">
-              <h3>Subir cronograma</h3>
-              <div class="field"><input id="scheduleFile" type="file" accept=".json,.xlsx,.xls" /></div>
-              <button class="btn primary" id="uploadScheduleBtn">Subir archivo</button>
-            </section>
-
-            <section class="section stack">
-              <h3>Eventos de esta semana</h3>
-              <div class="event-list" id="eventList"></div>
-            </section>
-
-            <section class="section stack">
-              <h3>Editar evento seleccionado</h3>
-              <div class="field"><input id="editTitle" placeholder="Título" /></div>
-              <div class="field"><input id="editDay" placeholder="Día" /></div>
-              <div class="field"><input id="editTime" placeholder="Hora" /></div>
-              <div class="field"><textarea id="editDescription" placeholder="Descripción"></textarea></div>
-              <div class="field"><textarea id="editMessage" placeholder="Mensaje de invitación"></textarea></div>
-              <button class="btn primary" id="saveEventBtn">Guardar cambios</button>
-            </section>
-
-            <section class="section stack">
-              <h3>Invitación multimedia</h3>
-              <div class="field"><input id="invitationFile" type="file" accept="image/*,video/mp4" /></div>
-              <div class="field"><input id="videoUrl" placeholder="Enlace de YouTube opcional" /></div>
-              <div class="field"><textarea id="fullInvitation" placeholder="Texto completo de la invitación"></textarea></div>
-              <button class="btn primary" id="uploadInvitationBtn">Guardar invitación</button>
-            </section>
-          </div>
-
           <div class="notice" id="panelNotice"></div>
         </main>
       </div>
     </div>
-
     <script>
-      const state = { loggedIn: false, payload: null, selectedEventId: null };
+      const state = { payload:null, selectedEventId:null };
       const byId = (id) => document.getElementById(id);
-
+      function selectedEvent() { return state.payload?.currentWeek?.eventos?.find((event) => event.id === state.selectedEventId) || null; }
+      function showNotice(id, message, mode='info') { const el = byId(id); el.style.display = 'block'; el.textContent = message; el.style.color = mode === 'error' ? '#fca5a5' : mode === 'success' ? '#86efac' : '#f8f6ea'; }
+      function unlockEditor() { byId('editorArea').classList.add('active'); sessionStorage.setItem('ipuc_admin_logged', 'true'); }
+      function lockEditor() { byId('editorArea').classList.remove('active'); sessionStorage.removeItem('ipuc_admin_logged'); }
       async function fetchCurrent() {
-        const response = await fetch('/api/public/schedule/current');
-        if (!response.ok) throw new Error('No fue posible cargar el cronograma actual.');
+        const response = await fetch('/api/public/schedule/current'); if (!response.ok) throw new Error('No fue posible cargar el cronograma actual.');
         state.payload = await response.json();
-        state.selectedEventId = state.selectedEventId || state.payload.currentWeek.eventos[0]?.id || null;
-        renderEvents();
+        if (!state.payload.currentWeek.eventos.some((event) => event.id === 'especial' || event.tipo === 'especial')) state.payload.currentWeek.eventos.push({ id:'especial', dia:'Evento especial', titulo:'Evento especial', hora:'Próximamente', fecha:'', descripcion:'Espacio para vigilia, campaña u oración.', mensaje:'', tipo:'especial', media:'', invitacion:{ descripcion_completa:'', imagen_url:'', video_url:'' } });
+        state.selectedEventId = state.selectedEventId || state.payload.currentWeek.eventos[0]?.id || null; byId('weekText').textContent = state.payload.currentWeek.etiqueta || 'Semana actual'; renderEvents();
       }
-
-      function selectedEvent() {
-        return state.payload?.currentWeek?.eventos?.find((event) => event.id === state.selectedEventId) || null;
-      }
-
-      function renderEvents() {
-        const list = byId('eventList');
-        const events = state.payload?.currentWeek?.eventos || [];
-        list.innerHTML = events.map((event) => `
-          <button class="event-pill ${event.id === state.selectedEventId ? 'active' : ''}" data-id="${event.id}">
-            <strong>${event.dia}</strong><br />
-            <span class="muted">${event.titulo}</span>
-          </button>
-        `).join('');
-        list.querySelectorAll('[data-id]').forEach((button) => {
-          button.addEventListener('click', () => {
-            state.selectedEventId = button.dataset.id;
-            fillEditor();
-            renderEvents();
-          });
-        });
-        fillEditor();
-      }
-
-      function fillEditor() {
-        const event = selectedEvent();
-        if (!event) return;
-        byId('editTitle').value = event.titulo || '';
-        byId('editDay').value = event.dia || '';
-        byId('editTime').value = event.hora || '';
-        byId('editDescription').value = event.descripcion || '';
-        byId('editMessage').value = event.mensaje || '';
-        byId('fullInvitation').value = event.invitacion?.descripcion_completa || '';
-        byId('videoUrl').value = event.invitacion?.video_url || '';
-      }
-
-      function showNotice(id, message, mode='') {
-        const el = byId(id);
-        el.style.display = 'block';
-        el.textContent = message;
-        el.style.color = mode === 'error' ? '#fca5a5' : mode === 'success' ? '#86efac' : '#f8f6ea';
-      }
-
+      function renderEvents() { const events = state.payload?.currentWeek?.eventos || []; byId('eventList').innerHTML = events.map((event) => `<button class="event-item ${event.id === state.selectedEventId ? 'active' : ''}" data-id="${event.id}"><strong>${event.dia}</strong><br><span class="muted">${event.titulo}</span></button>`).join(''); byId('eventList').querySelectorAll('[data-id]').forEach((button) => button.addEventListener('click', () => { state.selectedEventId = button.dataset.id; fillEditor(); renderEvents(); })); fillEditor(); }
+      function fillEditor() { const event = selectedEvent(); if (!event) return; byId('editDay').value = event.dia || ''; byId('editTitle').value = event.titulo || ''; byId('editTime').value = event.hora || ''; byId('editDate').value = event.fecha || ''; byId('editDescription').value = event.descripcion || ''; byId('editMessage').value = event.mensaje || ''; byId('videoUrl').value = event.invitacion?.video_url || ''; byId('fullInvitation').value = event.invitacion?.descripcion_completa || ''; }
       byId('loginBtn').addEventListener('click', async () => {
-        try {
-          const response = await fetch('/api/auth/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username: byId('loginUser').value, password: byId('loginPass').value }),
-          });
-          const result = await response.json();
-          if (!result.success) throw new Error('Credenciales incorrectas.');
-          state.loggedIn = true;
-          byId('editorArea').style.opacity = '1';
-          byId('editorArea').style.pointerEvents = 'auto';
-          showNotice('authNotice', 'Acceso concedido. Ya puedes editar el contenido.', 'success');
-          await fetchCurrent();
-        } catch (error) {
-          showNotice('authNotice', error.message, 'error');
-        }
+        try { const response = await fetch('/api/auth/login', { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ username: byId('loginUser').value, password: byId('loginPass').value }) }); const result = await response.json(); if (!result.success) throw new Error('Credenciales incorrectas.'); unlockEditor(); showNotice('authNotice', 'Acceso concedido correctamente.', 'success'); await fetchCurrent(); } catch (error) { showNotice('authNotice', error.message, 'error'); }
       });
-
-      byId('logoutBtn').addEventListener('click', () => {
-        state.loggedIn = false;
-        byId('editorArea').style.opacity = '0.45';
-        byId('editorArea').style.pointerEvents = 'none';
-        showNotice('authNotice', 'Sesión cerrada.', '');
-      });
-
-      byId('uploadScheduleBtn').addEventListener('click', async () => {
-        const file = byId('scheduleFile').files[0];
-        if (!file) return showNotice('panelNotice', 'Selecciona un archivo primero.', 'error');
-        const formData = new FormData();
-        formData.append('file', file);
-        try {
-          const response = await fetch('/api/admin/schedules/upload', { method: 'POST', body: formData });
-          const result = await response.json();
-          if (!response.ok) throw new Error(result.message || 'No se pudo cargar el archivo.');
-          showNotice('panelNotice', 'Cronograma cargado correctamente.', 'success');
-          await fetchCurrent();
-        } catch (error) {
-          showNotice('panelNotice', error.message, 'error');
-        }
-      });
-
-      byId('saveEventBtn').addEventListener('click', async () => {
-        const event = selectedEvent();
-        if (!event || !state.payload?.currentWeek?.id) return;
-        try {
-          const response = await fetch(`/api/admin/schedules/${state.payload.currentWeek.id}/events/${event.id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              titulo: byId('editTitle').value,
-              dia: byId('editDay').value,
-              hora: byId('editTime').value,
-              descripcion: byId('editDescription').value,
-              mensaje: byId('editMessage').value,
-            }),
-          });
-          const result = await response.json();
-          if (!response.ok) throw new Error(result.message || 'No se pudo guardar el evento.');
-          showNotice('panelNotice', 'Evento actualizado correctamente.', 'success');
-          await fetchCurrent();
-        } catch (error) {
-          showNotice('panelNotice', error.message, 'error');
-        }
-      });
-
-      byId('uploadInvitationBtn').addEventListener('click', async () => {
-        const event = selectedEvent();
-        if (!event || !state.payload?.currentWeek?.id) return;
-        const formData = new FormData();
-        formData.append('scheduleId', state.payload.currentWeek.id);
-        formData.append('eventId', event.id);
-        formData.append('descripcion_completa', byId('fullInvitation').value);
-        formData.append('video_url', byId('videoUrl').value);
-        const file = byId('invitationFile').files[0];
-        if (file) formData.append('media', file);
-        try {
-          const response = await fetch('/api/admin/invitations/upload', { method: 'POST', body: formData });
-          const result = await response.json();
-          if (!response.ok) throw new Error(result.message || 'No se pudo guardar la invitación.');
-          showNotice('panelNotice', 'Invitación guardada correctamente.', 'success');
-          await fetchCurrent();
-        } catch (error) {
-          showNotice('panelNotice', error.message, 'error');
-        }
-      });
-
-      fetchCurrent().catch(() => showNotice('panelNotice', 'No se pudo cargar la semana actual desde la API.', 'error'));
+      byId('logoutBtn').addEventListener('click', () => { lockEditor(); showNotice('authNotice', 'Sesión cerrada.', 'info'); });
+      byId('reloadBtn').addEventListener('click', () => fetchCurrent().catch((error) => showNotice('panelNotice', error.message, 'error')));
+      byId('uploadScheduleBtn').addEventListener('click', async () => { const file = byId('scheduleFile').files[0]; if (!file) return showNotice('panelNotice', 'Selecciona un archivo primero.', 'error'); const formData = new FormData(); formData.append('file', file); try { const response = await fetch('/api/admin/schedules/upload', { method:'POST', body: formData }); const result = await response.json(); if (!response.ok) throw new Error(result.message || 'No se pudo cargar el archivo.'); showNotice('panelNotice', 'Cronograma cargado correctamente.', 'success'); await fetchCurrent(); } catch (error) { showNotice('panelNotice', error.message, 'error'); } });
+      byId('saveEventBtn').addEventListener('click', async () => { const event = selectedEvent(); if (!event || !state.payload?.currentWeek?.id) return; try { const response = await fetch(`/api/admin/schedules/${state.payload.currentWeek.id}/events/${event.id}`, { method:'PUT', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ dia: byId('editDay').value, titulo: byId('editTitle').value, hora: byId('editTime').value, fecha: byId('editDate').value, descripcion: byId('editDescription').value, mensaje: byId('editMessage').value, tipo: byId('editDay').value.toLowerCase().includes('especial') ? 'especial' : event.tipo }) }); const result = await response.json(); if (!response.ok) throw new Error(result.message || 'No se pudo guardar el evento.'); showNotice('panelNotice', 'Evento actualizado correctamente.', 'success'); await fetchCurrent(); } catch (error) { showNotice('panelNotice', error.message, 'error'); } });
+      byId('uploadInvitationBtn').addEventListener('click', async () => { const event = selectedEvent(); if (!event || !state.payload?.currentWeek?.id) return; const formData = new FormData(); formData.append('scheduleId', state.payload.currentWeek.id); formData.append('eventId', event.id); formData.append('descripcion_completa', byId('fullInvitation').value); formData.append('video_url', byId('videoUrl').value); const file = byId('invitationFile').files[0]; if (file) formData.append('media', file); try { const response = await fetch('/api/admin/invitations/upload', { method:'POST', body: formData }); const result = await response.json(); if (!response.ok) throw new Error(result.message || 'No se pudo guardar la invitación.'); showNotice('panelNotice', 'Invitación guardada correctamente.', 'success'); await fetchCurrent(); } catch (error) { showNotice('panelNotice', error.message, 'error'); } });
+      if (sessionStorage.getItem('ipuc_admin_logged') === 'true') unlockEditor();
+      fetchCurrent().catch((error) => showNotice('panelNotice', error.message, 'error'));
     </script>
   </body>
 </html>
