@@ -43,18 +43,26 @@
             <section class="list-box stack"><h3>Seleccionar culto o evento</h3><div class="event-list" id="eventList"></div></section>
             <section class="form-box stack"><h3>Editar información</h3><div class="field"><input id="editDay" placeholder="Día o etiqueta" /></div><div class="field"><input id="editTitle" placeholder="Título" /></div><div class="field"><input id="editTime" placeholder="Hora" /></div><div class="field"><input id="editDate" type="date" /></div><div class="field"><textarea id="editDescription" placeholder="Descripción"></textarea></div><div class="field"><textarea id="editMessage" placeholder="Mensaje de invitación"></textarea></div><button class="btn primary" id="saveEventBtn">Guardar cambios</button></section>
             <section class="form-box stack"><h3>Invitación multimedia</h3><div class="field"><input id="invitationFile" type="file" accept="image/*,video/mp4" /></div><div class="field"><input id="videoUrl" placeholder="Enlace de YouTube opcional" /></div><div class="field"><textarea id="fullInvitation" placeholder="Texto completo de la invitación"></textarea></div><button class="btn primary" id="uploadInvitationBtn">Guardar invitación</button></section>
+            <section class="form-box stack" id="principalTools" style="display:none;">
+              <h3>Administrador principal · Crear usuarios editores</h3>
+              <div class="field"><input id="newUsername" placeholder="Nuevo usuario editor" /></div>
+              <div class="field"><input id="newPassword" type="password" placeholder="Contraseña del nuevo editor" /></div>
+              <div class="field"><input id="principalPassword" type="password" placeholder="Tu contraseña principal para confirmar" /></div>
+              <button class="btn primary" id="createUserBtn">Crear usuario editor</button>
+              <div class="event-list" id="usersBox"></div>
+            </section>
           </div>
           <div class="notice" id="panelNotice"></div>
         </main>
       </div>
     </div>
     <script>
-      const state = { payload:null, selectedEventId:null };
+      const state = { payload:null, selectedEventId:null, currentUser:null };
       const byId = (id) => document.getElementById(id);
       function selectedEvent() { return state.payload?.currentWeek?.eventos?.find((event) => event.id === state.selectedEventId) || null; }
       function showNotice(id, message, mode='info') { const el = byId(id); el.style.display = 'block'; el.textContent = message; el.style.color = mode === 'error' ? '#fca5a5' : mode === 'success' ? '#86efac' : '#f8f6ea'; }
       function unlockEditor() { byId('editorArea').classList.add('active'); sessionStorage.setItem('ipuc_admin_logged', 'true'); }
-      function lockEditor() { byId('editorArea').classList.remove('active'); sessionStorage.removeItem('ipuc_admin_logged'); }
+      function lockEditor() { byId('editorArea').classList.remove('active'); sessionStorage.removeItem('ipuc_admin_logged'); sessionStorage.removeItem('ipuc_admin_user'); }
       async function requestJson(url, options = {}) {
         const response = await fetch(url, options);
         const raw = await response.text();
@@ -76,6 +84,12 @@
         if (!state.payload.currentWeek.eventos.some((event) => event.id === 'especial' || event.tipo === 'especial')) state.payload.currentWeek.eventos.push({ id:'especial', dia:'Evento especial', titulo:'Evento especial', hora:'Próximamente', fecha:'', descripcion:'Espacio para vigilia, campaña u oración.', mensaje:'', tipo:'especial', media:'', invitacion:{ descripcion_completa:'', imagen_url:'', video_url:'' } });
         state.selectedEventId = state.selectedEventId || state.payload.currentWeek.eventos[0]?.id || null; byId('weekText').textContent = state.payload.currentWeek.etiqueta || 'Semana actual'; renderEvents();
       }
+      async function loadUsers() {
+        const dashboard = await requestJson('/api/admin/dashboard');
+        const users = dashboard.users || [];
+        const box = document.getElementById('usersBox');
+        box.innerHTML = users.map((user) => `<div class="event-item"><strong>${user.username}</strong><br><span class="muted">${user.role}</span></div>`).join('');
+      }
       function renderEvents() { const events = state.payload?.currentWeek?.eventos || []; byId('eventList').innerHTML = events.map((event) => `<button class="event-item ${event.id === state.selectedEventId ? 'active' : ''}" data-id="${event.id}"><strong>${event.dia}</strong><br><span class="muted">${event.titulo}</span></button>`).join(''); byId('eventList').querySelectorAll('[data-id]').forEach((button) => button.addEventListener('click', () => { state.selectedEventId = button.dataset.id; fillEditor(); renderEvents(); })); fillEditor(); }
       function fillEditor() { const event = selectedEvent(); if (!event) return; byId('editDay').value = event.dia || ''; byId('editTitle').value = event.titulo || ''; byId('editTime').value = event.hora || ''; byId('editDate').value = event.fecha || ''; byId('editDescription').value = event.descripcion || ''; byId('editMessage').value = event.mensaje || ''; byId('videoUrl').value = event.invitacion?.video_url || ''; byId('fullInvitation').value = event.invitacion?.descripcion_completa || ''; }
       byId('loginBtn').addEventListener('click', async () => {
@@ -86,9 +100,15 @@
             body: JSON.stringify({ username: byId('loginUser').value, password: byId('loginPass').value })
           });
           if (!result.success) throw new Error('Credenciales incorrectas.');
+          state.currentUser = result.user;
+          sessionStorage.setItem('ipuc_admin_user', JSON.stringify(result.user));
           unlockEditor();
           showNotice('authNotice', 'Acceso concedido correctamente.', 'success');
           await fetchCurrent();
+          if (result.user?.role === 'principal') {
+            document.getElementById('principalTools').style.display = 'grid';
+            await loadUsers();
+          }
         } catch (error) { showNotice('authNotice', error.message, 'error'); }
       });
       byId('logoutBtn').addEventListener('click', () => { lockEditor(); showNotice('authNotice', 'Sesión cerrada.', 'info'); });
@@ -96,7 +116,31 @@
       byId('uploadScheduleBtn').addEventListener('click', async () => { const file = byId('scheduleFile').files[0]; if (!file) return showNotice('panelNotice', 'Selecciona un archivo primero.', 'error'); const formData = new FormData(); formData.append('file', file); try { await requestJson('/api/admin/schedules/upload', { method:'POST', body: formData }); showNotice('panelNotice', 'Cronograma cargado correctamente.', 'success'); await fetchCurrent(); } catch (error) { showNotice('panelNotice', error.message, 'error'); } });
       byId('saveEventBtn').addEventListener('click', async () => { const event = selectedEvent(); if (!event || !state.payload?.currentWeek?.id) return; try { await requestJson(`/api/admin/schedules/${state.payload.currentWeek.id}/events/${event.id}`, { method:'PUT', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ dia: byId('editDay').value, titulo: byId('editTitle').value, hora: byId('editTime').value, fecha: byId('editDate').value, descripcion: byId('editDescription').value, mensaje: byId('editMessage').value, tipo: byId('editDay').value.toLowerCase().includes('especial') ? 'especial' : event.tipo }) }); showNotice('panelNotice', 'Evento actualizado correctamente.', 'success'); await fetchCurrent(); } catch (error) { showNotice('panelNotice', error.message, 'error'); } });
       byId('uploadInvitationBtn').addEventListener('click', async () => { const event = selectedEvent(); if (!event || !state.payload?.currentWeek?.id) return; const formData = new FormData(); formData.append('scheduleId', state.payload.currentWeek.id); formData.append('eventId', event.id); formData.append('descripcion_completa', byId('fullInvitation').value); formData.append('video_url', byId('videoUrl').value); const file = byId('invitationFile').files[0]; if (file) formData.append('media', file); try { await requestJson('/api/admin/invitations/upload', { method:'POST', body: formData }); showNotice('panelNotice', 'Invitación guardada correctamente.', 'success'); await fetchCurrent(); } catch (error) { showNotice('panelNotice', error.message, 'error'); } });
-      if (sessionStorage.getItem('ipuc_admin_logged') === 'true') unlockEditor();
+      document.getElementById('createUserBtn').addEventListener('click', async () => {
+        try {
+          const savedUser = state.currentUser || JSON.parse(sessionStorage.getItem('ipuc_admin_user') || 'null');
+          await requestJson('/api/admin/users', {
+            method:'POST',
+            headers:{ 'Content-Type':'application/json' },
+            body: JSON.stringify({
+              adminUsername: savedUser?.username,
+              adminPassword: byId('principalPassword').value,
+              username: byId('newUsername').value,
+              password: byId('newPassword').value,
+            }),
+          });
+          showNotice('panelNotice', 'Usuario editor creado correctamente.', 'success');
+          await loadUsers();
+        } catch (error) { showNotice('panelNotice', error.message, 'error'); }
+      });
+      if (sessionStorage.getItem('ipuc_admin_logged') === 'true') {
+        unlockEditor();
+        state.currentUser = JSON.parse(sessionStorage.getItem('ipuc_admin_user') || 'null');
+        if (state.currentUser?.role === 'principal') {
+          document.getElementById('principalTools').style.display = 'grid';
+          loadUsers().catch(() => {});
+        }
+      }
       fetchCurrent().catch((error) => showNotice('panelNotice', error.message, 'error'));
     </script>
   </body>

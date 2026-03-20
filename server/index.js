@@ -13,9 +13,6 @@ const rootDir = path.join(__dirname, '..');
 const app = express();
 const PORT = process.env.PORT || 3001;
 const uploadsDir = path.join(__dirname, 'uploads');
-const adminUser = 'IPUCVILLADELRIO';
-const adminPass = '99061408327';
-
 fs.mkdirSync(uploadsDir, { recursive: true });
 
 const storage = multer.diskStorage({
@@ -75,8 +72,15 @@ app.get('/api/health', (_req, res) => {
 
 app.post('/api/auth/login', (req, res) => {
   const { username, password } = req.body;
-  const success = username === adminUser && password === adminPass;
-  res.json({ success, role: success ? 'admin' : 'viewer' });
+  const db = readDb();
+  const user = db.users.find(
+    (item) => item.username.toUpperCase() === String(username || '').toUpperCase() && item.password === password,
+  );
+  res.json({
+    success: Boolean(user),
+    role: user?.role || 'viewer',
+    user: user ? { id: user.id, username: user.username, role: user.role } : null,
+  });
 });
 
 app.get('/api/public/schedule/current', (_req, res) => {
@@ -105,7 +109,49 @@ app.get('/api/public/schedule/current', (_req, res) => {
 
 app.get('/api/admin/dashboard', (_req, res) => {
   const db = readDb();
-  res.json({ schedules: db.schedules, invitations: db.invitations });
+  res.json({
+    schedules: db.schedules,
+    invitations: db.invitations,
+    users: db.users.map(({ password: _password, ...user }) => user),
+  });
+});
+
+app.post('/api/admin/users', (req, res) => {
+  const db = readDb();
+  const { adminUsername, adminPassword, username, password } = req.body;
+  const principalUser = db.users.find(
+    (item) =>
+      item.role === 'principal' &&
+      item.username.toUpperCase() === String(adminUsername || '').toUpperCase() &&
+      item.password === adminPassword,
+  );
+
+  if (!principalUser) {
+    return res.status(403).json({ message: 'Solo el administrador principal puede crear usuarios.' });
+  }
+
+  if (!username || !password) {
+    return res.status(400).json({ message: 'Debes indicar usuario y contraseña para el nuevo editor.' });
+  }
+
+  if (db.users.some((item) => item.username.toUpperCase() === String(username).toUpperCase())) {
+    return res.status(409).json({ message: 'Ese usuario ya existe.' });
+  }
+
+  const newUser = {
+    id: `editor-${Date.now()}`,
+    username: String(username).trim(),
+    password: String(password),
+    role: 'editor',
+    created_at: new Date().toISOString(),
+  };
+
+  db.users.push(newUser);
+  writeDb(db);
+  res.json({
+    message: 'Usuario editor creado correctamente.',
+    user: { id: newUser.id, username: newUser.username, role: newUser.role, created_at: newUser.created_at },
+  });
 });
 
 app.post('/api/admin/schedules/upload', upload.single('file'), (req, res) => {
