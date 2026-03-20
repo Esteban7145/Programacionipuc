@@ -57,6 +57,7 @@
       </div>
     </div>
     <script>
+      const API_BASE = window.location.protocol === 'file:' || window.location.port === '5173' ? 'http://localhost:3001' : '';
       const state = { payload:null, selectedEventId:null, currentUser:null };
       const byId = (id) => document.getElementById(id);
       function selectedEvent() { return state.payload?.currentWeek?.eventos?.find((event) => event.id === state.selectedEventId) || null; }
@@ -66,7 +67,7 @@
       async function requestJson(url, options = {}) {
         let response;
         try {
-          response = await fetch(url, options);
+          response = await fetch(`${API_BASE}${url}`, options);
         } catch {
           throw new Error('No hay conexión con el servidor. Abre el panel desde http://localhost:3001/admin y verifica que Express esté encendido.');
         }
