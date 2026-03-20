@@ -44,7 +44,7 @@
       body::after { width: 28vw; height: 28vw; right: -8vw; top: 14vh; }
       .app-shell { max-width: 1460px; margin: 0 auto; padding: 24px 18px 44px; position: relative; z-index: 1; }
       .topbar, .hero-card, .day-card, .detail-card, .calendar-card, .verse-card, .menu-panel, .media-box, .calendar-actions { background: var(--panel); border: 1px solid var(--line); backdrop-filter: blur(18px); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
-      .topbar { display:flex; justify-content:space-between; align-items:center; gap:18px; padding: 18px 22px; border-radius: 30px; position: relative; }
+      .topbar { display:flex; justify-content:space-between; align-items:center; gap:18px; padding: 18px 22px; border-radius: 30px; position: relative; z-index: 30; }
       .brand { display:flex; align-items:center; gap:16px; }
       .brand img { width: 94px; height: 94px; object-fit: contain; }
       .brand h1 { margin:0; font-size: clamp(2rem,4vw,4rem); font-family: Georgia, "Times New Roman", serif; }
@@ -53,7 +53,7 @@
       .menu-btn { width: 56px; height: 56px; border-radius: 18px; font-size: 1.2rem; }
       .action-btn { border-radius: 999px; padding: 12px 18px; }
       .action-btn.primary, .chip-btn.active { background: var(--gold); color: #111827; font-weight: 700; }
-      .menu-panel { display:none; position:absolute; top: calc(100% + 10px); right: 0; width: 300px; border-radius: 24px; padding: 18px; }
+      .menu-panel { display:none; position:absolute; top: calc(100% + 10px); right: 0; width: 300px; border-radius: 24px; padding: 18px; z-index: 60; }
       .menu-panel.open { display:block; }
       .menu-panel a { display:block; padding: 12px 14px; margin-top: 10px; border-radius: 14px; background: rgba(255,255,255,0.05); color: var(--text); text-decoration:none; }
       .view-stack { position: relative; margin-top: 24px; min-height: 760px; }
@@ -99,7 +99,7 @@
     <div class="app-shell" id="captureArea">
       <header class="topbar">
         <div class="brand">
-          <img src="/assets/logo-ipuc.svg" alt="Logo IPUC Villa del Río" />
+          <img src="/assets/logo-subido.png" alt="Logo IPUC Villa del Río" onerror="this.style.display='none'" />
           <div>
             <div class="muted">Iglesia Pentecostal Unida de Colombia</div>
             <h1>Villa del Río</h1>
@@ -111,7 +111,7 @@
           <button class="menu-btn" id="menuBtn">☰</button>
           <div class="menu-panel" id="menuPanel">
             <strong>Acceso privado</strong>
-            <p class="muted">La edición quedó en una página aparte para que el público solo vea el cronograma y las invitaciones.</p>
+            <p class="muted">Ingreso reservado para el equipo autorizado.</p>
             <a href="/admin">Entrar al panel DECOM</a>
           </div>
         </div>
@@ -125,7 +125,6 @@
               <div class="muted" id="weekLabel">Cargando semana actual...</div>
               <p class="muted" style="line-height:1.75; max-width: 720px;">Bienvenido a la programación oficial de IPUC Villa del Río. Aquí encontrarás los cultos de la semana, el evento especial, la invitación visual y un recordatorio para agregar cada actividad al calendario de tu celular.</p>
               <div class="chip-list" id="dayChips"></div>
-              <div class="notice" id="statusNotice"></div>
               <div class="grid-days" id="dayGrid"></div>
             </div>
             <aside class="verse-card">
@@ -254,8 +253,6 @@
       }
       function renderHome() {
         byId('todayLabel').textContent = formatLong(new Date()); byId('weekLabel').textContent = state.payload.currentWeek.etiqueta || 'Semana actual';
-        const notice = byId('statusNotice');
-        if (state.fallbackMode) { notice.style.display = 'block'; notice.textContent = 'La vista está usando datos de respaldo mientras la API termina de responder, para que el cronograma siempre se vea.'; } else { notice.style.display = 'none'; }
         buildEventCards(); renderDetail(); renderCalendar();
       }
       function setView(target) {
