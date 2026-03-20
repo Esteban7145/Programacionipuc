@@ -57,7 +57,10 @@
       </div>
     </div>
     <script>
-      const API_BASE = window.location.protocol === 'file:' || window.location.port === '5173' ? 'http://localhost:3001' : '';
+      const API_BASE =
+        window.location.protocol === 'file:' || (window.location.port && window.location.port !== '3001')
+          ? 'http://localhost:3001'
+          : '';
       const state = { payload:null, selectedEventId:null, currentUser:null };
       const byId = (id) => document.getElementById(id);
       function selectedEvent() { return state.payload?.currentWeek?.eventos?.find((event) => event.id === state.selectedEventId) || null; }
