@@ -76,10 +76,13 @@ app.post('/api/auth/login', (req, res) => {
   const user = db.users.find(
     (item) => item.username.toUpperCase() === String(username || '').toUpperCase() && item.password === password,
   );
+  if (!user) {
+    return res.status(401).json({ success: false, message: 'Usuario o contraseña incorrectos.' });
+  }
   res.json({
-    success: Boolean(user),
-    role: user?.role || 'viewer',
-    user: user ? { id: user.id, username: user.username, role: user.role } : null,
+    success: true,
+    role: user.role,
+    user: { id: user.id, username: user.username, role: user.role },
   });
 });
 

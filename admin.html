@@ -64,7 +64,12 @@
       function unlockEditor() { byId('editorArea').classList.add('active'); sessionStorage.setItem('ipuc_admin_logged', 'true'); }
       function lockEditor() { byId('editorArea').classList.remove('active'); sessionStorage.removeItem('ipuc_admin_logged'); sessionStorage.removeItem('ipuc_admin_user'); }
       async function requestJson(url, options = {}) {
-        const response = await fetch(url, options);
+        let response;
+        try {
+          response = await fetch(url, options);
+        } catch {
+          throw new Error('No hay conexión con el servidor. Abre el panel desde http://localhost:3001/admin y verifica que Express esté encendido.');
+        }
         const raw = await response.text();
         let data = {};
         if (raw) {
@@ -75,7 +80,7 @@
           }
         }
         if (!response.ok) {
-          throw new Error(data.message || 'No se pudo completar la solicitud.');
+          throw new Error(data.message || `No se pudo completar la solicitud (${response.status}).`);
         }
         return data;
       }
@@ -99,7 +104,6 @@
             headers:{ 'Content-Type':'application/json' },
             body: JSON.stringify({ username: byId('loginUser').value, password: byId('loginPass').value })
           });
-          if (!result.success) throw new Error('Credenciales incorrectas.');
           state.currentUser = result.user;
           sessionStorage.setItem('ipuc_admin_user', JSON.stringify(result.user));
           unlockEditor();
