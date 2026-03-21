@@ -57,10 +57,11 @@
       </div>
     </div>
     <script>
-      const API_BASE =
-        window.location.protocol === 'file:' || (window.location.port && window.location.port !== '3001')
-          ? 'http://localhost:3001'
-          : '';
+      const API_CANDIDATES = [
+        '',
+        `${window.location.protocol === 'https:' ? 'https' : 'http'}://localhost:3001`,
+        `${window.location.protocol === 'https:' ? 'https' : 'http'}://127.0.0.1:3001`,
+      ].filter((value, index, array) => array.indexOf(value) === index);
       const state = { payload:null, selectedEventId:null, currentUser:null };
       const byId = (id) => document.getElementById(id);
       function selectedEvent() { return state.payload?.currentWeek?.eventos?.find((event) => event.id === state.selectedEventId) || null; }
@@ -68,25 +69,32 @@
       function unlockEditor() { byId('editorArea').classList.add('active'); sessionStorage.setItem('ipuc_admin_logged', 'true'); }
       function lockEditor() { byId('editorArea').classList.remove('active'); sessionStorage.removeItem('ipuc_admin_logged'); sessionStorage.removeItem('ipuc_admin_user'); }
       async function requestJson(url, options = {}) {
-        let response;
-        try {
-          response = await fetch(`${API_BASE}${url}`, options);
-        } catch {
-          throw new Error('No hay conexión con el servidor. Abre el panel desde http://localhost:3001/admin y verifica que Express esté encendido.');
-        }
-        const raw = await response.text();
-        let data = {};
-        if (raw) {
+        let lastError = null;
+        for (const base of API_CANDIDATES) {
           try {
-            data = JSON.parse(raw);
-          } catch {
-            throw new Error('El servidor respondió en un formato no válido. Verifica que la app esté ejecutándose desde Express.');
+            const response = await fetch(`${base}${url}`, options);
+            const raw = await response.text();
+            let data = {};
+            if (raw) {
+              try {
+                data = JSON.parse(raw);
+              } catch {
+                throw new Error('El servidor respondió en un formato no válido. Verifica que la app esté ejecutándose desde Express.');
+              }
+            }
+            if (response.status === 404) {
+              lastError = new Error(`No se pudo completar la solicitud (${response.status}).`);
+              continue;
+            }
+            if (!response.ok) {
+              throw new Error(data.message || `No se pudo completar la solicitud (${response.status}).`);
+            }
+            return data;
+          } catch (error) {
+            lastError = error;
           }
         }
-        if (!response.ok) {
-          throw new Error(data.message || `No se pudo completar la solicitud (${response.status}).`);
-        }
-        return data;
+        throw lastError || new Error('No hay conexión con el servidor. Abre el panel desde http://localhost:3001/admin y verifica que Express esté encendido.');
       }
       async function fetchCurrent() {
         state.payload = await requestJson('/api/public/schedule/current');
