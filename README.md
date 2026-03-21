@@ -130,6 +130,18 @@ Edita `src/services/firebase.js` y reemplaza los valores demo.
 }
 ```
 
+
+## Solución al error 404 en Netlify
+
+Si al abrir una URL del sitio desplegado aparece el mensaje **"Page not found"** de Netlify, el problema normalmente no está en React sino en la configuración de redirección para SPA.
+
+Ya se incluyeron dos mecanismos de compatibilidad en este repositorio:
+
+- `public/_redirects` para que Netlify redirija cualquier ruta a `index.html`.
+- `netlify.toml` con una regla global `/* -> /index.html 200`.
+
+Esto permite que rutas internas de la aplicación carguen correctamente incluso cuando el usuario entra directamente por una URL desplegada.
+
 ## Despliegue en Firebase Hosting
 
 ```bash
