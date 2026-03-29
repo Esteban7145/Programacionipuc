@@ -15,8 +15,71 @@ const eventColors = {
   especial: "especial"
 };
 
-// IMPORTANTE: aquí puedes pegar exactamente el cronograma completo sin modificarlo.
-// Usa el formato de objetos mostrado abajo para cada evento adicional puntual.
+// Fallback visual si una imagen no existe en la ruta indicada.
+const fallbackImage =
+  "data:image/svg+xml;utf8," +
+  encodeURIComponent(`
+    <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'>
+      <defs>
+        <linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>
+          <stop offset='0%' stop-color='#1f3b68' />
+          <stop offset='100%' stop-color='#402060' />
+        </linearGradient>
+      </defs>
+      <rect width='100%' height='100%' fill='url(#g)' />
+      <text x='50%' y='47%' fill='white' text-anchor='middle' font-size='54' font-family='Arial'>
+        CONFRATERNIDAD DISTRITAL
+      </text>
+      <text x='50%' y='57%' fill='#ffe7a8' text-anchor='middle' font-size='34' font-family='Arial'>
+        3 de abril de 2026
+      </text>
+      <text x='50%' y='66%' fill='white' text-anchor='middle' font-size='26' font-family='Arial'>
+        10:00 AM · 02:00 PM · 05:00 PM
+      </text>
+    </svg>
+  `);
+
+// Define aquí el nombre específico de cada culto y su responsable por día.
+const weeklyTemplateByWeekday = {
+  2: [
+    {
+      title: "Culto de Martes",
+      time: "07:00 PM",
+      type: "culto",
+      description: "Servicio congregacional de martes.",
+      responsable: "Responsable: por definir"
+    }
+  ],
+  4: [
+    {
+      title: "Culto de Jueves",
+      time: "07:00 PM",
+      type: "culto",
+      description: "Servicio congregacional de jueves.",
+      responsable: "Responsable: por definir"
+    }
+  ],
+  6: [
+    {
+      title: "Culto de Sábado",
+      time: "07:00 PM",
+      type: "culto",
+      description: "Servicio congregacional de sábado.",
+      responsable: "Responsable: por definir"
+    }
+  ],
+  0: [
+    {
+      title: "Culto Dominical",
+      time: "10:00 AM",
+      type: "culto",
+      description: "Servicio general dominical.",
+      responsable: "Responsable: por definir"
+    }
+  ]
+};
+
+// IMPORTANTE: pega aquí TODO el cronograma oficial con nombres exactos de cultos, responsables e imágenes.
 const customEvents = [
   {
     date: "2026-04-03",
@@ -24,34 +87,39 @@ const customEvents = [
     time: "10:00 AM · 02:00 PM · 05:00 PM",
     type: "especial",
     description: "Evento distrital en IPUC Villa del Río - Manizales.",
+    responsable: "Participan iglesias del distrito 4",
     featured: true,
-    image: "confraternidad-abril-3.jpg"
+    image: "confraternidad-abril-3.jpg",
+    imageCandidates: [
+      "confraternidad-abril-3.jpg",
+      "Confraternidad Distrital Abril 3.jpg",
+      "assets/confraternidad-abril-3.jpg"
+    ]
   }
-  // Ejemplo para pegar más eventos:
-  // { date: "2026-07-20", title: "Nombre", time: "06:00 PM", type: "especial", description: "Detalles" }
+
+  // EJEMPLO para agregar cultos con nombre y responsable reales:
+  // {
+  //   date: "2026-01-06",
+  //   title: "Culto de Jóvenes",
+  //   time: "07:00 PM",
+  //   type: "culto",
+  //   description: "Tema: Santidad y compromiso",
+  //   responsable: "Dirige: Hno. Carlos Pérez",
+  //   image: "imagenes/culto-jovenes-ene-06.jpg"
+  // }
 ];
 
 function formatDateKey(y, m, d) {
   return `${y}-${String(m + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
 }
 
+function cloneEvents(events = []) {
+  return events.map((event) => ({ ...event }));
+}
+
 function getWeeklyRecurringEvents(date) {
   const day = date.getDay();
-  const events = [];
-
-  // JS: 0 domingo, 2 martes, 4 jueves, 6 sábado
-  if ([2, 4, 6].includes(day)) {
-    events.push({ title: "Culto", time: "07:00 PM", type: "culto", description: "Culto congregacional." });
-  }
-  if (day === 0) {
-    events.push({ title: "Culto", time: "10:00 AM", type: "culto", description: "Culto dominical." });
-  }
-
-  // Plantillas opcionales para completar el cronograma oficial si aplica.
-  // if (day === 3) events.push({ title: "Oración", time: "06:00 PM - 08:00 PM", type: "oracion" });
-  // if (day === 5) events.push({ title: "Vigilia", time: "08:00 PM - 12:00 AM", type: "vigilia" });
-
-  return events;
+  return cloneEvents(weeklyTemplateByWeekday[day] || []);
 }
 
 function buildEventsByDate() {
@@ -68,22 +136,63 @@ function buildEventsByDate() {
 
   customEvents.forEach((ev) => {
     const list = map.get(ev.date) || [];
-    list.push(ev);
+    list.push({ ...ev });
     map.set(ev.date, list);
   });
 
   return map;
 }
 
+function getImageCandidates(event) {
+  if (Array.isArray(event.imageCandidates) && event.imageCandidates.length) {
+    return [...event.imageCandidates, fallbackImage];
+  }
+  return [event.image, fallbackImage].filter(Boolean);
+}
+
+function setProgressiveImage(imgEl, candidates = []) {
+  let index = 0;
+  const uniqueCandidates = [...new Set(candidates)];
+
+  function loadCurrent() {
+    imgEl.src = uniqueCandidates[index] || fallbackImage;
+  }
+
+  imgEl.onerror = () => {
+    index += 1;
+    if (index < uniqueCandidates.length) {
+      loadCurrent();
+    }
+  };
+
+  loadCurrent();
+}
+
 const eventsByDate = buildEventsByDate();
 const container = document.getElementById("calendarContainer");
 const modal = document.getElementById("eventModal");
+const churchLogo = document.getElementById("churchLogo");
+
+if (churchLogo) {
+  setProgressiveImage(churchLogo, [
+    "LOGO IPUC.png",
+    "LOGO IPUC PNG.png",
+    "logo ipuc.png",
+    "logo-ipuc.png",
+    fallbackImage
+  ]);
+}
 
 function openModal(event, dateText) {
   document.getElementById("modalTitle").textContent = event.title;
   document.getElementById("modalDate").textContent = `Fecha: ${dateText}`;
   document.getElementById("modalTime").textContent = `Hora: ${event.time || "Por confirmar"}`;
-  document.getElementById("modalDescription").textContent = event.description || "Sin descripción adicional.";
+  document.getElementById("modalDescription").textContent = [
+    event.description || "Sin descripción adicional.",
+    event.responsable || ""
+  ]
+    .filter(Boolean)
+    .join(" · ");
   modal.classList.add("show");
   modal.setAttribute("aria-hidden", "false");
 }
@@ -97,6 +206,11 @@ document.getElementById("closeModal").addEventListener("click", closeModal);
 modal.addEventListener("click", (e) => {
   if (e.target === modal) closeModal();
 });
+
+function buildEventLabel(event) {
+  const details = [event.time, event.responsable].filter(Boolean).join(" · ");
+  return `<strong>${event.title}</strong>${details ? `<span>${details}</span>` : ""}`;
+}
 
 function renderCalendar() {
   const today = new Date();
@@ -156,12 +270,18 @@ function renderCalendar() {
         if (event.featured) {
           const featured = document.createElement("div");
           featured.className = "special-card";
+
+          const image = document.createElement("img");
+          image.alt = `Imagen de ${event.title}`;
+          setProgressiveImage(image, getImageCandidates(event));
+
           featured.innerHTML = `
             <strong>${event.title}</strong>
             <div>${event.time}</div>
             <small>Evento principal de la semana</small>
-            <img src="${event.image}" alt="Imagen de ${event.title}" />
           `;
+          featured.appendChild(image);
+
           featured.addEventListener("click", () =>
             openModal(event, `${d} de ${monthNames[month]} de ${year}`)
           );
@@ -171,7 +291,7 @@ function renderCalendar() {
         const badge = document.createElement("button");
         badge.type = "button";
         badge.className = `event ${eventColors[event.type] || "especial"} ${event.featured ? "principal" : ""}`;
-        badge.textContent = `${event.title} · ${event.time}`;
+        badge.innerHTML = buildEventLabel(event);
         badge.title = event.description || "Ver detalles";
         badge.addEventListener("click", () =>
           openModal(event, `${d} de ${monthNames[month]} de ${year}`)
