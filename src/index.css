@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+body {
+  @apply min-h-screen bg-slate-950 text-slate-100 antialiased bg-halo;
+}
+
+#root {
+  @apply min-h-screen;
+}
+
+.glass {
+  @apply border border-white/10 bg-white/5 backdrop-blur-xl;
+}
+
+.section-title {
+  @apply text-2xl font-semibold tracking-tight text-white md:text-3xl;
+}
