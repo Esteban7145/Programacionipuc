@@ -5,7 +5,8 @@ import path from 'node:path';
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import xlsx from 'xlsx';
-import { endOfWeek, format, isWithinInterval, parseISO, startOfWeek } from 'date-fns';
+import { endOfDay, endOfWeek, format, isWithinInterval, parseISO, startOfDay, startOfWeek } from 'date-fns';
+import { es } from 'date-fns/locale';
 import { readDb, writeDb } from './db.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -54,16 +55,86 @@ const normalizeSchedule = (input) => {
   };
 };
 
+const normalizeDay = (value) =>
+  String(value || '')
+    .trim()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+
+const resolvePublicUrl = (req, value) => {
+  if (!value) return '';
+  if (/^https?:\/\//i.test(value) || value.startsWith('data:')) return value;
+
+  const clean = String(value).replace(/\\/g, '/').trim();
+  const maybeFile = path.basename(clean);
+  const normalizedPath = clean.startsWith('/') ? clean : `/uploads/${maybeFile}`;
+  return `${req.protocol}://${req.get('host')}${normalizedPath}`;
+};
+
+const getVerseByEvent = (event) => {
+  const byType = {
+    'escuela-dominical': 'Instruye al niño en su camino. — Proverbios 22:6',
+    culto: 'Donde están dos o tres congregados en mi nombre, allí estoy yo. — Mateo 18:20',
+    oracion: 'Perseverad en la oración. — Colosenses 4:2',
+    jovenes: 'Ninguno tenga en poco tu juventud. — 1 Timoteo 4:12',
+  };
+  const normalizedType = normalizeDay(event.tipo);
+  return byType[normalizedType] || 'Este es el día que hizo Jehová; nos gozaremos en él. — Salmo 118:24';
+};
+
+const escapeXml = (value) =>
+  String(value || '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&apos;');
+
+const buildAutoInvitationImage = (event, schedule) => {
+  const dateLabel = event.fecha ? format(parseISO(event.fecha), "d 'de' MMMM", { locale: es }) : '';
+  const verse = getVerseByEvent(event);
+  const title = escapeXml(event.titulo || 'Culto especial');
+  const subtitle = escapeXml(`${event.dia || ''} ${dateLabel}`.trim());
+  const hour = escapeXml(event.hora || '');
+  const safeVerse = escapeXml(verse);
+  const weekLabel = escapeXml(schedule.etiqueta || schedule.fecha_inicio_semana);
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720">
+      <defs>
+        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#0f172a"/>
+          <stop offset="60%" stop-color="#1d4ed8"/>
+          <stop offset="100%" stop-color="#7c3aed"/>
+        </linearGradient>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#bg)"/>
+      <text x="80" y="110" fill="#bfdbfe" font-family="Arial, sans-serif" font-size="34" font-weight="700">IPUC Villa del Río</text>
+      <text x="80" y="230" fill="#ffffff" font-family="Arial, sans-serif" font-size="74" font-weight="700">${title}</text>
+      <text x="80" y="300" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="40">${subtitle}</text>
+      <text x="80" y="360" fill="#ffffff" font-family="Arial, sans-serif" font-size="52" font-weight="700">${hour}</text>
+      <rect x="80" y="430" width="1120" height="180" rx="28" fill="rgba(2,6,23,0.45)" />
+      <text x="110" y="505" fill="#dbeafe" font-family="Arial, sans-serif" font-size="34" font-style="italic">${safeVerse}</text>
+      <text x="110" y="565" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="28">Semana: ${weekLabel}</text>
+    </svg>
+  `;
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+};
+
 const getCurrentWeekSchedule = (db) => {
   const today = new Date();
   const current = db.schedules.find((schedule) =>
     isWithinInterval(today, {
-      start: parseISO(schedule.fecha_inicio_semana),
-      end: parseISO(schedule.fecha_fin_semana),
+      start: startOfDay(parseISO(schedule.fecha_inicio_semana)),
+      end: endOfDay(parseISO(schedule.fecha_fin_semana)),
     }),
   );
 
-  return current || db.schedules[0] || null;
+  if (current) return current;
+
+  const sorted = [...db.schedules].sort((a, b) => a.fecha_inicio_semana.localeCompare(b.fecha_inicio_semana));
+  const previous = sorted.filter((item) => parseISO(item.fecha_inicio_semana) <= today).pop();
+  return previous || sorted[0] || null;
 };
 
 const ensureDefaultWeeklyServices = (schedule) => {
@@ -131,7 +202,7 @@ app.post('/api/auth/login', (req, res) => {
   });
 });
 
-app.get('/api/public/schedule/current', (_req, res) => {
+app.get('/api/public/schedule/current', (req, res) => {
   const db = readDb();
   const current = ensureDefaultWeeklyServices(getCurrentWeekSchedule(db));
 
@@ -144,7 +215,33 @@ app.get('/api/public/schedule/current', (_req, res) => {
     ...current,
     eventos: current.eventos.map((event) => ({
       ...event,
-      invitacion: invitationsByEvent[event.id] || null,
+      media: resolvePublicUrl(req, event.media),
+      invitacion: (() => {
+        const invitation = invitationsByEvent[event.id] || null;
+        const resolvedInvitation = invitation
+          ? {
+              ...invitation,
+              imagen_url: resolvePublicUrl(req, invitation.imagen_url),
+              video_url: resolvePublicUrl(req, invitation.video_url),
+            }
+          : null;
+
+        const hasVisualMedia = Boolean(
+          resolvedInvitation?.imagen_url || resolvedInvitation?.video_url || resolvePublicUrl(req, event.media),
+        );
+
+        if (hasVisualMedia) return resolvedInvitation;
+        return {
+          ...(resolvedInvitation || {}),
+          id: resolvedInvitation?.id || `auto-${event.id}`,
+          id_evento: event.id,
+          imagen_url: buildAutoInvitationImage(event, current),
+          video_url: resolvedInvitation?.video_url || '',
+          descripcion_completa:
+            resolvedInvitation?.descripcion_completa ||
+            `${event.titulo} | ${event.dia} ${event.fecha || ''} | ${event.hora || ''}`.trim(),
+        };
+      })(),
     })),
   };
 
