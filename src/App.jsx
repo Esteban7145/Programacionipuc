@@ -9,7 +9,7 @@ import EventModal from './components/EventModal';
 import Header from './components/Header';
 import ScheduleCard from './components/ScheduleCard';
 import { api } from './lib/api';
-import { fallbackSchedulePayload } from './lib/fallbackData';
+import { createFallbackSchedulePayload } from './lib/fallbackData';
 
 export default function App() {
   const scheduleRef = useRef(null);
@@ -32,6 +32,7 @@ export default function App() {
       setActiveEventId(current.currentWeek?.eventos?.[0]?.id || null);
       setUsingFallback(false);
     } catch (error) {
+      const fallbackSchedulePayload = createFallbackSchedulePayload();
       setData(fallbackSchedulePayload);
       setActiveEventId(fallbackSchedulePayload.currentWeek?.eventos?.[0]?.id || null);
       setUsingFallback(true);
