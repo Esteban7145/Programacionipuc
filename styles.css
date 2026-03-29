@@ -156,7 +156,9 @@ h1 {
   flex-direction: column;
   gap: 0.3rem;
   background: #fff;
+  overflow-y: auto;
 }
+
 
 .day:nth-child(7n) {
   border-right: 0;

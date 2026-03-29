@@ -15,7 +15,6 @@ const eventColors = {
   especial: "especial"
 };
 
-// Fallback visual si una imagen no existe en la ruta indicada.
 const fallbackImage =
   "data:image/svg+xml;utf8," +
   encodeURIComponent(`
@@ -39,87 +38,106 @@ const fallbackImage =
     </svg>
   `);
 
-// Define aquí el nombre específico de cada culto y su responsable por día.
-const weeklyTemplateByWeekday = {
-  2: [
-    {
-      title: "Culto de Martes",
-      time: "07:00 PM",
-      type: "culto",
-      description: "Servicio congregacional de martes.",
-      responsable: "Responsable: por definir"
-    }
-  ],
-  4: [
-    {
-      title: "Culto de Jueves",
-      time: "07:00 PM",
-      type: "culto",
-      description: "Servicio congregacional de jueves.",
-      responsable: "Responsable: por definir"
-    }
-  ],
-  6: [
-    {
-      title: "Culto de Sábado",
-      time: "07:00 PM",
-      type: "culto",
-      description: "Servicio congregacional de sábado.",
-      responsable: "Responsable: por definir"
-    }
-  ],
-  0: [
-    {
-      title: "Culto Dominical",
-      time: "10:00 AM",
-      type: "culto",
-      description: "Servicio general dominical.",
-      responsable: "Responsable: por definir"
-    }
-  ]
-};
+const committeeCultoSchedule = [
+  // Jóvenes - Primer y tercer sábado
+  { committee: "Comité de Jóvenes", dates: ["2026-01-17", "2026-02-07", "2026-02-21", "2026-03-07", "2026-03-21", "2026-04-04", "2026-04-18", "2026-05-02", "2026-05-16", "2026-06-06", "2026-06-13", "2026-07-04", "2026-07-18", "2026-08-01", "2026-08-15", "2026-09-05", "2026-09-19", "2026-10-03", "2026-10-17", "2026-11-07", "2026-11-21", "2026-12-05", "2026-12-19"] },
+  // Damas Dorcas - Primer y tercer martes
+  { committee: "Comité de Dorcas", dates: ["2026-01-06", "2026-01-20", "2026-02-03", "2026-02-17", "2026-03-03", "2026-03-17", "2026-04-07", "2026-04-21", "2026-05-05", "2026-05-19", "2026-06-02", "2026-06-16", "2026-07-07", "2026-07-21", "2026-08-04", "2026-08-18", "2026-09-01", "2026-09-15", "2026-10-06", "2026-10-20", "2026-11-03", "2026-11-17", "2026-12-01", "2026-12-15"] },
+  // Evangelismo - Segundo y cuarto jueves
+  { committee: "Comité de Evangelismo", dates: ["2026-01-08", "2026-01-22", "2026-02-12", "2026-02-26", "2026-03-12", "2026-03-26", "2026-04-09", "2026-04-23", "2026-05-14", "2026-05-28", "2026-06-11", "2026-06-25", "2026-07-09", "2026-07-23", "2026-08-13", "2026-08-27", "2026-09-10", "2026-09-24", "2026-10-08", "2026-10-22", "2026-11-12", "2026-11-26", "2026-12-10", "2026-12-24"] },
+  // Escuela Dominical - Segundo sábado
+  { committee: "Comité Escuela Dominical", dates: ["2026-01-10", "2026-02-14", "2026-03-14", "2026-04-11", "2026-05-09", "2026-06-13", "2026-07-11", "2026-08-08", "2026-09-12", "2026-10-10", "2026-11-14", "2026-12-12"] },
+  // Alabanza - Quinto sábado
+  { committee: "Comité de Alabanza", dates: ["2026-01-31", "2026-05-30", "2026-08-29", "2026-10-31"] },
+  // Obra Social - Cuarto martes
+  { committee: "Comité de Obra Social", dates: ["2026-01-27", "2026-02-24", "2026-03-24", "2026-04-28", "2026-05-26", "2026-06-23", "2026-07-28", "2026-08-25", "2026-09-22", "2026-10-27", "2026-11-24", "2026-12-22"] },
+  // Edad Dorada - Quinto martes
+  { committee: "Comité de Edad Dorada", dates: ["2026-03-31", "2026-06-30", "2026-09-29", "2026-12-29"] },
+  // Caballeros - Segundo martes
+  { committee: "Comité de Caballeros", dates: ["2026-01-13", "2026-02-10", "2026-03-10", "2026-04-14", "2026-05-12", "2026-06-09", "2026-07-14", "2026-08-11", "2026-09-08", "2026-10-13", "2026-11-10", "2026-12-08"] },
+  // Red de Familia - Cuarto sábado
+  { committee: "Comité Red de Familia", dates: ["2026-01-24", "2026-02-28", "2026-03-28", "2026-04-25", "2026-05-23", "2026-06-27", "2026-07-25", "2026-08-22", "2026-09-26", "2026-10-24", "2026-11-28", "2026-12-26"] },
+  // Misiones - Último domingo
+  { committee: "Comité de Misiones", dates: ["2026-01-25", "2026-02-22", "2026-03-29", "2026-04-26", "2026-05-31", "2026-06-28", "2026-07-26", "2026-08-30", "2026-09-27", "2026-10-25", "2026-11-29", "2026-12-27"] }
+];
 
-// IMPORTANTE: pega aquí TODO el cronograma oficial con nombres exactos de cultos, responsables e imágenes.
-const customEvents = [
+const prayerSchedule = [
+  { date: "2026-02-09", committees: ["Junta local", "Damas Dorcas", "Jóvenes"] },
+  { date: "2026-03-09", committees: ["Escuela dominical", "Caballeros", "Alabanza"] },
+  { date: "2026-04-06", committees: ["Edad dorada", "Evangelismo", "Red de familia"] },
+  { date: "2026-05-11", committees: ["Obra social", "Misiones", "Recepción"] },
+  { date: "2026-06-01", committees: ["Junta local", "Damas Dorcas", "Jóvenes"] },
+  { date: "2026-07-13", committees: ["Escuela dominical", "Caballeros", "Alabanza"] },
+  { date: "2026-08-10", committees: ["Edad dorada", "Evangelismo", "Red de familia"] },
+  { date: "2026-09-14", committees: ["Obra social", "Misiones", "Recepción"] },
+  { date: "2026-10-05", committees: ["Junta local", "Damas Dorcas", "Jóvenes"] },
+  { date: "2026-11-09", committees: ["Escuela dominical", "Caballeros", "Alabanza"] },
+  { date: "2026-12-07", committees: ["Edad dorada", "Evangelismo", "Red de familia"] }
+];
+
+const fastingSchedule = [
+  { date: "2026-03-01", committees: ["Todos los comités"] },
+  { date: "2026-05-03", committees: ["Obra social", "Misiones", "Recepción"] },
+  { date: "2026-07-05", committees: ["Edad dorada", "Evangelismo", "Red de familias"] },
+  { date: "2026-09-06", committees: ["Escuela dominical", "Caballeros", "Alabanza"] },
+  { date: "2026-11-01", committees: ["Junta local", "Damas Dorcas", "Jóvenes"] }
+];
+
+const vigilSchedule = [
+  { date: "2026-04-17", committees: ["Evangelismo", "Red de familias", "Edad dorada"] },
+  { date: "2026-06-19", committees: ["Escuela dominical", "Caballeros", "Alabanza"] },
+  { date: "2026-08-21", committees: ["Obra social", "Misiones", "Recepción"] },
+  { date: "2026-10-23", committees: ["Junta local", "Damas Dorcas", "Jóvenes"] },
+  { date: "2026-12-18", committees: ["Evangelismo", "Red de familias", "Edad dorada"] }
+];
+
+const featuredEvents = [
   {
     date: "2026-04-03",
     title: "CONFRATERNIDAD DISTRITAL",
     time: "10:00 AM · 02:00 PM · 05:00 PM",
     type: "especial",
-    description: "Evento distrital en IPUC Villa del Río - Manizales.",
-    responsable: "Participan iglesias del distrito 4",
+    description: "Sede: IPUC Villa del Río - Manizales",
+    responsable: "Distrito 4",
     featured: true,
-    image: "confraternidad-abril-3.jpg",
     imageCandidates: [
       "confraternidad-abril-3.jpg",
+      "confraternidad.jpg",
       "Confraternidad Distrital Abril 3.jpg",
       "assets/confraternidad-abril-3.jpg"
     ]
   }
-
-  // EJEMPLO para agregar cultos con nombre y responsable reales:
-  // {
-  //   date: "2026-01-06",
-  //   title: "Culto de Jóvenes",
-  //   time: "07:00 PM",
-  //   type: "culto",
-  //   description: "Tema: Santidad y compromiso",
-  //   responsable: "Dirige: Hno. Carlos Pérez",
-  //   image: "imagenes/culto-jovenes-ene-06.jpg"
-  // }
 ];
 
 function formatDateKey(y, m, d) {
   return `${y}-${String(m + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
 }
 
-function cloneEvents(events = []) {
-  return events.map((event) => ({ ...event }));
+function addEvent(map, date, event) {
+  const existing = map.get(date) || [];
+  existing.push(event);
+  map.set(date, existing);
 }
 
-function getWeeklyRecurringEvents(date) {
-  const day = date.getDay();
-  return cloneEvents(weeklyTemplateByWeekday[day] || []);
+function getDefaultCultoEvent(dateObj) {
+  const day = dateObj.getDay();
+  if ([2, 4, 6].includes(day)) {
+    return {
+      title: "Culto congregacional",
+      time: "07:00 PM",
+      type: "culto",
+      description: "Culto regular"
+    };
+  }
+  if (day === 0) {
+    return {
+      title: "Culto dominical",
+      time: "10:00 AM",
+      type: "culto",
+      description: "Culto regular"
+    };
+  }
+  return null;
 }
 
 function buildEventsByDate() {
@@ -128,17 +146,55 @@ function buildEventsByDate() {
   for (let month = 0; month < 12; month++) {
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     for (let d = 1; d <= daysInMonth; d++) {
-      const date = new Date(year, month, d);
       const key = formatDateKey(year, month, d);
-      map.set(key, getWeeklyRecurringEvents(date));
+      const defaultEvent = getDefaultCultoEvent(new Date(year, month, d));
+      map.set(key, defaultEvent ? [defaultEvent] : []);
     }
   }
 
-  customEvents.forEach((ev) => {
-    const list = map.get(ev.date) || [];
-    list.push({ ...ev });
-    map.set(ev.date, list);
+  committeeCultoSchedule.forEach(({ committee, dates }) => {
+    dates.forEach((date) => {
+      addEvent(map, date, {
+        title: `Culto ${committee}`,
+        time: date.endsWith("27") || date.endsWith("28") || date.endsWith("29") || date.endsWith("30") || date.endsWith("31") ? "07:00 PM" : "07:00 PM",
+        type: "culto",
+        description: "Programación oficial de culto",
+        responsable: committee
+      });
+    });
   });
+
+  prayerSchedule.forEach(({ date, committees }) => {
+    addEvent(map, date, {
+      title: "Oración",
+      time: "06:00 PM - 08:00 PM",
+      type: "oracion",
+      description: "Programación oración lunes 2026",
+      responsable: committees.join(", ")
+    });
+  });
+
+  fastingSchedule.forEach(({ date, committees }) => {
+    addEvent(map, date, {
+      title: "Ayuno",
+      time: "Jornada de ayuno",
+      type: "ayuno",
+      description: "Programación de ayunos 2026",
+      responsable: committees.join(", ")
+    });
+  });
+
+  vigilSchedule.forEach(({ date, committees }) => {
+    addEvent(map, date, {
+      title: "Vigilia",
+      time: "08:00 PM - 12:00 AM",
+      type: "vigilia",
+      description: "Programación de vigilias 2026",
+      responsable: committees.join(", ")
+    });
+  });
+
+  featuredEvents.forEach((event) => addEvent(map, event.date, event));
 
   return map;
 }
@@ -151,21 +207,21 @@ function getImageCandidates(event) {
 }
 
 function setProgressiveImage(imgEl, candidates = []) {
-  let index = 0;
   const uniqueCandidates = [...new Set(candidates)];
+  let index = 0;
 
-  function loadCurrent() {
+  function tryLoad() {
     imgEl.src = uniqueCandidates[index] || fallbackImage;
   }
 
   imgEl.onerror = () => {
     index += 1;
     if (index < uniqueCandidates.length) {
-      loadCurrent();
+      tryLoad();
     }
   };
 
-  loadCurrent();
+  tryLoad();
 }
 
 const eventsByDate = buildEventsByDate();
@@ -188,8 +244,8 @@ function openModal(event, dateText) {
   document.getElementById("modalDate").textContent = `Fecha: ${dateText}`;
   document.getElementById("modalTime").textContent = `Hora: ${event.time || "Por confirmar"}`;
   document.getElementById("modalDescription").textContent = [
-    event.description || "Sin descripción adicional.",
-    event.responsable || ""
+    event.description || "Sin descripción adicional",
+    event.responsable ? `Encargados: ${event.responsable}` : ""
   ]
     .filter(Boolean)
     .join(" · ");
@@ -207,9 +263,23 @@ modal.addEventListener("click", (e) => {
   if (e.target === modal) closeModal();
 });
 
-function buildEventLabel(event) {
-  const details = [event.time, event.responsable].filter(Boolean).join(" · ");
-  return `<strong>${event.title}</strong>${details ? `<span>${details}</span>` : ""}`;
+function createEventButton(event, d, month) {
+  const badge = document.createElement("button");
+  badge.type = "button";
+  badge.className = `event ${eventColors[event.type] || "especial"} ${event.featured ? "principal" : ""}`;
+
+  const strong = document.createElement("strong");
+  strong.textContent = event.title;
+  const detail = document.createElement("span");
+  detail.textContent = [event.time, event.responsable].filter(Boolean).join(" · ");
+
+  badge.appendChild(strong);
+  if (detail.textContent) badge.appendChild(detail);
+
+  badge.title = event.description || "Ver detalles";
+  badge.addEventListener("click", () => openModal(event, `${d} de ${monthNames[month]} de ${year}`));
+
+  return badge;
 }
 
 function renderCalendar() {
@@ -271,32 +341,22 @@ function renderCalendar() {
           const featured = document.createElement("div");
           featured.className = "special-card";
 
+          const title = document.createElement("strong");
+          title.textContent = event.title;
+          const times = document.createElement("div");
+          times.textContent = event.time;
+          const subtitle = document.createElement("small");
+          subtitle.textContent = "Evento principal de la semana";
           const image = document.createElement("img");
           image.alt = `Imagen de ${event.title}`;
           setProgressiveImage(image, getImageCandidates(event));
 
-          featured.innerHTML = `
-            <strong>${event.title}</strong>
-            <div>${event.time}</div>
-            <small>Evento principal de la semana</small>
-          `;
-          featured.appendChild(image);
-
-          featured.addEventListener("click", () =>
-            openModal(event, `${d} de ${monthNames[month]} de ${year}`)
-          );
+          featured.append(title, times, subtitle, image);
+          featured.addEventListener("click", () => openModal(event, `${d} de ${monthNames[month]} de ${year}`));
           dayCell.appendChild(featured);
         }
 
-        const badge = document.createElement("button");
-        badge.type = "button";
-        badge.className = `event ${eventColors[event.type] || "especial"} ${event.featured ? "principal" : ""}`;
-        badge.innerHTML = buildEventLabel(event);
-        badge.title = event.description || "Ver detalles";
-        badge.addEventListener("click", () =>
-          openModal(event, `${d} de ${monthNames[month]} de ${year}`)
-        );
-        dayCell.appendChild(badge);
+        dayCell.appendChild(createEventButton(event, d, month));
       });
 
       daysGrid.appendChild(dayCell);
