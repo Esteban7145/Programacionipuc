@@ -146,6 +146,18 @@ Durante `firebase init hosting`:
 - Usa `build` como carpeta pública.
 - Configura como SPA: **Yes**.
 
+
+### Deploy en Netlify (evitar error 404 en rutas SPA)
+
+Este repositorio incluye:
+- `public/_redirects` con `/* /index.html 200`
+- `netlify.toml` con build `npm run build`, publish `build` y redirect universal a `index.html`.
+
+Si Netlify muestra *"Página no encontrada"*, verifica en Site settings:
+1. **Build command**: `npm run build`
+2. **Publish directory**: `build`
+3. Re-despliega el sitio después de confirmar esos valores.
+
 ## Escalabilidad futura
 
 - Integración de roles y permisos más granulares.
