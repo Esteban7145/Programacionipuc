@@ -1,0 +1,9 @@
+{
+  "short_name": "DECOM",
+  "name": "DECOM Villa del Río",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#0c0c0c",
+  "background_color": "#050505"
+}
