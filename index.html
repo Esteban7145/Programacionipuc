@@ -21,14 +21,33 @@
           <h1>CRONOGRAMA 2026 - IPUC VILLA DEL RÍO</h1>
         </div>
       </div>
-      <nav class="controls" aria-label="Navegación de meses">
-        <button id="prevMonth" class="btn">◀ Mes anterior</button>
-        <button id="todayBtn" class="btn btn-primary">Hoy</button>
-        <button id="nextMonth" class="btn">Mes siguiente ▶</button>
-      </nav>
+
+      <div class="right-controls">
+        <div class="view-switch" aria-label="Cambiar vista">
+          <button id="viewMonth" class="btn btn-primary">Mes</button>
+          <button id="viewWeek" class="btn">Semana</button>
+          <button id="viewDay" class="btn">Día</button>
+        </div>
+        <nav class="controls" aria-label="Navegación de fechas">
+          <button id="prevMonth" class="btn">◀ Anterior</button>
+          <button id="todayBtn" class="btn btn-primary">Hoy</button>
+          <button id="nextMonth" class="btn">Siguiente ▶</button>
+        </nav>
+      </div>
     </header>
 
-    <main id="calendarContainer" class="calendar-container" aria-live="polite"></main>
+    <section class="verse-panel" aria-live="polite">
+      <h2>Palabra para hoy</h2>
+      <p id="verseText"></p>
+    </section>
+
+    <main class="calendar-shell">
+      <section id="monthView" class="view-panel active" aria-live="polite">
+        <div id="calendarContainer" class="calendar-container"></div>
+      </section>
+      <section id="weekView" class="view-panel" aria-live="polite"></section>
+      <section id="dayView" class="view-panel" aria-live="polite"></section>
+    </main>
 
     <aside class="legend" aria-label="Leyenda de colores">
       <span class="chip culto">Culto</span>
