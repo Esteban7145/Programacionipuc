@@ -143,7 +143,7 @@ function setProgressiveImage(imgEl, candidates = []) {
 }
 
 const churchLogo = document.getElementById("churchLogo");
-if (churchLogo) setProgressiveImage(churchLogo, ["decom-villa-del-rio.png", "DECOM VILLA DEL RIO.png", "logo-villa-del-rio.png", "LOGO IPUC VILLA DEL RIO.png", "LOGO IPUC.png", "LOGO IPUC PNG.png", "logo ipuc.png", "logo-ipuc.png", logoFallback]);
+if (churchLogo) setProgressiveImage(churchLogo, ["DECOM VILLA DEL RIO.png", "decom-villa-del-rio.png", "logo-villa-del-rio.png", "LOGO IPUC VILLA DEL RIO.png", "LOGO IPUC.png", "LOGO IPUC PNG.png", "logo ipuc.png", "logo-ipuc.png", logoFallback]);
 
 function openModal(event, dateText) {
   document.getElementById("modalTitle").textContent = event.title;
