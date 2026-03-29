@@ -152,3 +152,13 @@ Durante `firebase init hosting`:
 - Notificaciones push con Firebase Cloud Messaging.
 - API adicional para analítica o integraciones externas.
 - Reutilización de services/hooks en React Native.
+
+
+## Solución de problemas
+
+- **Safari dice “dirección no válida” al abrir programación del mes:**
+  en modo seed (sin archivo PDF/imagen en Firebase) el botón ahora navega a la sección interna del mes. Si deseas abrir un archivo externo, sube un cronograma desde Admin para que exista `fileUrl` real.
+
+- **GitHub móvil muestra error 500 al actualizar la solicitud de extracción:**
+  este error pertenece a la plataforma de GitHub (backend de PR/extracción) y no a este código. Reintenta desde navegador de escritorio, recarga sesión o intenta más tarde.
+
