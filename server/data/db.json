@@ -1,0 +1,3311 @@
+{
+  "schedules": [
+    {
+      "id": "semana-2026-01-05",
+      "etiqueta": "Semana del 05/01 al 11/01",
+      "fecha_inicio_semana": "2026-01-05",
+      "fecha_fin_semana": "2026-01-11",
+      "eventos": [
+        {
+          "id": "evento-2026-01-06-martes",
+          "fecha": "2026-01-06",
+          "dia": "Martes",
+          "titulo": "Culto (Dorcas)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Dorcas.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-01-08-jueves",
+          "fecha": "2026-01-08",
+          "dia": "Jueves",
+          "titulo": "Culto (Evangelismo)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Evangelismo.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-01-10-sabado",
+          "fecha": "2026-01-10",
+          "dia": "Sábado",
+          "titulo": "Culto (Escuela Dominical)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Escuela Dominical.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Escuela Dominical) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-01-12",
+      "etiqueta": "Semana del 12/01 al 18/01",
+      "fecha_inicio_semana": "2026-01-12",
+      "fecha_fin_semana": "2026-01-18",
+      "eventos": [
+        {
+          "id": "evento-2026-01-13-martes",
+          "fecha": "2026-01-13",
+          "dia": "Martes",
+          "titulo": "Culto (Caballeros)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Caballeros.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Caballeros) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-01-17-sabado",
+          "fecha": "2026-01-17",
+          "dia": "Sábado",
+          "titulo": "Culto (Jóvenes)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Jóvenes.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-01-19",
+      "etiqueta": "Semana del 19/01 al 25/01",
+      "fecha_inicio_semana": "2026-01-19",
+      "fecha_fin_semana": "2026-01-25",
+      "eventos": [
+        {
+          "id": "evento-2026-01-20-martes",
+          "fecha": "2026-01-20",
+          "dia": "Martes",
+          "titulo": "Culto (Dorcas)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Dorcas.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-01-22-jueves",
+          "fecha": "2026-01-22",
+          "dia": "Jueves",
+          "titulo": "Culto (Evangelismo)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Evangelismo.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-01-24-sabado",
+          "fecha": "2026-01-24",
+          "dia": "Sábado",
+          "titulo": "Culto (Red de Familia)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Red de Familia.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Red de Familia) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-01-25-domingo",
+          "fecha": "2026-01-25",
+          "dia": "Domingo",
+          "titulo": "Culto (Misiones)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Misiones.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Misiones) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-01-26",
+      "etiqueta": "Semana del 26/01 al 01/02",
+      "fecha_inicio_semana": "2026-01-26",
+      "fecha_fin_semana": "2026-02-01",
+      "eventos": [
+        {
+          "id": "evento-2026-01-27-martes",
+          "fecha": "2026-01-27",
+          "dia": "Martes",
+          "titulo": "Culto (Obra Social)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Obra Social.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Obra Social) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-01-31-sabado",
+          "fecha": "2026-01-31",
+          "dia": "Sábado",
+          "titulo": "Culto (Alabanza)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Alabanza.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Alabanza) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-02-02",
+      "etiqueta": "Semana del 02/02 al 08/02",
+      "fecha_inicio_semana": "2026-02-02",
+      "fecha_fin_semana": "2026-02-08",
+      "eventos": [
+        {
+          "id": "evento-2026-02-03-martes",
+          "fecha": "2026-02-03",
+          "dia": "Martes",
+          "titulo": "Culto (Dorcas)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Dorcas.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-02-07-sabado",
+          "fecha": "2026-02-07",
+          "dia": "Sábado",
+          "titulo": "Culto (Jóvenes)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Jóvenes.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-02-09",
+      "etiqueta": "Semana del 09/02 al 15/02",
+      "fecha_inicio_semana": "2026-02-09",
+      "fecha_fin_semana": "2026-02-15",
+      "eventos": [
+        {
+          "id": "evento-2026-02-09-lunes",
+          "fecha": "2026-02-09",
+          "dia": "Lunes",
+          "titulo": "Oración (Junta local, Dorcas, Jóvenes)",
+          "hora": "6:30 PM",
+          "descripcion": "Oración programado para Junta local, Dorcas, Jóvenes.",
+          "tipo": "especial",
+          "mensaje": "Te esperamos en Oración (Junta local, Dorcas, Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-02-10-martes",
+          "fecha": "2026-02-10",
+          "dia": "Martes",
+          "titulo": "Culto (Caballeros)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Caballeros.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Caballeros) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-02-12-jueves",
+          "fecha": "2026-02-12",
+          "dia": "Jueves",
+          "titulo": "Culto (Evangelismo)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Evangelismo.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-02-14-sabado",
+          "fecha": "2026-02-14",
+          "dia": "Sábado",
+          "titulo": "Culto (Escuela Dominical)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Escuela Dominical.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Escuela Dominical) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-02-16",
+      "etiqueta": "Semana del 16/02 al 22/02",
+      "fecha_inicio_semana": "2026-02-16",
+      "fecha_fin_semana": "2026-02-22",
+      "eventos": [
+        {
+          "id": "evento-2026-02-17-martes",
+          "fecha": "2026-02-17",
+          "dia": "Martes",
+          "titulo": "Culto (Dorcas)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Dorcas.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-02-21-sabado",
+          "fecha": "2026-02-21",
+          "dia": "Sábado",
+          "titulo": "Culto (Jóvenes)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Jóvenes.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-02-22-domingo",
+          "fecha": "2026-02-22",
+          "dia": "Domingo",
+          "titulo": "Culto (Misiones)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Misiones.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Misiones) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-02-23",
+      "etiqueta": "Semana del 23/02 al 01/03",
+      "fecha_inicio_semana": "2026-02-23",
+      "fecha_fin_semana": "2026-03-01",
+      "eventos": [
+        {
+          "id": "evento-2026-02-24-martes",
+          "fecha": "2026-02-24",
+          "dia": "Martes",
+          "titulo": "Culto (Obra Social)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Obra Social.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Obra Social) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-02-26-jueves",
+          "fecha": "2026-02-26",
+          "dia": "Jueves",
+          "titulo": "Culto (Evangelismo)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Evangelismo.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-02-28-sabado",
+          "fecha": "2026-02-28",
+          "dia": "Sábado",
+          "titulo": "Culto (Red de Familia)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Red de Familia.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Red de Familia) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-03-01-domingo",
+          "fecha": "2026-03-01",
+          "dia": "Domingo",
+          "titulo": "Ayuno (Todos los comités)",
+          "hora": "6:00 AM",
+          "descripcion": "Ayuno programado para Todos los comités.",
+          "tipo": "especial",
+          "mensaje": "Te esperamos en Ayuno (Todos los comités) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-03-02",
+      "etiqueta": "Semana del 02/03 al 08/03",
+      "fecha_inicio_semana": "2026-03-02",
+      "fecha_fin_semana": "2026-03-08",
+      "eventos": [
+        {
+          "id": "evento-2026-03-03-martes",
+          "fecha": "2026-03-03",
+          "dia": "Martes",
+          "titulo": "Culto (Dorcas)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Dorcas.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-03-07-sabado",
+          "fecha": "2026-03-07",
+          "dia": "Sábado",
+          "titulo": "Culto (Jóvenes)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Jóvenes.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-03-09",
+      "etiqueta": "Semana del 09/03 al 15/03",
+      "fecha_inicio_semana": "2026-03-09",
+      "fecha_fin_semana": "2026-03-15",
+      "eventos": [
+        {
+          "id": "evento-2026-03-09-lunes",
+          "fecha": "2026-03-09",
+          "dia": "Lunes",
+          "titulo": "Oración (Escuela Dominical, Caballeros, Alabanza)",
+          "hora": "6:30 PM",
+          "descripcion": "Oración programado para Escuela Dominical, Caballeros, Alabanza.",
+          "tipo": "especial",
+          "mensaje": "Te esperamos en Oración (Escuela Dominical, Caballeros, Alabanza) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-03-10-martes",
+          "fecha": "2026-03-10",
+          "dia": "Martes",
+          "titulo": "Culto (Caballeros)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Caballeros.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Caballeros) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-03-12-jueves",
+          "fecha": "2026-03-12",
+          "dia": "Jueves",
+          "titulo": "Culto (Evangelismo)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Evangelismo.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-03-14-sabado",
+          "fecha": "2026-03-14",
+          "dia": "Sábado",
+          "titulo": "Culto (Escuela Dominical)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Escuela Dominical.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Escuela Dominical) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-03-16",
+      "etiqueta": "Semana del 16/03 al 22/03",
+      "fecha_inicio_semana": "2026-03-16",
+      "fecha_fin_semana": "2026-03-22",
+      "eventos": [
+        {
+          "id": "evento-2026-03-17-martes",
+          "fecha": "2026-03-17",
+          "dia": "Martes",
+          "titulo": "Culto (Dorcas)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Dorcas.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-03-21-sabado",
+          "fecha": "2026-03-21",
+          "dia": "Sábado",
+          "titulo": "Culto (Jóvenes)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Jóvenes.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-03-23",
+      "etiqueta": "Semana del 23/03 al 29/03",
+      "fecha_inicio_semana": "2026-03-23",
+      "fecha_fin_semana": "2026-03-29",
+      "eventos": [
+        {
+          "id": "evento-2026-03-24-martes",
+          "fecha": "2026-03-24",
+          "dia": "Martes",
+          "titulo": "Culto (Obra Social)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Obra Social.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Obra Social) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-03-26-jueves",
+          "fecha": "2026-03-26",
+          "dia": "Jueves",
+          "titulo": "Culto (Evangelismo)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Evangelismo.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-03-28-sabado",
+          "fecha": "2026-03-28",
+          "dia": "Sábado",
+          "titulo": "Culto (Red de Familia)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Red de Familia.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Red de Familia) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-03-29-domingo",
+          "fecha": "2026-03-29",
+          "dia": "Domingo",
+          "titulo": "Culto (Misiones)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Misiones.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Misiones) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-03-30",
+      "etiqueta": "Semana del 30/03 al 05/04",
+      "fecha_inicio_semana": "2026-03-30",
+      "fecha_fin_semana": "2026-04-05",
+      "eventos": [
+        {
+          "id": "evento-2026-03-31-martes",
+          "fecha": "2026-03-31",
+          "dia": "Martes",
+          "titulo": "Culto (Edad Dorada)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Edad Dorada.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Edad Dorada) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-04-03-viernes",
+          "fecha": "2026-04-03",
+          "dia": "Evento especial",
+          "titulo": "Confraternidad Distrital (Confraternidad Distrital)",
+          "hora": "6:30 PM",
+          "descripcion": "Evento Especial programado para Confraternidad Distrital.",
+          "tipo": "especial",
+          "mensaje": "Te esperamos en Confraternidad Distrital (Confraternidad Distrital) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": "/assets/confraternidad-2026-04-03.jpg"
+        },
+        {
+          "id": "evento-2026-04-04-sabado",
+          "fecha": "2026-04-04",
+          "dia": "Sábado",
+          "titulo": "Culto (Jóvenes)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Jóvenes.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-04-06",
+      "etiqueta": "Semana del 06/04 al 12/04",
+      "fecha_inicio_semana": "2026-04-06",
+      "fecha_fin_semana": "2026-04-12",
+      "eventos": [
+        {
+          "id": "evento-2026-04-06-lunes",
+          "fecha": "2026-04-06",
+          "dia": "Lunes",
+          "titulo": "Oración (Edad dorada, Evangelismo, Red de familia)",
+          "hora": "6:30 PM",
+          "descripcion": "Oración programado para Edad dorada, Evangelismo, Red de familia.",
+          "tipo": "especial",
+          "mensaje": "Te esperamos en Oración (Edad dorada, Evangelismo, Red de familia) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-04-07-martes",
+          "fecha": "2026-04-07",
+          "dia": "Martes",
+          "titulo": "Culto (Dorcas)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Dorcas.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-04-09-jueves",
+          "fecha": "2026-04-09",
+          "dia": "Jueves",
+          "titulo": "Culto (Evangelismo)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Evangelismo.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-04-11-sabado",
+          "fecha": "2026-04-11",
+          "dia": "Sábado",
+          "titulo": "Culto (Escuela Dominical)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Escuela Dominical.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Escuela Dominical) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-04-13",
+      "etiqueta": "Semana del 13/04 al 19/04",
+      "fecha_inicio_semana": "2026-04-13",
+      "fecha_fin_semana": "2026-04-19",
+      "eventos": [
+        {
+          "id": "evento-2026-04-14-martes",
+          "fecha": "2026-04-14",
+          "dia": "Martes",
+          "titulo": "Culto (Caballeros)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Caballeros.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Caballeros) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-04-17-viernes",
+          "fecha": "2026-04-17",
+          "dia": "Viernes",
+          "titulo": "Vigilia (Evangelismo, Red de familia, Edad dorada)",
+          "hora": "7:00 PM",
+          "descripcion": "Vigilia programado para Evangelismo, Red de familia, Edad dorada.",
+          "tipo": "especial",
+          "mensaje": "Te esperamos en Vigilia (Evangelismo, Red de familia, Edad dorada) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-04-18-sabado",
+          "fecha": "2026-04-18",
+          "dia": "Sábado",
+          "titulo": "Culto (Jóvenes)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Jóvenes.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-04-20",
+      "etiqueta": "Semana del 20/04 al 26/04",
+      "fecha_inicio_semana": "2026-04-20",
+      "fecha_fin_semana": "2026-04-26",
+      "eventos": [
+        {
+          "id": "evento-2026-04-21-martes",
+          "fecha": "2026-04-21",
+          "dia": "Martes",
+          "titulo": "Culto (Dorcas)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Dorcas.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-04-23-jueves",
+          "fecha": "2026-04-23",
+          "dia": "Jueves",
+          "titulo": "Culto (Evangelismo)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Evangelismo.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-04-25-sabado",
+          "fecha": "2026-04-25",
+          "dia": "Sábado",
+          "titulo": "Culto (Red de Familia)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Red de Familia.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Red de Familia) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-04-26-domingo",
+          "fecha": "2026-04-26",
+          "dia": "Domingo",
+          "titulo": "Culto (Misiones)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Misiones.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Misiones) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-04-27",
+      "etiqueta": "Semana del 27/04 al 03/05",
+      "fecha_inicio_semana": "2026-04-27",
+      "fecha_fin_semana": "2026-05-03",
+      "eventos": [
+        {
+          "id": "evento-2026-04-28-martes",
+          "fecha": "2026-04-28",
+          "dia": "Martes",
+          "titulo": "Culto (Obra Social)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Obra Social.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Obra Social) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-05-02-sabado",
+          "fecha": "2026-05-02",
+          "dia": "Sábado",
+          "titulo": "Culto (Jóvenes)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Jóvenes.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-05-03-domingo",
+          "fecha": "2026-05-03",
+          "dia": "Domingo",
+          "titulo": "Ayuno (Obra social, Misiones, Recepción)",
+          "hora": "6:00 AM",
+          "descripcion": "Ayuno programado para Obra social, Misiones, Recepción.",
+          "tipo": "especial",
+          "mensaje": "Te esperamos en Ayuno (Obra social, Misiones, Recepción) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-05-04",
+      "etiqueta": "Semana del 04/05 al 10/05",
+      "fecha_inicio_semana": "2026-05-04",
+      "fecha_fin_semana": "2026-05-10",
+      "eventos": [
+        {
+          "id": "evento-2026-05-05-martes",
+          "fecha": "2026-05-05",
+          "dia": "Martes",
+          "titulo": "Culto (Dorcas)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Dorcas.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-05-09-sabado",
+          "fecha": "2026-05-09",
+          "dia": "Sábado",
+          "titulo": "Culto (Escuela Dominical)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Escuela Dominical.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Escuela Dominical) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-05-11",
+      "etiqueta": "Semana del 11/05 al 17/05",
+      "fecha_inicio_semana": "2026-05-11",
+      "fecha_fin_semana": "2026-05-17",
+      "eventos": [
+        {
+          "id": "evento-2026-05-11-lunes",
+          "fecha": "2026-05-11",
+          "dia": "Lunes",
+          "titulo": "Oración (Obra social, Misiones, Recepción)",
+          "hora": "6:30 PM",
+          "descripcion": "Oración programado para Obra social, Misiones, Recepción.",
+          "tipo": "especial",
+          "mensaje": "Te esperamos en Oración (Obra social, Misiones, Recepción) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-05-12-martes",
+          "fecha": "2026-05-12",
+          "dia": "Martes",
+          "titulo": "Culto (Caballeros)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Caballeros.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Caballeros) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-05-14-jueves",
+          "fecha": "2026-05-14",
+          "dia": "Jueves",
+          "titulo": "Culto (Evangelismo)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Evangelismo.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-05-16-sabado",
+          "fecha": "2026-05-16",
+          "dia": "Sábado",
+          "titulo": "Culto (Jóvenes)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Jóvenes.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-05-18",
+      "etiqueta": "Semana del 18/05 al 24/05",
+      "fecha_inicio_semana": "2026-05-18",
+      "fecha_fin_semana": "2026-05-24",
+      "eventos": [
+        {
+          "id": "evento-2026-05-19-martes",
+          "fecha": "2026-05-19",
+          "dia": "Martes",
+          "titulo": "Culto (Dorcas)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Dorcas.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-05-23-sabado",
+          "fecha": "2026-05-23",
+          "dia": "Sábado",
+          "titulo": "Culto (Red de Familia)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Red de Familia.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Red de Familia) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-05-25",
+      "etiqueta": "Semana del 25/05 al 31/05",
+      "fecha_inicio_semana": "2026-05-25",
+      "fecha_fin_semana": "2026-05-31",
+      "eventos": [
+        {
+          "id": "evento-2026-05-26-martes",
+          "fecha": "2026-05-26",
+          "dia": "Martes",
+          "titulo": "Culto (Obra Social)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Obra Social.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Obra Social) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-05-28-jueves",
+          "fecha": "2026-05-28",
+          "dia": "Jueves",
+          "titulo": "Culto (Evangelismo)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Evangelismo.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-05-30-sabado",
+          "fecha": "2026-05-30",
+          "dia": "Sábado",
+          "titulo": "Culto (Alabanza)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Alabanza.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Alabanza) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-05-31-domingo",
+          "fecha": "2026-05-31",
+          "dia": "Domingo",
+          "titulo": "Culto (Misiones)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Misiones.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Misiones) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-06-01",
+      "etiqueta": "Semana del 01/06 al 07/06",
+      "fecha_inicio_semana": "2026-06-01",
+      "fecha_fin_semana": "2026-06-07",
+      "eventos": [
+        {
+          "id": "evento-2026-06-01-lunes",
+          "fecha": "2026-06-01",
+          "dia": "Lunes",
+          "titulo": "Oración (Junta local, Dorcas, Jóvenes)",
+          "hora": "6:30 PM",
+          "descripcion": "Oración programado para Junta local, Dorcas, Jóvenes.",
+          "tipo": "especial",
+          "mensaje": "Te esperamos en Oración (Junta local, Dorcas, Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-06-02-martes",
+          "fecha": "2026-06-02",
+          "dia": "Martes",
+          "titulo": "Culto (Dorcas)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Dorcas.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-06-06-sabado",
+          "fecha": "2026-06-06",
+          "dia": "Sábado",
+          "titulo": "Culto (Jóvenes)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Jóvenes.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-06-08",
+      "etiqueta": "Semana del 08/06 al 14/06",
+      "fecha_inicio_semana": "2026-06-08",
+      "fecha_fin_semana": "2026-06-14",
+      "eventos": [
+        {
+          "id": "evento-2026-06-09-martes",
+          "fecha": "2026-06-09",
+          "dia": "Martes",
+          "titulo": "Culto (Caballeros)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Caballeros.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Caballeros) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-06-11-jueves",
+          "fecha": "2026-06-11",
+          "dia": "Jueves",
+          "titulo": "Culto (Evangelismo)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Evangelismo.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-06-13-sabado",
+          "fecha": "2026-06-13",
+          "dia": "Sábado",
+          "titulo": "Culto (Jóvenes / Escuela Dominical)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Jóvenes / Escuela Dominical.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Jóvenes / Escuela Dominical) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-06-15",
+      "etiqueta": "Semana del 15/06 al 21/06",
+      "fecha_inicio_semana": "2026-06-15",
+      "fecha_fin_semana": "2026-06-21",
+      "eventos": [
+        {
+          "id": "evento-2026-06-16-martes",
+          "fecha": "2026-06-16",
+          "dia": "Martes",
+          "titulo": "Culto (Dorcas)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Dorcas.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-06-19-viernes",
+          "fecha": "2026-06-19",
+          "dia": "Viernes",
+          "titulo": "Vigilia (Escuela dominical, Caballeros, Alabanza)",
+          "hora": "7:00 PM",
+          "descripcion": "Vigilia programado para Escuela dominical, Caballeros, Alabanza.",
+          "tipo": "especial",
+          "mensaje": "Te esperamos en Vigilia (Escuela dominical, Caballeros, Alabanza) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-06-22",
+      "etiqueta": "Semana del 22/06 al 28/06",
+      "fecha_inicio_semana": "2026-06-22",
+      "fecha_fin_semana": "2026-06-28",
+      "eventos": [
+        {
+          "id": "evento-2026-06-23-martes",
+          "fecha": "2026-06-23",
+          "dia": "Martes",
+          "titulo": "Culto (Obra Social)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Obra Social.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Obra Social) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-06-25-jueves",
+          "fecha": "2026-06-25",
+          "dia": "Jueves",
+          "titulo": "Culto (Evangelismo)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Evangelismo.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-06-27-sabado",
+          "fecha": "2026-06-27",
+          "dia": "Sábado",
+          "titulo": "Culto (Red de Familia)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Red de Familia.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Red de Familia) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-06-28-domingo",
+          "fecha": "2026-06-28",
+          "dia": "Domingo",
+          "titulo": "Culto (Misiones)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Misiones.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Misiones) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-06-29",
+      "etiqueta": "Semana del 29/06 al 05/07",
+      "fecha_inicio_semana": "2026-06-29",
+      "fecha_fin_semana": "2026-07-05",
+      "eventos": [
+        {
+          "id": "evento-2026-06-30-martes",
+          "fecha": "2026-06-30",
+          "dia": "Martes",
+          "titulo": "Culto (Edad dorada)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Edad dorada.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Edad dorada) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-07-04-sabado",
+          "fecha": "2026-07-04",
+          "dia": "Sábado",
+          "titulo": "Culto (Jóvenes)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Jóvenes.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-07-05-domingo",
+          "fecha": "2026-07-05",
+          "dia": "Domingo",
+          "titulo": "Ayuno (Edad dorada, Evangelismo, Red de familias)",
+          "hora": "6:00 AM",
+          "descripcion": "Ayuno programado para Edad dorada, Evangelismo, Red de familias.",
+          "tipo": "especial",
+          "mensaje": "Te esperamos en Ayuno (Edad dorada, Evangelismo, Red de familias) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-07-06",
+      "etiqueta": "Semana del 06/07 al 12/07",
+      "fecha_inicio_semana": "2026-07-06",
+      "fecha_fin_semana": "2026-07-12",
+      "eventos": [
+        {
+          "id": "evento-2026-07-07-martes",
+          "fecha": "2026-07-07",
+          "dia": "Martes",
+          "titulo": "Culto (Dorcas)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Dorcas.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-07-09-jueves",
+          "fecha": "2026-07-09",
+          "dia": "Jueves",
+          "titulo": "Culto (Evangelismo)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Evangelismo.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-07-11-sabado",
+          "fecha": "2026-07-11",
+          "dia": "Sábado",
+          "titulo": "Culto (Escuela Dominical)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Escuela Dominical.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Escuela Dominical) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-07-13",
+      "etiqueta": "Semana del 13/07 al 19/07",
+      "fecha_inicio_semana": "2026-07-13",
+      "fecha_fin_semana": "2026-07-19",
+      "eventos": [
+        {
+          "id": "evento-2026-07-13-lunes",
+          "fecha": "2026-07-13",
+          "dia": "Lunes",
+          "titulo": "Oración (Escuela dominical, Caballeros, Alabanza)",
+          "hora": "6:30 PM",
+          "descripcion": "Oración programado para Escuela dominical, Caballeros, Alabanza.",
+          "tipo": "especial",
+          "mensaje": "Te esperamos en Oración (Escuela dominical, Caballeros, Alabanza) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-07-14-martes",
+          "fecha": "2026-07-14",
+          "dia": "Martes",
+          "titulo": "Culto (Caballeros)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Caballeros.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Caballeros) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-07-18-sabado",
+          "fecha": "2026-07-18",
+          "dia": "Sábado",
+          "titulo": "Culto (Jóvenes)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Jóvenes.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-07-20",
+      "etiqueta": "Semana del 20/07 al 26/07",
+      "fecha_inicio_semana": "2026-07-20",
+      "fecha_fin_semana": "2026-07-26",
+      "eventos": [
+        {
+          "id": "evento-2026-07-21-martes",
+          "fecha": "2026-07-21",
+          "dia": "Martes",
+          "titulo": "Culto (Dorcas)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Dorcas.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-07-23-jueves",
+          "fecha": "2026-07-23",
+          "dia": "Jueves",
+          "titulo": "Culto (Evangelismo)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Evangelismo.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-07-25-sabado",
+          "fecha": "2026-07-25",
+          "dia": "Sábado",
+          "titulo": "Culto (Red de Familia)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Red de Familia.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Red de Familia) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-07-26-domingo",
+          "fecha": "2026-07-26",
+          "dia": "Domingo",
+          "titulo": "Culto (Misiones)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Misiones.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Misiones) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-07-27",
+      "etiqueta": "Semana del 27/07 al 02/08",
+      "fecha_inicio_semana": "2026-07-27",
+      "fecha_fin_semana": "2026-08-02",
+      "eventos": [
+        {
+          "id": "evento-2026-07-28-martes",
+          "fecha": "2026-07-28",
+          "dia": "Martes",
+          "titulo": "Culto (Obra Social)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Obra Social.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Obra Social) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-08-01-sabado",
+          "fecha": "2026-08-01",
+          "dia": "Sábado",
+          "titulo": "Culto (Jóvenes)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Jóvenes.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-08-03",
+      "etiqueta": "Semana del 03/08 al 09/08",
+      "fecha_inicio_semana": "2026-08-03",
+      "fecha_fin_semana": "2026-08-09",
+      "eventos": [
+        {
+          "id": "evento-2026-08-04-martes",
+          "fecha": "2026-08-04",
+          "dia": "Martes",
+          "titulo": "Culto (Dorcas)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Dorcas.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-08-08-sabado",
+          "fecha": "2026-08-08",
+          "dia": "Sábado",
+          "titulo": "Culto (Escuela Dominical)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Escuela Dominical.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Escuela Dominical) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-08-10",
+      "etiqueta": "Semana del 10/08 al 16/08",
+      "fecha_inicio_semana": "2026-08-10",
+      "fecha_fin_semana": "2026-08-16",
+      "eventos": [
+        {
+          "id": "evento-2026-08-10-lunes",
+          "fecha": "2026-08-10",
+          "dia": "Lunes",
+          "titulo": "Oración (Edad dorada, Evangelismo, Red de familia)",
+          "hora": "6:30 PM",
+          "descripcion": "Oración programado para Edad dorada, Evangelismo, Red de familia.",
+          "tipo": "especial",
+          "mensaje": "Te esperamos en Oración (Edad dorada, Evangelismo, Red de familia) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-08-11-martes",
+          "fecha": "2026-08-11",
+          "dia": "Martes",
+          "titulo": "Culto (Caballeros)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Caballeros.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Caballeros) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-08-13-jueves",
+          "fecha": "2026-08-13",
+          "dia": "Jueves",
+          "titulo": "Culto (Evangelismo)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Evangelismo.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-08-15-sabado",
+          "fecha": "2026-08-15",
+          "dia": "Sábado",
+          "titulo": "Culto (Jóvenes)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Jóvenes.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-08-17",
+      "etiqueta": "Semana del 17/08 al 23/08",
+      "fecha_inicio_semana": "2026-08-17",
+      "fecha_fin_semana": "2026-08-23",
+      "eventos": [
+        {
+          "id": "evento-2026-08-18-martes",
+          "fecha": "2026-08-18",
+          "dia": "Martes",
+          "titulo": "Culto (Dorcas)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Dorcas.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-08-21-viernes",
+          "fecha": "2026-08-21",
+          "dia": "Viernes",
+          "titulo": "Vigilia (Obra social, Misiones, Recepción)",
+          "hora": "7:00 PM",
+          "descripcion": "Vigilia programado para Obra social, Misiones, Recepción.",
+          "tipo": "especial",
+          "mensaje": "Te esperamos en Vigilia (Obra social, Misiones, Recepción) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-08-22-sabado",
+          "fecha": "2026-08-22",
+          "dia": "Sábado",
+          "titulo": "Culto (Red de Familia)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Red de Familia.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Red de Familia) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-08-24",
+      "etiqueta": "Semana del 24/08 al 30/08",
+      "fecha_inicio_semana": "2026-08-24",
+      "fecha_fin_semana": "2026-08-30",
+      "eventos": [
+        {
+          "id": "evento-2026-08-25-martes",
+          "fecha": "2026-08-25",
+          "dia": "Martes",
+          "titulo": "Culto (Obra Social)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Obra Social.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Obra Social) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-08-27-jueves",
+          "fecha": "2026-08-27",
+          "dia": "Jueves",
+          "titulo": "Culto (Evangelismo)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Evangelismo.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-08-29-sabado",
+          "fecha": "2026-08-29",
+          "dia": "Sábado",
+          "titulo": "Culto (Alabanza)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Alabanza.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Alabanza) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-08-30-domingo",
+          "fecha": "2026-08-30",
+          "dia": "Domingo",
+          "titulo": "Culto (Misiones)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Misiones.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Misiones) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-08-31",
+      "etiqueta": "Semana del 31/08 al 06/09",
+      "fecha_inicio_semana": "2026-08-31",
+      "fecha_fin_semana": "2026-09-06",
+      "eventos": [
+        {
+          "id": "evento-2026-09-01-martes",
+          "fecha": "2026-09-01",
+          "dia": "Martes",
+          "titulo": "Culto (Dorcas)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Dorcas.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-09-05-sabado",
+          "fecha": "2026-09-05",
+          "dia": "Sábado",
+          "titulo": "Culto (Jóvenes)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Jóvenes.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-09-06-domingo",
+          "fecha": "2026-09-06",
+          "dia": "Domingo",
+          "titulo": "Ayuno (Escuela dominical, Caballeros, Alabanza)",
+          "hora": "6:00 AM",
+          "descripcion": "Ayuno programado para Escuela dominical, Caballeros, Alabanza.",
+          "tipo": "especial",
+          "mensaje": "Te esperamos en Ayuno (Escuela dominical, Caballeros, Alabanza) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-09-07",
+      "etiqueta": "Semana del 07/09 al 13/09",
+      "fecha_inicio_semana": "2026-09-07",
+      "fecha_fin_semana": "2026-09-13",
+      "eventos": [
+        {
+          "id": "evento-2026-09-08-martes",
+          "fecha": "2026-09-08",
+          "dia": "Martes",
+          "titulo": "Culto (Caballeros)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Caballeros.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Caballeros) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-09-10-jueves",
+          "fecha": "2026-09-10",
+          "dia": "Jueves",
+          "titulo": "Culto (Evangelismo)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Evangelismo.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-09-12-sabado",
+          "fecha": "2026-09-12",
+          "dia": "Sábado",
+          "titulo": "Culto (Escuela Dominical)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Escuela Dominical.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Escuela Dominical) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-09-14",
+      "etiqueta": "Semana del 14/09 al 20/09",
+      "fecha_inicio_semana": "2026-09-14",
+      "fecha_fin_semana": "2026-09-20",
+      "eventos": [
+        {
+          "id": "evento-2026-09-14-lunes",
+          "fecha": "2026-09-14",
+          "dia": "Lunes",
+          "titulo": "Oración (Obra social, Misiones, Recepción)",
+          "hora": "6:30 PM",
+          "descripcion": "Oración programado para Obra social, Misiones, Recepción.",
+          "tipo": "especial",
+          "mensaje": "Te esperamos en Oración (Obra social, Misiones, Recepción) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-09-15-martes",
+          "fecha": "2026-09-15",
+          "dia": "Martes",
+          "titulo": "Culto (Dorcas)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Dorcas.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-09-19-sabado",
+          "fecha": "2026-09-19",
+          "dia": "Sábado",
+          "titulo": "Culto (Jóvenes)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Jóvenes.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-09-21",
+      "etiqueta": "Semana del 21/09 al 27/09",
+      "fecha_inicio_semana": "2026-09-21",
+      "fecha_fin_semana": "2026-09-27",
+      "eventos": [
+        {
+          "id": "evento-2026-09-22-martes",
+          "fecha": "2026-09-22",
+          "dia": "Martes",
+          "titulo": "Culto (Obra Social)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Obra Social.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Obra Social) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-09-24-jueves",
+          "fecha": "2026-09-24",
+          "dia": "Jueves",
+          "titulo": "Culto (Evangelismo)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Evangelismo.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-09-26-sabado",
+          "fecha": "2026-09-26",
+          "dia": "Sábado",
+          "titulo": "Culto (Red de Familia)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Red de Familia.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Red de Familia) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-09-27-domingo",
+          "fecha": "2026-09-27",
+          "dia": "Domingo",
+          "titulo": "Culto (Misiones)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Misiones.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Misiones) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-09-28",
+      "etiqueta": "Semana del 28/09 al 04/10",
+      "fecha_inicio_semana": "2026-09-28",
+      "fecha_fin_semana": "2026-10-04",
+      "eventos": [
+        {
+          "id": "evento-2026-09-29-martes",
+          "fecha": "2026-09-29",
+          "dia": "Martes",
+          "titulo": "Culto (Edad dorada)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Edad dorada.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Edad dorada) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-10-03-sabado",
+          "fecha": "2026-10-03",
+          "dia": "Sábado",
+          "titulo": "Culto (Jóvenes)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Jóvenes.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-10-05",
+      "etiqueta": "Semana del 05/10 al 11/10",
+      "fecha_inicio_semana": "2026-10-05",
+      "fecha_fin_semana": "2026-10-11",
+      "eventos": [
+        {
+          "id": "evento-2026-10-05-lunes",
+          "fecha": "2026-10-05",
+          "dia": "Lunes",
+          "titulo": "Oración (Junta local, Dorcas, Jóvenes)",
+          "hora": "6:30 PM",
+          "descripcion": "Oración programado para Junta local, Dorcas, Jóvenes.",
+          "tipo": "especial",
+          "mensaje": "Te esperamos en Oración (Junta local, Dorcas, Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-10-06-martes",
+          "fecha": "2026-10-06",
+          "dia": "Martes",
+          "titulo": "Culto (Dorcas)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Dorcas.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-10-08-jueves",
+          "fecha": "2026-10-08",
+          "dia": "Jueves",
+          "titulo": "Culto (Evangelismo)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Evangelismo.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-10-10-sabado",
+          "fecha": "2026-10-10",
+          "dia": "Sábado",
+          "titulo": "Culto (Escuela Dominical)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Escuela Dominical.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Escuela Dominical) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-10-12",
+      "etiqueta": "Semana del 12/10 al 18/10",
+      "fecha_inicio_semana": "2026-10-12",
+      "fecha_fin_semana": "2026-10-18",
+      "eventos": [
+        {
+          "id": "evento-2026-10-13-martes",
+          "fecha": "2026-10-13",
+          "dia": "Martes",
+          "titulo": "Culto (Caballeros)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Caballeros.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Caballeros) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-10-17-sabado",
+          "fecha": "2026-10-17",
+          "dia": "Sábado",
+          "titulo": "Culto (Jóvenes)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Jóvenes.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-10-19",
+      "etiqueta": "Semana del 19/10 al 25/10",
+      "fecha_inicio_semana": "2026-10-19",
+      "fecha_fin_semana": "2026-10-25",
+      "eventos": [
+        {
+          "id": "evento-2026-10-20-martes",
+          "fecha": "2026-10-20",
+          "dia": "Martes",
+          "titulo": "Culto (Dorcas)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Dorcas.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-10-22-jueves",
+          "fecha": "2026-10-22",
+          "dia": "Jueves",
+          "titulo": "Culto (Evangelismo)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Evangelismo.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-10-23-viernes",
+          "fecha": "2026-10-23",
+          "dia": "Viernes",
+          "titulo": "Vigilia (Junta local, Dorcas, Jóvenes)",
+          "hora": "7:00 PM",
+          "descripcion": "Vigilia programado para Junta local, Dorcas, Jóvenes.",
+          "tipo": "especial",
+          "mensaje": "Te esperamos en Vigilia (Junta local, Dorcas, Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-10-24-sabado",
+          "fecha": "2026-10-24",
+          "dia": "Sábado",
+          "titulo": "Culto (Red de Familia)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Red de Familia.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Red de Familia) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-10-25-domingo",
+          "fecha": "2026-10-25",
+          "dia": "Domingo",
+          "titulo": "Culto (Misiones)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Misiones.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Misiones) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-10-26",
+      "etiqueta": "Semana del 26/10 al 01/11",
+      "fecha_inicio_semana": "2026-10-26",
+      "fecha_fin_semana": "2026-11-01",
+      "eventos": [
+        {
+          "id": "evento-2026-10-27-martes",
+          "fecha": "2026-10-27",
+          "dia": "Martes",
+          "titulo": "Culto (Obra Social)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Obra Social.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Obra Social) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-10-31-sabado",
+          "fecha": "2026-10-31",
+          "dia": "Sábado",
+          "titulo": "Culto (Alabanza)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Alabanza.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Alabanza) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-11-01-domingo",
+          "fecha": "2026-11-01",
+          "dia": "Domingo",
+          "titulo": "Ayuno (Junta local, Dorcas, Jóvenes)",
+          "hora": "6:00 AM",
+          "descripcion": "Ayuno programado para Junta local, Dorcas, Jóvenes.",
+          "tipo": "especial",
+          "mensaje": "Te esperamos en Ayuno (Junta local, Dorcas, Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-11-02",
+      "etiqueta": "Semana del 02/11 al 08/11",
+      "fecha_inicio_semana": "2026-11-02",
+      "fecha_fin_semana": "2026-11-08",
+      "eventos": [
+        {
+          "id": "evento-2026-11-03-martes",
+          "fecha": "2026-11-03",
+          "dia": "Martes",
+          "titulo": "Culto (Dorcas)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Dorcas.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-11-07-sabado",
+          "fecha": "2026-11-07",
+          "dia": "Sábado",
+          "titulo": "Culto (Jóvenes)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Jóvenes.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-11-09",
+      "etiqueta": "Semana del 09/11 al 15/11",
+      "fecha_inicio_semana": "2026-11-09",
+      "fecha_fin_semana": "2026-11-15",
+      "eventos": [
+        {
+          "id": "evento-2026-11-09-lunes",
+          "fecha": "2026-11-09",
+          "dia": "Lunes",
+          "titulo": "Oración (Escuela dominical, Caballeros, Alabanza)",
+          "hora": "6:30 PM",
+          "descripcion": "Oración programado para Escuela dominical, Caballeros, Alabanza.",
+          "tipo": "especial",
+          "mensaje": "Te esperamos en Oración (Escuela dominical, Caballeros, Alabanza) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-11-10-martes",
+          "fecha": "2026-11-10",
+          "dia": "Martes",
+          "titulo": "Culto (Caballeros)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Caballeros.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Caballeros) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-11-12-jueves",
+          "fecha": "2026-11-12",
+          "dia": "Jueves",
+          "titulo": "Culto (Evangelismo)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Evangelismo.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-11-14-sabado",
+          "fecha": "2026-11-14",
+          "dia": "Sábado",
+          "titulo": "Culto (Escuela Dominical)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Escuela Dominical.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Escuela Dominical) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-11-16",
+      "etiqueta": "Semana del 16/11 al 22/11",
+      "fecha_inicio_semana": "2026-11-16",
+      "fecha_fin_semana": "2026-11-22",
+      "eventos": [
+        {
+          "id": "evento-2026-11-17-martes",
+          "fecha": "2026-11-17",
+          "dia": "Martes",
+          "titulo": "Culto (Dorcas)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Dorcas.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-11-21-sabado",
+          "fecha": "2026-11-21",
+          "dia": "Sábado",
+          "titulo": "Culto (Jóvenes)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Jóvenes.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-11-23",
+      "etiqueta": "Semana del 23/11 al 29/11",
+      "fecha_inicio_semana": "2026-11-23",
+      "fecha_fin_semana": "2026-11-29",
+      "eventos": [
+        {
+          "id": "evento-2026-11-24-martes",
+          "fecha": "2026-11-24",
+          "dia": "Martes",
+          "titulo": "Culto (Obra Social)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Obra Social.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Obra Social) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-11-26-jueves",
+          "fecha": "2026-11-26",
+          "dia": "Jueves",
+          "titulo": "Culto (Evangelismo)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Evangelismo.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-11-28-sabado",
+          "fecha": "2026-11-28",
+          "dia": "Sábado",
+          "titulo": "Culto (Red de Familia)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Red de Familia.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Red de Familia) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-11-29-domingo",
+          "fecha": "2026-11-29",
+          "dia": "Domingo",
+          "titulo": "Culto (Misiones)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Misiones.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Misiones) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-11-30",
+      "etiqueta": "Semana del 30/11 al 06/12",
+      "fecha_inicio_semana": "2026-11-30",
+      "fecha_fin_semana": "2026-12-06",
+      "eventos": [
+        {
+          "id": "evento-2026-12-01-martes",
+          "fecha": "2026-12-01",
+          "dia": "Martes",
+          "titulo": "Culto (Dorcas)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Dorcas.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-12-05-sabado",
+          "fecha": "2026-12-05",
+          "dia": "Sábado",
+          "titulo": "Culto (Jóvenes)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Jóvenes.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-12-07",
+      "etiqueta": "Semana del 07/12 al 13/12",
+      "fecha_inicio_semana": "2026-12-07",
+      "fecha_fin_semana": "2026-12-13",
+      "eventos": [
+        {
+          "id": "evento-2026-12-07-lunes",
+          "fecha": "2026-12-07",
+          "dia": "Lunes",
+          "titulo": "Oración (Edad dorada, Evangelismo, Red de familia)",
+          "hora": "6:30 PM",
+          "descripcion": "Oración programado para Edad dorada, Evangelismo, Red de familia.",
+          "tipo": "especial",
+          "mensaje": "Te esperamos en Oración (Edad dorada, Evangelismo, Red de familia) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-12-08-martes",
+          "fecha": "2026-12-08",
+          "dia": "Martes",
+          "titulo": "Culto (Caballeros)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Caballeros.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Caballeros) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-12-10-jueves",
+          "fecha": "2026-12-10",
+          "dia": "Jueves",
+          "titulo": "Culto (Evangelismo)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Evangelismo.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-12-12-sabado",
+          "fecha": "2026-12-12",
+          "dia": "Sábado",
+          "titulo": "Culto (Escuela Dominical)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Escuela Dominical.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Escuela Dominical) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-12-14",
+      "etiqueta": "Semana del 14/12 al 20/12",
+      "fecha_inicio_semana": "2026-12-14",
+      "fecha_fin_semana": "2026-12-20",
+      "eventos": [
+        {
+          "id": "evento-2026-12-15-martes",
+          "fecha": "2026-12-15",
+          "dia": "Martes",
+          "titulo": "Culto (Dorcas)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Dorcas.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-12-18-viernes",
+          "fecha": "2026-12-18",
+          "dia": "Viernes",
+          "titulo": "Vigilia (Evangelismo, Red de familias, Edad dorada)",
+          "hora": "7:00 PM",
+          "descripcion": "Vigilia programado para Evangelismo, Red de familias, Edad dorada.",
+          "tipo": "especial",
+          "mensaje": "Te esperamos en Vigilia (Evangelismo, Red de familias, Edad dorada) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-12-19-sabado",
+          "fecha": "2026-12-19",
+          "dia": "Sábado",
+          "titulo": "Culto (Jóvenes)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Jóvenes.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-12-21",
+      "etiqueta": "Semana del 21/12 al 27/12",
+      "fecha_inicio_semana": "2026-12-21",
+      "fecha_fin_semana": "2026-12-27",
+      "eventos": [
+        {
+          "id": "evento-2026-12-22-martes",
+          "fecha": "2026-12-22",
+          "dia": "Martes",
+          "titulo": "Culto (Obra Social)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Obra Social.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Obra Social) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-12-24-jueves",
+          "fecha": "2026-12-24",
+          "dia": "Jueves",
+          "titulo": "Culto (Evangelismo)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Evangelismo.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-12-26-sabado",
+          "fecha": "2026-12-26",
+          "dia": "Sábado",
+          "titulo": "Culto (Red de Familia)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Red de Familia.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Red de Familia) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        },
+        {
+          "id": "evento-2026-12-27-domingo",
+          "fecha": "2026-12-27",
+          "dia": "Domingo",
+          "titulo": "Culto (Misiones)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Misiones.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Misiones) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    },
+    {
+      "id": "semana-2026-12-28",
+      "etiqueta": "Semana del 28/12 al 03/01",
+      "fecha_inicio_semana": "2026-12-28",
+      "fecha_fin_semana": "2027-01-03",
+      "eventos": [
+        {
+          "id": "evento-2026-12-29-martes",
+          "fecha": "2026-12-29",
+          "dia": "Martes",
+          "titulo": "Culto (Edad dorada)",
+          "hora": "7:00 PM",
+          "descripcion": "Culto programado para Edad dorada.",
+          "tipo": "culto",
+          "mensaje": "Te esperamos en Culto (Edad dorada) para vivir una jornada de fe y comunión en IPUC Villa del Río.",
+          "media": ""
+        }
+      ]
+    }
+  ],
+  "invitations": [
+    {
+      "id": "inv-evento-2026-01-06-martes",
+      "id_evento": "evento-2026-01-06-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-01-08-jueves",
+      "id_evento": "evento-2026-01-08-jueves",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-01-10-sabado",
+      "id_evento": "evento-2026-01-10-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Escuela Dominical) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-01-13-martes",
+      "id_evento": "evento-2026-01-13-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Caballeros) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-01-17-sabado",
+      "id_evento": "evento-2026-01-17-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-01-20-martes",
+      "id_evento": "evento-2026-01-20-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-01-22-jueves",
+      "id_evento": "evento-2026-01-22-jueves",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-01-24-sabado",
+      "id_evento": "evento-2026-01-24-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Red de Familia) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-01-25-domingo",
+      "id_evento": "evento-2026-01-25-domingo",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Misiones) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-01-27-martes",
+      "id_evento": "evento-2026-01-27-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Obra Social) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-01-31-sabado",
+      "id_evento": "evento-2026-01-31-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Alabanza) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-02-03-martes",
+      "id_evento": "evento-2026-02-03-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-02-07-sabado",
+      "id_evento": "evento-2026-02-07-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-02-09-lunes",
+      "id_evento": "evento-2026-02-09-lunes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Oración (Junta local, Dorcas, Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-02-10-martes",
+      "id_evento": "evento-2026-02-10-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Caballeros) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-02-12-jueves",
+      "id_evento": "evento-2026-02-12-jueves",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-02-14-sabado",
+      "id_evento": "evento-2026-02-14-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Escuela Dominical) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-02-17-martes",
+      "id_evento": "evento-2026-02-17-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-02-21-sabado",
+      "id_evento": "evento-2026-02-21-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-02-22-domingo",
+      "id_evento": "evento-2026-02-22-domingo",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Misiones) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-02-24-martes",
+      "id_evento": "evento-2026-02-24-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Obra Social) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-02-26-jueves",
+      "id_evento": "evento-2026-02-26-jueves",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-02-28-sabado",
+      "id_evento": "evento-2026-02-28-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Red de Familia) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-03-01-domingo",
+      "id_evento": "evento-2026-03-01-domingo",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Ayuno (Todos los comités) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-03-03-martes",
+      "id_evento": "evento-2026-03-03-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-03-07-sabado",
+      "id_evento": "evento-2026-03-07-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-03-09-lunes",
+      "id_evento": "evento-2026-03-09-lunes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Oración (Escuela Dominical, Caballeros, Alabanza) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-03-10-martes",
+      "id_evento": "evento-2026-03-10-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Caballeros) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-03-12-jueves",
+      "id_evento": "evento-2026-03-12-jueves",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-03-14-sabado",
+      "id_evento": "evento-2026-03-14-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Escuela Dominical) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-03-17-martes",
+      "id_evento": "evento-2026-03-17-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-03-21-sabado",
+      "id_evento": "evento-2026-03-21-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-03-24-martes",
+      "id_evento": "evento-2026-03-24-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Obra Social) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-03-26-jueves",
+      "id_evento": "evento-2026-03-26-jueves",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-03-28-sabado",
+      "id_evento": "evento-2026-03-28-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Red de Familia) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-03-29-domingo",
+      "id_evento": "evento-2026-03-29-domingo",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Misiones) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-03-31-martes",
+      "id_evento": "evento-2026-03-31-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Edad Dorada) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-04-03-viernes",
+      "id_evento": "evento-2026-04-03-viernes",
+      "imagen_url": "/assets/confraternidad-2026-04-03.jpg",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Confraternidad Distrital (Confraternidad Distrital) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-04-04-sabado",
+      "id_evento": "evento-2026-04-04-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-04-06-lunes",
+      "id_evento": "evento-2026-04-06-lunes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Oración (Edad dorada, Evangelismo, Red de familia) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-04-07-martes",
+      "id_evento": "evento-2026-04-07-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-04-09-jueves",
+      "id_evento": "evento-2026-04-09-jueves",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-04-11-sabado",
+      "id_evento": "evento-2026-04-11-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Escuela Dominical) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-04-14-martes",
+      "id_evento": "evento-2026-04-14-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Caballeros) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-04-17-viernes",
+      "id_evento": "evento-2026-04-17-viernes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Vigilia (Evangelismo, Red de familia, Edad dorada) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-04-18-sabado",
+      "id_evento": "evento-2026-04-18-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-04-21-martes",
+      "id_evento": "evento-2026-04-21-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-04-23-jueves",
+      "id_evento": "evento-2026-04-23-jueves",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-04-25-sabado",
+      "id_evento": "evento-2026-04-25-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Red de Familia) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-04-26-domingo",
+      "id_evento": "evento-2026-04-26-domingo",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Misiones) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-04-28-martes",
+      "id_evento": "evento-2026-04-28-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Obra Social) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-05-02-sabado",
+      "id_evento": "evento-2026-05-02-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-05-03-domingo",
+      "id_evento": "evento-2026-05-03-domingo",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Ayuno (Obra social, Misiones, Recepción) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-05-05-martes",
+      "id_evento": "evento-2026-05-05-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-05-09-sabado",
+      "id_evento": "evento-2026-05-09-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Escuela Dominical) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-05-11-lunes",
+      "id_evento": "evento-2026-05-11-lunes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Oración (Obra social, Misiones, Recepción) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-05-12-martes",
+      "id_evento": "evento-2026-05-12-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Caballeros) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-05-14-jueves",
+      "id_evento": "evento-2026-05-14-jueves",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-05-16-sabado",
+      "id_evento": "evento-2026-05-16-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-05-19-martes",
+      "id_evento": "evento-2026-05-19-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-05-23-sabado",
+      "id_evento": "evento-2026-05-23-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Red de Familia) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-05-26-martes",
+      "id_evento": "evento-2026-05-26-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Obra Social) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-05-28-jueves",
+      "id_evento": "evento-2026-05-28-jueves",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-05-30-sabado",
+      "id_evento": "evento-2026-05-30-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Alabanza) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-05-31-domingo",
+      "id_evento": "evento-2026-05-31-domingo",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Misiones) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-06-01-lunes",
+      "id_evento": "evento-2026-06-01-lunes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Oración (Junta local, Dorcas, Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-06-02-martes",
+      "id_evento": "evento-2026-06-02-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-06-06-sabado",
+      "id_evento": "evento-2026-06-06-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-06-09-martes",
+      "id_evento": "evento-2026-06-09-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Caballeros) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-06-11-jueves",
+      "id_evento": "evento-2026-06-11-jueves",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-06-13-sabado",
+      "id_evento": "evento-2026-06-13-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Jóvenes / Escuela Dominical) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-06-16-martes",
+      "id_evento": "evento-2026-06-16-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-06-19-viernes",
+      "id_evento": "evento-2026-06-19-viernes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Vigilia (Escuela dominical, Caballeros, Alabanza) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-06-23-martes",
+      "id_evento": "evento-2026-06-23-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Obra Social) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-06-25-jueves",
+      "id_evento": "evento-2026-06-25-jueves",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-06-27-sabado",
+      "id_evento": "evento-2026-06-27-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Red de Familia) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-06-28-domingo",
+      "id_evento": "evento-2026-06-28-domingo",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Misiones) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-06-30-martes",
+      "id_evento": "evento-2026-06-30-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Edad dorada) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-07-04-sabado",
+      "id_evento": "evento-2026-07-04-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-07-05-domingo",
+      "id_evento": "evento-2026-07-05-domingo",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Ayuno (Edad dorada, Evangelismo, Red de familias) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-07-07-martes",
+      "id_evento": "evento-2026-07-07-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-07-09-jueves",
+      "id_evento": "evento-2026-07-09-jueves",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-07-11-sabado",
+      "id_evento": "evento-2026-07-11-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Escuela Dominical) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-07-13-lunes",
+      "id_evento": "evento-2026-07-13-lunes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Oración (Escuela dominical, Caballeros, Alabanza) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-07-14-martes",
+      "id_evento": "evento-2026-07-14-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Caballeros) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-07-18-sabado",
+      "id_evento": "evento-2026-07-18-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-07-21-martes",
+      "id_evento": "evento-2026-07-21-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-07-23-jueves",
+      "id_evento": "evento-2026-07-23-jueves",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-07-25-sabado",
+      "id_evento": "evento-2026-07-25-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Red de Familia) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-07-26-domingo",
+      "id_evento": "evento-2026-07-26-domingo",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Misiones) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-07-28-martes",
+      "id_evento": "evento-2026-07-28-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Obra Social) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-08-01-sabado",
+      "id_evento": "evento-2026-08-01-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-08-04-martes",
+      "id_evento": "evento-2026-08-04-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-08-08-sabado",
+      "id_evento": "evento-2026-08-08-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Escuela Dominical) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-08-10-lunes",
+      "id_evento": "evento-2026-08-10-lunes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Oración (Edad dorada, Evangelismo, Red de familia) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-08-11-martes",
+      "id_evento": "evento-2026-08-11-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Caballeros) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-08-13-jueves",
+      "id_evento": "evento-2026-08-13-jueves",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-08-15-sabado",
+      "id_evento": "evento-2026-08-15-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-08-18-martes",
+      "id_evento": "evento-2026-08-18-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-08-21-viernes",
+      "id_evento": "evento-2026-08-21-viernes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Vigilia (Obra social, Misiones, Recepción) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-08-22-sabado",
+      "id_evento": "evento-2026-08-22-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Red de Familia) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-08-25-martes",
+      "id_evento": "evento-2026-08-25-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Obra Social) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-08-27-jueves",
+      "id_evento": "evento-2026-08-27-jueves",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-08-29-sabado",
+      "id_evento": "evento-2026-08-29-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Alabanza) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-08-30-domingo",
+      "id_evento": "evento-2026-08-30-domingo",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Misiones) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-09-01-martes",
+      "id_evento": "evento-2026-09-01-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-09-05-sabado",
+      "id_evento": "evento-2026-09-05-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-09-06-domingo",
+      "id_evento": "evento-2026-09-06-domingo",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Ayuno (Escuela dominical, Caballeros, Alabanza) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-09-08-martes",
+      "id_evento": "evento-2026-09-08-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Caballeros) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-09-10-jueves",
+      "id_evento": "evento-2026-09-10-jueves",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-09-12-sabado",
+      "id_evento": "evento-2026-09-12-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Escuela Dominical) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-09-14-lunes",
+      "id_evento": "evento-2026-09-14-lunes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Oración (Obra social, Misiones, Recepción) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-09-15-martes",
+      "id_evento": "evento-2026-09-15-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-09-19-sabado",
+      "id_evento": "evento-2026-09-19-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-09-22-martes",
+      "id_evento": "evento-2026-09-22-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Obra Social) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-09-24-jueves",
+      "id_evento": "evento-2026-09-24-jueves",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-09-26-sabado",
+      "id_evento": "evento-2026-09-26-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Red de Familia) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-09-27-domingo",
+      "id_evento": "evento-2026-09-27-domingo",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Misiones) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-09-29-martes",
+      "id_evento": "evento-2026-09-29-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Edad dorada) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-10-03-sabado",
+      "id_evento": "evento-2026-10-03-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-10-05-lunes",
+      "id_evento": "evento-2026-10-05-lunes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Oración (Junta local, Dorcas, Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-10-06-martes",
+      "id_evento": "evento-2026-10-06-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-10-08-jueves",
+      "id_evento": "evento-2026-10-08-jueves",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-10-10-sabado",
+      "id_evento": "evento-2026-10-10-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Escuela Dominical) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-10-13-martes",
+      "id_evento": "evento-2026-10-13-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Caballeros) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-10-17-sabado",
+      "id_evento": "evento-2026-10-17-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-10-20-martes",
+      "id_evento": "evento-2026-10-20-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-10-22-jueves",
+      "id_evento": "evento-2026-10-22-jueves",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-10-23-viernes",
+      "id_evento": "evento-2026-10-23-viernes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Vigilia (Junta local, Dorcas, Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-10-24-sabado",
+      "id_evento": "evento-2026-10-24-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Red de Familia) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-10-25-domingo",
+      "id_evento": "evento-2026-10-25-domingo",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Misiones) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-10-27-martes",
+      "id_evento": "evento-2026-10-27-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Obra Social) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-10-31-sabado",
+      "id_evento": "evento-2026-10-31-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Alabanza) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-11-01-domingo",
+      "id_evento": "evento-2026-11-01-domingo",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Ayuno (Junta local, Dorcas, Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-11-03-martes",
+      "id_evento": "evento-2026-11-03-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-11-07-sabado",
+      "id_evento": "evento-2026-11-07-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-11-09-lunes",
+      "id_evento": "evento-2026-11-09-lunes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Oración (Escuela dominical, Caballeros, Alabanza) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-11-10-martes",
+      "id_evento": "evento-2026-11-10-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Caballeros) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-11-12-jueves",
+      "id_evento": "evento-2026-11-12-jueves",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-11-14-sabado",
+      "id_evento": "evento-2026-11-14-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Escuela Dominical) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-11-17-martes",
+      "id_evento": "evento-2026-11-17-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-11-21-sabado",
+      "id_evento": "evento-2026-11-21-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-11-24-martes",
+      "id_evento": "evento-2026-11-24-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Obra Social) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-11-26-jueves",
+      "id_evento": "evento-2026-11-26-jueves",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-11-28-sabado",
+      "id_evento": "evento-2026-11-28-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Red de Familia) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-11-29-domingo",
+      "id_evento": "evento-2026-11-29-domingo",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Misiones) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-12-01-martes",
+      "id_evento": "evento-2026-12-01-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-12-05-sabado",
+      "id_evento": "evento-2026-12-05-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-12-07-lunes",
+      "id_evento": "evento-2026-12-07-lunes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Oración (Edad dorada, Evangelismo, Red de familia) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-12-08-martes",
+      "id_evento": "evento-2026-12-08-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Caballeros) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-12-10-jueves",
+      "id_evento": "evento-2026-12-10-jueves",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-12-12-sabado",
+      "id_evento": "evento-2026-12-12-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Escuela Dominical) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-12-15-martes",
+      "id_evento": "evento-2026-12-15-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Dorcas) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-12-18-viernes",
+      "id_evento": "evento-2026-12-18-viernes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Vigilia (Evangelismo, Red de familias, Edad dorada) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-12-19-sabado",
+      "id_evento": "evento-2026-12-19-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Jóvenes) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-12-22-martes",
+      "id_evento": "evento-2026-12-22-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Obra Social) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-12-24-jueves",
+      "id_evento": "evento-2026-12-24-jueves",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Evangelismo) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-12-26-sabado",
+      "id_evento": "evento-2026-12-26-sabado",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Red de Familia) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-12-27-domingo",
+      "id_evento": "evento-2026-12-27-domingo",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Misiones) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    },
+    {
+      "id": "inv-evento-2026-12-29-martes",
+      "id_evento": "evento-2026-12-29-martes",
+      "imagen_url": "",
+      "video_url": "",
+      "descripcion_completa": "Te esperamos en Culto (Edad dorada) para vivir una jornada de fe y comunión en IPUC Villa del Río."
+    }
+  ],
+  "users": [
+    {
+      "id": "principal-esteban",
+      "username": "ESTEBAN",
+      "password": "1013689193",
+      "role": "principal",
+      "created_at": "2026-03-20T00:00:00.000Z"
+    }
+  ]
+}
