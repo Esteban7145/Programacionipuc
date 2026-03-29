@@ -46,7 +46,7 @@ const normalizeSchedule = (input) => {
       id: event.id || `${format(startDate, 'yyyyMMdd')}-${index + 1}`,
       dia: event.dia,
       titulo: event.titulo,
-      hora: getDefaultHourByDay(event.dia) || event.hora,
+      hora: getDefaultHourByDay(event.dia, event.tipo) || event.hora,
       descripcion: event.descripcion,
       tipo: event.tipo || 'culto',
       mensaje: event.mensaje || `Te esperamos este ${event.dia?.toLowerCase?.() || 'día'} en IPUC Villa del Río.`,
@@ -62,7 +62,8 @@ const normalizeDay = (value) =>
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '');
 
-const getDefaultHourByDay = (day) => {
+const getDefaultHourByDay = (day, tipo) => {
+  if (normalizeDay(tipo) !== 'culto') return '';
   const normalized = normalizeDay(day);
   if (['martes', 'jueves', 'sabado'].includes(normalized)) return '7:00 PM';
   if (normalized === 'domingo') return '10:00 AM';
@@ -146,7 +147,7 @@ const getCurrentWeekSchedule = (db) => {
 
 const enforceDefaultHours = (events = []) =>
   events.map((event) => {
-    const defaultHour = getDefaultHourByDay(event.dia);
+    const defaultHour = getDefaultHourByDay(event.dia, event.tipo);
     if (!defaultHour) return event;
     return {
       ...event,
