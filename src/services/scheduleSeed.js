@@ -135,7 +135,7 @@ export const buildSeedSchedules = () => {
         id: `schedule-${item.monthKey}`,
         monthKey: item.monthKey,
         monthLabel: item.monthLabel.charAt(0).toUpperCase() + item.monthLabel.slice(1),
-        fileUrl: `cronograma://${item.monthKey}`,
+        fileUrl: '',
       };
     }
     return acc;
