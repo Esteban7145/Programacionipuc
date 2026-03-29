@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cronograma 2026 - IPUC Villa del Río</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <img src="LOGO IPUC.png" alt="Logo IPUC" class="logo" />
+        <div>
+          <p class="subtitle">Iglesia Pentecostal Unida de Colombia</p>
+          <h1>CRONOGRAMA 2026 - IPUC VILLA DEL RÍO</h1>
+        </div>
+      </div>
+      <nav class="controls" aria-label="Navegación de meses">
+        <button id="prevMonth" class="btn">◀ Mes anterior</button>
+        <button id="todayBtn" class="btn btn-primary">Hoy</button>
+        <button id="nextMonth" class="btn">Mes siguiente ▶</button>
+      </nav>
+    </header>
+
+    <main id="calendarContainer" class="calendar-container" aria-live="polite"></main>
+
+    <aside class="legend" aria-label="Leyenda de colores">
+      <span class="chip culto">Culto</span>
+      <span class="chip oracion">Oración</span>
+      <span class="chip vigilia">Vigilia</span>
+      <span class="chip ayuno">Ayuno</span>
+      <span class="chip especial">Evento especial</span>
+    </aside>
+
+    <div id="eventModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="modal-content">
+        <button id="closeModal" class="close-btn" aria-label="Cerrar detalles">✕</button>
+        <h3 id="modalTitle"></h3>
+        <p id="modalDate"></p>
+        <p id="modalTime"></p>
+        <p id="modalDescription"></p>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
