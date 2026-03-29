@@ -131,6 +131,23 @@ Edita `src/services/firebase.js` y reemplaza los valores demo.
 }
 ```
 
+
+## Despliegue en Netlify (evitar error 404)
+
+Si desplegas en Netlify y abres rutas internas (por ejemplo `/gallery`), una SPA de React puede mostrar **Page not found** si no hay regla de redirección.
+
+Este proyecto ya incluye dos mecanismos de fallback:
+- `public/_redirects` con `/* /index.html 200`
+- `netlify.toml` con redirección global a `index.html`
+
+Pasos:
+1. Conecta el repositorio en Netlify.
+2. Build command: `npm run build`.
+3. Publish directory: `build`.
+4. Redeploy (idealmente `Clear cache and deploy site`).
+
+Si el error persiste, revisa que Netlify esté desplegando la rama donde existen `_redirects` y `netlify.toml`.
+
 ## Despliegue en Firebase Hosting
 
 ```bash
