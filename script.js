@@ -8,6 +8,11 @@ const fallbackImage =
   "data:image/svg+xml;utf8," +
   encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='#1f3b68' /><stop offset='100%' stop-color='#402060' /></linearGradient></defs><rect width='100%' height='100%' fill='url(#g)' /><text x='50%' y='47%' fill='white' text-anchor='middle' font-size='54' font-family='Arial'>CONFRATERNIDAD DISTRITAL</text><text x='50%' y='57%' fill='#ffe7a8' text-anchor='middle' font-size='34' font-family='Arial'>3 de abril de 2026</text><text x='50%' y='66%' fill='white' text-anchor='middle' font-size='26' font-family='Arial'>10:00 AM · 02:00 PM · 05:00 PM</text></svg>`);
 
+
+const logoFallback =
+  "data:image/svg+xml;utf8," +
+  encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='500' height='220'><rect width='100%' height='100%' rx='22' fill='#0f4fa3'/><text x='50%' y='48%' text-anchor='middle' fill='white' font-size='48' font-family='Arial'>IPUC</text><text x='50%' y='68%' text-anchor='middle' fill='#cde3ff' font-size='28' font-family='Arial'>Villa del Río</text></svg>`);
+
 const verses = [
   '"Y recibiréis poder, cuando haya venido sobre vosotros el Espíritu Santo." — Hechos 1:8',
   '"Jesucristo es el mismo ayer, y hoy, y por los siglos." — Hebreos 13:8',
@@ -138,7 +143,7 @@ function setProgressiveImage(imgEl, candidates = []) {
 }
 
 const churchLogo = document.getElementById("churchLogo");
-if (churchLogo) setProgressiveImage(churchLogo, ["logo-villa-del-rio.png", "LOGO IPUC VILLA DEL RIO.png", "LOGO IPUC.png", "LOGO IPUC PNG.png", "logo ipuc.png", "logo-ipuc.png", fallbackImage]);
+if (churchLogo) setProgressiveImage(churchLogo, ["decom-villa-del-rio.png", "DECOM VILLA DEL RIO.png", "logo-villa-del-rio.png", "LOGO IPUC VILLA DEL RIO.png", "LOGO IPUC.png", "LOGO IPUC PNG.png", "logo ipuc.png", "logo-ipuc.png", logoFallback]);
 
 function openModal(event, dateText) {
   document.getElementById("modalTitle").textContent = event.title;
