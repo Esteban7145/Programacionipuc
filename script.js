@@ -121,22 +121,37 @@ function addEvent(map, date, event) {
 
 function getDefaultCultoEvent(dateObj) {
   const day = dateObj.getDay();
-  if ([2, 4, 6].includes(day)) {
+
+  if (day === 4) {
+    return {
+      title: "Culto de Oración y Enseñanza",
+      time: "07:00 PM",
+      type: "culto",
+      description: "Jueves regular",
+      isDefault: true
+    };
+  }
+
+  if ([2, 6].includes(day)) {
     return {
       title: "Culto congregacional",
       time: "07:00 PM",
       type: "culto",
-      description: "Culto regular"
+      description: "Culto regular",
+      isDefault: true
     };
   }
+
   if (day === 0) {
     return {
       title: "Culto dominical",
       time: "10:00 AM",
       type: "culto",
-      description: "Culto regular"
+      description: "Culto regular",
+      isDefault: true
     };
   }
+
   return null;
 }
 
@@ -156,12 +171,23 @@ function buildEventsByDate() {
     dates.forEach((date) => {
       addEvent(map, date, {
         title: `Culto ${committee}`,
-        time: date.endsWith("27") || date.endsWith("28") || date.endsWith("29") || date.endsWith("30") || date.endsWith("31") ? "07:00 PM" : "07:00 PM",
+        time: "07:00 PM",
         type: "culto",
         description: "Programación oficial de culto",
         responsable: committee
       });
     });
+  });
+
+  // Si un día ya tiene culto de comité, se elimina el culto default para evitar duplicados.
+  map.forEach((events, date) => {
+    const hasCommitteeCulto = events.some((event) => event.type === "culto" && event.responsable);
+    if (hasCommitteeCulto) {
+      map.set(
+        date,
+        events.filter((event) => !event.isDefault)
+      );
+    }
   });
 
   prayerSchedule.forEach(({ date, committees }) => {
@@ -231,6 +257,8 @@ const churchLogo = document.getElementById("churchLogo");
 
 if (churchLogo) {
   setProgressiveImage(churchLogo, [
+    "logo-villa-del-rio.png",
+    "LOGO IPUC VILLA DEL RIO.png",
     "LOGO IPUC.png",
     "LOGO IPUC PNG.png",
     "logo ipuc.png",
