@@ -185,30 +185,68 @@
         { ref: 'Palabra de fe', text: 'La casa del Señor es un lugar de restauración, enseñanza y esperanza. Siempre serás bienvenido para congregarte con nosotros.' },
         { ref: 'Comunidad IPUC', text: 'Cada culto y cada evento especial son una oportunidad para servir, apoyar la obra y experimentar la presencia de Dios en unidad.' },
       ];
-      const fallbackData = {
-        generatedAt: new Date().toISOString(),
-        currentWeek: {
-          id: 'semana-demo', fecha_inicio_semana: '2026-03-16', fecha_fin_semana: '2026-03-22', etiqueta: 'Semana del 16 al 22 de marzo',
-          eventos: [
-            { id:'martes', dia:'Martes', titulo:'Culto de Caballeros', hora:'7:00 P.M', descripcion:'Servicio especial para fortalecer la fe, la oración y el liderazgo cristiano.', mensaje:'Te invitamos a una noche especial de adoración, palabra y comunión en IPUC Villa del Río.', tipo:'culto', media:'', invitacion:{ descripcion_completa:'Ven con tu familia y amigos. Dios tiene una palabra de bendición para tu vida.', imagen_url:'', video_url:'' } },
-            { id:'jueves', dia:'Jueves', titulo:'Culto de Evangelismo', hora:'7:00 P.M', descripcion:'Jornada para invitar nuevos corazones y compartir el mensaje de salvación.', mensaje:'Invita a una persona especial y acompáñanos a vivir un culto de evangelismo poderoso.', tipo:'culto', media:'', invitacion:{ descripcion_completa:'Será una noche de milagros, alabanza y palabra para visitantes y congregación.', imagen_url:'', video_url:'' } },
-            { id:'sabado', dia:'Sábado', titulo:'Culto Escuela Dominical', hora:'7:00 P.M', descripcion:'Encuentro formativo con enseñanza bíblica y participación de toda la iglesia.', mensaje:'Prepárate para aprender más de la Palabra y crecer espiritualmente.', tipo:'culto', media:'', invitacion:{ descripcion_completa:'Una noche ideal para profundizar en la enseñanza bíblica con toda la congregación.', imagen_url:'', video_url:'' } },
-            { id:'domingo', dia:'Domingo', titulo:'Escuela Dominical', hora:'10:00 A.M', descripcion:'La reunión principal de enseñanza y adoración para la familia y los visitantes.', mensaje:'Te esperamos para celebrar juntos una mañana gloriosa en la presencia de Dios.', tipo:'culto', media:'', invitacion:{ descripcion_completa:'Ven con toda tu familia para disfrutar un tiempo especial de adoración, palabra y unidad.', imagen_url:'', video_url:'' } },
-            { id:'especial', dia:'Evento especial', titulo:'Vigilia / Oración / Campaña', hora:'Próximamente', descripcion:'Espacio flexible para vigilias, campañas, reuniones de oración o actividades especiales.', mensaje:'Mantente atento a nuestras actividades especiales y acompáñanos en cada jornada extraordinaria.', tipo:'especial', media:'', invitacion:{ descripcion_completa:'Aquí se publicará la invitación del evento especial cuando sea programado por el equipo DECOM.', imagen_url:'', video_url:'' } }
-          ]
-        }
+      const buildCurrentFallback = () => {
+        const today = new Date();
+        const monday = new Date(today);
+        const day = monday.getDay();
+        const diff = day === 0 ? -6 : 1 - day;
+        monday.setDate(monday.getDate() + diff);
+        monday.setHours(0, 0, 0, 0);
+        const sunday = new Date(monday);
+        sunday.setDate(monday.getDate() + 6);
+        const tuesday = new Date(monday);
+        tuesday.setDate(monday.getDate() + 1);
+        const thursday = new Date(monday);
+        thursday.setDate(monday.getDate() + 3);
+        const saturday = new Date(monday);
+        saturday.setDate(monday.getDate() + 5);
+        const toIso = (date) => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+
+        const createEvent = (id, date, dia, titulo, hora, descripcion, mensaje, tipo = 'culto') => ({
+          id,
+          fecha: toIso(date),
+          dia,
+          titulo,
+          hora,
+          descripcion,
+          mensaje,
+          tipo,
+          media: '',
+          invitacion: { descripcion_completa: `${titulo} | ${dia} ${toIso(date)} | ${hora}`, imagen_url: '', video_url: '' },
+        });
+
+        return {
+          generatedAt: new Date().toISOString(),
+          currentWeek: {
+            id: `semana-${toIso(monday)}`,
+            fecha_inicio_semana: toIso(monday),
+            fecha_fin_semana: toIso(sunday),
+            etiqueta: `Semana del ${toIso(monday)} al ${toIso(sunday)}`,
+            eventos: [
+              createEvent(`martes-${toIso(tuesday)}`, tuesday, 'Martes', 'Culto de Martes', '7:00 PM', 'Servicio congregacional para fortalecer la fe y la comunión.', 'Te esperamos este martes para adorar juntos al Señor.'),
+              createEvent(`jueves-${toIso(thursday)}`, thursday, 'Jueves', 'Culto de Oración y Enseñanza', '7:00 PM', 'Servicio base de oración y enseñanza para toda la congregación.', 'Te esperamos este jueves para un tiempo especial de oración y enseñanza bíblica.'),
+              createEvent(`sabado-${toIso(saturday)}`, saturday, 'Sábado', 'Culto de Sábado', '7:00 PM', 'Servicio especial para toda la congregación.', 'Acompáñanos este sábado en un tiempo de adoración y palabra.'),
+              createEvent(`domingo-${toIso(sunday)}`, sunday, 'Domingo', 'Escuela Dominical', '10:00 AM', 'Espacio dominical de formación bíblica para toda la iglesia.', 'Acompáñanos este domingo en nuestra Escuela Dominical.', 'escuela-dominical'),
+            ],
+          },
+        };
       };
-      const state = { payload: structuredClone(fallbackData), selectedEventId: 'martes', fallbackMode: true, selectedDate: null, verseIndex: 0 };
+      const fallbackData = buildCurrentFallback();
+      const state = { payload: structuredClone(fallbackData), selectedEventId: fallbackData.currentWeek.eventos[0].id, fallbackMode: true, selectedDate: null, verseIndex: 0 };
       const byId = (id) => document.getElementById(id);
       const dayOffset = { 'lunes':0, 'martes':1, 'miércoles':2, 'miercoles':2, 'jueves':3, 'viernes':4, 'sábado':5, 'sabado':5, 'domingo':6 };
       function selectedEvent() { return state.payload.currentWeek.eventos.find((event) => event.id === state.selectedEventId) || state.payload.currentWeek.eventos[0]; }
       function getCurrentWeekFromList(weeks) {
         const today = new Date();
-        return weeks.find((week) => {
+        const current = weeks.find((week) => {
           const start = new Date(`${week.fecha_inicio_semana}T00:00:00`);
           const end = new Date(`${week.fecha_fin_semana}T23:59:59`);
           return today >= start && today <= end;
-        }) || weeks[0] || null;
+        });
+        if (current) return current;
+        const sorted = [...weeks].sort((a, b) => String(a.fecha_inicio_semana).localeCompare(String(b.fecha_inicio_semana)));
+        const previous = sorted.filter((week) => new Date(`${week.fecha_inicio_semana}T00:00:00`) <= today).pop();
+        return previous || sorted[0] || null;
       }
       function readLocalOverride() {
         try {
@@ -301,8 +339,7 @@
         const localOverride = readLocalOverride();
         if (localOverride?.currentWeek) {
           state.payload = localOverride;
-          if (!state.payload.currentWeek.eventos.some((event) => event.id === 'especial' || event.tipo === 'especial')) state.payload.currentWeek.eventos.push(structuredClone(fallbackData.currentWeek.eventos.find((event) => event.id === 'especial')));
-          state.selectedEventId = state.payload.currentWeek.eventos[0]?.id || 'martes';
+          state.selectedEventId = state.payload.currentWeek.eventos[0]?.id || fallbackData.currentWeek.eventos[0].id;
           state.selectedDate = eventDate(selectedEvent());
           state.fallbackMode = false;
           renderHome();
@@ -311,9 +348,8 @@
         try {
           const response = await fetch('/api/public/schedule/current'); if (!response.ok) throw new Error('Sin respuesta pública.');
           state.payload = await response.json();
-          if (!state.payload.currentWeek.eventos.some((event) => event.id === 'especial' || event.tipo === 'especial')) state.payload.currentWeek.eventos.push(structuredClone(fallbackData.currentWeek.eventos.find((event) => event.id === 'especial')));
-          state.selectedEventId = state.payload.currentWeek.eventos[0]?.id || 'martes'; state.selectedDate = eventDate(selectedEvent()); state.fallbackMode = false;
-        } catch { state.payload = structuredClone(fallbackData); state.selectedEventId = 'martes'; state.selectedDate = eventDate(selectedEvent()); state.fallbackMode = true; }
+          state.selectedEventId = state.payload.currentWeek.eventos[0]?.id || fallbackData.currentWeek.eventos[0].id; state.selectedDate = eventDate(selectedEvent()); state.fallbackMode = false;
+        } catch { state.payload = structuredClone(fallbackData); state.selectedEventId = fallbackData.currentWeek.eventos[0].id; state.selectedDate = eventDate(selectedEvent()); state.fallbackMode = true; }
         renderHome();
       }
       byId('menuBtn').addEventListener('click', () => byId('menuPanel').classList.toggle('open'));
