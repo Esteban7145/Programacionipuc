@@ -178,6 +178,7 @@
       </div>
     </div>
     <script>
+      const LOCAL_SCHEDULE_KEY = 'ipuc_schedule_override_v1';
       const verses = [
         { ref: 'IPUC Villa del Río', text: 'Únete con nosotros en cada servicio, escuela dominical y evento especial. Tu presencia, tu oración y tu apoyo fortalecen la obra del Señor y la comunión de la iglesia.' },
         { ref: 'Invitación general', text: 'Ven con tu familia y amigos a cada culto. Juntos adoramos a Dios, recibimos palabra y respaldamos el crecimiento espiritual de la congregación.' },
@@ -201,6 +202,26 @@
       const byId = (id) => document.getElementById(id);
       const dayOffset = { 'lunes':0, 'martes':1, 'miércoles':2, 'miercoles':2, 'jueves':3, 'viernes':4, 'sábado':5, 'sabado':5, 'domingo':6 };
       function selectedEvent() { return state.payload.currentWeek.eventos.find((event) => event.id === state.selectedEventId) || state.payload.currentWeek.eventos[0]; }
+      function getCurrentWeekFromList(weeks) {
+        const today = new Date();
+        return weeks.find((week) => {
+          const start = new Date(`${week.fecha_inicio_semana}T00:00:00`);
+          const end = new Date(`${week.fecha_fin_semana}T23:59:59`);
+          return today >= start && today <= end;
+        }) || weeks[0] || null;
+      }
+      function readLocalOverride() {
+        try {
+          const raw = localStorage.getItem(LOCAL_SCHEDULE_KEY);
+          if (!raw) return null;
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed?.allWeeks) && parsed.allWeeks.length > 0) {
+            const currentWeek = getCurrentWeekFromList(parsed.allWeeks);
+            return { generatedAt: parsed.generatedAt || new Date().toISOString(), currentWeek, allWeeks: parsed.allWeeks };
+          }
+        } catch {}
+        return null;
+      }
       function parseDate(dateString) { return new Date(`${dateString}T00:00:00`); }
       function formatLong(date) { return new Intl.DateTimeFormat('es-CO', { weekday:'long', day:'numeric', month:'long', year:'numeric' }).format(date); }
       function eventDate(event) {
@@ -277,6 +298,16 @@
         const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' }); const url = URL.createObjectURL(blob); const link = document.createElement('a'); link.href = url; link.download = `${title.toLowerCase().replace(/[^a-z0-9]+/gi, '-')}.ics`; link.click(); URL.revokeObjectURL(url);
       }
       async function loadCurrentSchedule() {
+        const localOverride = readLocalOverride();
+        if (localOverride?.currentWeek) {
+          state.payload = localOverride;
+          if (!state.payload.currentWeek.eventos.some((event) => event.id === 'especial' || event.tipo === 'especial')) state.payload.currentWeek.eventos.push(structuredClone(fallbackData.currentWeek.eventos.find((event) => event.id === 'especial')));
+          state.selectedEventId = state.payload.currentWeek.eventos[0]?.id || 'martes';
+          state.selectedDate = eventDate(selectedEvent());
+          state.fallbackMode = false;
+          renderHome();
+          return;
+        }
         try {
           const response = await fetch('/api/public/schedule/current'); if (!response.ok) throw new Error('Sin respuesta pública.');
           state.payload = await response.json();

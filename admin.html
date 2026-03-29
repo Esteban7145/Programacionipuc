@@ -57,6 +57,7 @@
       </div>
     </div>
     <script>
+      const LOCAL_SCHEDULE_KEY = 'ipuc_schedule_override_v1';
       const API_CANDIDATES = [
         '',
         `${window.location.protocol === 'https:' ? 'https' : 'http'}://localhost:3001`,
@@ -68,6 +69,30 @@
       function showNotice(id, message, mode='info') { const el = byId(id); el.style.display = 'block'; el.textContent = message; el.style.color = mode === 'error' ? '#fca5a5' : mode === 'success' ? '#86efac' : '#f8f6ea'; }
       function unlockEditor() { byId('editorArea').classList.add('active'); sessionStorage.setItem('ipuc_admin_logged', 'true'); }
       function lockEditor() { byId('editorArea').classList.remove('active'); sessionStorage.removeItem('ipuc_admin_logged'); sessionStorage.removeItem('ipuc_admin_user'); }
+      function getCurrentWeekFromList(weeks) {
+        const today = new Date();
+        return weeks.find((week) => {
+          const start = new Date(`${week.fecha_inicio_semana}T00:00:00`);
+          const end = new Date(`${week.fecha_fin_semana}T23:59:59`);
+          return today >= start && today <= end;
+        }) || weeks[0] || null;
+      }
+      function saveLocalOverride(weeks) {
+        if (!Array.isArray(weeks) || weeks.length === 0) return;
+        const payload = { generatedAt: new Date().toISOString(), allWeeks: weeks };
+        localStorage.setItem(LOCAL_SCHEDULE_KEY, JSON.stringify(payload));
+      }
+      function readLocalOverride() {
+        try {
+          const raw = localStorage.getItem(LOCAL_SCHEDULE_KEY);
+          if (!raw) return null;
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed?.allWeeks) && parsed.allWeeks.length > 0) {
+            return { generatedAt: parsed.generatedAt || new Date().toISOString(), currentWeek: getCurrentWeekFromList(parsed.allWeeks), allWeeks: parsed.allWeeks };
+          }
+        } catch {}
+        return null;
+      }
       async function requestJson(url, options = {}) {
         let lastError = null;
         for (const base of API_CANDIDATES) {
@@ -97,7 +122,14 @@
         throw lastError || new Error('No hay conexión con el servidor. Abre el panel desde http://localhost:3001/admin y verifica que Express esté encendido.');
       }
       async function fetchCurrent() {
-        state.payload = await requestJson('/api/public/schedule/current');
+        try {
+          state.payload = await requestJson('/api/public/schedule/current');
+        } catch (error) {
+          const localData = readLocalOverride();
+          if (!localData) throw error;
+          state.payload = localData;
+          showNotice('panelNotice', 'Usando cronograma local guardado en este dispositivo.', 'info');
+        }
         if (!state.payload.currentWeek.eventos.some((event) => event.id === 'especial' || event.tipo === 'especial')) state.payload.currentWeek.eventos.push({ id:'especial', dia:'Evento especial', titulo:'Evento especial', hora:'Próximamente', fecha:'', descripcion:'Espacio para vigilia, campaña u oración.', mensaje:'', tipo:'especial', media:'', invitacion:{ descripcion_completa:'', imagen_url:'', video_url:'' } });
         state.selectedEventId = state.selectedEventId || state.payload.currentWeek.eventos[0]?.id || null; byId('weekText').textContent = state.payload.currentWeek.etiqueta || 'Semana actual'; renderEvents();
       }
@@ -129,7 +161,37 @@
       });
       byId('logoutBtn').addEventListener('click', () => { lockEditor(); showNotice('authNotice', 'Sesión cerrada.', 'info'); });
       byId('reloadBtn').addEventListener('click', () => fetchCurrent().catch((error) => showNotice('panelNotice', error.message, 'error')));
-      byId('uploadScheduleBtn').addEventListener('click', async () => { const file = byId('scheduleFile').files[0]; if (!file) return showNotice('panelNotice', 'Selecciona un archivo primero.', 'error'); const formData = new FormData(); formData.append('file', file); try { await requestJson('/api/admin/schedules/upload', { method:'POST', body: formData }); showNotice('panelNotice', 'Cronograma cargado correctamente.', 'success'); await fetchCurrent(); } catch (error) { showNotice('panelNotice', error.message, 'error'); } });
+      byId('uploadScheduleBtn').addEventListener('click', async () => {
+        const file = byId('scheduleFile').files[0];
+        if (!file) return showNotice('panelNotice', 'Selecciona un archivo primero.', 'error');
+        const formData = new FormData();
+        formData.append('file', file);
+        try {
+          const response = await requestJson('/api/admin/schedules/upload', { method:'POST', body: formData });
+          if (Array.isArray(response.schedules)) saveLocalOverride(response.schedules);
+          showNotice('panelNotice', 'Cronograma cargado correctamente.', 'success');
+          await fetchCurrent();
+        } catch (error) {
+          if (file.name.toLowerCase().endsWith('.json')) {
+            try {
+              const text = await file.text();
+              const parsed = JSON.parse(text);
+              const weeks = Array.isArray(parsed) ? parsed : parsed.schedules;
+              if (!Array.isArray(weeks) || weeks.length === 0) throw new Error('El JSON no tiene semanas válidas.');
+              saveLocalOverride(weeks);
+              state.payload = { generatedAt: new Date().toISOString(), currentWeek: getCurrentWeekFromList(weeks), allWeeks: weeks };
+              state.selectedEventId = state.payload.currentWeek?.eventos?.[0]?.id || null;
+              renderEvents();
+              showNotice('panelNotice', 'Cronograma guardado localmente en este dispositivo.', 'success');
+              return;
+            } catch (parseError) {
+              showNotice('panelNotice', parseError.message, 'error');
+              return;
+            }
+          }
+          showNotice('panelNotice', `${error.message} Si no tienes backend, sube el cronograma en JSON para guardarlo localmente.`, 'error');
+        }
+      });
       byId('saveEventBtn').addEventListener('click', async () => { const event = selectedEvent(); if (!event || !state.payload?.currentWeek?.id) return; try { await requestJson(`/api/admin/schedules/${state.payload.currentWeek.id}/events/${event.id}`, { method:'PUT', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ dia: byId('editDay').value, titulo: byId('editTitle').value, hora: byId('editTime').value, fecha: byId('editDate').value, descripcion: byId('editDescription').value, mensaje: byId('editMessage').value, tipo: byId('editDay').value.toLowerCase().includes('especial') ? 'especial' : event.tipo }) }); showNotice('panelNotice', 'Evento actualizado correctamente.', 'success'); await fetchCurrent(); } catch (error) { showNotice('panelNotice', error.message, 'error'); } });
       byId('uploadInvitationBtn').addEventListener('click', async () => { const event = selectedEvent(); if (!event || !state.payload?.currentWeek?.id) return; const formData = new FormData(); formData.append('scheduleId', state.payload.currentWeek.id); formData.append('eventId', event.id); formData.append('descripcion_completa', byId('fullInvitation').value); formData.append('video_url', byId('videoUrl').value); const file = byId('invitationFile').files[0]; if (file) formData.append('media', file); try { await requestJson('/api/admin/invitations/upload', { method:'POST', body: formData }); showNotice('panelNotice', 'Invitación guardada correctamente.', 'success'); await fetchCurrent(); } catch (error) { showNotice('panelNotice', error.message, 'error'); } });
       document.getElementById('createUserBtn').addEventListener('click', async () => {
