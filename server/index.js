@@ -46,7 +46,7 @@ const normalizeSchedule = (input) => {
       id: event.id || `${format(startDate, 'yyyyMMdd')}-${index + 1}`,
       dia: event.dia,
       titulo: event.titulo,
-      hora: event.hora,
+      hora: getDefaultHourByDay(event.dia) || event.hora,
       descripcion: event.descripcion,
       tipo: event.tipo || 'culto',
       mensaje: event.mensaje || `Te esperamos este ${event.dia?.toLowerCase?.() || 'día'} en IPUC Villa del Río.`,
@@ -61,6 +61,13 @@ const normalizeDay = (value) =>
     .toLowerCase()
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '');
+
+const getDefaultHourByDay = (day) => {
+  const normalized = normalizeDay(day);
+  if (['martes', 'jueves', 'sabado'].includes(normalized)) return '7:00 PM';
+  if (normalized === 'domingo') return '10:00 AM';
+  return '';
+};
 
 const resolvePublicUrl = (req, value) => {
   if (!value) return '';
@@ -137,10 +144,21 @@ const getCurrentWeekSchedule = (db) => {
   return previous || sorted[0] || null;
 };
 
+const enforceDefaultHours = (events = []) =>
+  events.map((event) => {
+    const defaultHour = getDefaultHourByDay(event.dia);
+    if (!defaultHour) return event;
+    return {
+      ...event,
+      hora: defaultHour,
+    };
+  });
+
 const ensureDefaultWeeklyServices = (schedule) => {
   if (!schedule) return schedule;
-  const hasThursday = schedule.eventos.some((event) => String(event.dia || '').toLowerCase() === 'jueves');
-  const hasSunday = schedule.eventos.some((event) => String(event.dia || '').toLowerCase() === 'domingo');
+  const eventsWithHours = enforceDefaultHours(schedule.eventos || []);
+  const hasThursday = eventsWithHours.some((event) => normalizeDay(event.dia) === 'jueves');
+  const hasSunday = eventsWithHours.some((event) => normalizeDay(event.dia) === 'domingo');
   const start = parseISO(schedule.fecha_inicio_semana);
   const thursday = new Date(start);
   thursday.setDate(start.getDate() + 3);
@@ -168,7 +186,7 @@ const ensureDefaultWeeklyServices = (schedule) => {
       fecha: format(sunday, 'yyyy-MM-dd'),
       dia: 'Domingo',
       titulo: 'Escuela Dominical',
-      hora: '9:00 AM',
+      hora: '10:00 AM',
       descripcion: 'Espacio dominical de formación bíblica para toda la iglesia.',
       tipo: 'escuela-dominical',
       mensaje: 'Acompáñanos este domingo en nuestra Escuela Dominical.',
@@ -178,7 +196,7 @@ const ensureDefaultWeeklyServices = (schedule) => {
 
   return {
     ...schedule,
-    eventos: [...schedule.eventos, ...additions].sort((a, b) => (a.fecha || '').localeCompare(b.fecha || '')),
+    eventos: [...eventsWithHours, ...additions].sort((a, b) => (a.fecha || '').localeCompare(b.fecha || '')),
   };
 };
 
@@ -349,7 +367,8 @@ app.post('/api/admin/schedules/upload', upload.single('file'), (req, res) => {
     }
 
     const normalized = schedules.map(normalizeSchedule);
-    const merged = [...db.schedules.filter((existing) => !normalized.some((item) => item.id === existing.id)), ...normalized]
+    const uploadedWeekStarts = new Set(normalized.map((item) => item.fecha_inicio_semana));
+    const merged = [...db.schedules.filter((existing) => !uploadedWeekStarts.has(existing.fecha_inicio_semana)), ...normalized]
       .sort((a, b) => a.fecha_inicio_semana.localeCompare(b.fecha_inicio_semana));
 
     writeDb({ ...db, schedules: merged });

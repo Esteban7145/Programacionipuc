@@ -71,9 +71,24 @@ export const createFallbackSchedulePayload = () => {
   sunday.setDate(monday.getDate() + 6);
   const thursday = new Date(monday);
   thursday.setDate(monday.getDate() + 3);
+  const tuesday = new Date(monday);
+  tuesday.setDate(monday.getDate() + 1);
+  const saturday = new Date(monday);
+  saturday.setDate(monday.getDate() + 5);
 
   const label = `Semana del ${toIsoDate(monday)} al ${toIsoDate(sunday)}`;
   const events = [
+    {
+      id: `fallback-martes-${toIsoDate(tuesday)}`,
+      fecha: toIsoDate(tuesday),
+      dia: DAY_NAMES[tuesday.getDay()],
+      titulo: 'Culto de Martes',
+      hora: '7:00 PM',
+      descripcion: 'Servicio congregacional para fortalecer la fe y la comunión.',
+      tipo: 'culto',
+      mensaje: 'Te esperamos este martes para adorar juntos al Señor.',
+      media: '',
+    },
     {
       id: `fallback-jueves-${toIsoDate(thursday)}`,
       fecha: toIsoDate(thursday),
@@ -86,11 +101,22 @@ export const createFallbackSchedulePayload = () => {
       media: '',
     },
     {
+      id: `fallback-sabado-${toIsoDate(saturday)}`,
+      fecha: toIsoDate(saturday),
+      dia: DAY_NAMES[saturday.getDay()],
+      titulo: 'Culto de Sábado',
+      hora: '7:00 PM',
+      descripcion: 'Servicio especial para toda la congregación.',
+      tipo: 'culto',
+      mensaje: 'Acompáñanos este sábado en un tiempo de adoración y palabra.',
+      media: '',
+    },
+    {
       id: `fallback-domingo-${toIsoDate(sunday)}`,
       fecha: toIsoDate(sunday),
       dia: DAY_NAMES[sunday.getDay()],
       titulo: 'Escuela Dominical',
-      hora: '9:00 AM',
+      hora: '10:00 AM',
       descripcion: 'Espacio dominical de formación bíblica para toda la iglesia.',
       tipo: 'escuela-dominical',
       mensaje: 'Acompáñanos este domingo en nuestra Escuela Dominical.',
