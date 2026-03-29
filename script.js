@@ -101,7 +101,19 @@ function buildEventsByDate() {
     }
   }
 
-  committeeCultoSchedule.forEach(({ committee, dates }) => dates.forEach((date) => addEvent(map, date, { title: `Culto ${committee}`, time: "07:00 PM", type: "culto", description: "Programación oficial de culto", responsable: committee })));
+  committeeCultoSchedule.forEach(({ committee, dates }) =>
+    dates.forEach((date) => {
+      const dateObj = parseKey(date);
+      const cultoTime = dateObj.getDay() === 0 ? "10:00 AM" : "07:00 PM";
+      addEvent(map, date, {
+        title: `Culto ${committee}`,
+        time: cultoTime,
+        type: "culto",
+        description: "Programación oficial de culto",
+        responsable: committee
+      });
+    })
+  );
 
   map.forEach((events, date) => {
     if (events.some((event) => event.type === "culto" && event.responsable)) map.set(date, events.filter((event) => !event.isDefault));
