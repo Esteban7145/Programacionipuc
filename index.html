@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feliz Cumpleaños Mopris 🎉</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Orbitron:wght@500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <canvas id="space-canvas" aria-hidden="true"></canvas>
+    <canvas id="particles-canvas" aria-hidden="true"></canvas>
+    <div class="cursor-glow" aria-hidden="true"></div>
+
+    <header class="top-nav glass-panel">
+      <button class="nav-btn" data-target="landing">Inicio</button>
+      <button class="nav-btn" data-target="message-1">Mensaje 1</button>
+      <button class="nav-btn" data-target="message-2">Mensaje 2</button>
+      <button class="nav-btn" data-target="message-3">Mensaje 3</button>
+      <button class="nav-btn" data-target="nickname">Mopris / Ñobo</button>
+      <button class="nav-btn" data-target="final">Final</button>
+      <button class="sound-toggle" id="sound-toggle" aria-pressed="false">🔈 Ambient</button>
+    </header>
+
+    <main>
+      <section id="landing" class="page-section">
+        <div class="glass-card hero-card" data-tilt>
+          <p class="section-tag">COSMIC CELEBRATION</p>
+          <h1>Feliz Cumpleaños Mopris 🎉</h1>
+          <p class="subtitle">Para Jorge Andrés (Ñobo)</p>
+          <button id="enter-btn" class="neon-btn">Entrar</button>
+        </div>
+      </section>
+
+      <section id="message-1" class="page-section">
+        <article class="glass-card message-card" data-tilt>
+          <h2>Mensaje 01</h2>
+          <p class="animated-line">Hoy celebro la vida de alguien demasiado especial...</p>
+          <p class="animated-line delay-1">Más que un primo, eres un hermano para mí.</p>
+        </article>
+      </section>
+
+      <section id="message-2" class="page-section">
+        <article class="glass-card message-card" data-tilt>
+          <h2>Mensaje 02</h2>
+          <p class="animated-line">
+            Gracias por cada momento, por cada risa, por cada locura que hemos vivido.
+          </p>
+          <p class="animated-line delay-1">Y por todas las que aún nos faltan por vivir.</p>
+        </article>
+      </section>
+
+      <section id="message-3" class="page-section">
+        <article class="glass-card message-card" data-tilt>
+          <h2>Mensaje 03</h2>
+          <p class="animated-line">Que Dios bendiga tu vida, tus sueños y cada paso que des.</p>
+          <p class="animated-line delay-1">Siempre voy a estar para ti, pase lo que pase.</p>
+        </article>
+      </section>
+
+      <section id="nickname" class="page-section">
+        <article class="glass-card nickname-card" data-tilt>
+          <h2>Alias Cósmicos</h2>
+          <div class="morph-wrap">
+            <span class="morph-text" id="morph-text">Mopris</span>
+          </div>
+          <p>Una vibra única, una hermandad eterna.</p>
+        </article>
+      </section>
+
+      <section id="final" class="page-section">
+        <article class="glass-card final-card" data-tilt>
+          <h2>Último Mensaje</h2>
+          <p class="final-text">Feliz cumpleaños, hermano ❤️</p>
+          <button id="burst-btn" class="neon-btn secondary">Explosión de Estrellas</button>
+        </article>
+      </section>
+    </main>
+
+    <audio id="ambient-audio" loop preload="none">
+      <source src="https://cdn.pixabay.com/download/audio/2022/01/20/audio_32676cbca9.mp3?filename=space-ambient-110624.mp3" type="audio/mpeg" />
+    </audio>
+
+    <script src="script.js"></script>
+  </body>
+</html>
