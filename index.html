@@ -14,76 +14,95 @@
   </head>
   <body>
     <canvas id="space-canvas" aria-hidden="true"></canvas>
-    <canvas id="particles-canvas" aria-hidden="true"></canvas>
+    <canvas id="fx-canvas" aria-hidden="true"></canvas>
     <div class="cursor-glow" aria-hidden="true"></div>
 
-    <header class="top-nav glass-panel">
-      <button class="nav-btn" data-target="landing">Inicio</button>
-      <button class="nav-btn" data-target="message-1">Mensaje 1</button>
-      <button class="nav-btn" data-target="message-2">Mensaje 2</button>
-      <button class="nav-btn" data-target="message-3">Mensaje 3</button>
-      <button class="nav-btn" data-target="nickname">Mopris / Ñobo</button>
-      <button class="nav-btn" data-target="final">Final</button>
+    <header class="top-bar glass-panel">
+      <p class="book-label">✨ Regalo Digital de Cumpleaños</p>
       <button class="sound-toggle" id="sound-toggle" aria-pressed="false">🔈 Ambient</button>
     </header>
 
-    <main>
-      <section id="landing" class="page-section">
-        <div class="glass-card hero-card" data-tilt>
-          <p class="section-tag">COSMIC CELEBRATION</p>
+    <main class="book-wrap">
+      <article class="book glass-panel" id="book" data-page="0">
+        <section class="page active" id="page-landing">
+          <p class="section-tag">COSMIC BIRTHDAY EXPERIENCE</p>
           <h1>Feliz Cumpleaños Mopris 🎉</h1>
           <p class="subtitle">Para Jorge Andrés (Ñobo)</p>
-          <button id="enter-btn" class="neon-btn">Entrar</button>
-        </div>
-      </section>
-
-      <section id="message-1" class="page-section">
-        <article class="glass-card message-card" data-tilt>
-          <h2>Mensaje 01</h2>
-          <p class="animated-line">Hoy celebro la vida de alguien demasiado especial...</p>
-          <p class="animated-line delay-1">Más que un primo, eres un hermano para mí.</p>
-        </article>
-      </section>
-
-      <section id="message-2" class="page-section">
-        <article class="glass-card message-card" data-tilt>
-          <h2>Mensaje 02</h2>
-          <p class="animated-line">
-            Gracias por cada momento, por cada risa, por cada locura que hemos vivido.
+          <p class="body-text">
+            Hoy el universo entero se enciende para celebrar tu vida. Entre estrellas,
+            códigos y sueños infinitos, este regalo digital está hecho para recordarte
+            lo increíble que eres y lo mucho que te quiero, hermano.
           </p>
-          <p class="animated-line delay-1">Y por todas las que aún nos faltan por vivir.</p>
-        </article>
-      </section>
+          <div class="candle-row" aria-hidden="true">
+            <span class="candle">🕯️</span><span class="candle">🕯️</span><span class="candle">🕯️</span>
+          </div>
+        </section>
 
-      <section id="message-3" class="page-section">
-        <article class="glass-card message-card" data-tilt>
+        <section class="page" id="page-1">
+          <h2>Mensaje 01</h2>
+          <p class="body-text">
+            Hoy celebro la vida de alguien demasiado especial. Celebro tu corazón noble,
+            tu energía única y esa forma tan tuya de hacer que cualquier momento sencillo
+            se vuelva inolvidable. Más que un primo, eres un hermano que la vida me regaló,
+            un compañero de aventuras y una parte esencial de mi historia.
+          </p>
+        </section>
+
+        <section class="page" id="page-2">
+          <h2>Mensaje 02</h2>
+          <p class="body-text">
+            Gracias por cada momento, por cada risa, por cada locura que hemos vivido.
+            Gracias por estar en las buenas y también en los días difíciles, cuando una
+            palabra tuya bastaba para devolverme la calma. Y gracias por seguir soñando
+            conmigo, porque todavía nos faltan mil historias por escribir juntos.
+          </p>
+        </section>
+
+        <section class="page" id="page-3">
           <h2>Mensaje 03</h2>
-          <p class="animated-line">Que Dios bendiga tu vida, tus sueños y cada paso que des.</p>
-          <p class="animated-line delay-1">Siempre voy a estar para ti, pase lo que pase.</p>
-        </article>
-      </section>
+          <p class="body-text">
+            Que Dios bendiga tu vida, tus sueños y cada paso que des. Que abra puertas
+            enormes para ti, que te regale salud, paz y alegría, y que nunca te falte
+            fuerza para conquistar todo lo que anhelas. Pase lo que pase, siempre voy a
+            estar para ti, con lealtad y con todo el cariño del mundo.
+          </p>
+        </section>
 
-      <section id="nickname" class="page-section">
-        <article class="glass-card nickname-card" data-tilt>
+        <section class="page" id="page-nickname">
           <h2>Alias Cósmicos</h2>
           <div class="morph-wrap">
             <span class="morph-text" id="morph-text">Mopris</span>
           </div>
-          <p>Una vibra única, una hermandad eterna.</p>
-        </article>
-      </section>
+          <p class="body-text">
+            Mopris, Ñobo... dos nombres para una misma alma brillante. Tu esencia es
+            inconfundible: auténtica, divertida y poderosa. Donde tú estás, todo vibra
+            más alto.
+          </p>
+        </section>
 
-      <section id="final" class="page-section">
-        <article class="glass-card final-card" data-tilt>
+        <section class="page" id="page-final">
           <h2>Último Mensaje</h2>
           <p class="final-text">Feliz cumpleaños, hermano ❤️</p>
-          <button id="burst-btn" class="neon-btn secondary">Explosión de Estrellas</button>
-        </article>
-      </section>
+          <p class="body-text">
+            Que este nuevo año te sorprenda con amor, propósito, viajes, metas cumplidas,
+            y momentos que se queden tatuados en el alma. Brindo por ti hoy y siempre.
+          </p>
+          <button id="burst-btn" class="neon-btn">Explosión de celebración</button>
+        </section>
+      </article>
+
+      <nav class="book-controls glass-panel" aria-label="Controles del libro">
+        <button id="prev-btn" class="neon-btn" disabled>⟵ Anterior</button>
+        <span id="page-indicator">Página 1 de 6</span>
+        <button id="next-btn" class="neon-btn">Siguiente ⟶</button>
+      </nav>
     </main>
 
     <audio id="ambient-audio" loop preload="none">
-      <source src="https://cdn.pixabay.com/download/audio/2022/01/20/audio_32676cbca9.mp3?filename=space-ambient-110624.mp3" type="audio/mpeg" />
+      <source
+        src="https://cdn.pixabay.com/download/audio/2022/01/20/audio_32676cbca9.mp3?filename=space-ambient-110624.mp3"
+        type="audio/mpeg"
+      />
     </audio>
 
     <script src="script.js"></script>
