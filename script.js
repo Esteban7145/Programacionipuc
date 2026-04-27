@@ -33,7 +33,8 @@ const dayView=document.getElementById("dayView");
 const modal=document.getElementById("eventModal");
 
 let currentView='year';
-let activeDate=new Date(year,0,1);
+const now=new Date();
+let activeDate=(now.getFullYear()===year)?new Date(now.getFullYear(),now.getMonth(),now.getDate()):new Date(year,0,1);
 
 const formatDateKey=(y,m,d)=>`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
 const dateToKey=(d)=>formatDateKey(d.getFullYear(),d.getMonth(),d.getDate());
@@ -69,6 +70,7 @@ function createEventButton(event,dateObj){const b=document.createElement('button
 
 function renderMonthSection(month,container,isOverview=false){
   const section=document.createElement('section');section.className='month';
+  if(isOverview) section.classList.add('month-compact');
   const header=document.createElement('div');header.className='month-header';header.textContent=`${monthNames[month]} ${year}`;
   if(isOverview){header.style.cursor='pointer';header.title='Abrir vista mensual';header.addEventListener('click',()=>{activeDate=new Date(year,month,1);setView('month');});}
   section.append(header);
@@ -79,8 +81,14 @@ function renderMonthSection(month,container,isOverview=false){
   for(let d=1;d<=dim;d++){
     const dateObj=new Date(year,month,d);const key=dateToKey(dateObj);const cell=document.createElement('article');cell.className='day';
     const num=document.createElement('div');num.className='day-number';num.textContent=d;cell.append(num);
-    filteredEvents(key).forEach((ev)=>cell.append(createEventButton(ev,dateObj)));
-    cell.addEventListener('click',()=>{activeDate=dateObj;setView('day');});
+    const isToday=now.getFullYear()===year && now.getMonth()===month && now.getDate()===d;
+    if(isToday) cell.classList.add('today');
+
+    if(!isOverview){
+      filteredEvents(key).forEach((ev)=>cell.append(createEventButton(ev,dateObj)));
+    }
+
+    cell.addEventListener('click',()=>{activeDate=dateObj;setView(isOverview?'day':'day');});
     grid.append(cell);
   }
   section.append(grid);container.append(section);

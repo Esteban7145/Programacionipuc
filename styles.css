@@ -242,8 +242,11 @@ h1 { margin: 0; font-family: "Playfair Display", serif; font-size: clamp(1.2rem,
   font-weight: 600;
 }
 
-.year-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
-.year-grid .month { min-height: 420px; }
+.year-grid { grid-template-columns: repeat(4, minmax(0,1fr)); gap: .7rem; max-height: calc(100vh - 320px); }
+.year-grid .month { min-height: auto; }
+.month-compact .day { min-height: clamp(30px, 3.2vh, 40px); padding: .15rem; overflow: hidden; }
+.month-compact .day-number { font-size: .72rem; padding: .1rem .3rem; }
+.month-compact .weekdays div { font-size: .62rem; padding: .25rem; }
 
 .legend .chip {
   border: 0;
@@ -253,5 +256,11 @@ h1 { margin: 0; font-family: "Playfair Display", serif; font-size: clamp(1.2rem,
 .legend .chip:not(.active) { opacity: .45; filter: grayscale(.3); }
 
 @media (max-width: 1200px) {
+  .year-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+}
+@media (max-width: 900px) {
+  .year-grid { grid-template-columns: repeat(2, minmax(0,1fr)); max-height: none; }
+}
+@media (max-width: 560px) {
   .year-grid { grid-template-columns: 1fr; }
 }
