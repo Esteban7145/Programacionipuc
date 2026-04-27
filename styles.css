@@ -264,3 +264,21 @@ h1 { margin: 0; font-family: "Playfair Display", serif; font-size: clamp(1.2rem,
 @media (max-width: 560px) {
   .year-grid { grid-template-columns: 1fr; }
 }
+
+
+.day-type-bars {
+  margin-top: auto;
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+}
+.type-bar {
+  width: 14px;
+  height: 5px;
+  border-radius: 999px;
+}
+.type-bar.culto { background: var(--blue); }
+.type-bar.oracion { background: var(--green); }
+.type-bar.vigilia { background: var(--purple); }
+.type-bar.ayuno { background: var(--orange); }
+.type-bar.especial { background: var(--red); }

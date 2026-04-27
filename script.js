@@ -58,6 +58,7 @@ function buildEventsByDate(){
 const eventsByDate=buildEventsByDate();
 
 function filteredEvents(dateKey){return (eventsByDate.get(dateKey)||[]).filter(e=>activeFilters.has(e.type));}
+function dayTypes(dateKey){return [...new Set((eventsByDate.get(dateKey)||[]).map(e=>e.type))];}
 
 function setProgressiveImage(img,candidates=[]){const c=[...new Set(candidates)];let i=0;const load=()=>{img.src=c[i]||fallbackImage};img.onerror=()=>{i++;if(i<c.length)load();};load();}
 const churchLogo=document.getElementById('churchLogo');if(churchLogo)setProgressiveImage(churchLogo,["DECOM VILLA DEL RIO.png","decom-villa-del-rio.png","logo-villa-del-rio.png",logoFallback]);
@@ -84,11 +85,19 @@ function renderMonthSection(month,container,isOverview=false){
     const isToday=now.getFullYear()===year && now.getMonth()===month && now.getDate()===d;
     if(isToday) cell.classList.add('today');
 
-    if(!isOverview){
+    if(isOverview){
+      const types=dayTypes(key);
+      if(types.length){
+        const bars=document.createElement('div');
+        bars.className='day-type-bars';
+        types.forEach((type)=>{const bar=document.createElement('span');bar.className=`type-bar ${type}`;bars.append(bar);});
+        cell.append(bars);
+      }
+    } else {
       filteredEvents(key).forEach((ev)=>cell.append(createEventButton(ev,dateObj)));
     }
 
-    cell.addEventListener('click',()=>{activeDate=dateObj;setView(isOverview?'day':'day');});
+    cell.addEventListener('click',()=>{activeDate=dateObj;setView('day');});
     grid.append(cell);
   }
   section.append(grid);container.append(section);
@@ -112,7 +121,26 @@ document.getElementById('viewMonth').addEventListener('click',()=>setView('month
 document.getElementById('viewWeek').addEventListener('click',()=>setView('week'));
 document.getElementById('viewDay').addEventListener('click',()=>setView('day'));
 
-document.querySelectorAll('.legend .chip').forEach((chip)=>{chip.addEventListener('click',()=>{const type=chip.dataset.type;if(activeFilters.has(type))activeFilters.delete(type);else activeFilters.add(type);chip.classList.toggle('active',activeFilters.has(type));setView(currentView);});});
+function findNearestEventByType(type){
+  const sorted=[...eventsByDate.keys()].sort();
+  const currentKey=dateToKey(activeDate);
+  let candidate=sorted.find((k)=>k>=currentKey && (eventsByDate.get(k)||[]).some((e)=>e.type===type));
+  if(!candidate){
+    candidate=sorted.find((k)=>(eventsByDate.get(k)||[]).some((e)=>e.type===type));
+  }
+  return candidate;
+}
+
+document.querySelectorAll('.legend .chip').forEach((chip)=>{
+  chip.addEventListener('click',()=>{
+    const type=chip.dataset.type;
+    const nearest=findNearestEventByType(type);
+    if(nearest){
+      activeDate=parseKey(nearest);
+      setView('day');
+    }
+  });
+});
 
 function initVerseCarousel(){const v=document.getElementById('verseText');let i=0;v.textContent=verses[i];setInterval(()=>{i=(i+1)%verses.length;v.textContent=verses[i];},7000);} 
 
