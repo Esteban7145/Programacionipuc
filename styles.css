@@ -19,7 +19,7 @@ html, body {
   padding: 0;
   font-family: Inter, system-ui, sans-serif;
   color: var(--text);
-  background: radial-gradient(circle at top, #fff 0%, #f5f9ff 35%, var(--bg) 100%);
+  background: radial-gradient(circle at top, #f8fbff 0%, #eef5ff 32%, #dbe9ff 100%);
 }
 
 .topbar {
@@ -36,6 +36,23 @@ html, body {
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
+}
+.topbar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #6ea2ff, #a48dff, transparent);
+}
+
+.calendar-actions { display: flex; gap: .45rem; flex-wrap: wrap; justify-content: end; }
+.btn-glow {
+  background: linear-gradient(130deg, #1f74ff, #6f6dff);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.15) inset, 0 0 18px rgba(82,123,255,.55);
 }
 
 .brand { display: flex; align-items: center; gap: 1rem; }
@@ -66,6 +83,7 @@ h1 { margin: 0; font-family: "Playfair Display", serif; font-size: clamp(1.2rem,
   border-radius: 16px;
   padding: .9rem 1rem;
   box-shadow: var(--shadow);
+  position: relative;
 }
 
 .verse-panel h2 { margin: 0 0 .2rem; font-size: .95rem; letter-spacing: .02em; color: #ffe6a8; }
@@ -83,11 +101,12 @@ h1 { margin: 0; font-family: "Playfair Display", serif; font-size: clamp(1.2rem,
 
 .calendar-container { display: grid; gap: 1.4rem; }
 .month {
-  background: var(--surface);
+  background: linear-gradient(145deg, #ffffff, #f2f7ff);
   border: 1px solid var(--border);
   border-radius: 18px;
   overflow: hidden;
   box-shadow: var(--shadow);
+  position: relative;
 }
 .month-header {
   padding: .9rem 1rem;
@@ -160,6 +179,7 @@ h1 { margin: 0; font-family: "Playfair Display", serif; font-size: clamp(1.2rem,
   border: 1px solid var(--border);
   border-radius: 18px;
   box-shadow: var(--shadow);
+  position: relative;
   padding: 1rem;
 }
 .week-title, .day-title { margin: 0 0 .8rem; font-size: clamp(1rem, 1.8vw, 1.35rem); }
@@ -168,7 +188,7 @@ h1 { margin: 0; font-family: "Playfair Display", serif; font-size: clamp(1.2rem,
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: .55rem;
-  background: #f9fbff;
+  background: linear-gradient(150deg, #fcfdff, #eef5ff);
   min-height: 170px;
 }
 .week-card h4 { margin: 0 0 .45rem; font-size: .85rem; }

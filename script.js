@@ -341,5 +341,120 @@ function initVerseCarousel() {
   }, 7000);
 }
 
+document.getElementById("downloadIcs")?.addEventListener("click", downloadIcsFile);
+document.getElementById("shareIcs")?.addEventListener("click", () => {
+  shareIcsFile().catch(() => downloadIcsFile());
+});
+
+
+function escapeIcsText(text = "") {
+  return String(text)
+    .replace(/\\/g, "\\\\")
+    .replace(/\n/g, "\\n")
+    .replace(/,/g, "\\,")
+    .replace(/;/g, "\\;");
+}
+
+function parseStartEnd(dateKey, event) {
+  const date = parseKey(dateKey);
+  const lower = (event.time || "").toLowerCase();
+
+  if (event.type === "ayuno" || lower.includes("jornada")) {
+    const yyyy = date.getFullYear();
+    const mm = String(date.getMonth() + 1).padStart(2, "0");
+    const dd = String(date.getDate()).padStart(2, "0");
+    const next = addDays(date, 1);
+    const y2 = next.getFullYear();
+    const m2 = String(next.getMonth() + 1).padStart(2, "0");
+    const d2 = String(next.getDate()).padStart(2, "0");
+    return { allDay: true, start: `${yyyy}${mm}${dd}`, end: `${y2}${m2}${d2}` };
+  }
+
+  const parseTime = (raw, fallbackHour = 19) => {
+    const cleaned = raw.replace(/\./g, "").trim();
+    const match = cleaned.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+    if (!match) return { h: fallbackHour, m: 0 };
+    let h = Number(match[1]);
+    const m = Number(match[2]);
+    const mer = match[3].toUpperCase();
+    if (mer === "PM" && h !== 12) h += 12;
+    if (mer === "AM" && h === 12) h = 0;
+    return { h, m };
+  };
+
+  const segments = (event.time || "07:00 PM").split("-");
+  const startT = parseTime(segments[0], event.type === "culto" && date.getDay() === 0 ? 10 : 19);
+  const endT = segments[1] ? parseTime(segments[1], startT.h + 2) : { h: Math.min(startT.h + 2, 23), m: startT.m };
+
+  const toLocalIcs = (d, t) => `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, "0")}${String(d.getDate()).padStart(2, "0")}T${String(t.h).padStart(2, "0")}${String(t.m).padStart(2, "0")}00`;
+
+  return { allDay: false, start: toLocalIcs(date, startT), end: toLocalIcs(date, endT) };
+}
+
+function buildIcsCalendar() {
+  const lines = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//IPUC Villa del Río//Cronograma 2026//ES",
+    "CALSCALE:GREGORIAN",
+    "METHOD:PUBLISH"
+  ];
+
+  const stamp = new Date().toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+
+  [...eventsByDate.entries()].sort(([a], [b]) => a.localeCompare(b)).forEach(([dateKey, events]) => {
+    events.forEach((event, idx) => {
+      const timing = parseStartEnd(dateKey, event);
+      const uid = `${dateKey}-${idx}-${event.title.replace(/\s+/g, "-")}@ipuc-villadelrio`;
+      lines.push("BEGIN:VEVENT");
+      lines.push(`UID:${uid}`);
+      lines.push(`DTSTAMP:${stamp}`);
+      if (timing.allDay) {
+        lines.push(`DTSTART;VALUE=DATE:${timing.start}`);
+        lines.push(`DTEND;VALUE=DATE:${timing.end}`);
+      } else {
+        lines.push(`DTSTART:${timing.start}`);
+        lines.push(`DTEND:${timing.end}`);
+      }
+      lines.push(`SUMMARY:${escapeIcsText(event.title)}`);
+      lines.push(`DESCRIPTION:${escapeIcsText(`${event.description || ""}${event.responsable ? ` | Encargados: ${event.responsable}` : ""}`)}`);
+      lines.push("LOCATION:IPUC Villa del Río");
+      lines.push("END:VEVENT");
+    });
+  });
+
+  lines.push("END:VCALENDAR");
+  return lines.join("\r\n");
+}
+
+function downloadIcsFile() {
+  const ics = buildIcsCalendar();
+  const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "IPUC-Villa-del-Rio-Cronograma-2026.ics";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+async function shareIcsFile() {
+  const ics = buildIcsCalendar();
+  const file = new File([ics], "IPUC-Villa-del-Rio-Cronograma-2026.ics", { type: "text/calendar" });
+
+  if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    await navigator.share({
+      title: "Cronograma 2026 - IPUC Villa del Río",
+      text: "Calendario oficial 2026",
+      files: [file]
+    });
+  } else {
+    downloadIcsFile();
+    alert("Tu dispositivo no soporta compartir archivos directamente. Se descargó el .ICS para importarlo en tu calendario.");
+  }
+}
+
 setView("month");
 initVerseCarousel();
