@@ -6,10 +6,7 @@
     <title>Cronograma 2026 - IPUC Villa del Río</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -24,7 +21,8 @@
 
       <div class="right-controls">
         <div class="view-switch" aria-label="Cambiar vista">
-          <button id="viewMonth" class="btn btn-primary">Mes</button>
+          <button id="viewYear" class="btn btn-primary">Año</button>
+          <button id="viewMonth" class="btn">Mes</button>
           <button id="viewWeek" class="btn">Semana</button>
           <button id="viewDay" class="btn">Día</button>
         </div>
@@ -37,9 +35,13 @@
           <button id="downloadIcs" class="btn btn-glow">📅 Descargar .ICS</button>
           <button id="shareIcs" class="btn">📲 Compartir calendario</button>
         </div>
-
       </div>
     </header>
+
+    <section class="schedule-info">
+      <strong>Horarios base de cultos:</strong>
+      Martes, Jueves y Sábados 07:00 PM · Domingos 10:00 AM
+    </section>
 
     <section class="verse-panel" aria-live="polite">
       <h2>Palabra para hoy</h2>
@@ -47,19 +49,18 @@
     </section>
 
     <main class="calendar-shell">
-      <section id="monthView" class="view-panel active" aria-live="polite">
-        <div id="calendarContainer" class="calendar-container"></div>
-      </section>
-      <section id="weekView" class="view-panel" aria-live="polite"></section>
-      <section id="dayView" class="view-panel" aria-live="polite"></section>
+      <section id="yearView" class="view-panel active"><div id="yearContainer" class="calendar-container year-grid"></div></section>
+      <section id="monthView" class="view-panel"><div id="calendarContainer" class="calendar-container"></div></section>
+      <section id="weekView" class="view-panel"></section>
+      <section id="dayView" class="view-panel"></section>
     </main>
 
-    <aside class="legend" aria-label="Leyenda de colores">
-      <span class="chip culto">Culto</span>
-      <span class="chip oracion">Oración</span>
-      <span class="chip vigilia">Vigilia</span>
-      <span class="chip ayuno">Ayuno</span>
-      <span class="chip especial">Evento especial</span>
+    <aside class="legend" aria-label="Filtros de evento">
+      <button class="chip culto active" data-type="culto">Culto</button>
+      <button class="chip oracion active" data-type="oracion">Oración</button>
+      <button class="chip vigilia active" data-type="vigilia">Vigilia</button>
+      <button class="chip ayuno active" data-type="ayuno">Ayuno</button>
+      <button class="chip especial active" data-type="especial">Evento especial</button>
     </aside>
 
     <div id="eventModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
