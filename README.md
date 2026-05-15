@@ -93,3 +93,14 @@ python server.py
 ```
 
 Abre: `http://localhost:8000/`
+
+
+## Despliegue en Netlify (evitar 404)
+
+Este repositorio ahora incluye una página estática raíz `index.html` para que Netlify no responda "Página no encontrada".
+
+También se agregan reglas de fallback:
+- `netlify.toml`
+- `public/_redirects`
+
+Con eso, cualquier ruta inválida redirige a `/index.html` con estado `200`.
