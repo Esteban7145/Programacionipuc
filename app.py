@@ -11,6 +11,7 @@ import tempfile
 import shutil
 import threading
 import sys
+import subprocess
 
 DB_PATH = "motopark.db"
 APP_VERSION = "1.1.0"
@@ -229,6 +230,7 @@ class MainApp(tk.Tk):
     def setup_shortcuts(self):
         self.bind("<F11>", lambda _e: self.attributes("-fullscreen", not self.attributes("-fullscreen")))
         self.bind("<Escape>", lambda _e: self.attributes("-fullscreen", False))
+        self.bind("<F2>", lambda _e: self.open_quick_salida())
 
     def big_button(self, parent, text, cmd, color="#1f6feb"):
         return tk.Button(parent, text=text, command=cmd, bg=color, fg="white", font=("Segoe UI", 16, "bold"), pady=12)
@@ -239,6 +241,13 @@ class MainApp(tk.Tk):
 
     def build_dashboard(self):
         f = self.tabs["Dashboard"]
+        quick = tk.Frame(f, bg="#161b22", padx=12, pady=10)
+        quick.pack(fill="x", padx=10, pady=(0, 10))
+        tk.Label(quick, text="Ingreso rápido por placa", bg="#161b22", fg="#58a6ff", font=("Segoe UI", 12, "bold")).pack(side="left")
+        self.quick_placa = tk.Entry(quick, font=("Segoe UI", 18, "bold"), bg="#0d1117", fg="white", insertbackground="white", width=16)
+        self.quick_placa.pack(side="left", padx=12)
+        self.quick_placa.bind("<Return>", lambda _e: self.ingresar_moto(placa_override=self.quick_placa.get(), rapido=True))
+        tk.Label(quick, text="Escribe placa y ENTER para ingresar e imprimir", bg="#161b22", fg="#8b949e").pack(side="left", padx=8)
         self.cards = {}
         grid = tk.Frame(f, bg="#0d1117")
         grid.pack(fill="x", pady=10)
@@ -277,10 +286,14 @@ class MainApp(tk.Tk):
         self.inp["Placa"].focus_set()
         self.inp["Placa"].bind("<Return>", lambda _e: self.ingresar_moto())
 
-    def ingresar_moto(self):
-        placa = self.inp["Placa"].get().strip().upper()
+    def ingresar_moto(self, placa_override=None, rapido=False):
+        placa_raw = placa_override if placa_override is not None else self.inp["Placa"].get()
+        placa = placa_raw.strip().upper()
         if not placa:
             return messagebox.showwarning("Validación", "Placa es obligatoria")
+        existe = self.db.conn.execute("SELECT 1 FROM movimientos WHERE placa=? AND status='PARKED'", (placa,)).fetchone()
+        if existe:
+            return messagebox.showwarning("Duplicado", f"La moto {placa} ya se encuentra en el parqueadero")
         ticket = self.db.conn.execute("SELECT COALESCE(MAX(ticket_no),0)+1 n FROM movimientos").fetchone()["n"]
         self.db.conn.execute('''INSERT INTO movimientos(ticket_no,placa,cliente,service_type,entrada_at,locker_no,cascos,observaciones,amount,status)
              VALUES (?,?,?,?,?,?,?,?,?,?)''', (
@@ -295,6 +308,9 @@ class MainApp(tk.Tk):
         self.print_ticket(ticket, entrada=True)
         self.inp["Placa"].delete(0, "end")
         self.inp["Placa"].focus_set()
+        if hasattr(self, "quick_placa"):
+            self.quick_placa.delete(0, "end")
+            self.quick_placa.focus_set()
         self.bell()
         messagebox.showinfo("OK", f"Moto ingresada. Ticket #{ticket}")
         self.refresh_dashboard()
@@ -342,6 +358,57 @@ class MainApp(tk.Tk):
         self.bell()
         self.refresh_dashboard()
         messagebox.showinfo("OK", "Salida registrada")
+
+
+    def open_quick_salida(self):
+        win = tk.Toplevel(self)
+        win.title("Salida rápida (F2)")
+        win.geometry("520x280")
+        win.configure(bg="#0d1117")
+        tk.Label(win, text="Placa o Ticket", bg="#0d1117", fg="#c9d1d9", font=("Segoe UI", 11)).pack(anchor="w", padx=20, pady=(16, 4))
+        placa = tk.Entry(win, font=("Segoe UI", 16, "bold"), bg="#161b22", fg="white", insertbackground="white")
+        placa.pack(fill="x", padx=20)
+        info = tk.Label(win, text="", bg="#0d1117", fg="#8b949e", justify="left")
+        info.pack(anchor="w", padx=20, pady=10)
+        pago = ttk.Combobox(win, values=["Efectivo","Nequi","Daviplata","Transferencia"], state="readonly")
+        pago.current(0)
+        pago.pack(padx=20, anchor="w")
+
+        ctx = {"move": None}
+
+        def buscar(_e=None):
+            q = placa.get().strip().upper()
+            row = self.db.conn.execute("SELECT * FROM movimientos WHERE status='PARKED' AND (placa=? OR ticket_no=?)", (q, q if q.isdigit() else -1)).fetchone()
+            if not row:
+                ctx["move"] = None
+                info.config(text="No se encontró moto parqueada")
+                return
+            entrada = datetime.fromisoformat(row["entrada_at"])
+            delta = datetime.now() - entrada
+            horas = max(1, int(delta.total_seconds() // 3600) + (1 if delta.total_seconds() % 3600 else 0))
+            valor = TARIFAS[row["service_type"]] if row["service_type"] != "Hora" else horas * TARIFAS["Hora"]
+            ctx["move"] = (row, valor)
+            info.config(text=f"Placa: {row['placa']}  |  Valor: ${valor:,.0f} COP")
+            pago.focus_set()
+
+        def cobrar(_e=None):
+            if not ctx["move"]:
+                return
+            row, valor = ctx["move"]
+            self.db.conn.execute("UPDATE movimientos SET salida_at=?,amount=?,payment_method=?,status='OUT' WHERE id=?", (datetime.now().isoformat(), valor, pago.get(), row["id"]))
+            if row["locker_no"]:
+                self.db.conn.execute("UPDATE lockers SET status='Disponible', placa=NULL, cascos=0 WHERE locker_no=?", (row["locker_no"],))
+            self.db.conn.commit()
+            self.print_ticket(row["ticket_no"], entrada=False)
+            self.db.audit(self.username, f"Salida rápida moto {row['placa']}, ticket {row['ticket_no']}")
+            self.refresh_dashboard()
+            win.destroy()
+
+        placa.bind("<Return>", buscar)
+        pago.bind("<Return>", cobrar)
+        tk.Button(win, text="Buscar", command=buscar, bg="#1f6feb", fg="white").pack(side="left", padx=20, pady=16)
+        tk.Button(win, text="Cobrar e imprimir", command=cobrar, bg="#da3633", fg="white").pack(side="left", padx=8, pady=16)
+        placa.focus_set()
 
     def build_mensualidades(self):
         f = self.tabs["Mensualidades"]
@@ -441,7 +508,10 @@ class MainApp(tk.Tk):
     def try_print_file(self, file_path):
         try:
             if platform.system() == "Windows":
-                os.startfile(file_path, "print")
+                try:
+                    os.startfile(file_path, "print")
+                except Exception:
+                    subprocess.run(["notepad.exe", "/p", file_path], check=False)
             else:
                 print(f"Ticket generado: {file_path}")
         except Exception as e:
