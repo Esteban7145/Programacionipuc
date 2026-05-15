@@ -113,6 +113,8 @@ class LoginWindow(tk.Tk):
         self.user = self._entry(frame, "Usuario")
         self.pwd = self._entry(frame, "Contraseña", show="*")
         tk.Button(frame, text="Ingresar", bg="#238636", fg="white", font=("Segoe UI", 14, "bold"), command=self.login).pack(fill="x", pady=12)
+        self.user.bind("<Return>", lambda _e: self.pwd.focus_set())
+        self.pwd.bind("<Return>", lambda _e: self.login())
 
     def _entry(self, parent, lbl, **kwargs):
         tk.Label(parent, text=lbl, bg="#161b22", fg="#c9d1d9", font=("Segoe UI", 10)).pack(anchor="w")
@@ -248,10 +250,18 @@ class MainApp(tk.Tk):
         quick = tk.Frame(f, bg="#161b22", padx=12, pady=10)
         quick.pack(fill="x", padx=10, pady=(0, 10))
         tk.Label(quick, text="Ingreso rápido por placa", bg="#161b22", fg="#58a6ff", font=("Segoe UI", 12, "bold")).pack(side="left")
-        self.quick_placa = tk.Entry(quick, font=("Segoe UI", 18, "bold"), bg="#0d1117", fg="white", insertbackground="white", width=16)
-        self.quick_placa.pack(side="left", padx=12)
+        self.quick_placa = tk.Entry(quick, font=("Segoe UI", 18, "bold"), bg="#0d1117", fg="white", insertbackground="white", width=12)
+        self.quick_placa.pack(side="left", padx=8)
+        self.quick_cascos = tk.Entry(quick, font=("Segoe UI", 12), bg="#0d1117", fg="white", insertbackground="white", width=4)
+        self.quick_cascos.pack(side="left", padx=4)
+        self.quick_cascos.insert(0, "0")
+        self.quick_locker = tk.Entry(quick, font=("Segoe UI", 12), bg="#0d1117", fg="white", insertbackground="white", width=6)
+        self.quick_locker.pack(side="left", padx=4)
+        self.quick_tipo = ttk.Combobox(quick, values=["Hora","Día completo","Mensualidad"], state="readonly", width=12)
+        self.quick_tipo.current(0)
+        self.quick_tipo.pack(side="left", padx=6)
         self.quick_placa.bind("<Return>", lambda _e: self.ingresar_moto(placa_override=self.quick_placa.get(), rapido=True))
-        tk.Label(quick, text="Escribe placa y ENTER para ingresar e imprimir", bg="#161b22", fg="#8b949e").pack(side="left", padx=8)
+        tk.Label(quick, text="Placa + cascos + locker + tipo y ENTER", bg="#161b22", fg="#8b949e").pack(side="left", padx=8)
         self.cards = {}
         grid = tk.Frame(f, bg="#0d1117")
         grid.pack(fill="x", pady=10)
@@ -298,15 +308,26 @@ class MainApp(tk.Tk):
         existe = self.db.conn.execute("SELECT 1 FROM movimientos WHERE placa=? AND status='PARKED'", (placa,)).fetchone()
         if existe:
             return messagebox.showwarning("Duplicado", f"La moto {placa} ya se encuentra en el parqueadero")
+        service_type = self.quick_tipo.get() if rapido and hasattr(self, "quick_tipo") else self.inp["Tipo de servicio"].get()
+        cascos_val = int((self.quick_cascos.get() if rapido and hasattr(self, "quick_cascos") else self.inp["Cascos"].get()) or 0)
+        locker_val = (self.quick_locker.get() if rapido and hasattr(self, "quick_locker") else self.inp["Locker"].get())
+        if service_type == "Mensualidad":
+            vence = datetime.now() + timedelta(days=30)
+            self.db.conn.execute("INSERT INTO mensualidades(placa,cliente,vence_at,estado) VALUES (?,?,?,?)", (placa, self.inp["Cliente (opcional)"].get(), vence.date().isoformat(), "Activo"))
+            self.db.conn.commit()
+            self.db.audit(self.username, f"Registro mensualidad {placa}")
+            self.refresh_mensualidades()
+            self.quick_placa.delete(0, "end") if hasattr(self, "quick_placa") else None
+            return messagebox.showinfo("Mensualidad", f"Moto {placa} registrada en mensualidades")
         ticket = self.db.conn.execute("SELECT COALESCE(MAX(ticket_no),0)+1 n FROM movimientos").fetchone()["n"]
         self.db.conn.execute('''INSERT INTO movimientos(ticket_no,placa,cliente,service_type,entrada_at,locker_no,cascos,observaciones,amount,status)
              VALUES (?,?,?,?,?,?,?,?,?,?)''', (
-            ticket, placa, self.inp["Cliente (opcional)"].get(), self.inp["Tipo de servicio"].get(), datetime.now().isoformat(),
-            self.inp["Locker"].get(), int(self.inp["Cascos"].get() or 0), self.inp["Observaciones"].get(), TARIFAS[self.inp["Tipo de servicio"].get()], "PARKED"
+            ticket, placa, self.inp["Cliente (opcional)"].get(), service_type, datetime.now().isoformat(),
+            locker_val, cascos_val, self.inp["Observaciones"].get(), TARIFAS[service_type], "PARKED"
         ))
-        locker = self.inp["Locker"].get().strip()
+        locker = (locker_val or "").strip()
         if locker:
-            self.db.conn.execute("UPDATE lockers SET status='Ocupado', placa=?, cascos=? WHERE locker_no=?", (placa, int(self.inp["Cascos"].get() or 0), locker))
+            self.db.conn.execute("UPDATE lockers SET status='Ocupado', placa=?, cascos=? WHERE locker_no=?", (placa, cascos_val, locker))
         self.db.conn.commit()
         self.db.audit(self.username, f"Ingreso moto {placa}, ticket {ticket}")
         self.print_ticket(ticket, entrada=True)

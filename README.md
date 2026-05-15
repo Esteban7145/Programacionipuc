@@ -49,8 +49,8 @@ py app.py
 ```
 
 Usuario inicial:
-- usuario: `admin`
-- contraseña: `admin123`
+- usuario: `esteban`
+- contraseña: `caldas`
 
 ## Empaquetar instalador para Windows
 
