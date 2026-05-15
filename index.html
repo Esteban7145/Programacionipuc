@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cronograma 2026 - IPUC Villa del Río</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <img id="churchLogo" src="DECOM VILLA DEL RIO.png" alt="Logo IPUC" class="logo" />
+        <div>
+          <p class="subtitle">Iglesia Pentecostal Unida de Colombia</p>
+          <h1>CRONOGRAMA 2026 - IPUC VILLA DEL RÍO</h1>
+        </div>
+      </div>
+
+      <div class="right-controls">
+        <div class="view-switch" aria-label="Cambiar vista">
+          <button id="viewYear" class="btn btn-primary">Año</button>
+          <button id="viewMonth" class="btn">Mes</button>
+          <button id="viewWeek" class="btn">Semana</button>
+          <button id="viewDay" class="btn">Día</button>
+        </div>
+        <nav class="controls" aria-label="Navegación de fechas">
+          <button id="prevMonth" class="btn">◀ Anterior</button>
+          <button id="todayBtn" class="btn btn-primary">Hoy</button>
+          <button id="nextMonth" class="btn">Siguiente ▶</button>
+        </nav>
+        <div class="calendar-actions" aria-label="Acciones de calendario">
+          <button id="downloadIcs" class="btn btn-glow">📅 Descargar .ICS</button>
+          <button id="shareIcs" class="btn">📲 Compartir calendario</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="schedule-info">
+      <strong>Horarios base de cultos:</strong>
+      Martes, Jueves y Sábados 07:00 PM · Domingos 10:00 AM
+    </section>
+
+    <section class="verse-panel" aria-live="polite">
+      <h2>Palabra para hoy</h2>
+      <p id="verseText"></p>
+    </section>
+
+    <main class="calendar-shell">
+      <section id="yearView" class="view-panel active"><div id="yearContainer" class="calendar-container year-grid"></div></section>
+      <section id="monthView" class="view-panel"><div id="calendarContainer" class="calendar-container"></div></section>
+      <section id="weekView" class="view-panel"></section>
+      <section id="dayView" class="view-panel"></section>
+    </main>
+
+    <aside class="legend" aria-label="Filtros de evento">
+      <button class="chip culto active" data-type="culto">Culto</button>
+      <button class="chip oracion active" data-type="oracion">Oración</button>
+      <button class="chip vigilia active" data-type="vigilia">Vigilia</button>
+      <button class="chip ayuno active" data-type="ayuno">Ayuno</button>
+      <button class="chip especial active" data-type="especial">Evento especial</button>
+    </aside>
+
+    <div id="eventModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="modal-content">
+        <button id="closeModal" class="close-btn" aria-label="Cerrar detalles">✕</button>
+        <h3 id="modalTitle"></h3>
+        <p id="modalDate"></p>
+        <p id="modalTime"></p>
+        <p id="modalDescription"></p>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
