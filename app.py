@@ -5,8 +5,16 @@ from tkinter import ttk, messagebox, filedialog
 import csv
 import os
 import platform
+import json
+import urllib.request
+import tempfile
+import shutil
+import threading
+import sys
 
 DB_PATH = "motopark.db"
+APP_VERSION = "1.1.0"
+UPDATE_INFO_URL = "https://example.com/motopark/latest.json"  # Cambiar por tu URL real
 
 TARIFAS = {
     "Hora": 1300,
@@ -141,7 +149,7 @@ class MainApp(tk.Tk):
         top.pack(fill="x")
         self.clock_lbl = tk.Label(top, text="", bg="#161b22", fg="#58a6ff", font=("Segoe UI", 16, "bold"))
         self.clock_lbl.pack(side="right", padx=20, pady=15)
-        tk.Label(top, text=f"Usuario: {username} ({role})", bg="#161b22", fg="#c9d1d9", font=("Segoe UI", 12)).pack(side="left", padx=20)
+        tk.Label(top, text=f"Usuario: {username} ({role}) | v{APP_VERSION}", bg="#161b22", fg="#c9d1d9", font=("Segoe UI", 12)).pack(side="left", padx=20)
 
         self.nb = ttk.Notebook(self)
         self.nb.pack(fill="both", expand=True, padx=10, pady=10)
@@ -159,10 +167,64 @@ class MainApp(tk.Tk):
         self.build_lockers()
         self.build_caja()
         self.build_reportes()
+        self.build_actualizaciones()
         self.setup_shortcuts()
         self.update_clock()
         self.refresh_dashboard()
 
+
+
+    def build_actualizaciones(self):
+        f = self.tabs["Dashboard"]
+        bar = tk.Frame(f, bg="#0d1117")
+        bar.pack(fill="x", padx=10, pady=(0, 6))
+        tk.Button(bar, text="Buscar actualización", command=self.check_updates_async, bg="#1f6feb", fg="white", font=("Segoe UI", 10, "bold")).pack(side="left")
+        self.update_status = tk.Label(bar, text="", bg="#0d1117", fg="#8b949e")
+        self.update_status.pack(side="left", padx=10)
+
+    def check_updates_async(self):
+        self.update_status.config(text="Buscando actualizaciones...")
+        threading.Thread(target=self.check_updates, daemon=True).start()
+
+    def check_updates(self):
+        try:
+            with urllib.request.urlopen(UPDATE_INFO_URL, timeout=10) as r:
+                data = json.loads(r.read().decode("utf-8"))
+            latest = data.get("version", APP_VERSION)
+            url = data.get("url")
+            notes = data.get("notes", "")
+            if latest > APP_VERSION and url:
+                self.after(0, lambda: self.prompt_update(latest, url, notes))
+            else:
+                self.after(0, lambda: self.update_status.config(text="Ya tienes la última versión."))
+        except Exception as e:
+            self.after(0, lambda: self.update_status.config(text=f"No se pudo verificar: {e}"))
+
+    def prompt_update(self, latest, url, notes):
+        msg = f"Nueva versión disponible: {latest}\n\n{notes}\n\n¿Deseas descargar e instalar ahora?"
+        if messagebox.askyesno("Actualización disponible", msg):
+            self.download_and_install_update(url, latest)
+
+    def download_and_install_update(self, url, latest):
+        try:
+            self.update_status.config(text="Descargando actualización...")
+            tmp_dir = tempfile.mkdtemp(prefix="motopark_update_")
+            new_exe = os.path.join(tmp_dir, "MotoParkPro_new.exe")
+            urllib.request.urlretrieve(url, new_exe)
+
+            current_exe = sys.executable
+            updater_bat = os.path.join(tmp_dir, "update.bat")
+            with open(updater_bat, "w", encoding="utf-8") as f:
+                f.write("@echo off\n")
+                f.write("timeout /t 2 /nobreak > nul\n")
+                f.write(f'copy /Y "{new_exe}" "{current_exe}" > nul\n')
+                f.write(f'start "" "{current_exe}"\n')
+
+            self.update_status.config(text=f"Instalando versión {latest}...")
+            os.startfile(updater_bat)
+            self.destroy()
+        except Exception as e:
+            messagebox.showerror("Actualización", f"Error al actualizar: {e}")
 
     def setup_shortcuts(self):
         self.bind("<F11>", lambda _e: self.attributes("-fullscreen", not self.attributes("-fullscreen")))

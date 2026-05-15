@@ -138,3 +138,26 @@ py -3.12 app.py
 Al registrar **Ingreso** y **Salida**, el sistema ahora intenta imprimir automáticamente el ticket/factura en la impresora predeterminada de Windows.
 
 Si la impresión falla, el archivo queda guardado en `tickets/` para impresión manual.
+
+
+## Actualización automática (Auto-Update)
+
+La app ahora incluye botón **Buscar actualización** en el Dashboard.
+
+### Cómo funciona
+1. Consulta un JSON remoto en `UPDATE_INFO_URL` (definido en `app.py`).
+2. Si hay versión mayor, pregunta si deseas actualizar.
+3. Descarga el nuevo `.exe` y reemplaza automáticamente el ejecutable actual en Windows.
+4. Reinicia la app automáticamente.
+
+### JSON esperado en tu servidor
+
+```json
+{
+  "version": "1.2.0",
+  "url": "https://tudominio.com/descargas/MotoParkPro.exe",
+  "notes": "Mejoras en impresión y rendimiento"
+}
+```
+
+> Importante: cambia `UPDATE_INFO_URL` en `app.py` por tu URL real antes de distribuir.
