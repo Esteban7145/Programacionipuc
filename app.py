@@ -4,6 +4,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
 import csv
 import os
+import platform
 
 DB_PATH = "motopark.db"
 
@@ -158,8 +159,14 @@ class MainApp(tk.Tk):
         self.build_lockers()
         self.build_caja()
         self.build_reportes()
+        self.setup_shortcuts()
         self.update_clock()
         self.refresh_dashboard()
+
+
+    def setup_shortcuts(self):
+        self.bind("<F11>", lambda _e: self.attributes("-fullscreen", not self.attributes("-fullscreen")))
+        self.bind("<Escape>", lambda _e: self.attributes("-fullscreen", False))
 
     def big_button(self, parent, text, cmd, color="#1f6feb"):
         return tk.Button(parent, text=text, command=cmd, bg=color, fg="white", font=("Segoe UI", 16, "bold"), pady=12)
@@ -204,6 +211,9 @@ class MainApp(tk.Tk):
                 self.inp[field] = e
         form.columnconfigure(1, weight=1)
         self.big_button(f, "Ingresar Moto", self.ingresar_moto, "#238636").pack(fill="x", padx=20, pady=10)
+        tk.Label(f, text="Tip: escribe placa y presiona Enter para ingresar.", bg="#0d1117", fg="#8b949e").pack(anchor="w", padx=20)
+        self.inp["Placa"].focus_set()
+        self.inp["Placa"].bind("<Return>", lambda _e: self.ingresar_moto())
 
     def ingresar_moto(self):
         placa = self.inp["Placa"].get().strip().upper()
@@ -221,6 +231,8 @@ class MainApp(tk.Tk):
         self.db.conn.commit()
         self.db.audit(self.username, f"Ingreso moto {placa}, ticket {ticket}")
         self.print_ticket(ticket, entrada=True)
+        self.inp["Placa"].delete(0, "end")
+        self.inp["Placa"].focus_set()
         self.bell()
         messagebox.showinfo("OK", f"Moto ingresada. Ticket #{ticket}")
         self.refresh_dashboard()
@@ -238,6 +250,8 @@ class MainApp(tk.Tk):
         self.pay_method.current(0)
         self.pay_method.pack(padx=20, pady=8, anchor="w")
         self.big_button(f, "Registrar salida", self.registrar_salida, "#da3633").pack(fill="x", padx=20, pady=10)
+        tk.Label(f, text="Tip: busca por placa/ticket y presiona Enter para consultar.", bg="#0d1117", fg="#8b949e").pack(anchor="w", padx=20)
+        self.search.bind("<Return>", lambda _e: self.buscar_moto())
         self.current_move = None
 
     def buscar_moto(self):
@@ -351,13 +365,25 @@ class MainApp(tk.Tk):
         row = self.db.conn.execute("SELECT * FROM movimientos WHERE ticket_no=?", (ticket_no,)).fetchone()
         os.makedirs("tickets", exist_ok=True)
         kind = "entrada" if entrada else "salida"
-        with open(f"tickets/{ticket_no}_{kind}.txt", "w", encoding="utf-8") as fp:
+        file_path = f"tickets/{ticket_no}_{kind}.txt"
+        with open(file_path, "w", encoding="utf-8") as fp:
             fp.write("MOTOPARK PRO\n")
-            fp.write("NIT: 900.000.000-0\nDirección: Colombia\n")
-            fp.write(f"Ticket #{ticket_no}\nFecha: {datetime.now()}\n")
+            fp.write("NIT: 900.000.000-0\nDirección: Colombia\nTel: 3000000000\n")
+            fp.write(f"Recibo #{ticket_no}\nFecha: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
             fp.write(f"Placa: {row['placa']}\nServicio: {row['service_type']}\n")
-            fp.write(f"Valor: ${row['amount'] or 0:,.0f}\n")
-            fp.write("QR: [placeholder]\nGracias por su visita\n")
+            fp.write(f"Valor: ${row['amount'] or 0:,.0f} COP\n")
+            fp.write("QR: [placeholder]\n")
+            fp.write("Gracias por su visita\n")
+        self.try_print_file(file_path)
+
+    def try_print_file(self, file_path):
+        try:
+            if platform.system() == "Windows":
+                os.startfile(file_path, "print")
+            else:
+                print(f"Ticket generado: {file_path}")
+        except Exception as e:
+            messagebox.showwarning("Impresión", f"No se pudo imprimir automáticamente. Ticket guardado en: {file_path}\nDetalle: {e}")
 
     def refresh_dashboard(self):
         parked = self.db.conn.execute("SELECT COUNT(*) c FROM movimientos WHERE status='PARKED'").fetchone()["c"]

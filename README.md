@@ -131,3 +131,10 @@ Y para forzar una versión específica:
 ```bash
 py -3.12 app.py
 ```
+
+
+## Impresión automática de tickets (Windows)
+
+Al registrar **Ingreso** y **Salida**, el sistema ahora intenta imprimir automáticamente el ticket/factura en la impresora predeterminada de Windows.
+
+Si la impresión falla, el archivo queda guardado en `tickets/` para impresión manual.
