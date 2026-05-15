@@ -79,3 +79,17 @@ Los tickets se generan en la carpeta `tickets/` como TXT para integrarse con imp
 - MotoControl
 - UrbanMoto Parking
 - ParkZone Moto
+
+
+## Solución a error 404 en navegador
+
+Se agregó `server.py` con Flask para exponer una página principal en `/` y endpoint de verificación en `/health`.
+
+### Ejecutar versión web
+
+```bash
+pip install -r requirements.txt
+python server.py
+```
+
+Abre: `http://localhost:8000/`
