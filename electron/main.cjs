@@ -1,9 +1,11 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
+const http = require('http');
 const Database = require('better-sqlite3');
 
 let mainWindow;
 let db;
+let localServer;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -19,7 +21,10 @@ function createWindow() {
     }
   });
 
-  const rendererUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:5173' : `file://${path.join(__dirname, '..', 'dist', 'index.html')}`;
+  const rendererUrl = process.env.NODE_ENV === 'development'
+    ? 'http://localhost:5173'
+    : `file://${path.join(__dirname, '..', 'dist', 'index.html')}`;
+
   mainWindow.loadURL(rendererUrl);
 }
 
@@ -36,9 +41,48 @@ function initDatabase() {
   `);
 }
 
-app.whenReady().then(() => {
+function startLocalServer() {
+  return new Promise((resolve, reject) => {
+    localServer = http.createServer((req, res) => {
+      res.setHeader('Content-Type', 'application/json; charset=utf-8');
+
+      if (req.url === '/health') {
+        res.writeHead(200);
+        res.end(JSON.stringify({ status: 'ok', app: 'IPUC Vision' }));
+        return;
+      }
+
+      if (req.url === '/api/songs') {
+        const songs = db.prepare('SELECT * FROM songs ORDER BY created_at DESC').all();
+        res.writeHead(200);
+        res.end(JSON.stringify({ data: songs }));
+        return;
+      }
+
+      res.writeHead(404);
+      res.end(JSON.stringify({ error: 'Not found' }));
+    });
+
+    localServer.once('error', reject);
+    localServer.listen(47821, '127.0.0.1', () => resolve({ port: 47821 }));
+  });
+}
+
+app.whenReady().then(async () => {
   initDatabase();
+  await startLocalServer();
   createWindow();
 
   ipcMain.handle('songs:list', () => db.prepare('SELECT * FROM songs ORDER BY created_at DESC').all());
+  ipcMain.handle('app:server-status', () => ({ running: Boolean(localServer?.listening), port: 47821 }));
+});
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') app.quit();
+});
+
+app.on('before-quit', () => {
+  if (localServer?.listening) {
+    localServer.close();
+  }
 });
