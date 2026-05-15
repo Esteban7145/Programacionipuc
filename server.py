@@ -9,6 +9,17 @@ def home():
     return render_template('index.html', now=datetime.now())
 
 
+
+
+@app.route('/update/latest.json')
+def update_latest():
+    return jsonify({
+        "version": "1.1.0",
+        "url": "http://127.0.0.1:8000/downloads/MotoParkPro.exe",
+        "notes": "Configura esta URL con tu ejecutable publicado"
+    })
+
+
 @app.route('/health')
 def health():
     return jsonify({"status": "ok", "time": datetime.now().isoformat()})

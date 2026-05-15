@@ -161,3 +161,21 @@ La app ahora incluye botón **Buscar actualización** en el Dashboard.
 ```
 
 > Importante: cambia `UPDATE_INFO_URL` en `app.py` por tu URL real antes de distribuir.
+
+
+## Solución cuando actualizar muestra error 404
+
+Si al pulsar **Buscar actualización** aparece 404, significa que la URL de actualizaciones no existe o no está publicada.
+
+Ahora la app usa por defecto:
+
+- `http://127.0.0.1:8000/update/latest.json`
+
+Puedes cambiarla con variable de entorno en Windows antes de abrir la app:
+
+```bat
+set MOTOPARK_UPDATE_URL=https://tudominio.com/update/latest.json
+MotoParkPro.exe
+```
+
+En `server.py` ya quedó una ruta de ejemplo `GET /update/latest.json` para evitar 404 en ambiente local.

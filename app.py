@@ -15,7 +15,7 @@ import subprocess
 
 DB_PATH = "motopark.db"
 APP_VERSION = "1.1.0"
-UPDATE_INFO_URL = "https://example.com/motopark/latest.json"  # Cambiar por tu URL real
+UPDATE_INFO_URL = os.getenv("MOTOPARK_UPDATE_URL", "http://127.0.0.1:8000/update/latest.json")
 
 TARIFAS = {
     "Hora": 1300,
@@ -189,7 +189,8 @@ class MainApp(tk.Tk):
 
     def check_updates(self):
         try:
-            with urllib.request.urlopen(UPDATE_INFO_URL, timeout=10) as r:
+            req = urllib.request.Request(UPDATE_INFO_URL, headers={"User-Agent": "MotoParkPro-Updater/1.0"})
+            with urllib.request.urlopen(req, timeout=10) as r:
                 data = json.loads(r.read().decode("utf-8"))
             latest = data.get("version", APP_VERSION)
             url = data.get("url")
@@ -199,7 +200,10 @@ class MainApp(tk.Tk):
             else:
                 self.after(0, lambda: self.update_status.config(text="Ya tienes la última versión."))
         except Exception as e:
-            self.after(0, lambda: self.update_status.config(text=f"No se pudo verificar: {e}"))
+            msg = str(e)
+            if "404" in msg:
+                msg = "URL de actualización no encontrada (404). Configura MOTOPARK_UPDATE_URL o server.py"
+            self.after(0, lambda: self.update_status.config(text=f"No se pudo verificar: {msg}"))
 
     def prompt_update(self, latest, url, notes):
         msg = f"Nueva versión disponible: {latest}\n\n{notes}\n\n¿Deseas descargar e instalar ahora?"
