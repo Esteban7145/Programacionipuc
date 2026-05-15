@@ -45,7 +45,7 @@ Aplicación de escritorio para Windows (también funciona en Linux) orientada a 
 ## Ejecutar
 
 ```bash
-python app.py
+py app.py
 ```
 
 Usuario inicial:
@@ -57,13 +57,13 @@ Usuario inicial:
 1. Instala PyInstaller:
 
 ```bash
-pip install pyinstaller
+py -m pip install pyinstaller
 ```
 
 2. Genera ejecutable:
 
 ```bash
-pyinstaller --noconfirm --onefile --windowed --name MotoParkPro app.py
+py -m PyInstaller --noconfirm --onefile --windowed --name MotoParkPro app.py
 ```
 
 El ejecutable quedará en `dist/MotoParkPro.exe`.
@@ -88,8 +88,8 @@ Se agregó `server.py` con Flask para exponer una página principal en `/` y end
 ### Ejecutar versión web
 
 ```bash
-pip install -r requirements.txt
-python server.py
+py -m pip install -r requirements.txt
+py server.py
 ```
 
 Abre: `http://localhost:8000/`
@@ -104,3 +104,30 @@ También se agregan reglas de fallback:
 - `public/_redirects`
 
 Con eso, cualquier ruta inválida redirige a `/index.html` con estado `200`.
+
+
+## Ejecución en Windows (recomendado)
+
+Si en Windows te aparece la ayuda de `py` (como la que compartiste), usa siempre el launcher así:
+
+```bash
+py app.py
+```
+
+Si no tienes Python instalado, instala una versión 3.x con:
+
+```bash
+py install 3.12
+```
+
+Verifica versiones disponibles:
+
+```bash
+py list
+```
+
+Y para forzar una versión específica:
+
+```bash
+py -3.12 app.py
+```
