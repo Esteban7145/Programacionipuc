@@ -179,3 +179,14 @@ MotoParkPro.exe
 ```
 
 En `server.py` ya quedó una ruta de ejemplo `GET /update/latest.json` para evitar 404 en ambiente local.
+
+
+## Logo en tiquete
+
+Ahora el tiquete imprime una línea de logo en el encabezado usando la variable `LOGO_TEXTO` y el nombre del parqueadero con `NOMBRE_PARQUEADERO` en `app.py`.
+
+Ejemplo:
+- `LOGO_TEXTO = "[TU LOGO]"`
+- `NOMBRE_PARQUEADERO = "PARQUEADERO CALDAS"`
+
+Si más adelante quieres logo de imagen (PNG) en impresora térmica ESC/POS, te lo puedo dejar en la siguiente versión.

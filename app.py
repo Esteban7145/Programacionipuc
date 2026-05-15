@@ -14,8 +14,10 @@ import sys
 import subprocess
 
 DB_PATH = "motopark.db"
-APP_VERSION = "1.1.0"
+APP_VERSION = "1.2.0"
 UPDATE_INFO_URL = os.getenv("MOTOPARK_UPDATE_URL", "http://127.0.0.1:8000/update/latest.json")
+NOMBRE_PARQUEADERO = "MOTOPARK PRO"
+LOGO_TEXTO = "[LOGO AQUÍ]"
 
 TARIFAS = {
     "Hora": 1300,
@@ -158,12 +160,12 @@ class MainApp(tk.Tk):
         self.nb.pack(fill="both", expand=True, padx=10, pady=10)
 
         self.tabs = {}
-        for name in ["Dashboard", "Ingreso", "Salida", "Mensualidades", "Lockers", "Caja", "Reportes"]:
+        for name in ["Inicio", "Ingreso", "Salida", "Mensualidades", "Lockers", "Caja", "Reportes"]:
             f = tk.Frame(self.nb, bg="#0d1117")
             self.nb.add(f, text=name)
             self.tabs[name] = f
 
-        self.build_dashboard()
+        self.build_inicio()
         self.build_ingreso()
         self.build_salida()
         self.build_mensualidades()
@@ -173,12 +175,12 @@ class MainApp(tk.Tk):
         self.build_actualizaciones()
         self.setup_shortcuts()
         self.update_clock()
-        self.refresh_dashboard()
+        self.refresh_inicio()
 
 
 
     def build_actualizaciones(self):
-        f = self.tabs["Dashboard"]
+        f = self.tabs["Inicio"]
         bar = tk.Frame(f, bg="#0d1117")
         bar.pack(fill="x", padx=10, pady=(0, 6))
         tk.Button(bar, text="Buscar actualización", command=self.check_updates_async, bg="#1f6feb", fg="white", font=("Segoe UI", 10, "bold")).pack(side="left")
@@ -257,8 +259,8 @@ class MainApp(tk.Tk):
         self.clock_lbl.config(text=datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
         self.after(1000, self.update_clock)
 
-    def build_dashboard(self):
-        f = self.tabs["Dashboard"]
+    def build_inicio(self):
+        f = self.tabs["Inicio"]
         quick = tk.Frame(f, bg="#161b22", padx=12, pady=10)
         quick.pack(fill="x", padx=10, pady=(0, 10))
         tk.Label(quick, text="Ingreso rápido por placa", bg="#161b22", fg="#58a6ff", font=("Segoe UI", 12, "bold")).pack(side="left")
@@ -308,7 +310,7 @@ class MainApp(tk.Tk):
                 self.inp[field] = e
         form.columnconfigure(1, weight=1)
         self.big_button(f, "Ingresar Moto", self.ingresar_moto, "#238636").pack(fill="x", padx=20, pady=10)
-        tk.Label(f, text="Tip: escribe placa y presiona Enter para ingresar.", bg="#0d1117", fg="#8b949e").pack(anchor="w", padx=20)
+        tk.Label(f, text="Consejo: escribe la placa y presiona Enter para ingresar.", bg="#0d1117", fg="#8b949e").pack(anchor="w", padx=20)
         self.inp["Placa"].focus_set()
         self.inp["Placa"].bind("<Return>", lambda _e: self.ingresar_moto())
 
@@ -349,8 +351,8 @@ class MainApp(tk.Tk):
             self.quick_placa.delete(0, "end")
             self.quick_placa.focus_set()
         self.bell()
-        messagebox.showinfo("OK", f"Moto ingresada. Ticket #{ticket}")
-        self.refresh_dashboard()
+        messagebox.showinfo("OK", f"Moto ingresada. Tiquete #{ticket}")
+        self.refresh_inicio()
 
     def build_salida(self):
         f = self.tabs["Salida"]
@@ -358,14 +360,14 @@ class MainApp(tk.Tk):
         box.pack(fill="x", padx=20, pady=20)
         self.search = tk.Entry(box, font=("Segoe UI", 14), bg="#161b22", fg="white", insertbackground="white")
         self.search.pack(side="left", fill="x", expand=True, padx=(0,10))
-        self.big_button(box, "Buscar por placa / ticket", self.buscar_moto).pack(side="left")
+        self.big_button(box, "Buscar por placa / tiquete", self.buscar_moto).pack(side="left")
         self.out_info = tk.Label(f, text="", bg="#0d1117", fg="#c9d1d9", font=("Consolas", 13), justify="left")
         self.out_info.pack(anchor="w", padx=20, pady=10)
         self.pay_method = ttk.Combobox(f, values=["Efectivo","Nequi","Daviplata","Transferencia"], state="readonly")
         self.pay_method.current(0)
         self.pay_method.pack(padx=20, pady=8, anchor="w")
         self.big_button(f, "Registrar salida", self.registrar_salida, "#da3633").pack(fill="x", padx=20, pady=10)
-        tk.Label(f, text="Tip: busca por placa/ticket y presiona Enter para consultar.", bg="#0d1117", fg="#8b949e").pack(anchor="w", padx=20)
+        tk.Label(f, text="Consejo: busca por placa/tiquete y presiona Enter para consultar.", bg="#0d1117", fg="#8b949e").pack(anchor="w", padx=20)
         self.search.bind("<Return>", lambda _e: self.buscar_moto())
         self.current_move = None
 
@@ -393,7 +395,7 @@ class MainApp(tk.Tk):
         self.print_ticket(row["ticket_no"], entrada=False)
         self.db.audit(self.username, f"Salida moto {row['placa']}, ticket {row['ticket_no']}")
         self.bell()
-        self.refresh_dashboard()
+        self.refresh_inicio()
         messagebox.showinfo("OK", "Salida registrada")
 
 
@@ -438,7 +440,7 @@ class MainApp(tk.Tk):
             self.db.conn.commit()
             self.print_ticket(row["ticket_no"], entrada=False)
             self.db.audit(self.username, f"Salida rápida moto {row['placa']}, ticket {row['ticket_no']}")
-            self.refresh_dashboard()
+            self.refresh_inicio()
             win.destroy()
 
         placa.bind("<Return>", buscar)
@@ -533,9 +535,10 @@ class MainApp(tk.Tk):
         kind = "entrada" if entrada else "salida"
         file_path = f"tickets/{ticket_no}_{kind}.txt"
         with open(file_path, "w", encoding="utf-8") as fp:
-            fp.write("MOTOPARK PRO\n")
+            fp.write(f"{LOGO_TEXTO}\n")
+            fp.write(f"{NOMBRE_PARQUEADERO}\n")
             fp.write("NIT: 900.000.000-0\nDirección: Colombia\nTel: 3000000000\n")
-            fp.write(f"Recibo #{ticket_no}\nFecha: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+            fp.write(f"Tiquete #{ticket_no}\nFecha: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
             fp.write(f"Placa: {row['placa']}\nServicio: {row['service_type']}\n")
             fp.write(f"Valor: ${row['amount'] or 0:,.0f} COP\n")
             fp.write("QR: [placeholder]\n")
@@ -554,7 +557,7 @@ class MainApp(tk.Tk):
         except Exception as e:
             messagebox.showwarning("Impresión", f"No se pudo imprimir automáticamente. Ticket guardado en: {file_path}\nDetalle: {e}")
 
-    def refresh_dashboard(self):
+    def refresh_inicio(self):
         parked = self.db.conn.execute("SELECT COUNT(*) c FROM movimientos WHERE status='PARKED'").fetchone()["c"]
         ins_today = self.db.conn.execute("SELECT COUNT(*) c FROM movimientos WHERE substr(entrada_at,1,10)=?", (datetime.now().date().isoformat(),)).fetchone()["c"]
         out_today = self.db.conn.execute("SELECT COUNT(*) c FROM movimientos WHERE status='OUT' AND substr(salida_at,1,10)=?", (datetime.now().date().isoformat(),)).fetchone()["c"]
