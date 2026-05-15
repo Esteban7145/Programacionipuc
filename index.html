@@ -3,35 +3,68 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MotoPark Pro</title>
+  <title>MotoPark Pro | Parqueadero de Motos</title>
+  <meta name="description" content="MotoPark Pro: software moderno para administración de parqueadero de motos en Colombia." />
   <style>
-    :root { --bg:#0d1117; --card:#161b22; --text:#c9d1d9; --accent:#58a6ff; --ok:#238636; }
-    *{box-sizing:border-box;font-family:Segoe UI,Arial,sans-serif}
-    body{margin:0;background:var(--bg);color:var(--text)}
-    .wrap{max-width:980px;margin:40px auto;padding:20px}
-    .hero{background:var(--card);padding:28px;border-radius:14px;border:1px solid #30363d}
-    h1{margin:0;color:var(--accent);font-size:2.1rem}
-    p{line-height:1.5}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:18px}
-    .card{background:#111827;border:1px solid #30363d;border-radius:12px;padding:16px}
-    .btn{display:inline-block;background:var(--ok);color:#fff;text-decoration:none;padding:12px 18px;border-radius:10px;font-weight:700;margin-top:16px}
-    code{background:#0b1220;padding:2px 6px;border-radius:6px}
-    small{color:#8b949e}
+    :root{
+      --bg:#0b1020;--bg2:#0d1117;--card:#161b22;--line:#2b3240;--text:#dce3ea;--muted:#8b949e;--primary:#3b82f6;--ok:#22c55e;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Segoe UI,Inter,Arial,sans-serif;background:radial-gradient(1200px 500px at 20% -5%,#1b2a52 0%,var(--bg2) 45%,#080c17 100%);color:var(--text)}
+    .container{max-width:1100px;margin:auto;padding:24px}
+    .nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+    .logo{font-weight:800;font-size:1.2rem;color:#9ec5ff}
+    .badge{border:1px solid #2c66c3;color:#9ec5ff;padding:6px 10px;border-radius:999px;font-size:.82rem}
+    .hero{background:linear-gradient(180deg,#141b2a,#101725);border:1px solid var(--line);border-radius:16px;padding:34px}
+    h1{font-size:2rem;margin:0 0 10px;color:#dbeafe}
+    p{color:var(--muted);line-height:1.6;margin:0}
+    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+    .btn{display:inline-block;padding:11px 16px;border-radius:10px;text-decoration:none;font-weight:700}
+    .btn-primary{background:var(--primary);color:#fff}
+    .btn-outline{border:1px solid #36517f;color:#b9d4ff}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:18px}
+    .card{background:var(--card);border:1px solid var(--line);padding:16px;border-radius:12px}
+    .card h3{margin:0 0 6px;font-size:1rem;color:#cfe1ff}
+    .card small{color:var(--muted)}
+    .features{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .feature{background:#111827;border:1px solid var(--line);padding:14px;border-radius:10px}
+    .ok{color:var(--ok);font-weight:700}
+    footer{padding:18px 0;color:var(--muted);font-size:.9rem}
+    @media (max-width:780px){.features{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-  <div class="wrap">
+  <div class="container">
+    <div class="nav">
+      <div class="logo">MotoPark Pro</div>
+      <div class="badge">Software para parqueaderos de motos</div>
+    </div>
+
     <section class="hero">
-      <h1>MotoPark Pro</h1>
-      <p>Esta página existe para despliegues estáticos (Netlify) y evita el error <strong>404 - Página no encontrada</strong>.</p>
-      <p>Si quieres ejecutar la API local, usa <code>python server.py</code> y abre <code>http://localhost:8000/health</code>.</p>
-      <div class="grid">
-        <div class="card"><strong>Estado</strong><br><small>Landing estática activa</small></div>
-        <div class="card"><strong>Desktop</strong><br><small>Aplicación principal en <code>app.py</code></small></div>
-        <div class="card"><strong>Backend local</strong><br><small>Flask opcional en <code>server.py</code></small></div>
+      <h1>Control rápido, moderno y profesional para tu parqueadero.</h1>
+      <p>
+        Plataforma diseñada para recepción de alto flujo: ingreso y salida por placa o ticket,
+        caja diaria, lockers para cascos, mensualidades y reportes.
+      </p>
+      <div class="cta">
+        <a class="btn btn-primary" href="/health">Estado del servidor</a>
+        <a class="btn btn-outline" href="https://github.com" target="_blank" rel="noreferrer">Manual de despliegue</a>
       </div>
-      <a class="btn" href="/">Recargar inicio</a>
+
+      <div class="grid">
+        <article class="card"><h3>Ingreso y salida</h3><small>Tarifas por hora, día y mensualidad con consecutivo automático.</small></article>
+        <article class="card"><h3>Caja y arqueo</h3><small>Control por método de pago y total diario.</small></article>
+        <article class="card"><h3>Lockers de cascos</h3><small>Visual de disponibilidad y relación por placa.</small></article>
+        <article class="card"><h3>Operación offline</h3><small>Base local SQLite y respaldo para continuidad.</small></article>
+      </div>
+
+      <div class="features">
+        <div class="feature"><span class="ok">●</span> Interfaz optimizada para pantallas táctiles y botones grandes.</div>
+        <div class="feature"><span class="ok">●</span> Tickets POS y base preparada para crecimiento (cámaras / talanqueras).</div>
+      </div>
     </section>
+
+    <footer>© MotoPark Pro · Colombia · Tema oscuro profesional</footer>
   </div>
 </body>
 </html>
