@@ -182,8 +182,18 @@ class MainApp(tk.Tk):
         bar = tk.Frame(f, bg="#0d1117")
         bar.pack(fill="x", padx=10, pady=(0, 6))
         tk.Button(bar, text="Buscar actualización", command=self.check_updates_async, bg="#1f6feb", fg="white", font=("Segoe UI", 10, "bold")).pack(side="left")
+        tk.Button(bar, text="¿Error?", command=self.abrir_ayuda_actualizacion, bg="#30363d", fg="white", font=("Segoe UI", 9)).pack(side="left", padx=6)
         self.update_status = tk.Label(bar, text="", bg="#0d1117", fg="#8b949e")
         self.update_status.pack(side="left", padx=10)
+
+    def abrir_ayuda_actualizacion(self):
+        messagebox.showinfo(
+            "Ayuda actualización",
+            "Si aparece WinError 10061:\n\n"
+            "1) Inicia el servidor local con: py server.py\n"
+            "2) O configura MOTOPARK_UPDATE_URL con una URL pública válida\n"
+            "3) Vuelve a pulsar Buscar actualización"
+        )
 
     def check_updates_async(self):
         self.update_status.config(text="Buscando actualizaciones...")
@@ -205,6 +215,8 @@ class MainApp(tk.Tk):
             msg = str(e)
             if "404" in msg:
                 msg = "URL de actualización no encontrada (404). Configura MOTOPARK_UPDATE_URL o server.py"
+            elif "10061" in msg or "Connection refused" in msg:
+                msg = "No hay servidor de actualizaciones activo (WinError 10061). Inicia server.py o configura MOTOPARK_UPDATE_URL."
             self.after(0, lambda: self.update_status.config(text=f"No se pudo verificar: {msg}"))
 
     def prompt_update(self, latest, url, notes):
