@@ -316,6 +316,7 @@ const TYPES = {
       renderPanel();
       renderFeatured();
       renderAnnouncements();
+      renderPastEvents();
       populateAdminSelectors();
     }
 
@@ -456,33 +457,7 @@ const TYPES = {
       return { events: {}, announcements: DEFAULT_ANNOUNCEMENTS, reflections: {}, music: null };
     }
     function saveState() {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify({
-          events: APP_STATE.events,
-          announcements: APP_STATE.announcements,
-          reflections: APP_STATE.reflections,
-          music: APP_STATE.music
-        }));
-      } catch (e) {
-        console.warn("saveState:", e);
-      }
-    }
-    const toastContainer = document.getElementById("toastContainer");
-    function showToast(message, type) {
-      type = type || "success";
-      if (!toastContainer) {
-        var c = document.createElement("div");
-        c.id = "toastContainer";
-        c.className = "toast-container";
-        document.body.appendChild(c);
-      }
-      var toast = document.createElement("div");
-      toast.className = "toast " + (type || "success");
-      toast.textContent = message;
-      toastContainer.appendChild(toast);
-      setTimeout(function() {
-        if (toast.parentNode) toast.parentNode.removeChild(toast);
-      }, 3200);
+      window.dispatchEvent(new CustomEvent("ipuc-state-updated"));
     }
     function eventIdFor(event) {
       return `${event.date}-${slugify(event.title)}`;
@@ -885,7 +860,7 @@ const TYPES = {
         const title = document.getElementById("adminTitle").value.trim();
         const date = document.getElementById("adminDate").value;
         if (!title || !date) {
-          showToast("Escribe al menos el nombre y la fecha del evento", "error");
+          alert("Escribe al menos el nombre y la fecha del evento.");
           return;
         }
 
@@ -942,7 +917,7 @@ const TYPES = {
         render();
         adminEventSelect.value = id;
         loadAdminEvent(id);
-        showToast("Evento guardado exitosamente", "success");
+        alert("Evento guardado.");
       } finally {
         saveButton.disabled = false;
         saveButton.textContent = originalText;
@@ -973,7 +948,7 @@ const TYPES = {
       const description = document.getElementById("announcementDescription").value.trim();
       const eventId = announcementEvent.value;
       if (!title || !description) {
-        showToast("Escribe titulo y descripcion del anuncio", "error");
+        alert("Escribe titulo y descripcion del anuncio.");
         return;
       }
       APP_STATE.announcements = APP_STATE.announcements || [];
@@ -985,11 +960,10 @@ const TYPES = {
         eventId
       });
       saveState();
-      renderAnnouncements();
       document.getElementById("announcementTitle").value = "";
       document.getElementById("announcementDescription").value = "";
       announcementEvent.value = "";
-      showToast("Anuncio publicado correctamente", "success");
+      renderAnnouncements();
     }
     function selectedAdminTags() {
       return [...document.querySelectorAll("#adminTags input:checked")].map(input => input.value);
@@ -1088,31 +1062,11 @@ const TYPES = {
     }
     function updateClock() {
       const now = new Date();
-      const wrap = clockTime.closest(".clock-card");
-      if (!wrap) { clockTime.textContent = now.toLocaleTimeString("es-CO", { hour: "2-digit", minute: "2-digit" }); return; }
-      if (!wrap.querySelector("svg")) {
-        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        svg.setAttribute("viewBox", "0 0 42 42");
-        svg.setAttribute("width", "42");
-        svg.setAttribute("height", "42");
-        svg.setAttribute("aria-hidden", "true");
-        svg.innerHTML =
-          '<circle cx="21" cy="21" r="19.5" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.2"></circle>' +
-          '<circle cx="21" cy="21" r="16.5" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.8" stroke-dasharray="1.5 3.5"></circle>' +
-          '<line id="clockHandHour" x1="21" y1="21" x2="21" y2="8" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" stroke-linecap="round"></line>' +
-          '<line id="clockHandMin" x1="21" y1="21" x2="21" y2="5.5" stroke="rgba(255,255,255,0.95)" stroke-width="1.1" stroke-linecap="round"></line>';
-        wrap.insertBefore(svg, clockTime);
-      }
-      const hourHand = document.getElementById("clockHandHour");
-      const minHand = document.getElementById("clockHandMin");
-      if (!hourHand || !minHand) { clockTime.textContent = now.toLocaleTimeString("es-CO", { hour: "2-digit", minute: "2-digit" }); return; }
-      const h = now.getHours() % 12;
-      const m = now.getMinutes();
-      const hourAngle = (h / 12) * 360 + (m / 60) * (360 / 12);
-      const minAngle = (m / 60) * 360;
-      hourHand.setAttribute("transform", `rotate(${hourAngle} 21 21)`);
-      minHand.setAttribute("transform", `rotate(${minAngle} 21 21)`);
-      clockTime.textContent = now.toLocaleTimeString("es-CO", { hour: "2-digit", minute: "2-digit" });
+      clockTime.textContent = now.toLocaleTimeString("es-CO", {
+        hour: "numeric",
+        minute: "2-digit",
+        second: "2-digit"
+      });
     }
     function addAllEventsToCalendar() {
       const events = eventsForYear(2026).sort((a, b) => {
