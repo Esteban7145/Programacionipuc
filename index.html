@@ -91,7 +91,15 @@
     <section class="music-card glass" id="musicCard">
       <div>
         <p class="eyebrow">Musica ambiente</p>
-        <p id="musicText">El administrador puede cargar musica autorizada para reproducirla manualmente.</p>
+        <p id="musicText" style="display:none">El administrador puede cargar musica autorizada para reproducirla manualmente.</p>
+      </div>
+      <div id="radioPlayer" style="display:none">
+        <div class="radio-header">
+          <span class="radio-logo">📻</span>
+          <span class="radio-name"><strong>Radio Ipuc</strong> en vivo</span>
+          <span class="radio-status" id="radioStatus">● EN VIVO</span>
+        </div>
+        <audio id="radioAudio" autoplay controls preload="none"></audio>
       </div>
       <audio id="backgroundAudio" controls preload="none"></audio>
     </section>
@@ -288,6 +296,33 @@
     </article>
   </div>
 
-  <script src="js/app.js?v=20260828-9" defer></script>
+  <style>
+    .radio-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .radio-logo {
+      font-size: 1.4em;
+    }
+    .radio-name {
+      font-size: 1em;
+      flex: 1;
+    }
+    .radio-status {
+      font-size: 0.75em;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: var(--background);
+      color: var(--muted-foreground);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    #radioAudio {
+      width: 100%;
+    }
+  </style>
+  <script src="js/app.js?v=20260828-10" defer></script>
 </body>
 </html>

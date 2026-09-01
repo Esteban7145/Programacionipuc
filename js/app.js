@@ -614,6 +614,34 @@ const TYPES = {
         backgroundAudio.removeAttribute("src");
         musicText.textContent = "El administrador puede cargar musica autorizada para reproducirla manualmente.";
       }
+      // Radio Ipuc en vivo - se reproduce automáticamente al cargar la página
+      const radioStatus = document.getElementById("radioStatus");
+      const radioAudio = document.getElementById("radioAudio");
+      const radioPlayer = document.getElementById("radioPlayer");
+      const musicTextEl = document.getElementById("musicText");
+      if (radioAudio && radioPlayer && radioStatus) {
+        radioAudio.src = "https://radiohd4.streaminghd.co:8190/stream";
+        radioAudio.volume = 0.7;
+        radioAudio.play().catch(() => {
+          // Autoplay bloqueado por el navegador - mostrar mensaje
+          radioStatus.textContent = "▼ Presiona play";
+        });
+        radioAudio.addEventListener("playing", () => {
+          radioStatus.textContent = "● EN VIVO";
+          radioStatus.style.color = "var(--success)";
+        });
+        radioAudio.addEventListener("pause", () => {
+          radioStatus.textContent = "◼ DETENIDA";
+          radioStatus.style.color = "var(--muted-foreground)";
+        });
+        radioAudio.addEventListener("error", () => {
+          radioStatus.textContent = "⚠ ERROR DE STREAM";
+          radioStatus.style.color = "var(--destructive)";
+        });
+        // Mostrar el reproductor de radio
+        radioPlayer.style.display = "block";
+        if (musicTextEl) musicTextEl.style.display = "none";
+      }
     }
     function openEventModal(id) {
       const event = eventById(id);
